@@ -1,6 +1,6 @@
 import { Camera, Scene } from "three";
 
-export default class ThreeVar {
+export default class ThreeParams {
     private static _CAMERA: Camera;
     private static _SCENE: Scene;
 

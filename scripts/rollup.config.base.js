@@ -1,22 +1,23 @@
 import alias from "rollup-plugin-alias";
-import { eslint } from "rollup-plugin-eslint";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
 import replace from "rollup-plugin-replace";
-import typescript from '@rollup/plugin-typescript'
 import sourceMaps from "rollup-plugin-sourcemaps";
 
 const getPath = _path => path.resolve(__dirname, _path);
 import path from "path";
+import ts from "rollup-plugin-typescript2";
+import template from "rollup-plugin-templatejs";
 
 const extensions = [
     ".js",
     ".ts"
 ];
 // ts
-const tsPlugin = typescript({
-    tsconfig: getPath("../tsconfig.json"), // 导入本地ts配置
+const tsPlugin = ts({
+    tsconfig: getPath("../tsconfig.json"),
+    extensions// 导入本地ts配置
 });
 
 
@@ -31,14 +32,19 @@ export default {
         }),
         resolve(),
         sourceMaps(),
+        template({
+            sTag: "<#",
+            eTag: "#>",
+            expression: "require(\"@templatejs/runtime\")", // 获取template的表达式，如 `window.template`
+            sandbox: false, // 沙箱模式
+            include: ["**/*.tmpl"], // 默认值
+            exclude: "node_modules/**" // 默认值
+        }),
         tsPlugin,
         commonjs({
             // non-CommonJS modules will be ignored, but you can also
             // specifically include/exclude files
             include: "node_modules/**"
-        }),
-        eslint({
-            include: ["src/**/*.ts"]
         }),
         babel({
             runtimeHelpers: true,
