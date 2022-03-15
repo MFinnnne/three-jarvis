@@ -1,9 +1,8 @@
-import { Camera, Scene } from "three";
+import { Camera, Scene } from 'three';
 
 export default class ThreeParams {
     private static _CAMERA: Camera;
     private static _SCENE: Scene;
-
 
     static get CAMERA(): Camera {
         return this._CAMERA;

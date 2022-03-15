@@ -5,12 +5,12 @@ module.exports = {
     parserOptions: {
         tsconfigRootDir: __dirname,
         project: ['./tsconfig.json'],
-        sourceType: "module"
+        sourceType: 'module',
     },
     extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
     rules: {
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-        "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["off"],
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': ['off'],
     },
 };

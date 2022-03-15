@@ -4,3 +4,4 @@ node_modules
 dist
 ./node_moudles
 types
+jest.config.ts

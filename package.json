@@ -14,7 +14,8 @@
     "build": "tsc",
     "build:type": "tsc -p ./tsconfig.type.json",
     "clean": "rimraf dist",
-    "start": "yarn run clean && yarn run build:type && cross-env NODE_ENV=development rollup -w -c scripts/rollup.config.dev.js"
+    "start": "yarn run clean && yarn run build:type && cross-env NODE_ENV=development rollup -w -c scripts/rollup.config.dev.js",
+    "test": "jest"
   },
   "types": "types/index.d.ts",
   "pre-commit": [
@@ -22,15 +23,21 @@
     "format"
   ],
   "devDependencies": {
-    "@babel/core": "^7.17.5",
+    "@babel/core": "^7.17.7",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
     "@rollup/plugin-commonjs": "^21.0.2",
     "@rollup/plugin-node-resolve": "^13.1.3",
+    "@types/jest": "^27.4.1",
     "@types/three": "^0.138.0",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
+    "babel-jest": "^27.5.1",
     "cross-env": "^7.0.3",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.4.0",
+    "jest": "^27.5.1",
+    "nanoid": "^3.3.1",
     "pre-commit": "^1.2.2",
     "prettier": "2.5.1",
     "rollup-plugin-alias": "^2.2.0",
@@ -43,6 +50,8 @@
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-templatejs": "^2.4.2",
     "rollup-plugin-typescript2": "^0.31.2",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^10.7.0",
     "typescript": "4.5.4",
     "utility-types": "^3.10.0"
   },

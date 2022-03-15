@@ -1,30 +1,28 @@
-import baseConfig from "./rollup.config.base";
+import baseConfig from './rollup.config.base';
 
-import { name } from "../package.json";
+import { name } from '../package.json';
 
 export default {
     ...baseConfig,
     output: [
         {
             file: `dist/${name}.esm.js`,
-            format: "esm",
+            format: 'esm',
             name,
-            sourcemap: true
+            sourcemap: true,
         },
         {
             file: `dist/${name}.umd.js`,
-            format: "umd",
+            format: 'umd',
             name,
-            sourcemap: true
+            sourcemap: true,
         },
         {
             file: `dist/${name}.cjs.js`,
-            format: "cjs",
+            format: 'cjs',
             name,
-            sourcemap: true
-        }
+            sourcemap: true,
+        },
     ],
-    plugins: [
-        ...baseConfig.plugins,
-    ]
+    plugins: [...baseConfig.plugins],
 };
