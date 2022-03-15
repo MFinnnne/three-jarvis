@@ -17,7 +17,7 @@ export type Attributes = {
     className: string;
     style?: Partial<CSSStyleDeclaration>;
     id: string;
-}
+};
 
 export default class VDOM {
     static createVNode(tagName: string, attributes: Attributes): VNode {
@@ -41,8 +41,6 @@ export default class VDOM {
             children: vNodeTrees,
         };
     }
-
-
 
     static print(vNodeTree: VNodeTree, level = 0) {
         const { self, children } = vNodeTree;

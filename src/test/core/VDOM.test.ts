@@ -59,7 +59,6 @@ describe('test vom', () => {
                 className: mesh1.name,
                 style: { color: 'red' },
             },
-
         };
         const mesh2 = mesh.clone(true);
         mesh2.name = 'mesh2';
@@ -72,7 +71,6 @@ describe('test vom', () => {
                 className: mesh2.name,
                 style: { color: 'red' },
             },
-
         };
         modelL1.child = [modelL20, modelL21];
         modelL20.parent = modelL1;
@@ -83,4 +81,3 @@ describe('test vom', () => {
         checkModelDataTree(vNodeTree);
     });
 });
-
