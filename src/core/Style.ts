@@ -1,8 +1,6 @@
 import { Camera, Group, Light, Line, Mesh, Object3D, Points, Scene, Sprite } from 'three';
 
-
 class Style {
-
     private handlerMap: Map<string, (object3D: Object3D) => Partial<CSSStyleDeclaration>> = new Map();
 
     constructor() {
@@ -36,7 +34,7 @@ class Style {
         return {
             backgroundColor: '#000',
         };
-    };
+    }
 
     private static getLightStyle(object3D: Object3D): Partial<CSSStyleDeclaration> {
         if (!(object3D instanceof Light)) {
@@ -45,7 +43,7 @@ class Style {
         return {
             backgroundColor: '#000',
         };
-    };
+    }
 
     private static getCameraStyle(object3D: Object3D): Partial<CSSStyleDeclaration> {
         if (!(object3D instanceof Camera)) {
@@ -54,7 +52,7 @@ class Style {
         return {
             backgroundColor: '#000',
         };
-    };
+    }
 
     private static getMeshStyle(object3D: Object3D): Partial<CSSStyleDeclaration> {
         if (!(object3D instanceof Mesh)) {
