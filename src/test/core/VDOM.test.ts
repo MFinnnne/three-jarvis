@@ -1,10 +1,9 @@
 import VDOM, { VNodeTree } from '../../core/VDOM';
 import { ModelVDomData } from '../../app/ObjectTree';
-import { BoxGeometry, Mesh, MeshBasicMaterial, Scene } from 'three';
+import { BoxGeometry, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, PointLight, Scene } from 'three';
 
 function checkModelDataTree(vNodeTree: VNodeTree) {
     expect(vNodeTree.self.tagName).toBe('div');
-    expect(vNodeTree.self.style?.color).toBe('red');
     expect(vNodeTree.self.className).toBeDefined();
     expect(vNodeTree.self.id).toBeDefined();
     vNodeTree.children?.forEach((child) => {
@@ -79,5 +78,22 @@ describe('test vom', () => {
         const vNodeTree = VDOM.parseModelDataTree(modelL1);
         VDOM.print(vNodeTree);
         checkModelDataTree(vNodeTree);
+    });
+
+    test('should parse three scene to vnode tree', () => {
+        const scene = new Scene();
+        const pointLight = new PointLight(0xffffff, 1, 100, 2);
+        scene.add(pointLight);
+        const perspectiveCamera = new PerspectiveCamera(45, 1920 / 1080, 0.1, 1000);
+        scene.add(perspectiveCamera);
+        const group = new Group();
+        const boxGeometry1 = new BoxGeometry(1, 1, 1);
+        const material1 = new MeshBasicMaterial({ color: 0x00ff00 });
+        const mesh3 = new Mesh(boxGeometry1, material1);
+        group.add(mesh3);
+        scene.add(group);
+        const vNodeTree1 = VDOM.threeScene2VNodeTree(scene);
+        VDOM.print(vNodeTree1);
+        checkModelDataTree(vNodeTree1);
     });
 });
