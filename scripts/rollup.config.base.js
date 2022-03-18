@@ -4,11 +4,10 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import sourceMaps from 'rollup-plugin-sourcemaps';
-
-const getPath = (_path) => path.resolve(__dirname, _path);
 import path from 'path';
 import ts from 'rollup-plugin-typescript2';
-import template from 'rollup-plugin-templatejs';
+
+const getPath = (_path) => path.resolve(__dirname, _path);
 
 const extensions = ['.js', '.ts'];
 // ts
@@ -28,14 +27,6 @@ export default {
         }),
         resolve(),
         sourceMaps(),
-        template({
-            sTag: '<#',
-            eTag: '#>',
-            expression: 'require("@templatejs/runtime")', // 获取template的表达式，如 `window.template`
-            sandbox: false, // 沙箱模式
-            include: ['**/*.tmpl'], // 默认值
-            exclude: 'node_modules/**', // 默认值
-        }),
         tsPlugin,
         commonjs({
             // non-CommonJS modules will be ignored, but you can also

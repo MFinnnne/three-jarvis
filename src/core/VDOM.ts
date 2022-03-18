@@ -2,6 +2,11 @@ import { ModelVDomData } from '../app/ObjectTree';
 import { Object3D } from 'three';
 import style from './Style';
 
+/**
+ * this class is discard;
+ */
+
+
 export type VNode = {
     tagName: string;
     id: string;
@@ -48,6 +53,7 @@ export default class VDOM {
     }
 
     static threeScene2VNodeTree(object3D: Object3D): VNodeTree {
+
         const vNodeTree: VNodeTree = {
             self: {
                 tagName: 'div',
@@ -82,6 +88,7 @@ export default class VDOM {
         return element;
     }
 
+
     static print(vNodeTree: VNodeTree, level = 0) {
         const { self, children } = vNodeTree;
         const { tagName, id, className } = self;
@@ -91,4 +98,5 @@ export default class VDOM {
             VDOM.print(child, level + 1);
         });
     }
+
 }

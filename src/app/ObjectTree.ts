@@ -1,8 +1,11 @@
-import { Object3D } from 'three';
+import { Object3D, Scene } from 'three';
 import { Attributes } from '../core/VDOM';
+import $ from 'jquery';
+import { Config } from '../config/config';
+import ThreeParams from '../constant/ThreeParams';
 
 /**
- * Render the model dom nodes based on this structures
+ *  discard
  */
 export type ModelVDomData = {
     name: string;
@@ -13,17 +16,13 @@ export type ModelVDomData = {
     attributes?: Attributes;
 };
 
+
+
 /**
  * Generate a model tree
  */
 export class ObjectTree {
-    private geneModelDataTree(model: Object3D): ModelVDomData {
-        return {
-            name: model.name,
-            uuid: model.uuid,
-            model: model,
-            child: model.children.map((child) => this.geneModelDataTree(child)) ?? [],
-            parent: model.parent ? this.geneModelDataTree(model.parent) : null,
-        };
-    }
+
+
+
 }
