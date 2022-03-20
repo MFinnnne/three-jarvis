@@ -34,6 +34,6 @@
     }
     // "suppressImplicitAnyIndexErrors": true, //阻止对缺少索引签名的索引对象报错
   },
-  "exclude": ["node_modules","dist","lib"],
+  "exclude": ["node_modules", "dist", "lib"],
   "include": ["src/**/*.ts"]
 }

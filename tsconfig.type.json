@@ -3,8 +3,8 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "./types",
-    "emitDeclarationOnly": true,
+    "emitDeclarationOnly": true
   },
-  "exclude": ["node_modules","dist","lib"],
+  "exclude": ["node_modules", "dist", "lib"],
   "include": ["src/**/*"]
 }

@@ -32,7 +32,8 @@ class Style {
             throw new Error('function param is not Scene');
         }
         return {
-            backgroundColor: '#000',
+            cursor: 'pointer',
+            userSelect: 'none'
         };
     }
 
@@ -41,7 +42,8 @@ class Style {
             throw new Error('function param is not Light');
         }
         return {
-            backgroundColor: '#000',
+            cursor: 'pointer',
+            userSelect: 'none'
         };
     }
 
@@ -50,7 +52,8 @@ class Style {
             throw new Error('function param is not Camera');
         }
         return {
-            backgroundColor: '#000',
+            cursor: 'pointer',
+            userSelect: 'none'
         };
     }
 
@@ -59,7 +62,8 @@ class Style {
             throw new Error('function param is not Object3D');
         }
         return {
-            backgroundColor: '#000',
+            cursor: 'pointer',
+            userSelect: 'none'
         };
     }
 
@@ -68,7 +72,8 @@ class Style {
             throw new Error('function param is not Object3D');
         }
         return {
-            backgroundColor: '#000',
+            cursor: 'pointer',
+            userSelect: 'none'
         };
     }
 
@@ -77,7 +82,8 @@ class Style {
             throw new Error('function param is not Object3D');
         }
         return {
-            backgroundColor: '#000',
+            cursor: 'pointer',
+            userSelect: 'none'
         };
     }
 
@@ -86,7 +92,8 @@ class Style {
             throw new Error('function param is not Object3D');
         }
         return {
-            backgroundColor: '#000',
+            cursor: 'pointer',
+            userSelect: 'none'
         };
     }
 
@@ -95,13 +102,15 @@ class Style {
             throw new Error('function param is not Object3D');
         }
         return {
-            backgroundColor: '#000',
+            cursor: 'pointer',
+            userSelect: 'none'
         };
     }
 
     private static getDefaultStyle(): Partial<CSSStyleDeclaration> {
         return {
-            backgroundColor: '#000',
+            cursor: 'pointer',
+            userSelect: 'none'
         };
     }
 }

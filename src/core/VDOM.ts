@@ -1,16 +1,18 @@
 import { ModelVDomData } from '../app/ObjectTree';
 import { Object3D } from 'three';
 import style from './Style';
+import { children } from 'cheerio/lib/api/traversing';
 
 /**
  * this class is discard;
  */
 
-
 export type VNode = {
     tagName: string;
     id: string;
     className: string;
+    value: string;
+    uuid: string;
     style?: Partial<CSSStyleDeclaration>;
 };
 
@@ -18,6 +20,7 @@ export type VNodeTree = {
     self: VNode;
     children?: VNodeTree[];
     parent?: VNode;
+    hasChildren: boolean;
 };
 
 export type Attributes = {
@@ -27,12 +30,16 @@ export type Attributes = {
 };
 
 export default class VDOM {
+
+
     static createVNode(tagName: string, attributes: Attributes): VNode {
         return {
             tagName,
             id: attributes.id,
             className: attributes.className,
             style: attributes.style,
+            value: '',
+            uuid: '',
         };
     }
 
@@ -49,45 +56,33 @@ export default class VDOM {
         return {
             self: curVNode,
             children: vNodeTrees,
+            hasChildren: !!vNodeTrees,
         };
     }
 
     static threeScene2VNodeTree(object3D: Object3D): VNodeTree {
-
         const vNodeTree: VNodeTree = {
             self: {
                 tagName: 'div',
                 id: object3D.uuid,
                 className: object3D.name === '' ? object3D.type : object3D.name,
                 style: style.getStyleByModelType(object3D),
+                value: object3D.name === '' ? object3D.type : object3D.name,
+                uuid: object3D.uuid,
             },
             children: [],
+            hasChildren: false,
         };
         object3D.children.forEach((child) => {
             const childVNodeTree = VDOM.threeScene2VNodeTree(child);
             childVNodeTree.parent = vNodeTree.self;
             vNodeTree.children?.push(childVNodeTree);
         });
+        if (vNodeTree.children?.length) {
+            vNodeTree.hasChildren = true;
+        }
         return vNodeTree;
     }
-
-    static render(vNodeTree: VNodeTree): HTMLElement {
-        const { self, children } = vNodeTree;
-        const { tagName, id, className, style } = self;
-        const element = document.createElement(tagName);
-        element.id = id;
-        element.className = className;
-        if (style) {
-            Object.keys(style).forEach((key) => {
-                element.style[key] = style[key];
-            });
-        }
-        children?.forEach((child) => {
-            element.appendChild(VDOM.render(child));
-        });
-        return element;
-    }
-
 
     static print(vNodeTree: VNodeTree, level = 0) {
         const { self, children } = vNodeTree;
@@ -98,5 +93,4 @@ export default class VDOM {
             VDOM.print(child, level + 1);
         });
     }
-
 }

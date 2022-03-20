@@ -1,7 +1,12 @@
 import { ObjectTree } from './ObjectTree';
 
 export default class GUI {
-    constructor() {
-        const objectTree = new ObjectTree();
+
+    public static init(): void {
+        GUI.initSideBar();
+    }
+
+    private static initSideBar(): void {
+        ObjectTree.generateTree();
     }
 }
