@@ -30,8 +30,6 @@ export type Attributes = {
 };
 
 export default class VDOM {
-
-
     static createVNode(tagName: string, attributes: Attributes): VNode {
         return {
             tagName,

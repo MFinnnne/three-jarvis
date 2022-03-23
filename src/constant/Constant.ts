@@ -21,7 +21,6 @@ export default class Constant {
         this._SCENE = value;
     }
 
-
     static get CONTAINER(): HTMLElement {
         return this._CONTAINER;
     }

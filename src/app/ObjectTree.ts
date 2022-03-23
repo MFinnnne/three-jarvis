@@ -15,49 +15,30 @@ export type ModelVDomData = {
     attributes?: Attributes;
 };
 
-
 /**
  * Generate a model tree
  */
 export class ObjectTree {
-
-
     private static initStyle() {
         document.styleSheets[0].insertRule(
             '.caret-over,.caret{ overflow: hidden;white-space: nowrap; cursor:pointer;user-select: none;margin-top:20px}',
             0,
         );
 
-
-        document.styleSheets[0].insertRule(
-            '.caret-over:hover,.caret:hover { background:olive;}',
-            0,
-        );
-
+        document.styleSheets[0].insertRule('.caret-over:hover,.caret:hover { background:olive;}', 0);
 
         document.styleSheets[0].insertRule(
             '.caret::before { content: "\\25B6"; color: #000; display: inline-block; margin-right: 5px; }',
             0,
         );
-        document.styleSheets[0].insertRule(
-            '.caret-down::before {transform: rotate(90deg);}',
-            0,
-        );
+        document.styleSheets[0].insertRule('.caret-down::before {transform: rotate(90deg);}', 0);
 
+        document.styleSheets[0].insertRule('.active {display: block;}', 0);
 
-        document.styleSheets[0].insertRule(
-            '.active {display: block;}',
-            0,
-        );
-
-        document.styleSheets[0].insertRule(
-            '.nested {display: none; padding-inline-start: 20px;margin:0px}',
-            0,
-        );
-    };
+        document.styleSheets[0].insertRule('.nested {display: none; padding-inline-start: 20px;margin:0px}', 0);
+    }
 
     public static generateTree() {
-
         ObjectTree.initStyle();
         const vNodeTree = VDOM.threeScene2VNodeTree(Constant.SCENE);
         const modelTreeDOM = ObjectTree.vNodeTree2DOM(vNodeTree);
@@ -65,14 +46,13 @@ export class ObjectTree {
 
         const toggle = document.getElementsByClassName('caret');
         for (let i = 0; i < toggle.length; i++) {
-            toggle[i].addEventListener('click', function(e) {
+            toggle[i].addEventListener('click', function (e) {
                 const parentElement = (e.target as HTMLElement).parentElement;
                 parentElement?.querySelector('.nested')?.classList.toggle('active');
                 (e.target as HTMLElement).classList.toggle('caret-down');
             });
         }
     }
-
 
     static vNodeTree2DOM(vNodeTree: VNodeTree): HTMLElement {
         const { self, children } = vNodeTree;
@@ -110,11 +90,10 @@ export class ObjectTree {
                 if (uuid) {
                     const model = Constant.SCENE.getObjectByProperty('uuid', uuid);
                     if (model) {
-                       // if(model.type===)
+                        // if(model.type===)
                     }
                 }
             });
         }
     }
-
 }

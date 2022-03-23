@@ -33,7 +33,7 @@ class Style {
         }
         return {
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
         };
     }
 
@@ -43,7 +43,7 @@ class Style {
         }
         return {
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
         };
     }
 
@@ -53,7 +53,7 @@ class Style {
         }
         return {
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
         };
     }
 
@@ -63,7 +63,7 @@ class Style {
         }
         return {
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
         };
     }
 
@@ -73,7 +73,7 @@ class Style {
         }
         return {
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
         };
     }
 
@@ -83,7 +83,7 @@ class Style {
         }
         return {
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
         };
     }
 
@@ -93,7 +93,7 @@ class Style {
         }
         return {
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
         };
     }
 
@@ -103,14 +103,14 @@ class Style {
         }
         return {
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
         };
     }
 
     private static getDefaultStyle(): Partial<CSSStyleDeclaration> {
         return {
             cursor: 'pointer',
-            userSelect: 'none'
+            userSelect: 'none',
         };
     }
 }
