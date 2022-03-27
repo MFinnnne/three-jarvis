@@ -1,7 +1,6 @@
-import {Pane} from 'tweakpane';
+import { Pane } from 'tweakpane';
 
 export default class ControlPanel {
-
     public init(): void {
         const PARAMS = {
             factor: 123,
@@ -13,6 +12,5 @@ export default class ControlPanel {
         pane.addInput(PARAMS, 'factor');
         pane.addInput(PARAMS, 'title');
         pane.addInput(PARAMS, 'color');
-
     }
 }

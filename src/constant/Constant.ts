@@ -31,7 +31,6 @@ export default class Constant {
         this._CONTAINER = value;
     }
 
-
     static get MENU_CONTAINER(): HTMLDivElement {
         return this._MENU_CONTAINER;
     }
@@ -39,7 +38,6 @@ export default class Constant {
     static set MENU_CONTAINER(value: HTMLDivElement) {
         this._MENU_CONTAINER = value;
     }
-
 
     static get LEFT_SIDE_BAR_CONTAINER(): HTMLDivElement {
         return this._LEFT_SIDE_BAR_CONTAINER;

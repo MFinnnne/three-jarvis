@@ -46,7 +46,7 @@ export class LeftSideBar {
 
         const toggle = document.getElementsByClassName('caret');
         for (let i = 0; i < toggle.length; i++) {
-            toggle[i].addEventListener('click', function(e) {
+            toggle[i].addEventListener('click', function (e) {
                 const parentElement = (e.target as HTMLElement).parentElement;
                 parentElement?.querySelector('.nested')?.classList.toggle('active');
                 (e.target as HTMLElement).classList.toggle('caret-down');
