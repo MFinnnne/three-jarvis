@@ -18,7 +18,7 @@ export type ModelVDomData = {
 /**
  * Generate a model tree
  */
-export class ObjectTree {
+export class LeftSideBar {
     private static initStyle() {
         document.styleSheets[0].insertRule(
             '.caret-over,.caret{ overflow: hidden;white-space: nowrap; cursor:pointer;user-select: none;margin-top:20px}',
@@ -39,14 +39,14 @@ export class ObjectTree {
     }
 
     public static generateTree() {
-        ObjectTree.initStyle();
+        LeftSideBar.initStyle();
         const vNodeTree = VDOM.threeScene2VNodeTree(Constant.SCENE);
-        const modelTreeDOM = ObjectTree.vNodeTree2DOM(vNodeTree);
-        Constant.CONTAINER.appendChild(modelTreeDOM);
+        const modelTreeDOM = LeftSideBar.vNodeTree2DOM(vNodeTree);
+        Constant.LEFT_SIDE_BAR_CONTAINER.appendChild(modelTreeDOM);
 
         const toggle = document.getElementsByClassName('caret');
         for (let i = 0; i < toggle.length; i++) {
-            toggle[i].addEventListener('click', function (e) {
+            toggle[i].addEventListener('click', function(e) {
                 const parentElement = (e.target as HTMLElement).parentElement;
                 parentElement?.querySelector('.nested')?.classList.toggle('active');
                 (e.target as HTMLElement).classList.toggle('caret-down');
@@ -56,12 +56,11 @@ export class ObjectTree {
 
     static vNodeTree2DOM(vNodeTree: VNodeTree): HTMLElement {
         const { self, children } = vNodeTree;
-        const { tagName, id, className, style } = self;
+        const { tagName, id, className } = self;
         const element = document.createElement(tagName);
-        element.id = id;
         element.className = className;
-
         const spanElement = document.createElement('span');
+        spanElement.id = id;
         spanElement.innerHTML = vNodeTree.self.value;
         if (vNodeTree.hasChildren) {
             spanElement.className = 'caret';
@@ -75,7 +74,7 @@ export class ObjectTree {
         nestedEle.className = 'nested';
         element.appendChild(nestedEle);
         children?.forEach((child) => {
-            nestedEle.appendChild(ObjectTree.vNodeTree2DOM(child));
+            nestedEle.appendChild(LeftSideBar.vNodeTree2DOM(child));
         });
         return element;
     }

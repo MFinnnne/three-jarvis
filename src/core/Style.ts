@@ -28,7 +28,7 @@ class Style {
     }
 
     private static getSceneStyle(object3D: Object3D): Partial<CSSStyleDeclaration> {
-        if (!(object3D instanceof Scene)) {
+        if (!(object3D.type === 'Scene')) {
             throw new Error('function param is not Scene');
         }
         return {

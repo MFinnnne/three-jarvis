@@ -1,7 +1,6 @@
-import { ModelVDomData } from '../app/ObjectTree';
+import { ModelVDomData } from '../app/LeftSideBar';
 import { Object3D } from 'three';
 import style from './Style';
-import { children } from 'cheerio/lib/api/traversing';
 
 /**
  * this class is discard;
@@ -64,7 +63,6 @@ export default class VDOM {
                 tagName: 'div',
                 id: object3D.uuid,
                 className: object3D.name === '' ? object3D.type : object3D.name,
-                style: style.getStyleByModelType(object3D),
                 value: object3D.name === '' ? object3D.type : object3D.name,
                 uuid: object3D.uuid,
             },

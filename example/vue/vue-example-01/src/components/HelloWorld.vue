@@ -4,7 +4,9 @@ import { Box3Helper, BoxGeometry, BoxHelper, DirectionalLight, MeshBasicMaterial
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { onMounted } from 'vue';
-import ThreeHelper from '../../../../../src/main';
+import ThreeHelper from 'three-helper';
+
+
 
 
 let camera, scene, renderer, controls;
@@ -31,13 +33,12 @@ function init() {
     const boxGeometry = new BoxGeometry(10, 10, 10);
     const material = new MeshBasicMaterial({ color: 0x00ff00 });
     const mesh = new THREE.Mesh(boxGeometry, material);
-    // scene.add(mesh);
-
+    material.wireframe = true;
+    scene.add(mesh);
     const loader = new GLTFLoader().setPath('../../static/');
     loader.load('test.glb', function(gltf) {
         scene.add(gltf.scene);
-        const box3Helper = new BoxHelper(gltf.scene.children[1][1]);
-        scene.add(box3Helper);
+
         gltf.scene.scale.set(0.01, 0.01, 0.01);
         ThreeHelper.init(scene, camera);
     });

@@ -9,6 +9,7 @@ export default {
             file: `dist/${name}.esm.js`,
             format: 'esm',
             name,
+            exports: 'auto',
             sourcemap: true,
         },
         {
