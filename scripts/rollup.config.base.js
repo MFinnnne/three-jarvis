@@ -11,7 +11,6 @@ import sass from 'rollup-plugin-scss';
 import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
 
-
 const getPath = (_path) => path.resolve(__dirname, _path);
 
 const extensions = ['.js', '.ts'];
@@ -20,7 +19,6 @@ const tsPlugin = ts({
     tsconfig: getPath('../tsconfig.json'),
     extensions, // 导入本地ts配置
 });
-
 
 export default {
     input: 'src/main.ts',
