@@ -16,11 +16,13 @@ export default {
             file: `dist/${name}.umd.js`,
             format: 'umd',
             name,
+            exports: 'auto',
             sourcemap: true,
         },
         {
             file: `dist/${name}.cjs.js`,
             format: 'cjs',
+            exports: 'auto',
             name,
             sourcemap: true,
         },

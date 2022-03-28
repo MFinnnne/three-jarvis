@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "three-helper": {
+      "signature": "234f8c9eb1d885a1292fc2c97b5cb8d9",
+      "file": true
+    }
+  }
+}

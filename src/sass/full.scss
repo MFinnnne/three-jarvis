@@ -1,6 +1,6 @@
 $menu-height: 5%;
 
-.#three-helper-container {
+#three-helper-container {
     top: 0;
     left: 0;
     width: 100%;
@@ -8,19 +8,24 @@ $menu-height: 5%;
     position: absolute;
     z-index: 99999;
 
-    .#three-helper-container-menu {
+    #three-helper-container-menu {
         width: 100%;
         height: $menu-height;
+        position: fixed;
         top: 0;
         left: 0;
         z-index: 99999;
     }
 
-    .#three-helper-left-side-bar {
-        width: 20%;
+    #three-helper-left-side-bar {
+        position: fixed;
+        width: 6%;
         height: 80%;
         top: $menu-height;
         left: 0;
+        color: #fff;
+        background: #2f3137;
         z-index: 99999;
+        overflow: scroll;
     }
 }

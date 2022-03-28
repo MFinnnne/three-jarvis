@@ -7,9 +7,10 @@ import sourceMaps from 'rollup-plugin-sourcemaps';
 import path from 'path';
 import ts from 'rollup-plugin-typescript2';
 import postcss from 'postcss';
-import sass from 'rollup-plugin-sass';
+import sass from 'rollup-plugin-scss';
 import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
+
 
 const getPath = (_path) => path.resolve(__dirname, _path);
 
@@ -19,6 +20,7 @@ const tsPlugin = ts({
     tsconfig: getPath('../tsconfig.json'),
     extensions, // 导入本地ts配置
 });
+
 
 export default {
     input: 'src/main.ts',
@@ -36,12 +38,11 @@ export default {
             insert: true,
             processor: (css) =>
                 postcss([autoprefixer])
-                    .process(css)
+                    .process(css, { from: undefined })
                     .then((result) => result.css),
         }),
         commonjs(),
         sourceMaps(),
-        postcss(),
         tsPlugin,
         babel({
             runtimeHelpers: true,
