@@ -6,6 +6,7 @@ export default class Constant {
     private static _CONTAINER: HTMLElement;
     private static _MENU_CONTAINER: HTMLDivElement;
     private static _LEFT_SIDE_BAR_CONTAINER: HTMLDivElement;
+    private static _PANE_CONTAINER: HTMLDivElement;
 
     static get CAMERA(): Camera {
         return this._CAMERA;
@@ -45,5 +46,14 @@ export default class Constant {
 
     static set LEFT_SIDE_BAR_CONTAINER(value: HTMLDivElement) {
         this._LEFT_SIDE_BAR_CONTAINER = value;
+    }
+
+
+    static get PANE_CONTAINER(): HTMLDivElement {
+        return this._PANE_CONTAINER;
+    }
+
+    static set PANE_CONTAINER(value: HTMLDivElement) {
+        this._PANE_CONTAINER = value;
     }
 }
