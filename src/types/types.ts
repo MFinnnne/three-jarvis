@@ -14,4 +14,3 @@ export interface Events {
     cameraDomClick: () => void;
     renderDomClick: () => void;
 }
-

@@ -32,7 +32,5 @@ export default class GUI {
         Constant.PANE_CONTAINER = paneDom;
 
         LeftSideBar.generateTree();
-
-
     }
 }

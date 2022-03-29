@@ -1,7 +1,6 @@
 import { BoxHelper, Object3D } from 'three';
 import Constant from '../constant/Constant';
 
-
 let highLightBox: BoxHelper;
 
 /**
@@ -16,6 +15,4 @@ export function highLightMesh(object: Object3D) {
     }
     highLightBox = new BoxHelper(Constant.SCENE, 0xffff00);
     Constant.SCENE.add(highLightBox);
-
 }
-

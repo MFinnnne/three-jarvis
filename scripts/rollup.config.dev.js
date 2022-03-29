@@ -33,9 +33,9 @@ export default {
     plugins: [
         ...baseConfig.plugins,
         serve({
-            open:true,
+            open: true,
             port: 8082,
-            contentBase: ''
+            contentBase: '',
         }),
         livereload(),
         command(`yalc push`),

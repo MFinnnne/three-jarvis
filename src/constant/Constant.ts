@@ -48,7 +48,6 @@ export default class Constant {
         this._LEFT_SIDE_BAR_CONTAINER = value;
     }
 
-
     static get PANE_CONTAINER(): HTMLDivElement {
         return this._PANE_CONTAINER;
     }

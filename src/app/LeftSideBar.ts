@@ -19,14 +19,13 @@ export type ModelVDomData = {
  * Generate a model tree
  */
 export class LeftSideBar {
-
     public static generateTree() {
         const vNodeTree = VDOM.threeScene2VNodeTree(Constant.SCENE);
         const modelTreeDOM = LeftSideBar.vNodeTree2DOM(vNodeTree);
         Constant.LEFT_SIDE_BAR_CONTAINER.appendChild(modelTreeDOM);
         const toggle = document.getElementsByClassName('caret');
         for (let i = 0; i < toggle.length; i++) {
-            toggle[i].addEventListener('click', function(e) {
+            toggle[i].addEventListener('click', function (e) {
                 const parentElement = (e.target as HTMLElement).parentElement;
                 parentElement?.querySelector('.nested')?.classList.toggle('active');
                 (e.target as HTMLElement).classList.toggle('caret-down');
