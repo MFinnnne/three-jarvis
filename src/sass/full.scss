@@ -7,6 +7,7 @@ $menu-height: 5%;
     height: 100%;
     position: absolute;
     z-index: 99999;
+    pointer-events:none;
 
     #three-helper-container-menu {
         width: 100%;
@@ -15,6 +16,7 @@ $menu-height: 5%;
         top: 0;
         left: 0;
         z-index: 99999;
+        pointer-events:auto;
     }
 
     #three-helper-left-side-bar {
@@ -27,6 +29,7 @@ $menu-height: 5%;
         background: #2f3137;
         z-index: 99999;
         overflow: scroll;
+        pointer-events:auto;
 
 
         .caret-over, .caret {

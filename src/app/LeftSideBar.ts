@@ -65,7 +65,7 @@ export class LeftSideBar {
             objects[i].addEventListener('click', (e) => {
                 const target = e.target as HTMLElement;
                 const uuid = target.id;
-                Ticker.emmit('objectDomClick', [uuid]);
+                Ticker.emmit('objectDomClick', uuid);
             });
         }
     }

@@ -11,7 +11,8 @@ export default class EventRegistry {
     static registry() {
         EVENTS_UNBIND_MAP.set(
             'objectDomClick',
-            Ticker.on('objectDomClick', (id) => {
+            Ticker.on('objectDomClick', (value) => {
+                const id = value[0];
                 const obj = Constant.SCENE.getObjectByProperty('uuid', id);
                 if (!obj) {
                     throw new Error(`object3d ===${id}=== is not in scene`);

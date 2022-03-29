@@ -8,7 +8,7 @@ export default class Ticker {
         return Ticker.EMITTER.on(event, callback);
     }
 
-    static emmit<E extends keyof Events>(event: E, args: Parameters<Events[E]>) {
+    static emmit<E extends keyof Events>(event: E, ...args: Parameters<Events[E]>) {
         return Ticker.EMITTER.emit(event, args);
     }
 }
