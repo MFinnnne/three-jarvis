@@ -5,7 +5,7 @@ import './sass/full.scss';
 
 export default class ThreeHelper {
     public static init(scene: THREE.Scene, camera: THREE.Camera) {
-        console.log('three-helper v1.0.2');
+        console.log('three-helper v1.0.3');
         Constant.SCENE = scene;
         Constant.CAMERA = camera;
         GUI.init();
