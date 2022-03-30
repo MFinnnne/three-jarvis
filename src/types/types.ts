@@ -14,3 +14,9 @@ export interface Events {
     cameraDomClick: () => void;
     renderDomClick: () => void;
 }
+
+export interface Command {
+    name?:string
+    exec(): void
+    undo(): void
+}

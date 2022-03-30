@@ -7,7 +7,7 @@ $menu-height: 5%;
     height: 100%;
     position: absolute;
     z-index: 99999;
-    pointer-events:none;
+    pointer-events: none;
 
     #three-helper-container-menu {
         width: 100%;
@@ -16,7 +16,7 @@ $menu-height: 5%;
         top: 0;
         left: 0;
         z-index: 99999;
-        pointer-events:auto;
+        pointer-events: auto;
     }
 
     #three-helper-left-side-bar {
@@ -29,7 +29,7 @@ $menu-height: 5%;
         background: #2f3137;
         z-index: 99999;
         overflow: scroll;
-        pointer-events:auto;
+        pointer-events: auto;
 
 
         .caret-over, .caret {
@@ -68,13 +68,16 @@ $menu-height: 5%;
 
     #three-helper-pane {
         position: fixed;
-        width: 200px;
-        height: 100%-$menu-height;
+        width: auto;
+        height: auto;
+        max-height: 100%-$menu-height;
         top: $menu-height;
         right: 0;
         z-index: 99999;
         background: #2f3137;
-        opacity: 0;
         overflow: scroll;
+        pointer-events: auto;
+        overflow-x: hidden;
+        overflow-y: hidden;
     }
 }

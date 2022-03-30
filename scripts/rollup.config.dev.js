@@ -33,7 +33,7 @@ export default {
     plugins: [
         ...baseConfig.plugins,
         serve({
-            open: true,
+            open: false,
             port: 8082,
             contentBase: '',
         }),

@@ -1,5 +1,5 @@
-import { Object3D } from 'three';
-import VDOM, { Attributes, VNodeTree } from '../core/VDOM';
+import {Object3D} from 'three';
+import VDOM, {Attributes, VNodeTree} from '../core/VDOM';
 import Constant from '../constant/Constant';
 import Ticker from '../core/Ticker';
 
@@ -35,8 +35,8 @@ export class LeftSideBar {
     }
 
     static vNodeTree2DOM(vNodeTree: VNodeTree): HTMLElement {
-        const { self, children } = vNodeTree;
-        const { tagName, id, className } = self;
+        const {self, children} = vNodeTree;
+        const {tagName, id, className} = self;
         const element = document.createElement(tagName);
         element.className = className;
         const spanElement = document.createElement('span');
