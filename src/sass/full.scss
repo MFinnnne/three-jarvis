@@ -7,6 +7,7 @@ $menu-height: 5%;
     height: 100%;
     position: absolute;
     z-index: 99999;
+    pointer-events:none;
 
     #three-helper-container-menu {
         width: 100%;
@@ -15,6 +16,7 @@ $menu-height: 5%;
         top: 0;
         left: 0;
         z-index: 99999;
+        pointer-events:auto;
     }
 
     #three-helper-left-side-bar {
@@ -26,6 +28,53 @@ $menu-height: 5%;
         color: #fff;
         background: #2f3137;
         z-index: 99999;
+        overflow: scroll;
+        pointer-events:auto;
+
+
+        .caret-over, .caret {
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+            margin-top: 20px
+        }
+
+        .caret-over:hover, .caret:hover {
+            background: olive;
+        }
+
+        .caret:before {
+            content: "\25B6";
+            color: #1abc9c;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .caret-down::before {
+            transform: rotate(90deg);
+        }
+
+        .nested {
+            display: none;
+            padding-inline-start: 20px;
+            margin: 0
+        }
+
+        .active {
+            display: block;
+        }
+    }
+
+    #three-helper-pane {
+        position: fixed;
+        width: 200px;
+        height: 100%-$menu-height;
+        top: $menu-height;
+        right: 0;
+        z-index: 99999;
+        background: #2f3137;
+        opacity: 0;
         overflow: scroll;
     }
 }

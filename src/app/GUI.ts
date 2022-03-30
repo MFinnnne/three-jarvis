@@ -1,9 +1,11 @@
 import { LeftSideBar } from './LeftSideBar';
-import ControlPanel from './ControlPanel';
+import ObjectControlPane from './ObjectControlPane';
 import Constant from '../constant/Constant';
 
 export default class GUI {
     public static init(): void {
+        const container = document.querySelector('#three-helper-container');
+        container && container.remove();
         const element = document.createElement('div');
         element.id = 'three-helper-container';
         element.className = 'three-helper-container';
@@ -18,17 +20,17 @@ export default class GUI {
         leftSideBarDom.className = 'three-helper-left-side-bar';
         element.appendChild(leftSideBarDom);
 
+        const paneDom = document.createElement('div');
+        paneDom.id = 'three-helper-pane';
+        paneDom.className = 'three-helper-pane';
+        element.appendChild(paneDom);
+
         document.body.appendChild(element);
         Constant.CONTAINER = element;
         Constant.MENU_CONTAINER = menuDom;
         Constant.LEFT_SIDE_BAR_CONTAINER = leftSideBarDom;
+        Constant.PANE_CONTAINER = paneDom;
 
-        GUI.initSideBar();
-    }
-
-    private static initSideBar(): void {
         LeftSideBar.generateTree();
-        const controlPanel = new ControlPanel();
-        controlPanel.init();
     }
 }

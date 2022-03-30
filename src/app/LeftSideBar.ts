@@ -1,7 +1,7 @@
 import { Object3D } from 'three';
 import VDOM, { Attributes, VNodeTree } from '../core/VDOM';
 import Constant from '../constant/Constant';
-import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
+import Ticker from '../core/Ticker';
 
 /**
  *  discard
@@ -19,31 +19,10 @@ export type ModelVDomData = {
  * Generate a model tree
  */
 export class LeftSideBar {
-    private static initStyle() {
-        document.styleSheets[0].insertRule(
-            '.caret-over,.caret{ overflow: hidden;white-space: nowrap; cursor:pointer;user-select: none;margin-top:20px}',
-            0,
-        );
-
-        document.styleSheets[0].insertRule('.caret-over:hover,.caret:hover { background:olive;}', 0);
-
-        document.styleSheets[0].insertRule(
-            '.caret::before { content: "\\25B6"; color: #000; display: inline-block; margin-right: 5px; }',
-            0,
-        );
-        document.styleSheets[0].insertRule('.caret-down::before {transform: rotate(90deg);}', 0);
-
-        document.styleSheets[0].insertRule('.active {display: block;}', 0);
-
-        document.styleSheets[0].insertRule('.nested {display: none; padding-inline-start: 20px;margin:0px}', 0);
-    }
-
     public static generateTree() {
-        LeftSideBar.initStyle();
         const vNodeTree = VDOM.threeScene2VNodeTree(Constant.SCENE);
         const modelTreeDOM = LeftSideBar.vNodeTree2DOM(vNodeTree);
         Constant.LEFT_SIDE_BAR_CONTAINER.appendChild(modelTreeDOM);
-
         const toggle = document.getElementsByClassName('caret');
         for (let i = 0; i < toggle.length; i++) {
             toggle[i].addEventListener('click', function (e) {
@@ -52,6 +31,7 @@ export class LeftSideBar {
                 (e.target as HTMLElement).classList.toggle('caret-down');
             });
         }
+        this.nodeEvent();
     }
 
     static vNodeTree2DOM(vNodeTree: VNodeTree): HTMLElement {
@@ -81,17 +61,11 @@ export class LeftSideBar {
 
     static nodeEvent() {
         const objects = document.getElementsByClassName('three-object');
-
         for (let i = 0; i < objects.length; i++) {
             objects[i].addEventListener('click', (e) => {
                 const target = e.target as HTMLElement;
-                const uuid = target.parentElement?.id;
-                if (uuid) {
-                    const model = Constant.SCENE.getObjectByProperty('uuid', uuid);
-                    if (model) {
-                        // if(model.type===)
-                    }
-                }
+                const uuid = target.id;
+                Ticker.emmit('objectDomClick', uuid);
             });
         }
     }

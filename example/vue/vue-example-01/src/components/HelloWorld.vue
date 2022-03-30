@@ -40,7 +40,7 @@ function init() {
         scene.add(gltf.scene);
 
         gltf.scene.scale.set(0.01, 0.01, 0.01);
-        ThreeHelper.init(scene, camera);
+        ThreeHelper.init(scene, camera,renderer,controls);
     });
 
     // new RGBELoader().setPath()
