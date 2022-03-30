@@ -1,9 +1,9 @@
 import baseConfig from './rollup.config.base';
 
-import { name } from '../package.json';
+import {name} from '../package.json';
 import livereload from "rollup-plugin-livereload";
 import serve from "rollup-plugin-serve";
-import command from 'rollup-plugin-command';
+
 export default {
     ...baseConfig,
     output: [
@@ -32,11 +32,11 @@ export default {
     plugins: [
         ...baseConfig.plugins,
         serve({
-            open:true,
+            open: true,
             port: 6667,
             contentBase: ''
         }),
         livereload(),
-        command("yalc push")
+
     ],
 };

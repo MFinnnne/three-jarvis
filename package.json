@@ -19,7 +19,7 @@
     "build": "tsc",
     "build:type": "tsc -p ./tsconfig.type.json",
     "clean": "rimraf dist",
-    "dev": "pnpm run clean && pnpm run build:type && cross-env NODE_ENV=development rollup -w -c scripts/rollup.config.dev.js && yalc publish",
+    "dev": "pnpm run clean && pnpm run build:type && cross-env NODE_ENV=development rollup -w -c scripts/rollup.config.dev.js",
     "test": "jest"
   },
   "pre-commit": [
