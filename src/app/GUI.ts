@@ -1,5 +1,4 @@
 import { LeftSideBar } from './LeftSideBar';
-import ObjectControlPane from './ObjectControlPane';
 import Constant from '../constant/Constant';
 
 export default class GUI {
@@ -31,6 +30,6 @@ export default class GUI {
         Constant.LEFT_SIDE_BAR_CONTAINER = leftSideBarDom;
         Constant.PANE_CONTAINER = paneDom;
 
-        LeftSideBar.generateTree();
+        LeftSideBar.init();
     }
 }

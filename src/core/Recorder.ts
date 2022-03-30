@@ -1,8 +1,23 @@
-import {Command} from "../types/types";
+import { Command } from '../types/types';
+import objectChanged from './ObjectChanged';
 
+
+/**
+ * Operation records
+ * @class Recorder
+ */
 class Recorder {
 
-    public execute(cmd: Command, optionalName): void {
-        cmd.exec()
+    private static instance: Recorder;
+
+    // private operatorHistories: Command[] = [];
+
+    public execute(cmd: Command, optionalName?: string): void {
+        cmd.exec();
+        // this.operatorHistories.push(cmd);
+        objectChanged.update(cmd.object);
     }
 }
+
+const recorder = new Recorder();
+export default recorder;

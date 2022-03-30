@@ -1,5 +1,8 @@
 import { Camera, Group, Light, Line, Mesh, Object3D, Points, Scene, Sprite } from 'three';
 
+/**
+ * discard
+ */
 class Style {
     private handlerMap: Map<string, (object3D: Object3D) => Partial<CSSStyleDeclaration>> = new Map();
 
@@ -23,7 +26,7 @@ class Style {
             if (object3D.type.includes(key)) {
                 return value(object3D);
             }
-        });
+        })
         return Style.getDefaultStyle();
     }
 

@@ -16,6 +16,7 @@ export interface Events {
 }
 
 export interface Command {
+    object: Object3D;
     name?:string
     exec(): void
     undo(): void
