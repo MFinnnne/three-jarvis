@@ -36,16 +36,9 @@ function init() {
     material.wireframe = true;
     scene.add(mesh);
     const loader = new GLTFLoader().setPath('../../static/');
-    loader.load('test.glb', function(gltf) {
-        scene.add(gltf.scene);
 
-        gltf.scene.scale.set(0.01, 0.01, 0.01);
-        ThreeHelper.init(scene, camera,renderer,controls);
-    });
 
     // new RGBELoader().setPath()
-
-
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -61,7 +54,11 @@ function init() {
     controls.update();
 
     window.addEventListener('resize', onWindowResize);
-
+    loader.load('test.glb', function(gltf) {
+        scene.add(gltf.scene);
+        gltf.scene.scale.set(0.01, 0.01, 0.01);
+        ThreeHelper.init(scene, camera,renderer,controls);
+    });
 }
 
 function onWindowResize() {

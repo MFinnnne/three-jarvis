@@ -27,7 +27,6 @@ export type ModelVDomData = {
  */
 export class LeftSideBar {
     public static init() {
-        LeftSideBar.registryEvent();
         LeftSideBar.generateTree();
         this.objectDomClickEvent();
     }
@@ -82,18 +81,5 @@ export class LeftSideBar {
         }
     }
 
-    static registryEvent() {
-        let instance: Pane;
-        EventRegistry.registry('objectDomClick', (value => {
-            instance && instance.dispose();
-            const id = value[0];
-            const obj = Constant.SCENE.getObjectByProperty('uuid', id);
-            if (!obj) {
-                throw new Error(`object3d(uuid:${id}) is not in scene`);
-            }
-            objectChanged.highLightMesh(obj);
-            state.selected = obj;
-            instance = new ObjectControlPane().genPane(obj);
-        }));
-    }
+
 }

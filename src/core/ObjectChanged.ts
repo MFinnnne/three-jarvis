@@ -1,28 +1,27 @@
-import { BoxHelper, Object3D, Vector3 } from 'three';
+import { BoxHelper, ColorRepresentation, Object3D } from 'three';
 import Constant from '../constant/Constant';
 import state from './State';
 
 class ObjectChanged {
 
     private highLightBox?: BoxHelper;
-    private static instance: ObjectChanged;
-
-
 
     /**
      *   boxed  mesh
      * @param object
+     * @param color
      */
-    highLightMesh(object: Object3D): void {
+    highLightMesh(object: Object3D, color: ColorRepresentation = 0xffff00): void {
         if (object.type === 'Scene' || object.type === 'Camera') {
             return;
         }
+        state.selected = object;
         if (this.highLightBox) {
             this.highLightBox.setFromObject(object);
             this.highLightBox.update();
             return;
         }
-        this.highLightBox = new BoxHelper(Constant.SCENE, 0xffff00);
+        this.highLightBox = new BoxHelper(Constant.SCENE, color);
         Constant.SCENE.add(this.highLightBox);
     }
 
@@ -32,6 +31,7 @@ class ObjectChanged {
         }
     }
 }
+
 const objectChanged = new ObjectChanged();
 export default objectChanged;
 

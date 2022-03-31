@@ -1,4 +1,5 @@
-import { Camera, Scene } from 'three';
+import { Camera, Scene, WebGLRenderer } from 'three';
+import { Events } from '../types/types';
 
 export default class Constant {
     private static _CAMERA: Camera;
@@ -7,6 +8,15 @@ export default class Constant {
     private static _MENU_CONTAINER: HTMLDivElement;
     private static _LEFT_SIDE_BAR_CONTAINER: HTMLDivElement;
     private static _PANE_CONTAINER: HTMLDivElement;
+    private static _RENDERER: WebGLRenderer;
+
+    static get RENDERER(): WebGLRenderer {
+        return this._RENDERER;
+    }
+
+    static set RENDERER(value: WebGLRenderer) {
+        this._RENDERER = value;
+    }
 
     static get CAMERA(): Camera {
         return this._CAMERA;
