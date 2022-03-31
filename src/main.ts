@@ -11,7 +11,7 @@ export default class ThreeHelper {
         renderer: THREE.WebGLRenderer,
         control?: OrbitControls,
     ): void {
-        console.log("3333");
+        console.log("54532");
         Constant.SCENE = scene;
         Constant.CAMERA = camera;
         GUI.init();

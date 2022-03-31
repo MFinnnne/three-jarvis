@@ -67,6 +67,7 @@
     "utility-types": "^3.10.0"
   },
   "dependencies": {
+    "@0b5vr/tweakpane-plugin-rotation": "^0.1.1",
     "@tweakpane/core": "^1.0.8",
     "nanoevents": "^6.0.2",
     "sass": "^1.49.9",

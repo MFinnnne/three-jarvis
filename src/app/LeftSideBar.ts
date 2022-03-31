@@ -8,6 +8,7 @@ import ObjectChanged from '../core/ObjectChanged';
 import ObjectControlPane from './ObjectControlPane';
 import State from '../core/State';
 import state from '../core/State';
+import objectChanged from "../core/ObjectChanged";
 
 /**
  *  discard
@@ -90,7 +91,7 @@ export class LeftSideBar {
             if (!obj) {
                 throw new Error(`object3d(uuid:${id}) is not in scene`);
             }
-            ObjectChanged.getInstance().highLightMesh(obj);
+            objectChanged.highLightMesh(obj);
             state.selected = obj;
             instance = new ObjectControlPane().genPane(obj);
         }));

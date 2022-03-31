@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@0b5vr/tweakpane-plugin-rotation': ^0.1.1
   '@babel/core': ^7.17.7
   '@babel/preset-env': ^7.16.11
   '@babel/preset-typescript': ^7.16.7
@@ -47,6 +48,7 @@ specifiers:
   utility-types: ^3.10.0
 
 dependencies:
+  '@0b5vr/tweakpane-plugin-rotation': 0.1.1_tweakpane@3.0.7
   '@tweakpane/core': 1.0.8
   nanoevents: 6.0.2
   sass: 1.49.9
@@ -95,6 +97,14 @@ devDependencies:
   utility-types: 3.10.0
 
 packages:
+
+  /@0b5vr/tweakpane-plugin-rotation/0.1.1_tweakpane@3.0.7:
+    resolution: {integrity: sha512-eF/5f/2v7iseG6/0UPHhQtf82z0DIdRZl8tfI7VgchUefYztkW8a3wiyG3Lphnf/hshnox7Cz52AN6/zsrbZlw==}
+    peerDependencies:
+      tweakpane: ^3.0.7
+    dependencies:
+      tweakpane: 3.0.7
+    dev: false
 
   /@ampproject/remapping/2.1.2:
     resolution: {integrity: sha512-hoyByceqwKirw7w3Z7gnIIZC3Wx3J484Y3L/cMpXFbr7d9ZQj2mODrirNzcJa+SM3UlpWXYvKV4RlRpFXlWgXg==}
