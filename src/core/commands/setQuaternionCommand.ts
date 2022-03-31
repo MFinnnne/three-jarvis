@@ -1,7 +1,7 @@
 import { Command } from '../../types/types';
 import { Object3D, Quaternion } from 'three';
 
-export  default  class SetQuaternionCommand implements Command {
+export default class SetQuaternionCommand implements Command {
     name = 'change quaternion';
     oldQuaternion: Quaternion;
     newQuaternion: Quaternion;
@@ -21,5 +21,4 @@ export  default  class SetQuaternionCommand implements Command {
     undo(): void {
         this.name = 'change quaternion';
     }
-
 }

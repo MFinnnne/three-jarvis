@@ -20,10 +20,8 @@ export default class ThreeHelper {
         /**
          * register events
          */
-        for (let allEventsKey in allEvents) {
+        for (const allEventsKey in allEvents) {
             allEvents[allEventsKey]();
         }
     }
-
-
 }

@@ -8,10 +8,7 @@ import TweakpaneRotationInputPlugin from '@0b5vr/tweakpane-plugin-rotation';
 import SetScaleCommand from '../core/commands/SetScaleCommand';
 import SetQuaternionCommand from '../core/commands/setQuaternionCommand';
 
-
 export default class ObjectControlPane extends DefaultControlPane {
-
-
     public genPane(object: Object3D): Pane {
         this.pane.registerPlugin(TweakpaneRotationInputPlugin);
 
@@ -35,11 +32,7 @@ export default class ObjectControlPane extends DefaultControlPane {
         };
 
         const tab = this.pane.addTab({
-            pages: [
-                { title: 'Object' },
-                { title: 'Geometry' },
-                { title: 'Material' },
-            ],
+            pages: [{ title: 'Object' }, { title: 'Geometry' }, { title: 'Material' }],
         });
         const objectPane = tab.pages[0];
         objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
@@ -51,29 +44,32 @@ export default class ObjectControlPane extends DefaultControlPane {
             recorder.execute(new SetScaleCommand(object, new Vector3(x, y, z)));
         });
 
-
         // euler
-        objectPane.addInput(PARAMS, 'rotation', {
-            view: 'rotation',
-            rotationMode: 'euler',
-            order: 'XYZ', // Extrinsic rotation order. optional, 'XYZ' by default
-            unit: 'rad', // or 'rad' or 'turn'. optional, 'rad' by default
-            picker: 'inline',
-            expanded: false,
-        }).on('change', (e) => {
-            const { x, y, z } = e.value;
-            recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ')));
-        });
+        objectPane
+            .addInput(PARAMS, 'rotation', {
+                view: 'rotation',
+                rotationMode: 'euler',
+                order: 'XYZ', // Extrinsic rotation order. optional, 'XYZ' by default
+                unit: 'rad', // or 'rad' or 'turn'. optional, 'rad' by default
+                picker: 'inline',
+                expanded: false,
+            })
+            .on('change', (e) => {
+                const { x, y, z } = e.value;
+                recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ')));
+            });
         // quaternion
-        objectPane.addInput(PARAMS, 'quat', {
-            view: 'rotation',
-            rotationMode: 'quaternion', // optional, 'quaternion' by default
-            picker: 'inline', // or 'popup'. optional, 'popup' by default
-            expanded: false, // optional, false by default
-        }).on('change', (e) => {
-            const { x, y, z, w } = e.value;
-            recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w)));
-        });
+        objectPane
+            .addInput(PARAMS, 'quat', {
+                view: 'rotation',
+                rotationMode: 'quaternion', // optional, 'quaternion' by default
+                picker: 'inline', // or 'popup'. optional, 'popup' by default
+                expanded: false, // optional, false by default
+            })
+            .on('change', (e) => {
+                const { x, y, z, w } = e.value;
+                recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w)));
+            });
 
         return this.pane;
     }

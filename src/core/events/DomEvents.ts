@@ -7,7 +7,7 @@ import ObjectControlPane from '../../app/ObjectControlPane';
 
 export function domClickEvent(): void {
     let instance: Pane;
-    EventRegistry.registry('objectDomClick', (value => {
+    EventRegistry.registry('objectDomClick', (value) => {
         instance && instance.dispose();
         const id = value[0];
         const obj = Constant.SCENE.getObjectByProperty('uuid', id);
@@ -16,6 +16,5 @@ export function domClickEvent(): void {
         }
         objectChanged.highLightMesh(obj);
         instance = new ObjectControlPane().genPane(obj);
-    }));
+    });
 }
-

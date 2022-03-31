@@ -3,7 +3,6 @@ import Constant from '../constant/Constant';
 import state from './State';
 
 class ObjectChanged {
-
     private highLightBox?: BoxHelper;
 
     /**
@@ -34,4 +33,3 @@ class ObjectChanged {
 
 const objectChanged = new ObjectChanged();
 export default objectChanged;
-

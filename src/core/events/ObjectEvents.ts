@@ -36,5 +36,4 @@ export function clickObjectEvent(): void {
         }
         objectChanged.highLightMesh(object);
     });
-
 }
