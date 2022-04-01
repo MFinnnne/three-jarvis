@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import Constant from './constant/Constant';
 import GUI from './app/GUI';
 import './sass/full.scss';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import * as allEvents from './core/events';
 
 export default class ThreeHelper {
@@ -10,12 +10,14 @@ export default class ThreeHelper {
         scene: THREE.Scene,
         camera: THREE.Camera,
         renderer: THREE.WebGLRenderer,
+        container: HTMLElement,
         control?: OrbitControls,
     ): void {
-        console.log('12312312');
+        console.log('mfine3');
         Constant.SCENE = scene;
         Constant.CAMERA = camera;
         Constant.RENDERER = renderer;
+        Constant.THREE_CONTAINER = container;
         GUI.init();
         /**
          * register events

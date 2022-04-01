@@ -9,6 +9,15 @@ export default class Constant {
     private static _LEFT_SIDE_BAR_CONTAINER: HTMLDivElement;
     private static _PANE_CONTAINER: HTMLDivElement;
     private static _RENDERER: WebGLRenderer;
+    private static _THREE_CONTAINER: HTMLElement;
+
+    static get THREE_CONTAINER(): HTMLElement {
+        return this._THREE_CONTAINER;
+    }
+
+    static set THREE_CONTAINER(value: HTMLElement) {
+        this._THREE_CONTAINER = value;
+    }
 
     static get RENDERER(): WebGLRenderer {
         return this._RENDERER;

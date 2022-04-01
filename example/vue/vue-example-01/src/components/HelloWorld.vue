@@ -1,15 +1,13 @@
 <script setup lang='ts'>
 import * as THREE from 'three';
-import { Box3Helper, BoxGeometry, BoxHelper, DirectionalLight, MeshBasicMaterial } from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { onMounted } from 'vue';
+import {BoxGeometry, DirectionalLight, MeshBasicMaterial} from 'three';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import {onMounted} from 'vue';
 import ThreeHelper from 'three-helper';
 
 
-
-
-let camera, scene, renderer, controls;
+let camera, scene, renderer, controls   ;
 
 onMounted(() => {
     init();
@@ -57,7 +55,7 @@ function init() {
     loader.load('test.glb', function(gltf) {
         scene.add(gltf.scene);
         gltf.scene.scale.set(0.01, 0.01, 0.01);
-        ThreeHelper.init(scene, camera,renderer,controls);
+        ThreeHelper.init(scene, camera,renderer,container);
     });
 }
 

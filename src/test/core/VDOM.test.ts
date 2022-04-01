@@ -1,4 +1,4 @@
-import { ModelVDomData } from '../../app/LeftSideBar';
+import { ModelVDomData } from '../../app/Object3DTree';
 import { BoxGeometry, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, PointLight, Scene } from 'three';
 import VDOM, { VNodeTree } from '../../core/VDOM';
 

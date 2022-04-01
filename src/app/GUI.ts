@@ -1,4 +1,4 @@
-import { LeftSideBar } from './LeftSideBar';
+import { Object3DTree } from './Object3DTree';
 import Constant from '../constant/Constant';
 
 export default class GUI {
@@ -30,6 +30,6 @@ export default class GUI {
         Constant.LEFT_SIDE_BAR_CONTAINER = leftSideBarDom;
         Constant.PANE_CONTAINER = paneDom;
 
-        LeftSideBar.init();
+        Object3DTree.init();
     }
 }

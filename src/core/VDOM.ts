@@ -1,4 +1,4 @@
-import { ModelVDomData } from '../app/LeftSideBar';
+import { ModelVDomData } from '../app/Object3DTree';
 import { Object3D } from 'three';
 import style from './Style';
 

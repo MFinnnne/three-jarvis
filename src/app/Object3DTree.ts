@@ -1,14 +1,7 @@
-import { Object3D } from 'three';
-import VDOM, { Attributes, VNodeTree } from '../core/VDOM';
+import {Object3D} from 'three';
+import VDOM, {Attributes, VNodeTree} from '../core/VDOM';
 import Constant from '../constant/Constant';
 import Ticker from '../core/Ticker';
-import EventRegistry from '../core/EventRegistry';
-import { Pane } from 'tweakpane';
-import ObjectChanged from '../core/ObjectChanged';
-import ObjectControlPane from './ObjectControlPane';
-import State from '../core/State';
-import state from '../core/State';
-import objectChanged from '../core/ObjectChanged';
 
 /**
  *  discard
@@ -25,29 +18,30 @@ export type ModelVDomData = {
 /**
  * Generate a model tree
  */
-export class LeftSideBar {
+export class Object3DTree {
     public static init() {
-        LeftSideBar.generateTree();
+        Object3DTree.generateTree();
         this.objectDomClickEvent();
     }
 
     static generateTree() {
         const vNodeTree = VDOM.threeScene2VNodeTree(Constant.SCENE);
-        const modelTreeDOM = LeftSideBar.vNodeTree2DOM(vNodeTree);
+        const modelTreeDOM = Object3DTree.vNodeTree2DOM(vNodeTree);
         Constant.LEFT_SIDE_BAR_CONTAINER.appendChild(modelTreeDOM);
         const toggle = document.getElementsByClassName('caret');
         for (let i = 0; i < toggle.length; i++) {
             toggle[i].addEventListener('click', function (e) {
                 const parentElement = (e.target as HTMLElement).parentElement;
-                parentElement?.querySelector('.nested')?.classList.toggle('active');
+                let element = parentElement?.querySelector('.nested');
+                element?.classList.toggle('active');
                 (e.target as HTMLElement).classList.toggle('caret-down');
             });
         }
     }
 
     static vNodeTree2DOM(vNodeTree: VNodeTree): HTMLElement {
-        const { self, children } = vNodeTree;
-        const { tagName, id, className } = self;
+        const {self, children} = vNodeTree;
+        const {tagName, id, className} = self;
         const element = document.createElement(tagName);
         element.className = className;
         const spanElement = document.createElement('span');
@@ -61,12 +55,14 @@ export class LeftSideBar {
         spanElement.className += ' three-object';
         element.appendChild(spanElement);
 
-        const nestedEle = document.createElement('ul');
-        nestedEle.className = 'nested';
-        element.appendChild(nestedEle);
-        children?.forEach((child) => {
-            nestedEle.appendChild(LeftSideBar.vNodeTree2DOM(child));
-        });
+        if (vNodeTree.hasChildren) {
+            const nestedEle = document.createElement('ul');
+            nestedEle.className = 'nested';
+            element.appendChild(nestedEle);
+            children?.forEach((child) => {
+                nestedEle.appendChild(Object3DTree.vNodeTree2DOM(child));
+            });
+        }
         return element;
     }
 
@@ -78,6 +74,20 @@ export class LeftSideBar {
                 const uuid = target.id;
                 Ticker.emmit('objectDomClick', uuid);
             });
+        }
+    }
+
+    static expandTreeByChildNode(element: HTMLElement) {
+        let divElement = element.parentElement?.parentElement?.parentElement;
+        while (divElement) {
+            let classList = divElement.querySelector('.nested')?.classList;
+            if (!classList?.contains("active")) {
+                classList?.toggle("active");
+            }
+            if (divElement.className === 'scene') {
+                break
+            }
+            divElement = divElement.parentElement?.parentElement;
         }
     }
 }
