@@ -12,7 +12,7 @@ const threeHelperRayCaster = new Raycaster();
 threeHelperRayCaster.layers.mask = 0xfffffffe | 1;
 
 function intersectObjects(e: MouseEvent): Intersection[] {
-    let renderDom = Constant.THREE_CONTAINER;
+    const renderDom = Constant.THREE_CONTAINER;
     if (renderDom === undefined) {
         throw new Error('can not get threejs renderer dom');
     }
@@ -24,7 +24,6 @@ function intersectObjects(e: MouseEvent): Intersection[] {
 }
 
 export function rayCasterEvents() {
-
     window.addEventListener('click', (e) => {
         const intersects = intersectObjects(e);
         if (intersects.length > 0) {
@@ -42,7 +41,6 @@ export function rayCasterEvents() {
     });
 }
 
-
 export function clickObjectEvent(): void {
     EventRegistry.registry('objectClick', (value) => {
         const object = value[0];
@@ -58,7 +56,6 @@ export function clickObjectEvent(): void {
         Ticker.emmit('objectDomClick', object.uuid);
     });
 }
-
 
 export function objectDoubleClickEvent(): void {
     EventRegistry.registry('objectDoubleClick', (value) => {

@@ -24,7 +24,7 @@ export function domClickEvent(): void {
 
 export function domDoubleClickEvent(): void {
     Constant.LEFT_SIDE_BAR_CONTAINER.addEventListener('dblclick', (e) => {
-        const element = (e.target) as HTMLElement;
+        const element = e.target as HTMLElement;
         const id = element.id;
         if (id) {
             Ticker.emmit('objectDomDoubleClick', id);

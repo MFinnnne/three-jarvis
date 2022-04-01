@@ -25,7 +25,6 @@ class ObjectChanged {
         Constant.SCENE.add(this.highLightBox);
     }
 
-
     public update(object: Object3D): void {
         if (state.selectedObject.uuid === object.uuid) {
             this.highLightMesh(object);

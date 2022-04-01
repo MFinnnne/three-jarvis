@@ -31,9 +31,9 @@ export class Object3DTree {
         Constant.LEFT_SIDE_BAR_CONTAINER.appendChild(modelTreeDOM);
         const toggle = document.getElementsByClassName('caret');
         for (let i = 0; i < toggle.length; i++) {
-            toggle[i].addEventListener('click', function(e) {
+            toggle[i].addEventListener('click', function (e) {
                 const parentElement = (e.target as HTMLElement).parentElement;
-                let element = parentElement?.querySelector('.nested');
+                const element = parentElement?.querySelector('.nested');
                 element?.classList.toggle('active');
                 (e.target as HTMLElement).classList.toggle('caret-down');
             });
@@ -81,7 +81,7 @@ export class Object3DTree {
     static expandTreeByChildNode(element: HTMLElement) {
         let divElement = element.parentElement?.parentElement?.parentElement;
         while (divElement) {
-            let classList = divElement.querySelector('.nested')?.classList;
+            const classList = divElement.querySelector('.nested')?.classList;
             if (!classList?.contains('active')) {
                 classList?.toggle('active');
             }
@@ -108,6 +108,6 @@ export class Object3DTree {
         // Constant.LEFT_SIDE_BAR_CONTAINER.addEventListener('scroll',(e)=>{
         //     console.log(((e.target) as HTMLElement).scrollTop);
         // })
-        Constant.LEFT_SIDE_BAR_CONTAINER.scrollTo(offsetLeft,offsetTop);
+        Constant.LEFT_SIDE_BAR_CONTAINER.scrollTo(offsetLeft, offsetTop);
     }
 }

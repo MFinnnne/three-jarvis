@@ -10,7 +10,6 @@ class State {
     private _activeCamera: Camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     private _cameras: Camera[] = [];
 
-
     get activeCamera(): Camera {
         return this._activeCamera;
     }
