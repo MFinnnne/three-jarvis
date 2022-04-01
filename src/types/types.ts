@@ -7,6 +7,7 @@ export interface ControlPane {
 
 export interface Events {
     objectDomClick: (id: string) => void;
+    objectDomDoubleClick: (id: string) => void;
     objectClick: (object3D: Object3D) => void;
     objectDoubleClick: (object3D: Object3D) => void;
     objectHover: (object3D: Object3D) => void;
@@ -17,7 +18,7 @@ export interface Events {
 
 export interface Command {
     object: Object3D;
-    name?:string
-    exec(): void
-    undo(): void
+    name?: string;
+    exec(): void;
+    undo(): void;
 }

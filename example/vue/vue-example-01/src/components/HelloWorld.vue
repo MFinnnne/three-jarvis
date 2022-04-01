@@ -22,7 +22,7 @@ function init() {
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.25, 1000);
     camera.position.set(100, 100, 100);
     const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-    const light2 = new DirectionalLight(0xffffff, 4);
+    const light2 = new DirectionalLight(0xffffff, 1);
     light2.position.set(0.5, 0, 0.866); // ~60º
     light2.name = 'main_light';
     scene = new THREE.Scene();
@@ -31,8 +31,10 @@ function init() {
     const boxGeometry = new BoxGeometry(10, 10, 10);
     const material = new MeshBasicMaterial({ color: 0x00ff00 });
     const mesh = new THREE.Mesh(boxGeometry, material);
-    material.wireframe = true;
+    mesh.position.set(0, 0, 0);
+    // material.wireframe = true;
     scene.add(mesh);
+    scene.add(camera);
     const loader = new GLTFLoader().setPath('../../static/');
 
 
@@ -48,14 +50,14 @@ function init() {
     controls = new OrbitControls(camera, renderer.domElement);// use if there is no animation loop
     controls.minDistance = 2;
     controls.maxDistance = 1000;
-    controls.target.set(0, 0, -0.2);
+    controls.target.set(0, 0, 0);
     controls.update();
 
     window.addEventListener('resize', onWindowResize);
     loader.load('test.glb', function(gltf) {
         scene.add(gltf.scene);
         gltf.scene.scale.set(0.01, 0.01, 0.01);
-        ThreeHelper.init(scene, camera,renderer,container);
+        ThreeHelper.init(scene, camera,renderer,container,controls);
     });
 }
 

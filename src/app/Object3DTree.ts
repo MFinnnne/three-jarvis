@@ -1,7 +1,8 @@
-import {Object3D} from 'three';
-import VDOM, {Attributes, VNodeTree} from '../core/VDOM';
+import { Object3D } from 'three';
+import VDOM, { Attributes, VNodeTree } from '../core/VDOM';
 import Constant from '../constant/Constant';
 import Ticker from '../core/Ticker';
+import state from '../core/State';
 
 /**
  *  discard
@@ -30,7 +31,7 @@ export class Object3DTree {
         Constant.LEFT_SIDE_BAR_CONTAINER.appendChild(modelTreeDOM);
         const toggle = document.getElementsByClassName('caret');
         for (let i = 0; i < toggle.length; i++) {
-            toggle[i].addEventListener('click', function (e) {
+            toggle[i].addEventListener('click', function(e) {
                 const parentElement = (e.target as HTMLElement).parentElement;
                 let element = parentElement?.querySelector('.nested');
                 element?.classList.toggle('active');
@@ -40,8 +41,8 @@ export class Object3DTree {
     }
 
     static vNodeTree2DOM(vNodeTree: VNodeTree): HTMLElement {
-        const {self, children} = vNodeTree;
-        const {tagName, id, className} = self;
+        const { self, children } = vNodeTree;
+        const { tagName, id, className } = self;
         const element = document.createElement(tagName);
         element.className = className;
         const spanElement = document.createElement('span');
@@ -81,13 +82,32 @@ export class Object3DTree {
         let divElement = element.parentElement?.parentElement?.parentElement;
         while (divElement) {
             let classList = divElement.querySelector('.nested')?.classList;
-            if (!classList?.contains("active")) {
-                classList?.toggle("active");
+            if (!classList?.contains('active')) {
+                classList?.toggle('active');
             }
             if (divElement.className === 'scene') {
-                break
+                break;
             }
             divElement = divElement.parentElement?.parentElement;
         }
+        Object3DTree.autoLocateInTree(element);
+    }
+
+    private static autoLocateInTree(dom: HTMLElement) {
+        state.selectedObjectDom.classList.toggle('selected');
+        dom.classList.toggle('selected');
+        state.selectedObjectDom = dom;
+        let offsetTop: number = dom.offsetTop - Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight / 2;
+        if (dom.offsetTop < Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight) {
+            offsetTop = 0;
+        }
+        let offsetLeft: number = dom.offsetLeft - Constant.LEFT_SIDE_BAR_CONTAINER.clientWidth / 2;
+        if (dom.offsetLeft < Constant.LEFT_SIDE_BAR_CONTAINER.clientWidth / 2) {
+            offsetLeft = 0;
+        }
+        // Constant.LEFT_SIDE_BAR_CONTAINER.addEventListener('scroll',(e)=>{
+        //     console.log(((e.target) as HTMLElement).scrollTop);
+        // })
+        Constant.LEFT_SIDE_BAR_CONTAINER.scrollTo(offsetLeft,offsetTop);
     }
 }

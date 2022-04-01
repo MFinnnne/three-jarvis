@@ -1,5 +1,7 @@
 $menu-height: 5%;
 
+
+
 #three-helper-container {
     top: 0;
     left: 0;
@@ -31,6 +33,48 @@ $menu-height: 5%;
         overflow: scroll;
         pointer-events: auto;
 
+        &::-webkit-scrollbar {
+            width: 9px;
+            background: transparent;
+            height: 9px;
+            color: #3b3636;
+        }
+        &::-webkit-scrollbar-track {
+            background: #bccab1;        /* color of the tracking area */
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #fbaeae;    /* color of the scroll thumb */
+            border-radius: 6px;       /* roundness of the scroll thumb *//* creates padding around scroll thumb */
+        }
+
+        @keyframes highlight-selected {
+            from {
+                border-color: yellow;
+                border-width: thin;
+                border-style: solid;
+            }
+            to {
+                border-color: red;
+                border-width: thick;
+                border-style: solid;
+            }
+        }
+
+        @-webkit-keyframes highlight-selected /* Safari 与 Chrome */
+        {
+            from {
+                border-color: yellow;
+                border-style: solid;
+            }
+            to {
+                border-color: red;
+                border-style: solid;
+            }
+        }
+
+        .selected {
+            animation: highlight-selected 0.1s 5;
+        }
 
         .caret-over, .caret {
             overflow: hidden;

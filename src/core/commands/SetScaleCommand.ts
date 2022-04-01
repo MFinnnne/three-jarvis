@@ -1,8 +1,8 @@
-import {Command} from "../../types/types";
-import {Group, Object3D, Vector3} from "three";
+import { Command } from '../../types/types';
+import { Group, Object3D, Vector3 } from 'three';
 
-export  default  class SetScaleCommand implements Command {
-    name: string = 'change scale';
+export default class SetScaleCommand implements Command {
+    name = 'change scale';
     object: Object3D = new Group();
     newScale: Vector3;
     oldScale: Vector3;
@@ -21,6 +21,4 @@ export  default  class SetScaleCommand implements Command {
     undo(): void {
         this.name = 'change rotation';
     }
-
-
 }

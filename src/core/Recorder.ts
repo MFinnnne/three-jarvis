@@ -1,13 +1,11 @@
 import { Command } from '../types/types';
 import objectChanged from './ObjectChanged';
 
-
 /**
  * Operation records
  * @class Recorder
  */
 class Recorder {
-
     private static instance: Recorder;
 
     // private operatorHistories: Command[] = [];

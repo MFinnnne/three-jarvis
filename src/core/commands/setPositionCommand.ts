@@ -1,10 +1,9 @@
-import {Command} from "../../types/types";
-import {Object3D, Vector3} from "three";
+import { Command } from '../../types/types';
+import { Object3D, Vector3 } from 'three';
 
-
-export default  class SetPositionCommand implements Command {
-    oldPosition: Vector3
-    newPosition: Vector3
+export default class SetPositionCommand implements Command {
+    oldPosition: Vector3;
+    newPosition: Vector3;
     private _object: Object3D;
     name = '';
 
@@ -13,7 +12,6 @@ export default  class SetPositionCommand implements Command {
         this.oldPosition = object.position.clone();
         this.newPosition = position.clone();
     }
-
 
     get object(): Object3D {
         return this._object;
@@ -30,7 +28,5 @@ export default  class SetPositionCommand implements Command {
 
     undo(): void {
         //TODO
-
     }
-
 }

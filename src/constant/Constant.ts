@@ -1,7 +1,15 @@
 import { Camera, Scene, WebGLRenderer } from 'three';
 import { Events } from '../types/types';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default class Constant {
+    static get CONTROL(): OrbitControls {
+        return this._CONTROL;
+    }
+
+    static set CONTROL(value: OrbitControls) {
+        this._CONTROL = value;
+    }
     private static _CAMERA: Camera;
     private static _SCENE: Scene;
     private static _CONTAINER: HTMLElement;
@@ -10,6 +18,7 @@ export default class Constant {
     private static _PANE_CONTAINER: HTMLDivElement;
     private static _RENDERER: WebGLRenderer;
     private static _THREE_CONTAINER: HTMLElement;
+    private static _CONTROL: OrbitControls;
 
     static get THREE_CONTAINER(): HTMLElement {
         return this._THREE_CONTAINER;

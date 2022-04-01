@@ -1,7 +1,7 @@
 import { Command } from '../../types/types';
 import { Euler, Object3D, Vector3 } from 'three';
 
-export  default  class SetRotationCommand implements Command {
+export default class SetRotationCommand implements Command {
     name = 'change rotation';
     oldRotation: Euler;
     newRotation: Euler;
@@ -21,5 +21,4 @@ export  default  class SetRotationCommand implements Command {
     undo(): void {
         this.name = 'change rotation';
     }
-
 }
