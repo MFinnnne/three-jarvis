@@ -1,5 +1,5 @@
-import { Pane } from 'tweakpane';
-import { Camera, Object3D, WebGLRenderer } from 'three';
+import {Pane} from 'tweakpane';
+import {Camera, Object3D, WebGLRenderer} from 'three';
 
 export interface ControlPane {
     genPane(argument: Object3D | Camera | WebGLRenderer): Pane;
@@ -14,11 +14,14 @@ export interface Events {
     objectOut: (object3D: Object3D) => void;
     cameraDomClick: () => void;
     renderDomClick: () => void;
+    lockObject: (object3d: Object3D) => void
 }
 
 export interface Command {
     object: Object3D;
     name?: string;
+
     exec(): void;
+
     undo(): void;
 }

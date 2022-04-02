@@ -90,24 +90,20 @@ export class Object3DTree {
             }
             divElement = divElement.parentElement?.parentElement;
         }
-        Object3DTree.autoLocateInTree(element);
     }
 
-    private static autoLocateInTree(dom: HTMLElement) {
-        state.selectedObjectDom.classList.toggle('selected');
-        dom.classList.toggle('selected');
+    static autoLocateInTree(dom: HTMLElement) {
+        state.selectedObjectDom.classList.toggle('find-out');
+        dom.classList.toggle('find-out');
         state.selectedObjectDom = dom;
         let offsetTop: number = dom.offsetTop - Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight / 2;
         if (dom.offsetTop < Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight) {
             offsetTop = 0;
         }
         let offsetLeft: number = dom.offsetLeft - Constant.LEFT_SIDE_BAR_CONTAINER.clientWidth / 2;
-        if (dom.offsetLeft < Constant.LEFT_SIDE_BAR_CONTAINER.clientWidth / 2) {
+        if (dom.offsetLeft < Constant.LEFT_SIDE_BAR_CONTAINER.clientWidth / 4) {
             offsetLeft = 0;
         }
-        // Constant.LEFT_SIDE_BAR_CONTAINER.addEventListener('scroll',(e)=>{
-        //     console.log(((e.target) as HTMLElement).scrollTop);
-        // })
         Constant.LEFT_SIDE_BAR_CONTAINER.scrollTo(offsetLeft, offsetTop);
     }
 }

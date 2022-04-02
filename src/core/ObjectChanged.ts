@@ -1,16 +1,17 @@
-import { BoxHelper, ColorRepresentation, Object3D } from 'three';
+import {BoxHelper, ColorRepresentation, Object3D} from 'three';
 import Constant from '../constant/Constant';
 import state from './State';
 
 class ObjectChanged {
     private highLightBox?: BoxHelper;
+    private lockMeshBox?: BoxHelper;
 
     /**
      *   boxed  mesh
      * @param object
      * @param color
      */
-    public highLightMesh(object: Object3D, color: ColorRepresentation = 0xff0000): void {
+    public highLightMesh(object: Object3D, color: ColorRepresentation = 0xffff00): void {
         if (object.type === 'Scene' || object.type === 'Camera') {
             return;
         }

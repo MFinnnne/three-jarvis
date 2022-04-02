@@ -12,7 +12,6 @@ class Recorder {
 
     public execute(cmd: Command, optionalName?: string): void {
         cmd.exec();
-        // this.operatorHistories.push(cmd);
         objectChanged.update(cmd.object);
     }
 }

@@ -1,10 +1,10 @@
 import EventRegistry from '../EventRegistry';
-import { Object3D, Raycaster, Vector2 } from 'three';
+import {Object3D, Raycaster, Vector2} from 'three';
 import Constant from '../../constant/Constant';
-import { Intersection } from 'three/src/core/Raycaster';
+import {Intersection} from 'three/src/core/Raycaster';
 import objectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
-import { Object3DTree } from '../../app/Object3DTree';
+import {Object3DTree} from '../../app/Object3DTree';
 import MyCameraUtil from '../../util/MyCameraUtil';
 import state from '../State';
 
@@ -24,22 +24,27 @@ function intersectObjects(e: MouseEvent): Intersection[] {
 }
 
 export function rayCasterEvents() {
-    window.addEventListener('click', (e) => {
+    Constant.THREE_CONTAINER.addEventListener('click', (e) => {
+        const intersects = intersectObjects(e);
+        if (intersects.length > 0) {
+            const fistCatchObject = intersects[0].object;
+            if (e.altKey) {
+                Ticker.emmit('objectClick', fistCatchObject);
+            }
+        }
+
+    });
+
+    Constant.THREE_CONTAINER.addEventListener('dblclick', (e) => {
         const intersects = intersectObjects(e);
         if (intersects.length > 0) {
             const fistCatchObject = intersects[0].object;
             Ticker.emmit('objectClick', fistCatchObject);
-        }
-    });
-
-    window.addEventListener('dblclick', (e) => {
-        const intersects = intersectObjects(e);
-        if (intersects.length > 0) {
-            const fistCatchObject = intersects[0].object;
             Ticker.emmit('objectDoubleClick', fistCatchObject);
         }
     });
 }
+
 
 export function clickObjectEvent(): void {
     EventRegistry.registry('objectClick', (value) => {
@@ -59,6 +64,6 @@ export function clickObjectEvent(): void {
 
 export function objectDoubleClickEvent(): void {
     EventRegistry.registry('objectDoubleClick', (value) => {
-        MyCameraUtil.faceObject(state.selectedObject);
+        MyCameraUtil.faceObject(value[0]);
     });
 }

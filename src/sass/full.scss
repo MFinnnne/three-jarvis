@@ -72,8 +72,12 @@ $menu-height: 5%;
             }
         }
 
-        .selected {
+        .find-out {
             animation: highlight-selected 0.1s 5;
+        }
+
+        .selected {
+            background-color: #1abc9c;
         }
 
         .caret-over, .caret {
