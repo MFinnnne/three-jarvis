@@ -1,17 +1,24 @@
-import { Pane } from 'tweakpane';
+import { Pane, TabPageApi } from 'tweakpane';
 import { Euler, Object3D, Quaternion, Vector3 } from 'three';
-import DefaultControlPane from './DefaultControlPane';
-import recorder from '../core/Recorder';
-import SetPositionCommand from '../core/commands/setPositionCommand';
-import SetRotationCommand from '../core/commands/setRotationCommand';
+import DefaultControlPane from '../DefaultControlPane';
+import recorder from '../../core/Recorder';
+import SetPositionCommand from '../../core/commands/setPositionCommand';
+import SetRotationCommand from '../../core/commands/setRotationCommand';
 import TweakpaneRotationInputPlugin from '@0b5vr/tweakpane-plugin-rotation';
-import SetScaleCommand from '../core/commands/SetScaleCommand';
-import SetQuaternionCommand from '../core/commands/setQuaternionCommand';
+import SetScaleCommand from '../../core/commands/SetScaleCommand';
+import SetQuaternionCommand from '../../core/commands/setQuaternionCommand';
+
 
 export default class ObjectControlPane extends DefaultControlPane {
-    public genPane(object: Object3D): Pane {
-        this.pane.registerPlugin(TweakpaneRotationInputPlugin);
 
+
+    protected objectPane?: TabPageApi;
+    protected geometryPane?: TabPageApi;
+    protected materialPane?: TabPageApi;
+
+    public genPane(object: Object3D): Pane {
+        const pane = super.genPane(object);
+        pane.registerPlugin(TweakpaneRotationInputPlugin);
         const PARAMS = {
             position: {
                 x: object.position.x,
@@ -31,21 +38,23 @@ export default class ObjectControlPane extends DefaultControlPane {
             quat: { x: object.quaternion.x, y: object.quaternion.y, z: object.quaternion.z, w: object.quaternion.w },
         };
 
-        const tab = this.pane.addTab({
+        const tab = pane.addTab({
             pages: [{ title: 'Object' }, { title: 'Geometry' }, { title: 'Material' }],
         });
-        const objectPane = tab.pages[0];
-        objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
+        this.objectPane = tab.pages[0];
+        this.geometryPane = tab.pages[1];
+        this.materialPane = tab.pages[2];
+        this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
             const { x, y, z } = ev.value;
             recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z)));
         });
-        objectPane.addInput(PARAMS, 'scale').on('change', (ev) => {
+        this.objectPane.addInput(PARAMS, 'scale').on('change', (ev) => {
             const { x, y, z } = ev.value;
             recorder.execute(new SetScaleCommand(object, new Vector3(x, y, z)));
         });
 
         // euler
-        objectPane
+        this.objectPane
             .addInput(PARAMS, 'rotation', {
                 view: 'rotation',
                 rotationMode: 'euler',
@@ -59,7 +68,7 @@ export default class ObjectControlPane extends DefaultControlPane {
                 recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ')));
             });
         // quaternion
-        objectPane
+        this.objectPane
             .addInput(PARAMS, 'quat', {
                 view: 'rotation',
                 rotationMode: 'quaternion', // optional, 'quaternion' by default
@@ -71,6 +80,6 @@ export default class ObjectControlPane extends DefaultControlPane {
                 recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w)));
             });
 
-        return this.pane;
+        return pane;
     }
 }

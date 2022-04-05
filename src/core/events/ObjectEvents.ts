@@ -57,7 +57,7 @@ export function clickObjectEvent(): void {
             throw new Error(`object ===${object.uuid}=== dom is null`);
         }
         Object3DTree.expandTreeByChildNode(dom);
-        objectChanged.highLightMesh(object);
+        objectChanged.objectHelper(object);
         Ticker.emmit('objectDomClick', object.uuid);
     });
 }

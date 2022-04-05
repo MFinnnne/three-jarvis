@@ -17,7 +17,7 @@ export default class ThreeHelper {
         container: HTMLElement,
         control: OrbitControls,
     ): void {
-        console.log('mfine6');
+        console.log('mfine8');
         Constant.SCENE = scene;
         Constant.CAMERA = camera;
         Constant.RENDERER = renderer;

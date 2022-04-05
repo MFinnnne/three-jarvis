@@ -72,8 +72,9 @@
     "camera-controls": "^1.34.2",
     "nanoevents": "^6.0.2",
     "sass": "^1.49.9",
-    "signals": "^1.0.0",
-    "three": "^0.138.3",
     "tweakpane": "^3.0.7"
+  },
+  "peerDependencies": {
+    "three": "^0.138.3"
   }
 }
