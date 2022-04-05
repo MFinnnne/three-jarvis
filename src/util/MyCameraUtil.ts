@@ -1,4 +1,4 @@
-import {Box3, Object3D, Vector3} from 'three';
+import { Box3, Object3D, Vector3 } from 'three';
 import state from '../core/State';
 import Constant from '../constant/Constant';
 

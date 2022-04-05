@@ -1,6 +1,6 @@
 import Ticker from './Ticker';
-import {Events} from '../types/types';
-import {Unsubscribe} from 'nanoevents';
+import { Events } from '../types/types';
+import { Unsubscribe } from 'nanoevents';
 
 const EVENTS_UNBIND_MAP: Map<keyof Events, Unsubscribe> = new Map();
 
