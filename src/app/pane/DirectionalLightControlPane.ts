@@ -3,7 +3,6 @@ import { Pane } from 'tweakpane';
 import { DirectionalLight, Object3D } from 'three';
 
 export default class DirectionalLightControlPane extends LightControlPane {
-
     genPane(object: Object3D): Pane {
         super.genPane(object);
         const light = object as DirectionalLight;

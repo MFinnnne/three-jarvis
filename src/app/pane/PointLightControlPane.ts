@@ -3,7 +3,6 @@ import { Object3D, PointLight } from 'three';
 import { Pane } from 'tweakpane';
 
 export default class PointLightControlPane extends LightControlPane {
-
     genPane(object: Object3D): Pane {
         super.genPane(object);
         const light = object as PointLight;

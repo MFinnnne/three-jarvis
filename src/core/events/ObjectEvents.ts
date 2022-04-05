@@ -1,10 +1,10 @@
 import EventRegistry from '../EventRegistry';
-import {Object3D, Raycaster, Vector2} from 'three';
+import { Object3D, Raycaster, Vector2 } from 'three';
 import Constant from '../../constant/Constant';
-import {Intersection} from 'three/src/core/Raycaster';
+import { Intersection } from 'three/src/core/Raycaster';
 import objectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
-import {Object3DTree} from '../../app/Object3DTree';
+import { Object3DTree } from '../../app/Object3DTree';
 import MyCameraUtil from '../../util/MyCameraUtil';
 import state from '../State';
 
@@ -32,7 +32,6 @@ export function rayCasterEvents() {
                 Ticker.emmit('objectClick', fistCatchObject);
             }
         }
-
     });
 
     Constant.THREE_CONTAINER.addEventListener('dblclick', (e) => {
@@ -44,7 +43,6 @@ export function rayCasterEvents() {
         }
     });
 }
-
 
 export function clickObjectEvent(): void {
     EventRegistry.registry('objectClick', (value) => {

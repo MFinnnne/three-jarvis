@@ -8,10 +8,7 @@ import TweakpaneRotationInputPlugin from '@0b5vr/tweakpane-plugin-rotation';
 import SetScaleCommand from '../../core/commands/SetScaleCommand';
 import SetQuaternionCommand from '../../core/commands/setQuaternionCommand';
 
-
 export default class ObjectControlPane extends DefaultControlPane {
-
-
     protected objectPane?: TabPageApi;
     protected geometryPane?: TabPageApi;
     protected materialPane?: TabPageApi;

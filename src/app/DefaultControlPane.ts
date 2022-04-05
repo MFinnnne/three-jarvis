@@ -9,5 +9,4 @@ export default class DefaultControlPane implements ControlPane {
     genPane(argument: Object3D | Camera | WebGLRenderer): Pane {
         return this.pane;
     }
-
 }

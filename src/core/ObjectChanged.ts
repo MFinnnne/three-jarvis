@@ -1,10 +1,13 @@
 import {
     BoxHelper,
-    ColorRepresentation, DirectionalLight,
+    ColorRepresentation,
+    DirectionalLight,
     DirectionalLightHelper,
     HemisphereLight,
     HemisphereLightHelper,
-    Object3D, PointLight, PointLightHelper,
+    Object3D,
+    PointLight,
+    PointLightHelper,
 } from 'three';
 import Constant from '../constant/Constant';
 import state from './State';

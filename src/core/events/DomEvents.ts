@@ -15,7 +15,7 @@ export function domClickEvent(): void {
 
     EventRegistry.registry('objectDomClick', (value) => {
         const id = value[0];
-        let element = document.getElementById(id);
+        const element = document.getElementById(id);
         if (element === null) {
             throw new Error(`html element (uuid:${id}) is not exist`);
         }
