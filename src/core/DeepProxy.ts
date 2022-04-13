@@ -24,8 +24,8 @@ function createDeepProxy(target, handler) {
                     return deleted;
                 }
                 return false;
-            }
-        }
+            },
+        };
     }
 
     function unProxy(obj, key) {
@@ -40,7 +40,6 @@ function createDeepProxy(target, handler) {
                 unProxy(obj[key], k);
             }
         }
-
     }
 
     function proxify(obj, path) {
@@ -59,8 +58,7 @@ function createDeepProxy(target, handler) {
 
 const obj = {
     foo: 'baz',
-}
-
+};
 
 const proxied = createDeepProxy(obj, {
     set(target, path, value, receiver) {
@@ -69,5 +67,5 @@ const proxied = createDeepProxy(obj, {
 
     deleteProperty(target, path) {
         console.log('delete', path.join('.'));
-    }
+    },
 });

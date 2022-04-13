@@ -14,8 +14,6 @@ export function domClickEvent(): void {
     let instance: Pane | null = null;
 
     EventRegistry.registry('objectDomClick', (value) => {
-
-
         const id = value[0];
         const element = document.getElementById(id);
         if (element === null) {

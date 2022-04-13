@@ -34,7 +34,7 @@ export class Object3DTree {
         Constant.LEFT_SIDE_BAR_CONTAINER.appendChild(modelTreeDOM);
         const toggle = document.getElementsByClassName('caret');
         for (let i = 0; i < toggle.length; i++) {
-            toggle[i].addEventListener('click', function(e) {
+            toggle[i].addEventListener('click', function (e) {
                 const parentElement = (e.target as HTMLElement).parentElement;
                 const element = parentElement?.querySelector('.nested');
                 element?.classList.toggle('active');

@@ -11,7 +11,6 @@ function checkModelDataTree(vNodeTree: VNodeTree) {
 }
 
 describe('test vom', () => {
-
     test('should parse three scene to vnode tree', () => {
         const scene = new Scene();
         const pointLight = new PointLight(0xffffff, 1, 100, 2);
@@ -24,7 +23,7 @@ describe('test vom', () => {
         const mesh3 = new Mesh(boxGeometry1, material1);
         group.add(mesh3);
         scene.add(group);
-        const vNodeTree1 =Object3DTree.threeScene2VNodeTree(scene);
+        const vNodeTree1 = Object3DTree.threeScene2VNodeTree(scene);
         Object3DTree.print(vNodeTree1);
         checkModelDataTree(vNodeTree1);
     });
