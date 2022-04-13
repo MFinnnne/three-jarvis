@@ -34,7 +34,7 @@ export default {
         ...baseConfig.plugins,
         serve({
             open: false,
-            port: 8082,
+            port: 8088,
             contentBase: '',
         }),
         livereload(),

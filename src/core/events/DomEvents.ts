@@ -14,6 +14,8 @@ export function domClickEvent(): void {
     let instance: Pane | null = null;
 
     EventRegistry.registry('objectDomClick', (value) => {
+
+
         const id = value[0];
         const element = document.getElementById(id);
         if (element === null) {
@@ -33,6 +35,8 @@ export function domClickEvent(): void {
         instance?.dispose();
         instance = null;
         switch (obj.type) {
+            case 'Sprite':
+            case 'Points':
             case 'Group':
             case 'Mesh':
                 instance = new ObjectControlPane().genPane(obj);

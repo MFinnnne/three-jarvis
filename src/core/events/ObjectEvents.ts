@@ -1,5 +1,5 @@
 import EventRegistry from '../EventRegistry';
-import { Object3D, Raycaster, Vector2 } from 'three';
+import { Raycaster, Vector2 } from 'three';
 import Constant from '../../constant/Constant';
 import { Intersection } from 'three/src/core/Raycaster';
 import objectChanged from '../ObjectChanged';
