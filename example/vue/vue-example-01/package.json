@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/three": "^0.138.0",
+    "simplex-noise": "^3.0.1",
     "three": "^0.138.3",
     "three-helper": "file:.yalc/three-helper",
     "vue": "^3.2.25"

@@ -57,7 +57,7 @@ export default class VDOM {
         };
     }
 
-    static threeScene2VNodeTree(object3D: Object3D): VNodeTree {
+    static object2VNodeTree(object3D: Object3D): VNodeTree {
         const vNodeTree: VNodeTree = {
             self: {
                 tagName: 'div',
@@ -70,7 +70,7 @@ export default class VDOM {
             hasChildren: false,
         };
         object3D.children.forEach((child) => {
-            const childVNodeTree = VDOM.threeScene2VNodeTree(child);
+            const childVNodeTree = VDOM.object2VNodeTree(child);
             childVNodeTree.parent = vNodeTree.self;
             vNodeTree.children?.push(childVNodeTree);
         });

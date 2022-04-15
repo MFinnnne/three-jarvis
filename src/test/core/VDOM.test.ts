@@ -92,7 +92,7 @@ describe('test vom', () => {
         const mesh3 = new Mesh(boxGeometry1, material1);
         group.add(mesh3);
         scene.add(group);
-        const vNodeTree1 = VDOM.threeScene2VNodeTree(scene);
+        const vNodeTree1 = VDOM.object2VNodeTree(scene);
         VDOM.print(vNodeTree1);
         checkModelDataTree(vNodeTree1);
     });

@@ -1,11 +1,11 @@
-import { Pane } from 'tweakpane';
+import {Pane} from 'tweakpane';
 import EventRegistry from '../EventRegistry';
 import Constant from '../../constant/Constant';
 import objectChanged from '../ObjectChanged';
 import state from '../State';
 import ObjectControlPane from '../../app/pane/ObjectControlPane';
 import Ticker from '../Ticker';
-import { Object3DTree } from '../../app/Object3DTree';
+import {Object3DTree} from '../../app/Object3DTree';
 import HemisphereLightControlPane from '../../app/pane/HemisphereLightControlPane';
 import DirectionalLightControlPane from '../../app/pane/DirectionalLightControlPane';
 import PointLightControlPane from '../../app/pane/PointLightControlPane';
@@ -33,6 +33,8 @@ export function domClickEvent(): void {
         instance?.dispose();
         instance = null;
         switch (obj.type) {
+            case 'Points':
+            case 'Sprite':
             case 'Group':
             case 'Mesh':
                 instance = new ObjectControlPane().genPane(obj);

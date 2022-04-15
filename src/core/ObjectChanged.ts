@@ -33,6 +33,7 @@ class ObjectChanged {
                 this.hemisphereLightHelper = new HemisphereLightHelper(object as HemisphereLight, 5);
                 Constant.SCENE.add(this.hemisphereLightHelper);
                 break;
+            case 'Group':
             case 'Mesh':
                 state.selectedObject = object;
                 if (this.highLightBox) {

@@ -26,7 +26,7 @@ export class Object3DTree {
     }
 
     static generateTree() {
-        const vNodeTree = VDOM.threeScene2VNodeTree(Constant.SCENE);
+        const vNodeTree = VDOM.object2VNodeTree(Constant.SCENE);
         const modelTreeDOM = Object3DTree.vNodeTree2DOM(vNodeTree);
         Constant.LEFT_SIDE_BAR_CONTAINER.appendChild(modelTreeDOM);
         const toggle = document.getElementsByClassName('caret');
