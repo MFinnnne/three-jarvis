@@ -6,6 +6,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as allEvents from './core/events';
 import CameraControls from 'camera-controls';
 import state from './core/State';
+import MonitorScene from "./core/MonitorScene";
+import {Group} from "three";
 
 CameraControls.install({ THREE: THREE });
 
@@ -17,12 +19,14 @@ export default class ThreeHelper {
         container: HTMLElement,
         control: OrbitControls,
     ): void {
-        console.log('mfine9');
+        console.log('mfine12');
         Constant.SCENE = scene;
         Constant.CAMERA = camera;
         Constant.RENDERER = renderer;
         Constant.THREE_CONTAINER = container;
         Constant.CONTROL = control;
+        let monitorScene = new MonitorScene(scene);
+        monitorScene.add(new Group());
         GUI.init();
         state.activeCamera = camera;
         // register events
