@@ -27,19 +27,6 @@ function init() {
     light2.name = 'main_light';
     const pointLight = new PointLight(0xffffff, 1);
     pointLight.name = 'point_light';
-    scene = new THREE.Scene();
-    scene.add(pointLight);
-    scene.add(light);
-    scene.add(light2);
-    const boxGeometry = new BoxGeometry(10, 10, 10);
-    const material = new MeshBasicMaterial({color: 0x00ff00});
-    const mesh = new THREE.Mesh(boxGeometry, material);
-    mesh.position.set(0, 0, 0);
-    // material.wireframe = true;
-    scene.add(mesh);
-    scene.add(camera);
-    const loader = new GLTFLoader().setPath('../../static/');
-
 
     // new RGBELoader().setPath()
     renderer = new THREE.WebGLRenderer({antialias: true});
@@ -56,11 +43,27 @@ function init() {
     controls.target.set(0, 0, 0);
     controls.update();
 
+    scene = ThreeHelper.init(new THREE.Scene(), camera, renderer, container, controls);
+    scene.add(pointLight);
+    scene.add(light);
+    scene.add(light2);
+    const boxGeometry = new BoxGeometry(10, 10, 10);
+    const material = new MeshBasicMaterial({color: 0x00ff00});
+    const mesh = new THREE.Mesh(boxGeometry, material);
+    mesh.position.set(0, 0, 0);
+    // material.wireframe = true;
+    scene.add(mesh);
+    scene.add(camera);
+    const loader = new GLTFLoader().setPath('../../static/');
+
+
+
+
+
     window.addEventListener('resize', onWindowResize);
     loader.load('test.glb', function (gltf) {
         scene.add(gltf.scene);
         gltf.scene.scale.set(0.01, 0.01, 0.01);
-        ThreeHelper.init(scene, camera, renderer, container, controls);
     });
 }
 
@@ -68,7 +71,6 @@ function onWindowResize() {
 
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
@@ -76,7 +78,7 @@ function onWindowResize() {
 
 function render() {
     requestAnimationFrame(render);
-    renderer.render(scene, camera);
+    renderer.render(scene.target, camera);
     controls.update();
 }
 
