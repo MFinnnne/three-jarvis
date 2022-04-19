@@ -1,8 +1,6 @@
-import {Camera, Scene, WebGLRenderer} from 'three';
-import {Events, ProxyThreeVar, RawThreeVar} from '../types/types';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-
-
+import { Camera, Scene, WebGLRenderer } from 'three';
+import { Events, ProxyThreeVar, RawThreeVar } from '../types/types';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default class Constant {
     static get CONTROL(): OrbitControls {
@@ -20,7 +18,6 @@ export default class Constant {
     private static _PANE_CONTAINER: HTMLDivElement;
 
     private static _CONTROL: OrbitControls;
-
 
     static get rawVar(): RawThreeVar {
         return this._rawVar;

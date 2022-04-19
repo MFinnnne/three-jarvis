@@ -1,6 +1,6 @@
 import { Pane } from 'tweakpane';
-import {Camera, Object3D, Scene, WebGLRenderer} from 'three';
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import { Camera, Object3D, Scene, WebGLRenderer } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export interface ControlPane {
     genPane(argument: Object3D | Camera | WebGLRenderer): Pane;
@@ -28,15 +28,14 @@ export interface Command {
 }
 
 export type RawThreeVar = {
-    scene: Scene,
-    render: WebGLRenderer,
-    camera: Camera | Camera[],
-    container:HTMLElement,
-    control?: OrbitControls
-}
-
+    scene: Scene;
+    render: WebGLRenderer;
+    camera: Camera | Camera[];
+    container: HTMLElement;
+    control?: OrbitControls;
+};
 
 export type ProxyThreeVar = {
-    scene: Scene,
-    render: WebGLRenderer,
-}
+    scene: Scene;
+    render: WebGLRenderer;
+};

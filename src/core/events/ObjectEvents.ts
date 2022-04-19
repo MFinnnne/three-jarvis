@@ -63,6 +63,5 @@ export function clickObjectEvent(): void {
 export function objectDoubleClickEvent(): void {
     EventRegistry.registry('objectDoubleClick', (value) => {
         MyCameraUtil.faceObject(value[0]);
-
     });
 }

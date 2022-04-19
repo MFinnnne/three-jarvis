@@ -1,8 +1,7 @@
 import Constant from '../constant/Constant';
 import Ticker from '../core/Ticker';
 import state from '../core/State';
-import VDOM, {VNodeTree} from "../core/VDOM";
-
+import VDOM, { VNodeTree } from '../core/VDOM';
 
 /**
  * Generate a model tree
@@ -83,7 +82,6 @@ export class Object3DTree {
         }
     }
 
-
     /**
      * find dom in three and auto scroll to it
      * @param dom
@@ -102,6 +100,4 @@ export class Object3DTree {
         }
         Constant.LEFT_SIDE_BAR_CONTAINER.scrollTo(offsetLeft, offsetTop);
     }
-
-
 }

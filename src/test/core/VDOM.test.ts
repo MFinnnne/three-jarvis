@@ -1,6 +1,5 @@
 import { BoxGeometry, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, PointLight, Scene } from 'three';
-import VDOM, {VNodeTree} from "../../core/VDOM";
-
+import VDOM, { VNodeTree } from '../../core/VDOM';
 
 function checkModelDataTree(vNodeTree: VNodeTree) {
     expect(vNodeTree.self.tagName).toBe('div');
