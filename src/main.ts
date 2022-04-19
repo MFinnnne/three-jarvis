@@ -19,7 +19,7 @@ export default class ThreeHelper {
         container: HTMLElement,
         control: OrbitControls,
     ): ProxyThreeVar {
-        console.log('mfine16');
+        console.log('mfine18');
         Constant.rawVar = {scene: scene, render: renderer, control: control, container: container, camera: camera}
         const monitorScene = monitorObject.monitorScene(scene);
         const monitorRender = monitorObject.monitorRender(renderer);

@@ -49,6 +49,8 @@ export default class VDOM {
 
     static updateVNodeTree(path: string[], ...objects: Object3D[]) {
         console.log(path, '----', objects)
+        const object3d = VDOM.parseObjectChain(path);
+
     }
 
     static print(vNodeTree: VNodeTree, level = 0) {
@@ -64,9 +66,10 @@ export default class VDOM {
     /**
      * parse path to objects
      */
-    parseObjectChain(path: string[]) {
+   static parseObjectChain(path: string[]):Object3D{
         if (path.length === 1) {
             return Constant.proxyVar.scene;
         }
+        return Constant.proxyVar.scene;
     }
 }

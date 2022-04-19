@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import * as THREE from 'three';
-import {BoxGeometry, DirectionalLight, MeshBasicMaterial, PointLight} from 'three';
+import {BoxGeometry, DirectionalLight, Group, MeshBasicMaterial, PointLight} from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {onMounted} from 'vue';
@@ -43,17 +43,26 @@ function init() {
     controls.target.set(0, 0, 0);
     controls.update();
     rawScene = new THREE.Scene();
+
     const proxyVar = ThreeHelper.init(rawScene, camera, renderer, container, controls);
     proxyScene = proxyVar.scene;
     proxyScene.add(pointLight);
     proxyScene.add(light);
     proxyScene.add(light2);
+
+    let group = new Group();
+    group.name = 'group';
     const boxGeometry = new BoxGeometry(10, 10, 10);
     const material = new MeshBasicMaterial({color: 0x00ff00});
     const mesh = new THREE.Mesh(boxGeometry, material);
+    proxyScene.add(group);
+
+    setTimeout(() => {
+        group.add(mesh);
+    }, 4000);
+    // group.add(mesh);
     mesh.position.set(0, 0, 0);
     // material.wireframe = true;
-    proxyScene.add(mesh);
     proxyScene.add(camera);
     const loader = new GLTFLoader().setPath('../../static/');
 

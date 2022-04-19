@@ -20,7 +20,9 @@ class State {
         this._activeCamera = value;
         this._activeCamera.layers.enableAll();
         this._activeCamera.position.copy(camera.position);
-        Constant.CONTROL.object = this._activeCamera;
+        if (Constant.CONTROL) {
+            Constant.CONTROL.object = this._activeCamera;
+        }
         if (this._activeCamera instanceof PerspectiveCamera) {
             this._activeCamera.updateProjectionMatrix();
         }

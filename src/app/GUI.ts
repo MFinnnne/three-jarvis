@@ -24,6 +24,8 @@ export default class GUI {
         paneDom.className = 'three-helper-pane';
         element.appendChild(paneDom);
 
+        Constant.LEFT_SIDE_BAR_CONTAINER = element
+
         document.body.appendChild(element);
         Object3DTree.init();
     }
