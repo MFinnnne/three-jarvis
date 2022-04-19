@@ -23,7 +23,7 @@ export function domClickEvent(): void {
         state.selectedObjectDom.classList.toggle('selected');
         state.selectedObjectDom = element;
         element.classList.toggle('selected');
-        const obj = Constant.SCENE.getObjectByProperty('uuid', id);
+        const obj = Constant.proxyVar.scene.getObjectByProperty('uuid', id);
 
         if (!obj) {
             throw new Error(`object3d(uuid:${id}) is not in scene`);
@@ -66,7 +66,7 @@ export function domDoubleClickEvent(): void {
 
     EventRegistry.registry('objectDomDoubleClick', (value) => {
         const id = value[0];
-        const obj = Constant.SCENE.getObjectByProperty('uuid', id);
+        const obj = Constant.proxyVar.scene.getObjectByProperty('uuid', id);
         if (!obj) {
             throw new Error(`object3d(uuid:${id}) is not in scene`);
         }

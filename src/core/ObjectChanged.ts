@@ -31,7 +31,7 @@ class ObjectChanged {
             case 'HemisphereLight':
                 this.hemisphereLightHelper?.dispose();
                 this.hemisphereLightHelper = new HemisphereLightHelper(object as HemisphereLight, 5);
-                Constant.SCENE.add(this.hemisphereLightHelper);
+                Constant.proxyVar.scene.add(this.hemisphereLightHelper);
                 break;
             case 'Group':
             case 'Mesh':
@@ -41,19 +41,19 @@ class ObjectChanged {
                     this.highLightBox.update();
                     return;
                 }
-                this.highLightBox = new BoxHelper(Constant.SCENE, color);
+                this.highLightBox = new BoxHelper(Constant.proxyVar.scene, color);
                 this.highLightBox.layers.mask = 0x00000001 | 1;
-                Constant.SCENE.add(this.highLightBox);
+                Constant.proxyVar.scene.add(this.highLightBox);
                 break;
             case 'DirectionalLight':
                 this.directionLightHelper?.dispose();
                 this.directionLightHelper = new DirectionalLightHelper(object as DirectionalLight, 5);
-                Constant.SCENE.add(this.directionLightHelper);
+                Constant.proxyVar.scene.add(this.directionLightHelper);
                 break;
             case 'PointLight':
                 this.pointLightHelper?.dispose();
                 this.pointLightHelper = new PointLightHelper(object as PointLight, 5);
-                Constant.SCENE.add(this.pointLightHelper);
+                Constant.proxyVar.scene.add(this.pointLightHelper);
                 break;
             default:
                 console.log(`${object.type}  is not supported`);

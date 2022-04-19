@@ -7,7 +7,7 @@ import {onMounted} from 'vue';
 import ThreeHelper from 'three-helper';
 
 
-let camera, scene, renderer, controls;
+let camera, rawScene, proxyScene, renderer, controls;
 
 onMounted(() => {
     init();
@@ -42,27 +42,25 @@ function init() {
     controls.maxDistance = 1000;
     controls.target.set(0, 0, 0);
     controls.update();
-
-    scene = ThreeHelper.init(new THREE.Scene(), camera, renderer, container, controls);
-    scene.add(pointLight);
-    scene.add(light);
-    scene.add(light2);
+    rawScene = new THREE.Scene();
+    const proxyVar = ThreeHelper.init(rawScene, camera, renderer, container, controls);
+    proxyScene = proxyVar.scene;
+    proxyScene.add(pointLight);
+    proxyScene.add(light);
+    proxyScene.add(light2);
     const boxGeometry = new BoxGeometry(10, 10, 10);
     const material = new MeshBasicMaterial({color: 0x00ff00});
     const mesh = new THREE.Mesh(boxGeometry, material);
     mesh.position.set(0, 0, 0);
     // material.wireframe = true;
-    scene.add(mesh);
-    scene.add(camera);
+    proxyScene.add(mesh);
+    proxyScene.add(camera);
     const loader = new GLTFLoader().setPath('../../static/');
-
-
-
 
 
     window.addEventListener('resize', onWindowResize);
     loader.load('test.glb', function (gltf) {
-        scene.add(gltf.scene);
+        proxyScene.add(gltf.scene);
         gltf.scene.scale.set(0.01, 0.01, 0.01);
     });
 }
@@ -78,7 +76,7 @@ function onWindowResize() {
 
 function render() {
     requestAnimationFrame(render);
-    renderer.render(scene.target, camera);
+    renderer.render(rawScene, camera);
     controls.update();
 }
 

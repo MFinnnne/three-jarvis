@@ -12,7 +12,7 @@ const threeHelperRayCaster = new Raycaster();
 threeHelperRayCaster.layers.mask = 0xfffffffe | 1;
 
 function intersectObjects(e: MouseEvent): Intersection[] {
-    const renderDom = Constant.THREE_CONTAINER;
+    const renderDom = Constant.rawVar.container;
     if (renderDom === undefined) {
         throw new Error('can not get threejs renderer dom');
     }
@@ -20,11 +20,11 @@ function intersectObjects(e: MouseEvent): Intersection[] {
     mouse.x = ((e.clientX - renderDom.offsetLeft) / renderDom.clientWidth) * 2 - 1;
     mouse.y = -((e.clientY - renderDom.offsetTop) / renderDom.clientHeight) * 2 + 1;
     threeHelperRayCaster.setFromCamera(mouse, state.activeCamera);
-    return threeHelperRayCaster.intersectObjects(Constant.SCENE.children, true);
+    return threeHelperRayCaster.intersectObjects(Constant.proxyVar.scene.children, true);
 }
 
 export function rayCasterEvents() {
-    Constant.THREE_CONTAINER.addEventListener('click', (e) => {
+    Constant.rawVar.container.addEventListener('click', (e) => {
         const intersects = intersectObjects(e);
         if (intersects.length > 0) {
             const fistCatchObject = intersects[0].object;
@@ -34,7 +34,7 @@ export function rayCasterEvents() {
         }
     });
 
-    Constant.THREE_CONTAINER.addEventListener('dblclick', (e) => {
+    Constant.rawVar.container.addEventListener('dblclick', (e) => {
         const intersects = intersectObjects(e);
         if (intersects.length > 0) {
             const fistCatchObject = intersects[0].object;
@@ -63,5 +63,6 @@ export function clickObjectEvent(): void {
 export function objectDoubleClickEvent(): void {
     EventRegistry.registry('objectDoubleClick', (value) => {
         MyCameraUtil.faceObject(value[0]);
+
     });
 }

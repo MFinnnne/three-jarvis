@@ -1,5 +1,6 @@
 import { BoxGeometry, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, PointLight, Scene } from 'three';
-import { Object3DTree, VNodeTree } from '../../app/Object3DTree';
+import VDOM, {VNodeTree} from "../../core/VDOM";
+
 
 function checkModelDataTree(vNodeTree: VNodeTree) {
     expect(vNodeTree.self.tagName).toBe('div');
@@ -23,8 +24,8 @@ describe('test vom', () => {
         const mesh3 = new Mesh(boxGeometry1, material1);
         group.add(mesh3);
         scene.add(group);
-        const vNodeTree1 = Object3DTree.threeObject2VNodeTree(scene);
-        Object3DTree.print(vNodeTree1);
+        const vNodeTree1 = VDOM.threeObject2VNodeTree(scene);
+        VDOM.print(vNodeTree1);
         checkModelDataTree(vNodeTree1);
     });
 });

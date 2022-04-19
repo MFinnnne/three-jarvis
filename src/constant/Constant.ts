@@ -1,6 +1,8 @@
-import { Camera, Scene, WebGLRenderer } from 'three';
-import { Events } from '../types/types';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import {Camera, Scene, WebGLRenderer} from 'three';
+import {Events, ProxyThreeVar, RawThreeVar} from '../types/types';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+
+
 
 export default class Constant {
     static get CONTROL(): OrbitControls {
@@ -10,54 +12,30 @@ export default class Constant {
     static set CONTROL(value: OrbitControls) {
         this._CONTROL = value;
     }
-    private static _CAMERA: Camera;
-    private static _SCENE: Scene;
-    private static _CONTAINER: HTMLElement;
+
+    private static _proxyVar: ProxyThreeVar;
+    private static _rawVar: RawThreeVar;
     private static _MENU_CONTAINER: HTMLDivElement;
     private static _LEFT_SIDE_BAR_CONTAINER: HTMLDivElement;
     private static _PANE_CONTAINER: HTMLDivElement;
-    private static _RENDERER: WebGLRenderer;
-    private static _THREE_CONTAINER: HTMLElement;
+
     private static _CONTROL: OrbitControls;
 
-    static get THREE_CONTAINER(): HTMLElement {
-        return this._THREE_CONTAINER;
+
+    static get rawVar(): RawThreeVar {
+        return this._rawVar;
     }
 
-    static set THREE_CONTAINER(value: HTMLElement) {
-        this._THREE_CONTAINER = value;
+    static set rawVar(value: RawThreeVar) {
+        this._rawVar = value;
     }
 
-    static get RENDERER(): WebGLRenderer {
-        return this._RENDERER;
+    static set proxyVar(value: ProxyThreeVar) {
+        this._proxyVar = value;
     }
 
-    static set RENDERER(value: WebGLRenderer) {
-        this._RENDERER = value;
-    }
-
-    static get CAMERA(): Camera {
-        return this._CAMERA;
-    }
-
-    static set CAMERA(value: Camera) {
-        this._CAMERA = value;
-    }
-
-    static get SCENE(): Scene {
-        return this._SCENE;
-    }
-
-    static set SCENE(value: Scene) {
-        this._SCENE = value;
-    }
-
-    static get CONTAINER(): HTMLElement {
-        return this._CONTAINER;
-    }
-
-    static set CONTAINER(value: HTMLElement) {
-        this._CONTAINER = value;
+    static get proxyVar(): ProxyThreeVar {
+        return this._proxyVar;
     }
 
     static get MENU_CONTAINER(): HTMLDivElement {

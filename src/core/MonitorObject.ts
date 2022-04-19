@@ -1,19 +1,34 @@
-import { Object3D, Scene } from 'three';
+import {Scene, WebGLRenderer} from 'three';
 import DeepProxy from 'proxy-deep';
-import { doc } from 'prettier';
-import debug = doc.debug;
+import VDOM from "./VDOM";
 
 class MonitorObject {
-    warpScene(scene: Scene): Scene {
+    monitorScene(scene: Scene): Scene {
         return new DeepProxy<Scene>(scene, {
             get(target: Scene, p: PropertyKey, receiver: any): any {
-                return this.nest(function () {});
+                return this.nest(function () {
+                });
             },
             apply(target: Scene, thisArg: any, argArray?: any): any {
-                return this.path;
+                if (this.path[this.path.length - 1] === 'add') {
+                    VDOM.updateVNodeTree(this.path, argArray);
+                }
+            },
+        });
+    }
+
+    monitorRender(render: WebGLRenderer) {
+        return new DeepProxy<WebGLRenderer>(render, {
+            get(target: WebGLRenderer, p: PropertyKey, receiver: any): any {
+                return this.nest(function () {
+                });
+            },
+            apply(target: WebGLRenderer, thisArg: any, argArray?: any): any {
+
             },
         });
     }
 }
+
 const monitorObject = new MonitorObject();
 export default monitorObject;

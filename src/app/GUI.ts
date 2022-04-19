@@ -25,11 +25,6 @@ export default class GUI {
         element.appendChild(paneDom);
 
         document.body.appendChild(element);
-        Constant.CONTAINER = element;
-        Constant.MENU_CONTAINER = menuDom;
-        Constant.LEFT_SIDE_BAR_CONTAINER = leftSideBarDom;
-        Constant.PANE_CONTAINER = paneDom;
-
         Object3DTree.init();
     }
 }
