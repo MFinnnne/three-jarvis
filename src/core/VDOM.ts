@@ -1,4 +1,4 @@
-import { Object3D } from 'three';
+import {Object3D, Scene} from 'three';
 import Constant from '../constant/Constant';
 
 export type VNode = {
@@ -46,9 +46,7 @@ export default class VDOM {
         return vNodeTree;
     }
 
-    static updateVNodeTree(path: string[], ...objects: Object3D[]) {
-        console.log(path, '----', objects);
-        const object3d = VDOM.parseObjectChain(path);
+    static updateVNodeTree(object:Object3D) {
     }
 
     static print(vNodeTree: VNodeTree, level = 0) {
@@ -61,13 +59,5 @@ export default class VDOM {
         });
     }
 
-    /**
-     * parse path to objects
-     */
-    static parseObjectChain(path: string[]): Object3D {
-        if (path.length === 1) {
-            return Constant.proxyVar.scene;
-        }
-        return Constant.proxyVar.scene;
-    }
+
 }

@@ -44,26 +44,22 @@ function init() {
     controls.update();
     rawScene = new THREE.Scene();
 
-    const proxyVar = ThreeHelper.init(rawScene, camera, renderer, container, controls);
-    proxyScene = proxyVar.scene;
-    proxyScene.add(pointLight);
-    proxyScene.add(light);
-    proxyScene.add(light2);
+    ThreeHelper.init(rawScene, camera, renderer, container, controls);
+    rawScene.add(pointLight);
+    rawScene.add(light);
+    rawScene.add(light2);
 
     let group = new Group();
     group.name = 'group';
     const boxGeometry = new BoxGeometry(10, 10, 10);
     const material = new MeshBasicMaterial({color: 0x00ff00});
     const mesh = new THREE.Mesh(boxGeometry, material);
-    proxyScene.add(group);
-
-    setTimeout(() => {
-        group.add(mesh);
-    }, 4000);
+    rawScene.add(group);
+    group.add(mesh)
     // group.add(mesh);
     mesh.position.set(0, 0, 0);
     // material.wireframe = true;
-    proxyScene.add(camera);
+    rawScene.add(camera);
     const loader = new GLTFLoader().setPath('../../static/');
 
 
