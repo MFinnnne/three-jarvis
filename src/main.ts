@@ -1,11 +1,13 @@
 import * as THREE from 'three';
 import Constant from './constant/Constant';
-import GUI from './app/GUI';
 import './sass/full.scss';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import * as allEvents from './core/events';
 import CameraControls from 'camera-controls';
 import state from './core/State';
+import SceneObserver from "./core/SceneObserver";
+import GUI from "./app/GUI";
+
 
 CameraControls.install({THREE: THREE});
 
@@ -20,7 +22,7 @@ export default class ThreeHelper {
             lazyLoad: false
         }
     ) {
-        console.log('mfine18');
+        console.log('mfine22');
         Constant.rawVar = {
             scene: scene,
             render: renderer,
@@ -28,9 +30,9 @@ export default class ThreeHelper {
             container: container,
             camera: camera
         };
-        GUI.init();
+        GUI.guiContainerInit();
+        SceneObserver.monitorScene(scene);
         state.activeCamera = camera;
-
         // register events
         for (const allEventsKey in allEvents) {
             allEvents[allEventsKey]();

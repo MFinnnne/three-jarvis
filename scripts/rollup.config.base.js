@@ -10,7 +10,7 @@ import postcss from 'postcss';
 import sass from 'rollup-plugin-scss';
 import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
-import webWorkerLoader from 'rollup-plugin-web-worker-loader';
+import copy from 'rollup-plugin-copy';
 
 const getPath = (_path) => path.resolve(__dirname, _path);
 
@@ -30,7 +30,11 @@ export default {
         replace({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
         }),
-
+        copy({
+            targets: [
+                {src: 'static/**/*', dest: 'dist/static'},
+            ]
+        }),
         resolve(),
         sass({
             input: 'src/sass/full.scss',
@@ -41,18 +45,12 @@ export default {
                     .process(css, {from: undefined})
                     .then((result) => result.css),
         }),
-        webWorkerLoader(
-            {
-                targetPlatform: 'auto',
-                sourceMaps: true,
-                loadPath: 'src/core/worker'
-            }),
         commonjs(),
         sourceMaps(),
         tsPlugin,
         babel({
             runtimeHelpers: true,
-            exclude: 'node_modules/**', // only transpile our source code
+            exclude: ['node_modules/**', 'example/**'] // only transpile our source code
         }),
     ],
 };

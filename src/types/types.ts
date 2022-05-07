@@ -35,7 +35,3 @@ export type RawThreeVar = {
     control?: OrbitControls;
 };
 
-export type ProxyThreeVar = {
-    scene: Scene;
-    render: WebGLRenderer;
-};

@@ -1,8 +1,9 @@
-import { Object3DTree } from './Object3DTree';
+import {Object3DTree} from './Object3DTree';
 import Constant from '../constant/Constant';
+import {removeAllChildNodes} from "../util/DomUtils";
 
 export default class GUI {
-    public static init(): void {
+    public static guiContainerInit(): void {
         const container = document.querySelector('#three-helper-container');
         container && container.remove();
         const element = document.createElement('div');
@@ -18,15 +19,18 @@ export default class GUI {
         leftSideBarDom.id = 'three-helper-left-side-bar';
         leftSideBarDom.className = 'three-helper-left-side-bar';
         element.appendChild(leftSideBarDom);
+        Constant.LEFT_SIDE_BAR_CONTAINER = leftSideBarDom;
 
         const paneDom = document.createElement('div');
         paneDom.id = 'three-helper-pane';
         paneDom.className = 'three-helper-pane';
         element.appendChild(paneDom);
 
-        Constant.LEFT_SIDE_BAR_CONTAINER = element;
-
         document.body.appendChild(element);
+    }
+
+    public static objectTreeInit() {
+        removeAllChildNodes(Constant.LEFT_SIDE_BAR_CONTAINER);
         Object3DTree.init();
     }
 }

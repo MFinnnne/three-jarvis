@@ -1,8 +1,10 @@
-import { Camera, Scene, WebGLRenderer } from 'three';
-import { Events, ProxyThreeVar, RawThreeVar } from '../types/types';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import {RawThreeVar} from '../types/types';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 
 export default class Constant {
+
+    static HELPER_NAME:string = 'helper'
+
     static get CONTROL(): OrbitControls {
         return this._CONTROL;
     }
@@ -11,7 +13,6 @@ export default class Constant {
         this._CONTROL = value;
     }
 
-    private static _proxyVar: ProxyThreeVar;
     private static _rawVar: RawThreeVar;
     private static _MENU_CONTAINER: HTMLDivElement;
     private static _LEFT_SIDE_BAR_CONTAINER: HTMLDivElement;
@@ -27,13 +28,6 @@ export default class Constant {
         this._rawVar = value;
     }
 
-    static set proxyVar(value: ProxyThreeVar) {
-        this._proxyVar = value;
-    }
-
-    static get proxyVar(): ProxyThreeVar {
-        return this._proxyVar;
-    }
 
     static get MENU_CONTAINER(): HTMLDivElement {
         return this._MENU_CONTAINER;

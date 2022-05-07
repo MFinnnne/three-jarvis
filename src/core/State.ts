@@ -1,6 +1,5 @@
-import { Camera, Object3D, OrthographicCamera, PerspectiveCamera } from 'three';
+import { Camera, Object3D, PerspectiveCamera } from 'three';
 import Constant from '../constant/Constant';
-import * as THREE from 'three';
 
 class State {
     private static instance: State;

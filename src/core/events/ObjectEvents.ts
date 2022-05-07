@@ -8,8 +8,8 @@ import { Object3DTree } from '../../app/Object3DTree';
 import MyCameraUtil from '../../util/MyCameraUtil';
 import state from '../State';
 
-const threeHelperRayCaster = new Raycaster();
-threeHelperRayCaster.layers.mask = 0xfffffffe | 1;
+const threeJarvisRayCaster = new Raycaster();
+threeJarvisRayCaster.layers.mask = 0xfffffffe | 1;
 
 function intersectObjects(e: MouseEvent): Intersection[] {
     const renderDom = Constant.rawVar.container;
@@ -19,8 +19,8 @@ function intersectObjects(e: MouseEvent): Intersection[] {
     const mouse = new Vector2();
     mouse.x = ((e.clientX - renderDom.offsetLeft) / renderDom.clientWidth) * 2 - 1;
     mouse.y = -((e.clientY - renderDom.offsetTop) / renderDom.clientHeight) * 2 + 1;
-    threeHelperRayCaster.setFromCamera(mouse, state.activeCamera);
-    return threeHelperRayCaster.intersectObjects(Constant.proxyVar.scene.children, true);
+    threeJarvisRayCaster.setFromCamera(mouse, state.activeCamera);
+    return threeJarvisRayCaster.intersectObjects(Constant.rawVar.scene.children, true);
 }
 
 export function rayCasterEvents() {

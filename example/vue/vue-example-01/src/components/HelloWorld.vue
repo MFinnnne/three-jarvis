@@ -4,10 +4,10 @@ import {BoxGeometry, DirectionalLight, Group, MeshBasicMaterial, PointLight} fro
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {onMounted} from 'vue';
-import ThreeHelper from 'three-helper';
+import ThreeHelper from 'three-jarvis';
 
 
-let camera, rawScene, proxyScene, renderer, controls;
+let camera, rawScene,  renderer, controls;
 
 onMounted(() => {
     init();
@@ -65,7 +65,7 @@ function init() {
 
     window.addEventListener('resize', onWindowResize);
     loader.load('test.glb', function (gltf) {
-        proxyScene.add(gltf.scene);
+        rawScene.add(gltf.scene);
         gltf.scene.scale.set(0.01, 0.01, 0.01);
     });
 }
