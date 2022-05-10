@@ -1,6 +1,6 @@
 import {Object3DTree} from './Object3DTree';
 import Constant from '../constant/Constant';
-import {removeAllChildNodes} from "../util/DomUtils";
+import {removeAllChildNodes} from "../util/Utils";
 
 export default class GUI {
     public static guiContainerInit(): void {

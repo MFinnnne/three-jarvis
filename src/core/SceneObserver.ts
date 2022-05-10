@@ -1,6 +1,8 @@
 import {Object3D, Scene} from "three";
 import GUI from "../app/GUI";
 import Constant from "../constant/Constant";
+import Utils from "../util/Utils";
+
 
 export default class SceneObserver {
 
@@ -9,9 +11,9 @@ export default class SceneObserver {
     static monitorScene(scene: Scene) {
         let prevModelCount = 0;
         setInterval(() => {
-            const number = SceneObserver.countAllModels(scene);
-            const flatModels = scene.children.flat();
-            const curModelsCount = flatModels.filter(item => {
+            const length = Utils.countAllModels(scene);
+            const curModelsCount = scene.children.filter(item => {
+
                 return !item.name.includes(Constant.HELPER_NAME);
             }).length;
             console.log("all models count:", curModelsCount);
@@ -28,13 +30,5 @@ export default class SceneObserver {
         GUI.objectTreeInit();
     }
 
-    static countAllModels(model:Object3D):number{
-        if (model.children.length < 0) {
-            return 0;
-        }
-        const numbers = model.children.map(item=>{
-            return SceneObserver.countAllModels(item);
-        });
-        return model.children.length;
-    }
+
 }
