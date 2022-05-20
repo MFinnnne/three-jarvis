@@ -1,7 +1,6 @@
 import {BoxGeometry, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, PointLight, Scene} from 'three';
-import VDOM, {VNodeTree} from '../../core/VDOM';
-import VirtualDOM from "../../core/VirtualDOM";
 import {VElement} from "million";
+import VirtualDOM from "../../src/core/VirtualDOM";
 
 function checkModelDataTree(vNodeTree: VElement) {
     if (vNodeTree.props) {
@@ -15,8 +14,8 @@ function checkModelDataTree(vNodeTree: VElement) {
 
 }
 
-describe('test vom', () => {
-    test('should parse three scene to vnode tree', () => {
+describe('test new vom', () => {
+    test('should parse three scene', () => {
         const scene = new Scene();
         const pointLight = new PointLight(0xffffff, 1, 100, 2);
         scene.add(pointLight);

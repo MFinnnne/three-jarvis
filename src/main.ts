@@ -7,6 +7,7 @@ import CameraControls from 'camera-controls';
 import state from './core/State';
 import SceneObserver from "./core/SceneObserver";
 import GUI from "./app/GUI";
+import VirtualDOM from "./core/VirtualDOM";
 
 
 CameraControls.install({THREE: THREE});
@@ -32,6 +33,7 @@ export default class ThreeHelper {
         };
         GUI.guiContainerInit();
         SceneObserver.monitorScene(scene);
+        VirtualDOM.object2VNodeTree(scene);
         state.activeCamera = camera;
         // register events
         for (const allEventsKey in allEvents) {

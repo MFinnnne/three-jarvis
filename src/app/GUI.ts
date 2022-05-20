@@ -1,6 +1,6 @@
 import {Object3DTree} from './Object3DTree';
 import Constant from '../constant/Constant';
-import {removeAllChildNodes} from "../util/Utils";
+import Utils from "../util/Utils";
 
 export default class GUI {
     public static guiContainerInit(): void {
@@ -30,7 +30,7 @@ export default class GUI {
     }
 
     public static objectTreeInit() {
-        removeAllChildNodes(Constant.LEFT_SIDE_BAR_CONTAINER);
+       Utils.removeAllChildNodes(Constant.LEFT_SIDE_BAR_CONTAINER);
         Object3DTree.init();
     }
 }
