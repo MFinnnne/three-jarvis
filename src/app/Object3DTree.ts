@@ -1,7 +1,9 @@
 import Constant from '../constant/Constant';
 import Ticker from '../core/Ticker';
 import state from '../core/State';
-import VDOM, { VNodeTree } from '../core/VDOM';
+import VDOM, {VNodeTree} from '../core/VDOM';
+import {patch, VNode} from "million";
+import {c} from "million/dist/types-621449b5";
 
 /**
  * Generate a model tree
@@ -10,6 +12,15 @@ export class Object3DTree {
     public static init() {
         Object3DTree.generateTree();
         this.objectDomClickEvent();
+    }
+
+    static render(curNode, prevNode:VNode|null) {
+        if (prevNode) {
+            patch(Constant.LEFT_SIDE_BAR_CONTAINER, curNode, prevNode);
+        } else {
+            debugger
+            patch(Constant.LEFT_SIDE_BAR_CONTAINER, curNode);
+        }
     }
 
     static generateTree() {
@@ -28,8 +39,8 @@ export class Object3DTree {
     }
 
     static vNodeTree2DOM(vNodeTree: VNodeTree): HTMLElement {
-        const { self, children } = vNodeTree;
-        const { tagName, id, className } = self;
+        const {self, children} = vNodeTree;
+        const {tagName, id, className} = self;
         const element = document.createElement(tagName);
         element.className = className;
         const spanElement = document.createElement('span');
@@ -54,7 +65,7 @@ export class Object3DTree {
     }
 
     static objectDomClickEvent() {
-        const objects = document.getElementsByClassName('three-object');
+        const objects = document.getElementsByClassName('threeObject');
         for (let i = 0; i < objects.length; i++) {
             objects[i].addEventListener('click', (e) => {
                 const target = e.target as HTMLElement;

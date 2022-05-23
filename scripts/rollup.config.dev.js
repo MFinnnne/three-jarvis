@@ -38,6 +38,6 @@ export default {
             contentBase: '',
         }),
         livereload(),
-        command(`yalc push`),
+        // command(`yalc push`),
     ],
 };

@@ -80,7 +80,7 @@ $menu-height: 5%;
             background-color: #1abc9c;
         }
 
-        .caret-over, .caret {
+        .caretOver, .caret {
             overflow: hidden;
             white-space: nowrap;
             cursor: pointer;
@@ -88,7 +88,7 @@ $menu-height: 5%;
             margin-top: 20px
         }
 
-        .caret-over:hover, .caret:hover {
+        .caretOver:hover, .caret:hover {
             background: olive;
         }
 

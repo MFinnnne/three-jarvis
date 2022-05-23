@@ -8,6 +8,7 @@ import state from './core/State';
 import SceneObserver from "./core/SceneObserver";
 import GUI from "./app/GUI";
 import VirtualDOM from "./core/VirtualDOM";
+import {createElement} from "million";
 
 
 CameraControls.install({THREE: THREE});
@@ -23,7 +24,7 @@ export default class ThreeHelper {
             lazyLoad: false
         }
     ) {
-        console.log('mfine22');
+        console.log('mfine29');
         Constant.rawVar = {
             scene: scene,
             render: renderer,
@@ -32,8 +33,6 @@ export default class ThreeHelper {
             camera: camera
         };
         GUI.guiContainerInit();
-        SceneObserver.monitorScene(scene);
-        VirtualDOM.object2VNodeTree(scene);
         state.activeCamera = camera;
         // register events
         for (const allEventsKey in allEvents) {
