@@ -5,3 +5,4 @@ expose({
         return "hello";
     }
 })
+export default '';

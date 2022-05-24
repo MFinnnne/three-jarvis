@@ -1,6 +1,6 @@
-import {BoxGeometry, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, PointLight, Scene} from 'three';
-import {createElement, m, VElement} from "million";
-import VirtualDOM from "../../src/core/VirtualDOM";
+import { BoxGeometry, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, PointLight, Scene } from 'three';
+import { VElement } from 'million';
+import VirtualDOM from '../../core/VirtualDOM';
 
 function checkModelDataTree(vNodeTree: VElement) {
     if (vNodeTree.props) {

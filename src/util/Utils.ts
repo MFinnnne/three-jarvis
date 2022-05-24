@@ -10,7 +10,7 @@ export default class Utils {
 
     static countAllModels(model: Object3D): number {
         let length = 1;
-        for (let child of model.children) {
+        for (const child of model.children) {
             length +=  Utils.countAllModels(child);
         }
         return length;

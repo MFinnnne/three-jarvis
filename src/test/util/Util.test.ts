@@ -1,5 +1,5 @@
 import {Object3D, Scene} from "three";
-import Utils from "../../src/util/Utils";
+import Utils from "../../util/Utils";
 
 describe('test utils', ()=> {
     test('should count model', () => {

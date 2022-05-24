@@ -8,10 +8,10 @@ import {spawn, Thread} from "threads";
 export default class SceneObserver {
 
     private static PREV_NODE: VNode | null = null;
-    static sec: number = 0;
+    static sec = 0;
 
     static async monitorScene(scene: Scene) {
-        const test = await spawn(new Worker("./worker/SceneObserWorker"));
+        const test = await spawn(new Worker("./worker"));
         const hello = await test.hello();
         console.log("worker", hello);
         await Thread.terminate(hello);

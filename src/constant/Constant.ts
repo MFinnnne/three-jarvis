@@ -3,7 +3,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 
 export default class Constant {
 
-    static HELPER_NAME:string = 'helper'
+    static HELPER_NAME = 'helper'
 
     static get CONTROL(): OrbitControls {
         return this._CONTROL;

@@ -11,9 +11,9 @@ import sass from 'rollup-plugin-scss';
 import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
-import {nodeResolve} from '@rollup/plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import threads from 'rollup-plugin-threads';
-
+import webWorkerLoader from 'rollup-plugin-web-worker-loader';
 const getPath = (_path) => path.resolve(__dirname, _path);
 
 const extensions = ['.js', '.ts'];
@@ -26,6 +26,7 @@ const tsPlugin = ts({
 export default {
     input: 'src/main.ts',
     plugins: [
+        webWorkerLoader({}),
         alias({
             resolve: ['.ts'],
         }),
@@ -34,8 +35,8 @@ export default {
         }),
         copy({
             targets: [
-                {src: 'static/**/*', dest: 'dist/static'},
-            ]
+                { src: 'static/**/*', dest: 'dist/static' },
+            ],
         }),
         resolve(),
         sass({
@@ -44,7 +45,7 @@ export default {
             insert: true,
             processor: (css) =>
                 postcss([autoprefixer])
-                    .process(css, {from: undefined})
+                    .process(css, { from: undefined })
                     .then((result) => result.css),
         }),
         commonjs(),
@@ -52,19 +53,20 @@ export default {
         tsPlugin,
         babel({
             runtimeHelpers: true,
-            exclude: ['node_modules/**', 'example/**'] // only transpile our source code
+            exclude: ['node_modules/**', 'example/**'], // only transpile our source code
         }),
-        nodeResolve({moduleDirectories: ['node_modules']}),
+        nodeResolve({ moduleDirectories: ['node_modules'] }),
         threads({
             //Exclude worker files
-            exclude: ['src/core/worker/**'],
+            // exclude: ['../src/core/worker.ts'],
 
             //Include worker files
-            include: ['**/SceneObserWorker.js'],
+            include: ['src/core/worker.ts'],
 
             //Enable verbose logging (Simply prints what the child-bundler is bundling)
             verbose: true,
-        })
+        }),
     ],
-    external: ['threads']
+    external: ['threads'],
+
 };
