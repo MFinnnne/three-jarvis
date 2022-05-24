@@ -4,7 +4,6 @@ import { name } from '../package.json';
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 
-
 export default {
     ...baseConfig,
     output: [
@@ -14,7 +13,6 @@ export default {
             name,
             exports: 'auto',
             sourcemap: true,
-
         },
         {
             file: `dist/${name}.umd.js`,
@@ -29,8 +27,7 @@ export default {
             exports: 'auto',
             name,
             sourcemap: true,
-        }
-
+        },
     ],
     plugins: [
         ...baseConfig.plugins,

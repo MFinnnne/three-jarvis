@@ -1,9 +1,8 @@
-import {RawThreeVar} from '../types/types';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import { RawThreeVar } from '../types/types';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default class Constant {
-
-    static HELPER_NAME = 'helper'
+    static HELPER_NAME = 'helper';
 
     static get CONTROL(): OrbitControls {
         return this._CONTROL;
@@ -27,7 +26,6 @@ export default class Constant {
     static set rawVar(value: RawThreeVar) {
         this._rawVar = value;
     }
-
 
     static get MENU_CONTAINER(): HTMLDivElement {
         return this._MENU_CONTAINER;

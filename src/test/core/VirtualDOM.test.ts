@@ -11,7 +11,6 @@ function checkModelDataTree(vNodeTree: VElement) {
             checkModelDataTree(child as VElement);
         });
     }
-
 }
 
 describe('test new vom', () => {
@@ -23,7 +22,7 @@ describe('test new vom', () => {
         scene.add(perspectiveCamera);
         const group = new Group();
         const boxGeometry1 = new BoxGeometry(1, 1, 1);
-        const material1 = new MeshBasicMaterial({color: 0x00ff00});
+        const material1 = new MeshBasicMaterial({ color: 0x00ff00 });
         const mesh3 = new Mesh(boxGeometry1, material1);
         group.add(mesh3);
         scene.add(group);

@@ -1,8 +1,8 @@
-import {expose} from "threads";
+import { expose } from 'threads';
 
 expose({
     hello() {
-        return "hello";
-    }
-})
+        return 'hello';
+    },
+});
 export default '';

@@ -34,4 +34,3 @@ export type RawThreeVar = {
     container: HTMLElement;
     control?: OrbitControls;
 };
-

@@ -29,9 +29,9 @@ class ObjectChanged {
             return;
         }
         state.selectedObject = object;
-        this.helpers.forEach(helper => {
+        this.helpers.forEach((helper) => {
             helper.visible = false;
-        })
+        });
         switch (object.type) {
             case 'HemisphereLight':
                 if (this.hemisphereLightHelper) {
@@ -41,7 +41,7 @@ class ObjectChanged {
                     return;
                 }
                 this.hemisphereLightHelper = new HemisphereLightHelper(object as HemisphereLight, 5);
-                this.hemisphereLightHelper.name = "HemisphereLight_" + Constant.HELPER_NAME;
+                this.hemisphereLightHelper.name = 'HemisphereLight_' + Constant.HELPER_NAME;
                 this.helperPostProcess(this.hemisphereLightHelper);
                 break;
             case 'Group':
@@ -54,7 +54,7 @@ class ObjectChanged {
                 }
                 this.highLightBox = new BoxHelper(Constant.rawVar.scene, color);
                 this.highLightBox.layers.mask = 0x00000001 | 1;
-                this.highLightBox.name = "BoxHelper_" + Constant.HELPER_NAME;
+                this.highLightBox.name = 'BoxHelper_' + Constant.HELPER_NAME;
                 this.helperPostProcess(this.highLightBox);
                 break;
             case 'DirectionalLight':
@@ -65,7 +65,7 @@ class ObjectChanged {
                     return;
                 }
                 this.directionLightHelper = new DirectionalLightHelper(object as DirectionalLight, 5);
-                this.directionLightHelper.name = "DirectionalLight_" + Constant.HELPER_NAME;
+                this.directionLightHelper.name = 'DirectionalLight_' + Constant.HELPER_NAME;
                 this.helperPostProcess(this.directionLightHelper);
                 break;
             case 'PointLight':
@@ -76,7 +76,7 @@ class ObjectChanged {
                     return;
                 }
                 this.pointLightHelper = new PointLightHelper(object as PointLight, 5);
-                this.pointLightHelper.name = "PointLight_" + Constant.HELPER_NAME;
+                this.pointLightHelper.name = 'PointLight_' + Constant.HELPER_NAME;
                 this.helperPostProcess(this.pointLightHelper);
                 break;
             default:

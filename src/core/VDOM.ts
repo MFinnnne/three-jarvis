@@ -1,4 +1,4 @@
-import {Object3D, Scene} from 'three';
+import { Object3D, Scene } from 'three';
 import Constant from '../constant/Constant';
 
 export type VNode = {
@@ -46,8 +46,7 @@ export default class VDOM {
         return vNodeTree;
     }
 
-    static updateVNodeTree(object:Object3D) {
-    }
+    static updateVNodeTree(object: Object3D) {}
 
     static print(vNodeTree: VNodeTree, level = 0) {
         const { self, children } = vNodeTree;
@@ -58,6 +57,4 @@ export default class VDOM {
             VDOM.print(child, level + 1);
         });
     }
-
-
 }
