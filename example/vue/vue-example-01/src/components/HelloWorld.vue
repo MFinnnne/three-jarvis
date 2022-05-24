@@ -60,8 +60,6 @@ function init() {
     // material.wireframe = true;
     rawScene.add(camera);
     const loader = new GLTFLoader().setPath('../../static/');
-
-
     window.addEventListener('resize', onWindowResize);
     loader.load('test.glb', function (gltf) {
         rawScene.add(gltf.scene);

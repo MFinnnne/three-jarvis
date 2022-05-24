@@ -43,7 +43,7 @@
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.4.0",
     "jest": "^28.1.0",
-    "nanoid": "^3.3.1",
+    "nanoid": "^3.3.2",
     "postcss": "^8.4.12",
     "pre-commit": "^1.2.2",
     "prettier": "2.5.1",
@@ -80,6 +80,7 @@
     "proxy-deep": "^3.1.1",
     "rollup": "^2.72.0",
     "sass": "^1.49.9",
+    "threads": "^1.7.0",
     "tweakpane": "^3.0.7"
   },
   "peerDependencies": {

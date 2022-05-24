@@ -2,8 +2,7 @@ import Constant from '../constant/Constant';
 import Ticker from '../core/Ticker';
 import state from '../core/State';
 import VDOM, {VNodeTree} from '../core/VDOM';
-import {patch, VNode} from "million";
-import {c} from "million/dist/types-621449b5";
+import {render, VNode} from "million";
 
 /**
  * Generate a model tree
@@ -14,12 +13,11 @@ export class Object3DTree {
         this.objectDomClickEvent();
     }
 
-    static render(curNode, prevNode:VNode|null) {
+    static render(curNode: VNode, prevNode: VNode | null) {
         if (prevNode) {
-            patch(Constant.LEFT_SIDE_BAR_CONTAINER, curNode, prevNode);
+            render(Constant.LEFT_SIDE_BAR_CONTAINER, curNode, prevNode);
         } else {
-            debugger
-            patch(Constant.LEFT_SIDE_BAR_CONTAINER, curNode);
+            render(Constant.LEFT_SIDE_BAR_CONTAINER, curNode);
         }
     }
 

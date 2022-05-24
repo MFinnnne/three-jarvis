@@ -1,5 +1,6 @@
 import {className, Flags, m, VElement, VNode} from 'million';
 import {Object3D} from "three";
+import Ticker from "./Ticker";
 
 export default class VirtualDOM {
 
@@ -22,18 +23,25 @@ export default class VirtualDOM {
                         threeObject: true,
                     }),
                     onClick: (e) => {
-                        console.log(e);
+                        if (object.children.length > 0) {
+                            const parentElement = (e.target as HTMLElement).parentElement;
+                            const element = parentElement?.querySelector('.nested');
+                            element?.classList.toggle('active');
+                            (e.target as HTMLElement).classList.toggle('caretDown');
+                        }
+                        const target = e.target as HTMLElement;
+                        const uuid = target.id;
+                        Ticker.emmit('objectDomClick', uuid);
                     }
-                }, [object.name === '' ? object.type : object.name], Flags.ELEMENT_TEXT_CHILDREN),
+                }, [object.name === '' ? object.type : object.name], Flags.ELEMENT),
             ],
-            key: object.uuid
         };
         if (object.children.length > 0) {
             node.children?.push({
                 tag: 'ul',
                 props: {className: className({nested: true})},
                 children: [],
-                flag: Flags.ELEMENT
+                flag: Flags.ELEMENT,
             });
         }
         return node;

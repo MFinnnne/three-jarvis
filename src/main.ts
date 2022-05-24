@@ -5,10 +5,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import * as allEvents from './core/events';
 import CameraControls from 'camera-controls';
 import state from './core/State';
-import SceneObserver from "./core/SceneObserver";
 import GUI from "./app/GUI";
-import VirtualDOM from "./core/VirtualDOM";
-import {createElement} from "million";
 
 
 CameraControls.install({THREE: THREE});
@@ -24,7 +21,7 @@ export default class ThreeHelper {
             lazyLoad: false
         }
     ) {
-        console.log('mfine29');
+        console.log('mfine30');
         Constant.rawVar = {
             scene: scene,
             render: renderer,

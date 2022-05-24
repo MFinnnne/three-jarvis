@@ -11,6 +11,7 @@ import sass from 'rollup-plugin-scss';
 import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
+import {nodeResolve} from '@rollup/plugin-node-resolve';
 
 const getPath = (_path) => path.resolve(__dirname, _path);
 
@@ -52,5 +53,7 @@ export default {
             runtimeHelpers: true,
             exclude: ['node_modules/**', 'example/**'] // only transpile our source code
         }),
+        nodeResolve({moduleDirectories: ['node_modules']})
     ],
+    external: ['threads']
 };
