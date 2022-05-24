@@ -12,6 +12,7 @@ import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
+import threads from 'rollup-plugin-threads';
 
 const getPath = (_path) => path.resolve(__dirname, _path);
 
@@ -53,7 +54,17 @@ export default {
             runtimeHelpers: true,
             exclude: ['node_modules/**', 'example/**'] // only transpile our source code
         }),
-        nodeResolve({moduleDirectories: ['node_modules']})
+        nodeResolve({moduleDirectories: ['node_modules']}),
+        threads({
+            //Exclude worker files
+            exclude: ['src/core/worker/**'],
+
+            //Include worker files
+            include: ['**/SceneObserWorker.js'],
+
+            //Enable verbose logging (Simply prints what the child-bundler is bundling)
+            verbose: true,
+        })
     ],
     external: ['threads']
 };
