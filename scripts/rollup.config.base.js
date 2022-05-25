@@ -66,5 +66,5 @@ export default {
             verbose: true,
         })
     ],
-    external: ['threads']
+    // external: ['threads']
 };
