@@ -26,10 +26,21 @@ $menu-height: 5%;
             flex-direction: row;
             justify-content: flex-start;
             .menuItem{
+                text-align: center;
                 height: inherit;
                 width: 100px;
                 background-color: #1abc9c;
                 border: 1px solid red;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                .tag{
+                    height: fit-content;
+                    width: fit-content;
+                    color: red;
+                    font-size: large;
+                }
             }
         }
     }
