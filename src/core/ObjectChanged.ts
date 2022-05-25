@@ -11,12 +11,14 @@ import {
 } from 'three';
 import Constant from '../constant/Constant';
 import state from './State';
+import HelperManager from "./HelperManager";
 
 class ObjectChanged {
     private highLightBox?: BoxHelper;
     private hemisphereLightHelper?: HemisphereLightHelper;
     private directionLightHelper?: DirectionalLightHelper;
     private pointLightHelper?: PointLightHelper;
+    private helpers: Array<Object3D> = [];
 
     /**
      *   boxed  mesh
@@ -27,39 +29,14 @@ class ObjectChanged {
         if (object.type === 'Scene') {
             return;
         }
-        switch (object.type) {
-            case 'HemisphereLight':
-                this.hemisphereLightHelper?.dispose();
-                this.hemisphereLightHelper = new HemisphereLightHelper(object as HemisphereLight, 5);
-                Constant.SCENE.add(this.hemisphereLightHelper);
-                break;
-            case 'Group':
-            case 'Mesh':
-                state.selectedObject = object;
-                if (this.highLightBox) {
-                    this.highLightBox.setFromObject(object);
-                    this.highLightBox.update();
-                    return;
-                }
-                this.highLightBox = new BoxHelper(Constant.SCENE, color);
-                this.highLightBox.layers.mask = 0x00000001 | 1;
-                Constant.SCENE.add(this.highLightBox);
-                break;
-            case 'DirectionalLight':
-                this.directionLightHelper?.dispose();
-                this.directionLightHelper = new DirectionalLightHelper(object as DirectionalLight, 5);
-                Constant.SCENE.add(this.directionLightHelper);
-                break;
-            case 'PointLight':
-                this.pointLightHelper?.dispose();
-                this.pointLightHelper = new PointLightHelper(object as PointLight, 5);
-                Constant.SCENE.add(this.pointLightHelper);
-                break;
-            default:
-                console.log(`${object.type}  is not supported`);
-                break;
-        }
+        state.selectedObject = object;
+        HelperManager.render(object);
         return;
+    }
+
+    private helperPostProcess(helper: Object3D) {
+        this.helpers.push(helper);
+        Constant.rawVar.scene.add(helper);
     }
 
     public update(object: Object3D): void {

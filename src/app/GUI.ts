@@ -1,8 +1,10 @@
-import { Object3DTree } from './Object3DTree';
 import Constant from '../constant/Constant';
+import Utils from '../util/Utils';
+import ObjectTree from "./ObjectTree";
+import MenuBar from "./MenuBar";
 
 export default class GUI {
-    public static init(): void {
+    public static guiContainerInit(): void {
         const container = document.querySelector('#three-helper-container');
         container && container.remove();
         const element = document.createElement('div');
@@ -12,12 +14,14 @@ export default class GUI {
         const menuDom = document.createElement('div');
         menuDom.id = 'three-helper-menu';
         menuDom.className = 'three-helper-menu';
+        Constant.MENU_CONTAINER = menuDom;
         element.appendChild(menuDom);
 
         const leftSideBarDom = document.createElement('div');
         leftSideBarDom.id = 'three-helper-left-side-bar';
         leftSideBarDom.className = 'three-helper-left-side-bar';
         element.appendChild(leftSideBarDom);
+        Constant.LEFT_SIDE_BAR_CONTAINER = leftSideBarDom;
 
         const paneDom = document.createElement('div');
         paneDom.id = 'three-helper-pane';
@@ -25,11 +29,15 @@ export default class GUI {
         element.appendChild(paneDom);
 
         document.body.appendChild(element);
-        Constant.CONTAINER = element;
-        Constant.MENU_CONTAINER = menuDom;
-        Constant.LEFT_SIDE_BAR_CONTAINER = leftSideBarDom;
-        Constant.PANE_CONTAINER = paneDom;
 
-        Object3DTree.init();
+        MenuBar.render();
+        setInterval(() => {
+            ObjectTree.render()
+        }, 1000);
+    }
+
+    public static objectTreeInit() {
+        Utils.removeAllChildNodes(Constant.LEFT_SIDE_BAR_CONTAINER);
+        // Object3DTree.init();
     }
 }

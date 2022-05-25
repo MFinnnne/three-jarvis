@@ -15,7 +15,6 @@ export default {
 
     // Automatically clear mock calls, instances and results before every test
     clearMocks: true,
-
     // Indicates whether the coverage information should be collected while executing the test
     collectCoverage: true,
 
@@ -85,7 +84,6 @@ export default {
 
     // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
     // modulePathIgnorePatterns: [],
-
     // Activates notifications for test results
     // notify: false,
 
@@ -93,8 +91,19 @@ export default {
     // notifyMode: "failure-change",
 
     // A preset that is used as a base for Jest's configuration
-    preset: 'ts-jest',
+    // preset: "ts-jest",
+    // testEnvironment: "node",
+    // transform: {
+    //     '^.+\\.ts?$': 'ts-jest',
+    //     "^.+\\.(js|jsx)$": "babel-jest"
+    // },
+    // moduleNameMapper: {
+    //     'million': '/node_modules/million',
+    // },
 
+    transform: {
+        '^.+\\.[tj]s$': 'ts-jest',
+    },
     // Run tests from one or more projects
     // projects: undefined,
 
@@ -146,11 +155,7 @@ export default {
     // testLocationInResults: false,
 
     // The glob patterns Jest uses to detect test files
-    // testMatch: [
-    //   "**/__tests__/**/*.[jt]s?(x)",
-    //   "**/?(*.)+(spec|test).[tj]s?(x)"
-    // ],
-
+    testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
     // testPathIgnorePatterns: [
     //   "\\\\node_modules\\\\"

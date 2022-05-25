@@ -1,6 +1,5 @@
-import { Camera, Object3D, OrthographicCamera, PerspectiveCamera } from 'three';
+import { Camera, Object3D, PerspectiveCamera } from 'three';
 import Constant from '../constant/Constant';
-import * as THREE from 'three';
 
 class State {
     private static instance: State;
@@ -20,7 +19,9 @@ class State {
         this._activeCamera = value;
         this._activeCamera.layers.enableAll();
         this._activeCamera.position.copy(camera.position);
-        Constant.CONTROL.object = this._activeCamera;
+        if (Constant.CONTROL) {
+            Constant.CONTROL.object = this._activeCamera;
+        }
         if (this._activeCamera instanceof PerspectiveCamera) {
             this._activeCamera.updateProjectionMatrix();
         }
