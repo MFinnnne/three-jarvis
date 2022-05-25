@@ -1,8 +1,8 @@
 import Constant from '../constant/Constant';
 import Ticker from '../core/Ticker';
 import state from '../core/State';
-import VDOM, {VNodeTree} from '../core/VDOM';
-import {render, VNode} from "million";
+import VDOM, { VNodeTree } from '../core/VDOM';
+import { render, VNode } from 'million';
 
 /**
  * Generate a model tree
@@ -37,8 +37,8 @@ export class Object3DTree {
     }
 
     static vNodeTree2DOM(vNodeTree: VNodeTree): HTMLElement {
-        const {self, children} = vNodeTree;
-        const {tagName, id, className} = self;
+        const { self, children } = vNodeTree;
+        const { tagName, id, className } = self;
         const element = document.createElement(tagName);
         element.className = className;
         const spanElement = document.createElement('span');

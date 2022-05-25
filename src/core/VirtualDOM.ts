@@ -1,9 +1,8 @@
-import {className, Flags, m, VElement, VNode} from 'million';
-import {Object3D} from "three";
-import Ticker from "./Ticker";
+import { className, Flags, m, VElement, VNode } from 'million';
+import { Object3D } from 'three';
+import Ticker from './Ticker';
 
 export default class VirtualDOM {
-
     static object2VNode(object: Object3D): VElement {
         const node: VElement = {
             flag: Flags.ELEMENT,
@@ -12,34 +11,39 @@ export default class VirtualDOM {
                 className: object.name === '' ? object.type : object.name,
                 uuid: object.uuid,
                 parent: null,
-                hasChildren: object.children.length > 0
+                hasChildren: object.children.length > 0,
             },
             children: [
-                m('span', {
-                    id: object.uuid,
-                    className: className({
-                        caret: object.children.length > 0,
-                        caretOver: object.children.length <= 0,
-                        threeObject: true,
-                    }),
-                    onClick: (e) => {
-                        if (object.children.length > 0) {
-                            const parentElement = (e.target as HTMLElement).parentElement;
-                            const element = parentElement?.querySelector('.nested');
-                            element?.classList.toggle('active');
-                            (e.target as HTMLElement).classList.toggle('caretDown');
-                        }
-                        const target = e.target as HTMLElement;
-                        const uuid = target.id;
-                        Ticker.emmit('objectDomClick', uuid);
-                    }
-                }, [object.name === '' ? object.type : object.name], Flags.ELEMENT),
+                m(
+                    'span',
+                    {
+                        id: object.uuid,
+                        className: className({
+                            caret: object.children.length > 0,
+                            caretOver: object.children.length <= 0,
+                            threeObject: true,
+                        }),
+                        onClick: (e) => {
+                            if (object.children.length > 0) {
+                                const parentElement = (e.target as HTMLElement).parentElement;
+                                const element = parentElement?.querySelector('.nested');
+                                element?.classList.toggle('active');
+                                (e.target as HTMLElement).classList.toggle('caretDown');
+                            }
+                            const target = e.target as HTMLElement;
+                            const uuid = target.id;
+                            Ticker.emmit('objectDomClick', uuid);
+                        },
+                    },
+                    [object.name === '' ? object.type : object.name],
+                    Flags.ELEMENT,
+                ),
             ],
         };
         if (object.children.length > 0) {
             node.children?.push({
                 tag: 'ul',
-                props: {className: className({nested: true})},
+                props: { className: className({ nested: true }) },
                 children: [],
                 flag: Flags.ELEMENT,
             });
@@ -49,18 +53,17 @@ export default class VirtualDOM {
 
     static object2VNodeTree(object: Object3D): VElement {
         const node = VirtualDOM.object2VNode(object);
-        object.children.forEach(child => {
+        object.children.forEach((child) => {
             const childNode: VNode = VirtualDOM.object2VNodeTree(child);
             if (node.children?.length === 2) {
                 if (childNode.props) {
                     childNode.props.parent = node;
                 }
                 const ulNode = node.children[1] as VElement;
-                ulNode.children?.push(childNode)
+                ulNode.children?.push(childNode);
             }
-        })
+        });
         return node;
-
     }
 
     static print(vNode: VElement, level = 0) {

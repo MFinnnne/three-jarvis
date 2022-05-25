@@ -1,7 +1,7 @@
-import {Object3DTree} from './Object3DTree';
+import { Object3DTree } from './Object3DTree';
 import Constant from '../constant/Constant';
-import Utils from "../util/Utils";
-import SceneObserver from "../core/SceneObserver";
+import Utils from '../util/Utils';
+import SceneObserver from '../core/SceneObserver';
 
 export default class GUI {
     public static guiContainerInit(): void {
@@ -33,7 +33,7 @@ export default class GUI {
     }
 
     public static objectTreeInit() {
-       Utils.removeAllChildNodes(Constant.LEFT_SIDE_BAR_CONTAINER);
+        Utils.removeAllChildNodes(Constant.LEFT_SIDE_BAR_CONTAINER);
         // Object3DTree.init();
     }
 }

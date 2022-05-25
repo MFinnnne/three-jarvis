@@ -1,5 +1,4 @@
 import baseConfig from './rollup.config.base';
-import command from 'rollup-plugin-command';
 
 import { name } from '../package.json';
 import livereload from 'rollup-plugin-livereload';

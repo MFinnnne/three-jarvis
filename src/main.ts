@@ -1,14 +1,13 @@
 import * as THREE from 'three';
 import Constant from './constant/Constant';
 import './sass/full.scss';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as allEvents from './core/events';
 import CameraControls from 'camera-controls';
 import state from './core/State';
-import GUI from "./app/GUI";
+import GUI from './app/GUI';
 
-
-CameraControls.install({THREE: THREE});
+CameraControls.install({ THREE: THREE });
 
 export default class ThreeHelper {
     public static init(
@@ -17,17 +16,17 @@ export default class ThreeHelper {
         renderer: THREE.WebGLRenderer,
         container: HTMLElement,
         options?: {
-            control?: OrbitControls,
-            lazyLoad: false
-        }
+            control?: OrbitControls;
+            lazyLoad: false;
+        },
     ) {
-        console.log('mfine30');
+        console.log('mfine33');
         Constant.rawVar = {
             scene: scene,
             render: renderer,
             control: options?.control,
             container: container,
-            camera: camera
+            camera: camera,
         };
         GUI.guiContainerInit();
         state.activeCamera = camera;
