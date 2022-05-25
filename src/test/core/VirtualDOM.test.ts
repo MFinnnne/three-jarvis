@@ -1,6 +1,6 @@
 import { BoxGeometry, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, PointLight, Scene } from 'three';
 import { VElement } from 'million';
-import VirtualDOM from '../../core/VirtualDOM';
+import ObjectTree from '../../app/ObjectTree';
 
 function checkModelDataTree(vNodeTree: VElement) {
     if (vNodeTree.props) {
@@ -26,8 +26,10 @@ describe('test new vom', () => {
         const mesh3 = new Mesh(boxGeometry1, material1);
         group.add(mesh3);
         scene.add(group);
-        const vNodeTree1 = VirtualDOM.object2VNodeTree(scene);
-        VirtualDOM.print(vNodeTree1);
+        const vNodeTree1 = ObjectTree.object2VNodeTree(scene);
+        if (vNodeTree1) {
+            ObjectTree.print(vNodeTree1);
+        }
         // checkModelDataTree(vNodeTree1);
     });
 });

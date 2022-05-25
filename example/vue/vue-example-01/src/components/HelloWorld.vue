@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import * as THREE from 'three';
-import {BoxGeometry, DirectionalLight, Group, MeshBasicMaterial, PointLight} from 'three';
+import {BoxGeometry, DirectionalLight, Group, MeshBasicMaterial, PointLight, PointLightHelper} from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {onMounted} from 'vue';
@@ -25,6 +25,7 @@ function init() {
     light2.position.set(0.5, 0, 0.866); // ~60º
     light2.name = 'main_light';
     const pointLight = new PointLight(0xffffff, 1);
+    let pointLightHelper = new PointLightHelper(pointLight,5,0xffff00);
     pointLight.name = 'point_light';
 
     // new RGBELoader().setPath()
@@ -45,6 +46,7 @@ function init() {
 
     ThreeHelper.init(rawScene, camera, renderer, container, controls);
     rawScene.add(pointLight);
+    // rawScene.add(pointLightHelper)
     rawScene.add(light);
     rawScene.add(light2);
 

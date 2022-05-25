@@ -1,7 +1,7 @@
-import { Object3DTree } from './Object3DTree';
 import Constant from '../constant/Constant';
 import Utils from '../util/Utils';
-import SceneObserver from '../core/SceneObserver';
+import ObjectTree from "./ObjectTree";
+import MenuBar from "./MenuBar";
 
 export default class GUI {
     public static guiContainerInit(): void {
@@ -14,6 +14,7 @@ export default class GUI {
         const menuDom = document.createElement('div');
         menuDom.id = 'three-helper-menu';
         menuDom.className = 'three-helper-menu';
+        Constant.MENU_CONTAINER = menuDom;
         element.appendChild(menuDom);
 
         const leftSideBarDom = document.createElement('div');
@@ -29,7 +30,10 @@ export default class GUI {
 
         document.body.appendChild(element);
 
-        SceneObserver.monitorScene(Constant.rawVar.scene);
+        MenuBar.render();
+        setInterval(() => {
+            ObjectTree.render()
+        }, 1000);
     }
 
     public static objectTreeInit() {

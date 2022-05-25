@@ -1,12 +1,12 @@
 import EventRegistry from '../EventRegistry';
-import { Raycaster, Vector2 } from 'three';
+import {Raycaster, Vector2} from 'three';
 import Constant from '../../constant/Constant';
-import { Intersection } from 'three/src/core/Raycaster';
+import {Intersection} from 'three/src/core/Raycaster';
 import objectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
-import { Object3DTree } from '../../app/Object3DTree';
 import MyCameraUtil from '../../util/MyCameraUtil';
 import state from '../State';
+import ObjectTree from "../../app/ObjectTree";
 
 const threeJarvisRayCaster = new Raycaster();
 threeJarvisRayCaster.layers.mask = 0xfffffffe | 1;
@@ -54,7 +54,7 @@ export function clickObjectEvent(): void {
         if (dom === null) {
             throw new Error(`object ===${object.uuid}=== dom is null`);
         }
-        Object3DTree.expandTreeByChildNode(dom);
+        ObjectTree.expandTreeByChildNode(dom);
         objectChanged.objectHelper(object);
         Ticker.emmit('objectDomClick', object.uuid);
     });
@@ -62,6 +62,6 @@ export function clickObjectEvent(): void {
 
 export function objectDoubleClickEvent(): void {
     EventRegistry.registry('objectDoubleClick', (value) => {
-        MyCameraUtil.faceObject(value[0]);
+        // MyCameraUtil.faceObject(value[0]);
     });
 }
