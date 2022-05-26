@@ -20,7 +20,7 @@ export default class ThreeHelper {
             lazyLoad: false;
         },
     ) {
-        console.log('mfine42');
+        console.log('mfine123');
         Constant.rawVar = {
             scene: scene,
             render: renderer,

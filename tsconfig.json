@@ -27,7 +27,8 @@
     "isolatedModules": false,
     //将每个文件作为单独的模块（与“ts.transpileModule”类似）。
     // "noEmit": true,//不生成输出文件
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "million",
     "baseUrl": "./",
     "paths": {
       "*": ["types/*"],
