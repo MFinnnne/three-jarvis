@@ -11,7 +11,7 @@ import {
 } from 'three';
 import Constant from '../constant/Constant';
 import state from './State';
-import HelperManager from "./HelperManager";
+import HelperManager from './HelperManager';
 
 class ObjectChanged {
     private highLightBox?: BoxHelper;

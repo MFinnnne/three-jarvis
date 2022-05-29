@@ -1,15 +1,15 @@
-import {className, Flags, m, render, VElement, VNode} from 'million';
-import {Object3D} from 'three';
+import { className, Flags, m, render, VElement, VNode } from 'million';
+import { Object3D } from 'three';
 import Ticker from '../core/Ticker';
-import state from "../core/State";
-import Constant from "../constant/Constant";
-import {OBJECT_TREE_BLACK_LIST} from "../config/Config";
+import state from '../core/State';
+import Constant from '../constant/Constant';
+import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
 
 export default class ObjectTree {
     private static PREV_NODE: VNode;
 
     private static object2VNode(object: Object3D): VElement | null {
-        if (OBJECT_TREE_BLACK_LIST.find(item => item === object.uuid)) {
+        if (OBJECT_TREE_BLACK_LIST.find((item) => item === object.uuid)) {
             return null;
         }
         const node: VElement = {
@@ -51,7 +51,7 @@ export default class ObjectTree {
         if (object.children.length > 0) {
             node.children?.push({
                 tag: 'ul',
-                props: {className: className({nested: true})},
+                props: { className: className({ nested: true }) },
                 children: [],
                 flag: Flags.ELEMENT,
             });
@@ -63,7 +63,7 @@ export default class ObjectTree {
         const node = ObjectTree.object2VNode(object);
         if (node !== null) {
             object.children.forEach((child) => {
-                const childNode: VNode|null = ObjectTree.object2VNodeTree(child);
+                const childNode: VNode | null = ObjectTree.object2VNodeTree(child);
                 if (childNode == null) {
                     return;
                 }
@@ -97,13 +97,11 @@ export default class ObjectTree {
         if (newNode === null) {
             return;
         }
-        render(Constant.LEFT_SIDE_BAR_CONTAINER, newNode, ObjectTree.PREV_NODE,
-            (el, newNode, oldNode) => {
-                return true
-            });
+        render(Constant.LEFT_SIDE_BAR_CONTAINER, newNode, ObjectTree.PREV_NODE, (el, newNode, oldNode) => {
+            return true;
+        });
         ObjectTree.PREV_NODE = newNode;
     }
-
 
     /**
      * find dom in three and auto scroll to it
@@ -123,7 +121,6 @@ export default class ObjectTree {
         }
         Constant.LEFT_SIDE_BAR_CONTAINER.scrollTo(offsetLeft, offsetTop);
     }
-
 
     /**
      * find dom in tree and expand

@@ -1,4 +1,4 @@
-import {Pane} from 'tweakpane';
+import { Pane } from 'tweakpane';
 import EventRegistry from '../EventRegistry';
 import Constant from '../../constant/Constant';
 import objectChanged from '../ObjectChanged';
@@ -8,8 +8,8 @@ import Ticker from '../Ticker';
 import HemisphereLightControlPane from '../../app/pane/HemisphereLightControlPane';
 import DirectionalLightControlPane from '../../app/pane/DirectionalLightControlPane';
 import PointLightControlPane from '../../app/pane/PointLightControlPane';
-import ObjectTree from "../../app/ObjectTree";
-import PaneManager from "../PaneManager";
+import ObjectTree from '../../app/ObjectTree';
+import PaneManager from '../PaneManager';
 
 export function domClickEvent(): void {
     EventRegistry.registry('objectDomClick', (value) => {
@@ -29,7 +29,7 @@ export function domClickEvent(): void {
         }
         ObjectTree.autoLocateInTree(element);
         objectChanged.objectHelper(obj);
-        PaneManager.render(obj)
+        PaneManager.render(obj);
     });
 }
 

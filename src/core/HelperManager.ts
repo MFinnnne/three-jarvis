@@ -7,16 +7,16 @@ import {
     HemisphereLightHelper,
     Object3D,
     PointLight,
-    PointLightHelper
-} from "three";
-import Constant from "../constant/Constant";
-import {OBJECT_TREE_BLACK_LIST} from "../config/Config";
+    PointLightHelper,
+} from 'three';
+import Constant from '../constant/Constant';
+import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
 
 const OBJECT_HELPER_MAP: Map<string, (object: Object3D, color?: ColorRepresentation) => Object3D | null> = new Map();
 
 let highLightBox: BoxHelper | null = null;
 let lightHelper: PointLightHelper | HemisphereLightHelper | DirectionalLightHelper | null = null;
-let helpers: Array<Object3D> = [];
+const helpers: Array<Object3D> = [];
 let dLightHelper: DirectionalLightHelper | null = null;
 let hLightHelper: HemisphereLightHelper | null = null;
 let pLightHelper: PointLightHelper | null = null;
@@ -32,7 +32,7 @@ const boxHelperFn = (object, color = 0xffff00): Object3D | null => {
     highLightBox.layers.mask = 0x00000001 | 1;
     highLightBox.name = 'BoxHelper_' + Constant.HELPER_NAME;
     return highLightBox;
-}
+};
 
 const lightHelperFn = (object, color = 0xffff00): Object3D | null => {
     let lightObject: PointLight | HemisphereLight | DirectionalLight | null = null;
@@ -60,7 +60,7 @@ const lightHelperFn = (object, color = 0xffff00): Object3D | null => {
                 hLightHelper = new HemisphereLightHelper(lightObject, 5, color);
             }
             lightHelper = hLightHelper;
-            name = 'HemisphereLight'
+            name = 'HemisphereLight';
             break;
         default:
             break;
@@ -69,25 +69,22 @@ const lightHelperFn = (object, color = 0xffff00): Object3D | null => {
         lightHelper.visible = true;
         lightHelper.light = lightObject;
         lightHelper.update();
-        lightHelper.name = name + "_" + Constant.HELPER_NAME;
+        lightHelper.name = name + '_' + Constant.HELPER_NAME;
         return lightHelper;
     }
     return null;
-}
+};
 
 //light helper
 OBJECT_HELPER_MAP.set('HemisphereLight', (object) => lightHelperFn(object));
 OBJECT_HELPER_MAP.set('PointLight', (object) => lightHelperFn(object));
 OBJECT_HELPER_MAP.set('DirectionalLight', (object) => lightHelperFn(object));
 
-
-OBJECT_HELPER_MAP.set('Group', (object, color) => boxHelperFn(object))
-OBJECT_HELPER_MAP.set('Object3D', (object, color) => boxHelperFn(object))
-OBJECT_HELPER_MAP.set('Mesh', (object, color) => boxHelperFn(object))
-
+OBJECT_HELPER_MAP.set('Group', (object, color) => boxHelperFn(object));
+OBJECT_HELPER_MAP.set('Object3D', (object, color) => boxHelperFn(object));
+OBJECT_HELPER_MAP.set('Mesh', (object, color) => boxHelperFn(object));
 
 export default class HelperManager {
-
     static render(object: Object3D): void {
         helpers.forEach((helper) => {
             helper.visible = false;
@@ -97,10 +94,10 @@ export default class HelperManager {
         }
         const helper = OBJECT_HELPER_MAP.get(object.type)?.(object);
         if (helper) {
-            if (helpers.find(item => item.uuid === helper.uuid)) {
+            if (helpers.find((item) => item.uuid === helper.uuid)) {
                 return;
             }
-            OBJECT_TREE_BLACK_LIST.push(helper.uuid)
+            OBJECT_TREE_BLACK_LIST.push(helper.uuid);
             helpers.push(helper);
             Constant.rawVar.scene.add(helper);
         }
