@@ -1,7 +1,7 @@
 import Constant from '../constant/Constant';
 import Utils from '../util/Utils';
-import ObjectTree from "./ObjectTree";
-import MenuBar from "./MenuBar";
+import ObjectTree from './ObjectTree';
+import MenuBar from './MenuBar';
 
 export default class GUI {
     public static guiContainerInit(): void {
@@ -32,7 +32,7 @@ export default class GUI {
 
         MenuBar.init();
         setInterval(() => {
-            ObjectTree.render()
+            ObjectTree.render();
         }, 1000);
     }
 

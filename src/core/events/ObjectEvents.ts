@@ -1,12 +1,12 @@
 import EventRegistry from '../EventRegistry';
-import {Raycaster, Vector2} from 'three';
+import { Raycaster, Vector2 } from 'three';
 import Constant from '../../constant/Constant';
-import {Intersection} from 'three/src/core/Raycaster';
+import { Intersection } from 'three/src/core/Raycaster';
 import objectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
 import MyCameraUtil from '../../util/MyCameraUtil';
 import state from '../State';
-import ObjectTree from "../../app/ObjectTree";
+import ObjectTree from '../../app/ObjectTree';
 
 const threeJarvisRayCaster = new Raycaster();
 threeJarvisRayCaster.layers.mask = 0xfffffffe | 1;
