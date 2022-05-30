@@ -28,6 +28,8 @@ function init() {
     let pointLightHelper = new PointLightHelper(pointLight,5,0xffff00);
     pointLight.name = 'point_light';
 
+    setTimeout(()=>{pointLight.name="111QQQ"},5000)
+
     // new RGBELoader().setPath()
     renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setPixelRatio(window.devicePixelRatio);
