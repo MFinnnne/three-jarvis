@@ -2,11 +2,11 @@ import { Pane, TabPageApi } from 'tweakpane';
 import { Euler, Object3D, Quaternion, Vector3 } from 'three';
 import DefaultControlPane from '../DefaultControlPane';
 import recorder from '../../core/Recorder';
-import SetPositionCommand from '../../core/commands/setPositionCommand';
-import SetRotationCommand from '../../core/commands/setRotationCommand';
+import SetPositionCommand from '../../core/commands/SetPositionCommand';
+import SetRotationCommand from '../../core/commands/SetRotationCommand';
 import TweakpaneRotationInputPlugin from '@0b5vr/tweakpane-plugin-rotation';
 import SetScaleCommand from '../../core/commands/SetScaleCommand';
-import SetQuaternionCommand from '../../core/commands/setQuaternionCommand';
+import SetQuaternionCommand from '../../core/commands/SetQuaternionCommand';
 
 export default class ObjectControlPane extends DefaultControlPane {
     protected objectPane?: TabPageApi;

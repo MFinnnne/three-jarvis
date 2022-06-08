@@ -6,7 +6,7 @@ specifiers:
   '@vitejs/plugin-vue': ^2.3.3
   simplex-noise: ^3.0.1
   three: ^0.138.3
-  three-jarvis: file:.yalc/three-jarvis
+  three-jarvis: ^1.0.1
   vite: ^2.9.9
   vite-plugin-checker: ^0.4.6
   vue: ^3.2.36
@@ -15,7 +15,7 @@ dependencies:
   '@types/three': registry.npmjs.org/@types/three/0.138.0
   simplex-noise: registry.npmjs.org/simplex-noise/3.0.1
   three: registry.npmjs.org/three/0.138.3
-  three-jarvis: link:.yalc/three-jarvis
+  three-jarvis: link:../../..
   vue: registry.npmjs.org/vue/3.2.36
 
 devDependencies:

@@ -35,9 +35,4 @@ export default class GUI {
             ObjectTree.render();
         }, 1000);
     }
-
-    public static objectTreeInit() {
-        Utils.removeAllChildNodes(Constant.LEFT_SIDE_BAR_CONTAINER);
-        // Object3DTree.init();
-    }
 }

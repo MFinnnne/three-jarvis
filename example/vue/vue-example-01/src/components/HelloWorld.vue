@@ -4,7 +4,7 @@ import {BoxGeometry, DirectionalLight, Group, MeshBasicMaterial, PointLight, Poi
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {onMounted} from 'vue';
-import ThreeHelper from 'three-jarvis'
+import ThreeJarvis from 'three-jarvis'
 
 let camera, rawScene,  renderer, controls;
 
@@ -46,7 +46,7 @@ function init() {
     controls.update();
     rawScene = new THREE.Scene();
 
-    ThreeHelper.init(rawScene, camera, renderer, container, controls);
+    ThreeJarvis.init(rawScene, camera, renderer, container, controls);
     rawScene.add(pointLight);
     // rawScene.add(pointLightHelper)
     rawScene.add(light);

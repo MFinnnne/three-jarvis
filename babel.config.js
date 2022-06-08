@@ -4,15 +4,9 @@ module.exports = {
         targets: {
             node: 'current',
         }
-    }], '@babel/preset-typescript', 'babel-preset-million'],
+    }], '@babel/preset-typescript'],
     plugins: [
         '@babel/plugin-transform-modules-commonjs',
-        // [
-        //     "@babel/plugin-transform-react-jsx",
-        //     {
-        //         "runtime": "automatic",
-        //         "importSource": "million"
-        //     }
-        // ]
+
     ],
 };

@@ -20,7 +20,7 @@ export default class ThreeJarvis {
             lazyLoad: false;
         },
     ) {
-        console.log('mfine34');
+        console.log('mfine43');
         Constant.rawVar = {
             scene: scene,
             render: renderer,

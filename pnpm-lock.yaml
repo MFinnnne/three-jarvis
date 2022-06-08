@@ -50,6 +50,7 @@ specifiers:
   sass: ^1.52.1
   threads: ^1.7.0
   three: ^0.140.2
+  three-jarvis: file:.yalc/three-jarvis
   ts-babel: ^6.1.7
   ts-jest: ^28.0.3
   ts-node: ^10.8.0
@@ -68,6 +69,7 @@ dependencies:
   rollup: 2.74.1
   sass: 1.52.1
   threads: r2.cnpmjs.org/threads/1.7.0
+  three-jarvis: link:.yalc/three-jarvis
   tweakpane: 3.0.8
 
 devDependencies:
