@@ -39,7 +39,10 @@ class ObjectChanged {
         Constant.rawVar.scene.add(helper);
     }
 
-    public update(object: Object3D): void {
+    public update(object?: Object3D): void {
+        if (object == null) {
+            return;
+        }
         if (state.selectedObject.uuid === object.uuid) {
             this.objectHelper(object);
         }

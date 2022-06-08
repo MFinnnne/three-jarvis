@@ -9,7 +9,7 @@ import GUI from './app/GUI';
 
 CameraControls.install({ THREE: THREE });
 
-export default class ThreeHelper {
+export default class ThreeJarvis {
     public static init(
         scene: THREE.Scene,
         camera: THREE.Camera,
@@ -20,7 +20,7 @@ export default class ThreeHelper {
             lazyLoad: false;
         },
     ) {
-        console.log('mfine123');
+        console.log('mfine43');
         Constant.rawVar = {
             scene: scene,
             render: renderer,

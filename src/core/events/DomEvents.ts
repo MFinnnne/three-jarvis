@@ -1,4 +1,4 @@
-import { Pane } from 'tweakpane';
+import {Pane} from 'tweakpane';
 import EventRegistry from '../EventRegistry';
 import Constant from '../../constant/Constant';
 import objectChanged from '../ObjectChanged';
@@ -10,6 +10,7 @@ import DirectionalLightControlPane from '../../app/pane/DirectionalLightControlP
 import PointLightControlPane from '../../app/pane/PointLightControlPane';
 import ObjectTree from '../../app/ObjectTree';
 import PaneManager from '../PaneManager';
+import Loader from "../Loader";
 
 export function domClickEvent(): void {
     EventRegistry.registry('objectDomClick', (value) => {
@@ -50,5 +51,11 @@ export function domDoubleClickEvent(): void {
         }
         objectChanged.objectHelper(obj);
         Ticker.emmit('objectDoubleClick', obj);
+    });
+}
+
+export function importButtonEvent(): void {
+    EventRegistry.registry('importEvent', (value) => {
+        Loader.loadFiles(value);
     });
 }

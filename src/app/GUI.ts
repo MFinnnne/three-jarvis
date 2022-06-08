@@ -30,14 +30,9 @@ export default class GUI {
 
         document.body.appendChild(element);
 
-        MenuBar.render();
+        MenuBar.init();
         setInterval(() => {
             ObjectTree.render();
         }, 1000);
-    }
-
-    public static objectTreeInit() {
-        Utils.removeAllChildNodes(Constant.LEFT_SIDE_BAR_CONTAINER);
-        // Object3DTree.init();
     }
 }

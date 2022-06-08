@@ -30,6 +30,10 @@ export default {
         alias({
             resolve: ['.ts'],
         }),
+        babel({
+            exclude: '**/node_modules/**',
+            babelHelpers: 'runtime',
+        }),
         replace({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
         }),

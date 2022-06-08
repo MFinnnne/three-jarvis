@@ -1,4 +1,4 @@
-$menu-height: 5%;
+$menu-height: 3%;
 
 
 #three-helper-container {
@@ -20,27 +20,80 @@ $menu-height: 5%;
         pointer-events: auto;
 
         .menu {
+            overflow: hidden;
             height: 100%;
             width: 100%;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
-            .menuItem{
-                text-align: center;
+            align-items: center;
+            background-color: #3c3f41;
+
+            .menu-item {
                 height: inherit;
                 width: 100px;
-                background-color: #1abc9c;
-                border: 1px solid red;
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
-                .tag{
+                cursor: pointer;
+                margin-right: 5px;
+                margin-left: 5px;
+
+                &:hover {
+                    background-color: #757575;
+                }
+
+                .tag {
                     height: fit-content;
                     width: fit-content;
-                    color: red;
+                    color: white;
                     font-size: large;
                 }
+
+                .export {
+                    .dropbtn {
+                        color: white;
+                        padding: 16px;
+                        font-size: 16px;
+                        border: none;
+                        cursor: pointer;
+                        /* 在鼠标移上去后显示下拉菜单 */
+                        &:hover &.dropdown-content {
+                            background: red;
+                            display: block;
+                        }
+
+                        /* 当下拉内容显示后修改下拉按钮的背景颜色 */
+                        &:hover &.dropbtn {
+                            background-color: #282828;
+                        }
+                    }
+
+                    /* 容器 <div> - 需要定位下拉内容 */
+                    .dropdown {
+                        position: relative;
+                        display: inline-block;
+                    }
+
+                    /* 下拉内容 (默认隐藏) */
+                    .dropdown-content {
+                        display: none;
+                        position: absolute;
+                        min-width: 160px;
+                        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                        a {
+                            color: black;
+                            padding: 12px 16px;
+                            text-decoration: none;
+                            display: block;
+                            &:hover {
+                                background-color: #f1f1f1
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }
