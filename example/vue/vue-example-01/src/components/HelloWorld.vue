@@ -4,7 +4,7 @@ import {BoxGeometry, DirectionalLight, Group, MeshBasicMaterial, PointLight, Poi
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {onMounted} from 'vue';
-import ThreeJarvis from "../../../../../src/main";
+import ThreeJarvis  from 'three-jarvis'
 
 let camera, rawScene,  renderer, controls;
 

@@ -2,6 +2,8 @@
   "compilerOptions": {
     "outDir": "./lib",
     "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "dist/types/",
     "noImplicitAny": false,
     //在表达式和声明上有隐含的 any类型时报错。
     "target": "es5",
@@ -33,7 +35,7 @@
     "paths": {
       "*": ["types/*"],
       "tslib": ["node_modules/tslib/tslib.d.ts"]
-    }
+    },
     // "suppressImplicitAnyIndexErrors": true, //阻止对缺少索引签名的索引对象报错
   },
   "exclude": ["node_modules/**/*", "dist/**/*", "lib/**/*"],

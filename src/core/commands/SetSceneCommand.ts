@@ -1,12 +1,9 @@
-import {Command} from "../../types/types";
+import { Command } from '../../types/types';
 
-export default class SetSceneCommand implements Command{
-    name='set scene';
+export default class SetSceneCommand implements Command {
+    name = 'set scene';
 
-    exec(): void {
-    }
+    exec(): void {}
 
-    undo(): void {
-    }
-
+    undo(): void {}
 }
