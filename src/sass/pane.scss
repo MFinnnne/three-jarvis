@@ -1,0 +1,16 @@
+@import "Constant";
+
+#three-helper-pane {
+    position: fixed;
+    width: auto;
+    height: auto;
+    max-height: 100%-$menu-height;
+    top: $menu-height;
+    right: 0;
+    z-index: 99999;
+    background: #2f3137;
+    overflow: scroll;
+    pointer-events: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}

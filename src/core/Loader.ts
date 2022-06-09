@@ -119,7 +119,7 @@ export default class Loader {
                         const {GLTFLoader} = await import( 'three/examples/jsm/loaders/GLTFLoader.js' );
 
                         const dracoLoader = new DRACOLoader();
-                        dracoLoader.setDecoderPath('../examples/js/libs/draco/gltf/');
+                        dracoLoader.setDecoderPath('three/js/libs/draco/gltf/');
 
                         loader = new GLTFLoader(manager);
                         loader.setDRACOLoader(dracoLoader);

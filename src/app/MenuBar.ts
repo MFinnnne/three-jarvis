@@ -10,19 +10,20 @@ export default class MenuBar {
         const element = html`
             <div className=${{menu: true}}>
                 <div className=${{'menu-item': true}}>
-                    <div className=${{tag: true,import:true}}>
+                    <div className=${{tag: true, import: true}}>
                         <input type="file" id="file" style="display: none"
                                onchange=${(e) => MenuBar.onClick('import', e)}/>
                         <label for="file">
                             import
                         </label>
                     </div>
-                  
                 </div>
-                <div className='${{'menu-item':true}}'>
-                    <div className=${{tag:true,export:true}}>
-                        <div className=${{'dropbtn':true}}>export</div>
-                        <div className=${{'dropdown-content':true}}>
+                <div className='${{'menu-item': true}}'>
+                    <div className=${{tag: true}}>
+                        <div className=${{'dropbtn': true}}>export</div>
+                    </div>
+                    <div className=${{export: true}}>
+                        <div className=${{'dropdown-content': true}}>
                             <a href="#">config</a>
                             <a href="#">gltf</a>
                             <a href="#">glb</a>
@@ -30,8 +31,10 @@ export default class MenuBar {
                     </div>
                 </div>
             </div>`
+
         render(Constant.MENU_CONTAINER, element as VNode);
     }
+
 
     private static onClick(type: string, e: PointerEvent): void {
         if (type === 'import') {
