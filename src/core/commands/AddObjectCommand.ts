@@ -19,6 +19,4 @@ export default class AddObjectCommand implements Command {
     undo(): void {
         Constant.rawVar.scene.remove(this._object);
     }
-
-
 }

@@ -18,7 +18,5 @@ export default {
             name,
         },
     ],
-    plugins: [
-        ...baseConfig.plugins,
-    ],
+    plugins: [...baseConfig.plugins],
 };
