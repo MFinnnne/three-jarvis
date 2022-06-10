@@ -16,7 +16,6 @@ export interface Events {
     cameraDomClick: () => void;
     renderDomClick: () => void;
     lockObject: (object3d: Object3D) => void;
-    importEvent: (file: File | File[]) => void;
 }
 
 export interface Command {

@@ -21,15 +21,12 @@
 
         .menu-item {
             height: inherit;
-            width: 100px;
+            width: 80px;
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            margin-right: 5px;
-            margin-left: 5px;
-
 
             &:hover {
                 background-color: #757575;
@@ -69,7 +66,7 @@
                         display: block;
 
                         &:hover {
-                            background-color: $hover-color;
+                            background-color: #798d8d;
                         }
                     }
                 }

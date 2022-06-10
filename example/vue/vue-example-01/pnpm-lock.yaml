@@ -6,7 +6,7 @@ specifiers:
   '@vitejs/plugin-vue': ^2.3.3
   simplex-noise: ^3.0.1
   three: ^0.138.3
-  three-jarvis: ^1.0.8
+  three-jarvis: ^1.0.9
   vite: ^2.9.9
   vite-plugin-checker: ^0.4.6
   vue: ^3.2.36
@@ -15,7 +15,7 @@ dependencies:
   '@types/three': 0.138.0
   simplex-noise: 3.0.1
   three: 0.138.3
-  three-jarvis: 1.0.8_three@0.138.3
+  three-jarvis: 1.0.9_three@0.138.3
   vue: 3.2.36
 
 devDependencies:
@@ -913,8 +913,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /three-jarvis/1.0.8_three@0.138.3:
-    resolution: {integrity: sha512-qaOilG5Qo4sRmoCNMlc3af/ot5Ll/41NWs3Yfqk9EemyGdQHhfAAU4ZfnTHEYIxk0gIOivIE62W3dXJdBGaoyw==}
+  /three-jarvis/1.0.9_three@0.138.3:
+    resolution: {integrity: sha512-K+dNV8MOhSeTlyQJ8DkeO4HrXq9N/wzXo+5/7Sv7JnsZ9Kc9kBXIEuAY7ObRSU1Z8m7JQCEYkW2urAXUp7QiUA==}
     peerDependencies:
       three: '*'
     dependencies:
