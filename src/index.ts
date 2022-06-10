@@ -24,6 +24,7 @@ export default class ThreeJarvis {
             container: container,
             camera: camera,
         };
+        console.log("1");
         GUI.guiContainerInit();
         state.activeCamera = camera;
         // register events

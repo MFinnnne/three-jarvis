@@ -3,6 +3,15 @@ import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
+import path from "path";
+import typescript from "@rollup/plugin-typescript";
+import sourceMaps from "rollup-plugin-sourcemaps";
+const getPath = (_path) => path.resolve(__dirname, _path);
+
+const tsPlugin = typescript({
+    tsconfig: getPath('../tsconfig.json'),
+});
+
 export default {
     ...baseConfig,
     plugins: [
@@ -18,5 +27,7 @@ export default {
             mainFields: ['module', 'main'],
             preferBuiltins: true,
         }),
+        sourceMaps(),
+        tsPlugin,
     ],
 };

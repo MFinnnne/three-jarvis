@@ -1,4 +1,4 @@
-import { Pane } from 'tweakpane';
+import {Pane} from 'tweakpane';
 import EventRegistry from '../EventRegistry';
 import Constant from '../../constant/Constant';
 import objectChanged from '../ObjectChanged';
@@ -51,11 +51,5 @@ export function domDoubleClickEvent(): void {
         }
         objectChanged.objectHelper(obj);
         Ticker.emmit('objectDoubleClick', obj);
-    });
-}
-
-export function importButtonEvent(): void {
-    EventRegistry.registry('importEvent', (value) => {
-        Loader.loadFiles(value);
     });
 }

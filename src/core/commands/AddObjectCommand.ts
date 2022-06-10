@@ -1,8 +1,6 @@
-import { Command } from '../../types/types';
-import { Object3D, Vector3 } from 'three';
+import {Command} from '../../types/types';
+import {Object3D} from 'three';
 import Constant from '../../constant/Constant';
-import { object } from 'million/html';
-import state from '../State';
 
 export default class AddObjectCommand implements Command {
     name = 'add object';
