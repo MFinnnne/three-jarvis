@@ -3,13 +3,10 @@ import Constant from './constant/Constant';
 import './sass/full.scss';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as allEvents from './core/events';
-import CameraControls from 'camera-controls';
 import state from './core/State';
 import GUI from './app/GUI';
 
-CameraControls.install({ THREE: THREE });
-
-export default class ThreeHelper {
+export default class ThreeJarvis {
     public static init(
         scene: THREE.Scene,
         camera: THREE.Camera,
@@ -20,7 +17,6 @@ export default class ThreeHelper {
             lazyLoad: false;
         },
     ) {
-        console.log('mfine42');
         Constant.rawVar = {
             scene: scene,
             render: renderer,

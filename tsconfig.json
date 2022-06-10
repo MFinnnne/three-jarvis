@@ -2,6 +2,8 @@
   "compilerOptions": {
     "outDir": "./lib",
     "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "dist/types/",
     "noImplicitAny": false,
     //在表达式和声明上有隐含的 any类型时报错。
     "target": "es5",
@@ -27,7 +29,8 @@
     "isolatedModules": false,
     //将每个文件作为单独的模块（与“ts.transpileModule”类似）。
     // "noEmit": true,//不生成输出文件
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "million",
     "baseUrl": "./",
     "paths": {
       "*": ["types/*"],
@@ -35,6 +38,6 @@
     }
     // "suppressImplicitAnyIndexErrors": true, //阻止对缺少索引签名的索引对象报错
   },
-  "exclude": ["node_modules", "dist", "lib"],
+  "exclude": ["node_modules/**/*", "dist/**/*", "lib/**/*"],
   "include": ["src/**/*.ts"]
 }

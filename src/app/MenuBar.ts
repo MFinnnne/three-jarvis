@@ -1,19 +1,44 @@
-import { className, kebab, m, render, style } from 'million';
+import { render, VNode } from 'million';
 import Constant from '../constant/Constant';
+import { html } from 'million/html';
+import Ticker from '../core/Ticker';
+import { Input } from 'postcss';
 
 export default class MenuBar {
+    static init() {
+        const element = html` <div className=${{ menu: true }}>
+            <div className=${{ 'menu-item': true }}>
+                <div className=${{ tag: true, import: true }}>
+                    <input
+                        type="file"
+                        id="file"
+                        style="display: none"
+                        onchange=${(e) => MenuBar.onClick('import', e)}
+                    />
+                    <label for="file"> import </label>
+                </div>
+            </div>
+            <div className="${{ 'menu-item': true }}">
+                <div className=${{ tag: true }}>
+                    <div className=${{ dropbtn: true }}>export</div>
+                </div>
+                <div className=${{ export: true }}>
+                    <div className=${{ 'dropdown-content': true }}>
+                        <a href="#">config</a>
+                        <a href="#">gltf</a>
+                        <a href="#">glb</a>
+                    </div>
+                </div>
+            </div>
+        </div>`;
 
+        render(Constant.MENU_CONTAINER, element as VNode);
+    }
 
-    static render(): void {
-        const element = m('div', {
-            className: className({
-                menu: true,
-            }),
-        }, []);
-        const map = kebab({ tag: true }) as Record<string, boolean>;
-
-        const child = m('div', { className: className({ menuItem: true }) }, [m('div', { className: className(map) }, ['import'])]);
-        element.children?.push(child);
-        render(Constant.MENU_CONTAINER, element);
+    private static onClick(type: string, e: PointerEvent): void {
+        if (type === 'import') {
+            const file = (e.target as any).files[0];
+            Ticker.emmit('importEvent', file);
+        }
     }
 }

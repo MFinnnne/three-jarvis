@@ -11,7 +11,7 @@
     "@types/three": "^0.138.0",
     "simplex-noise": "^3.0.1",
     "three": "^0.138.3",
-    "three-jarvis": "file:.yalc/three-jarvis",
+    "three-jarvis": "^1.0.8",
     "vue": "^3.2.36"
   },
   "devDependencies": {

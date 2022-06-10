@@ -1,0 +1,95 @@
+@import "Constant";
+
+#three-helper-left-side-bar {
+    position: fixed;
+    width: 200px;
+    height: 80%;
+    top: $menu-height;
+    left: 0;
+    color: #fff;
+    background: #2f3137;
+    overflow: scroll;
+    pointer-events: auto;
+
+    &::-webkit-scrollbar {
+        width: 9px;
+        background: transparent;
+        height: 9px;
+        color: #3b3636;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #bccab1; /* color of the tracking area */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #fbaeae; /* color of the scroll thumb */
+        border-radius: 6px; /* roundness of the scroll thumb *//* creates padding around scroll thumb */
+    }
+
+    @keyframes highlight-selected {
+        from {
+            border-color: yellow;
+            border-width: thin;
+            border-style: solid;
+        }
+        to {
+            border-color: red;
+            border-width: thick;
+            border-style: solid;
+        }
+    }
+
+    @-webkit-keyframes highlight-selected /* Safari 与 Chrome */
+    {
+        from {
+            border-color: yellow;
+            border-style: solid;
+        }
+        to {
+            border-color: red;
+            border-style: solid;
+        }
+    }
+
+    .find-out {
+        animation: highlight-selected 0.1s 5;
+    }
+
+    .selected {
+        background-color: #1abc9c;
+    }
+
+    .caretOver, .caret {
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+        margin-top: 20px
+    }
+
+    .caretOver:hover, .caret:hover {
+        background: olive;
+    }
+
+    .caret:before {
+        content: "\25B6";
+        color: #1abc9c;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .caretDown::before {
+        transform: rotate(90deg);
+    }
+
+    .nested {
+        display: none;
+        padding-inline-start: 20px;
+        margin: 0
+    }
+
+    .active {
+        display: block;
+    }
+}

@@ -1,7 +1,6 @@
 import alias from 'rollup-plugin-alias';
 import resolve from 'rollup-plugin-node-resolve';
 
-import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import path from 'path';
@@ -10,9 +9,9 @@ import postcss from 'postcss';
 import sass from 'rollup-plugin-scss';
 import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
-import copy from 'rollup-plugin-copy';
-import {nodeResolve} from '@rollup/plugin-node-resolve';
 import webWorkerLoader from 'rollup-plugin-web-worker-loader';
+import babel from '@rollup/plugin-babel';
+import { name } from '../package.json';
 
 const getPath = (_path) => path.resolve(__dirname, _path);
 
@@ -24,17 +23,34 @@ const tsPlugin = ts({
 });
 
 export default {
-    input: 'src/main.ts',
+    input: 'src/index.ts',
+    output: [
+        {
+            dir: `dist/${name}.esm.js`,
+            format: 'esm',
+            name,
+            exports: 'auto',
+            sourcemap: true,
+        },
+        {
+            dir: `dist/${name}.cjs.js`,
+            format: 'cjs',
+            exports: 'auto',
+            name,
+            sourcemap: true,
+        },
+    ],
     plugins: [
         webWorkerLoader({}),
         alias({
             resolve: ['.ts'],
         }),
+        babel({
+            exclude: '**/node_modules/**',
+            babelHelpers: 'bundled',
+        }),
         replace({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-        }),
-        copy({
-            targets: [{src: 'static/**/*', dest: 'dist/static'}],
         }),
         resolve(),
         sass({
@@ -43,21 +59,11 @@ export default {
             insert: true,
             processor: (css) =>
                 postcss([autoprefixer])
-                    .process(css, {from: undefined})
+                    .process(css, { from: undefined })
                     .then((result) => result.css),
         }),
         commonjs(),
         sourceMaps(),
         tsPlugin,
-        babel({
-            runtimeHelpers: true,
-            exclude: ['node_modules/**', 'example/**'], // only transpile our source code
-        }),
-        nodeResolve({
-            browser: true,
-            mainFields: ["module", "main"],
-            preferBuiltins: true
-        })
-
     ],
 };

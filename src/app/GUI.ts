@@ -1,7 +1,7 @@
 import Constant from '../constant/Constant';
 import Utils from '../util/Utils';
-import ObjectTree from "./ObjectTree";
-import MenuBar from "./MenuBar";
+import ObjectTree from './ObjectTree';
+import MenuBar from './MenuBar';
 
 export default class GUI {
     public static guiContainerInit(): void {
@@ -30,14 +30,9 @@ export default class GUI {
 
         document.body.appendChild(element);
 
-        MenuBar.render();
+        MenuBar.init();
         setInterval(() => {
-            ObjectTree.render()
+            ObjectTree.render();
         }, 1000);
-    }
-
-    public static objectTreeInit() {
-        Utils.removeAllChildNodes(Constant.LEFT_SIDE_BAR_CONTAINER);
-        // Object3DTree.init();
     }
 }

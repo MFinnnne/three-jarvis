@@ -11,7 +11,7 @@ import {
 } from 'three';
 import Constant from '../constant/Constant';
 import state from './State';
-import HelperManager from "./HelperManager";
+import HelperManager from './HelperManager';
 
 class ObjectChanged {
     private highLightBox?: BoxHelper;
@@ -39,7 +39,10 @@ class ObjectChanged {
         Constant.rawVar.scene.add(helper);
     }
 
-    public update(object: Object3D): void {
+    public update(object?: Object3D): void {
+        if (object == null) {
+            return;
+        }
         if (state.selectedObject.uuid === object.uuid) {
             this.objectHelper(object);
         }
