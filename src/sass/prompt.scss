@@ -1,0 +1,27 @@
+.prompt {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 40px;
+    border: 1px solid red;
+    right: 100px;
+    animation: move-in 3s;
+    animation-delay: 5s;
+
+    @keyframes moveIn {
+        0% {
+            right: 0;
+        }
+        //40% {
+        //    right: 50px;
+        //}
+        //50% {
+        //    right: 0;
+        //}
+        100% {
+            right: 1000px;
+        }
+    }
+
+}
+
