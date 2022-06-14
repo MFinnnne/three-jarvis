@@ -11,11 +11,10 @@ export default class Prompt {
         `
         const element = createElement(prompt as VNode) as HTMLElement;
         document.body.appendChild(element);
-        // element.style.animation = 'move-in'
         console.log(element)
-        setTimeout(() => {
-            // element.style.animation = 'move-out';
-        }, 1000)
+        element.addEventListener('animationend', () => {
+            document.body.removeChild(element);
+        })
     }
 
 }
