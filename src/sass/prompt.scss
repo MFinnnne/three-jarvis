@@ -1,15 +1,31 @@
+$promptWidth:120px;
+$promptHeight:50px;
+
+
 .prompt {
     position: absolute;
     top: 0;
-    width: 100px;
-    height: 40px;
-    border: 1px solid red;
+    width: $promptWidth;
+    height: $promptHeight;
     right: -110px;
-    animation: moveIn 5s;
+    animation: moveIn 4s;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #282a28;
+    font-size: medium;
+    border-radius: 5px;
+
+    .msg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     @keyframes moveIn {
         0% {
-            right: -110px;
+            right: -$promptWidth;
         }
         10% {
             right: 0;
@@ -18,7 +34,7 @@
             right: 0;
         }
         100% {
-            right: -110px;
+            right: -$promptWidth;
         }
     }
 

@@ -1,4 +1,5 @@
 import {Object3D} from 'three';
+import Prompt from "../app/Prompt";
 
 export default class Utils {
     static removeAllChildNodes(parent): void {
@@ -27,6 +28,7 @@ export default class Utils {
         input.setSelectionRange(0, text.length);
         document.execCommand('copy');
         document.body.removeChild(input);
+        Prompt.eject("Copied")
         return true;
     }
 }

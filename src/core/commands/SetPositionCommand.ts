@@ -1,5 +1,8 @@
 import { Command } from '../../types/types';
 import { Object3D, Vector3 } from 'three';
+import {InputBindingApi} from "@tweakpane/core";
+import {Point3d, Point3dObject} from "@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d";
+import {Point3dInputParams} from "tweakpane";
 
 export default class SetPositionCommand implements Command {
     oldPosition: Vector3;
@@ -7,7 +10,7 @@ export default class SetPositionCommand implements Command {
     private _object: Object3D;
     name = '';
 
-    constructor(object: Object3D, position: Vector3) {
+    constructor(object: Object3D, position: Vector3,bindApi:InputBindingApi<Point3d, Point3dObject>) {
         this._object = object;
         this.oldPosition = object.position.clone();
         this.newPosition = position.clone();

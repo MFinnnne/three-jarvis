@@ -1,4 +1,4 @@
-import {Pane, TabPageApi} from 'tweakpane';
+import {Pane, Point3dInputParams, TabPageApi} from 'tweakpane';
 import {Euler, Object3D, Quaternion, Vector3} from 'three';
 import DefaultControlPane from '../DefaultControlPane';
 import recorder from '../../core/Recorder';
@@ -7,7 +7,7 @@ import SetRotationCommand from '../../core/commands/SetRotationCommand';
 import * as TweakpaneRotationInputPlugin from '@0b5vr/tweakpane-plugin-rotation';
 import SetScaleCommand from '../../core/commands/SetScaleCommand';
 import SetQuaternionCommand from '../../core/commands/SetQuaternionCommand';
-import {Point3d} from "@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d";
+import {Point3d, Point3dObject} from "@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d";
 import Utils from "../../util/Utils";
 
 export default class ObjectControlPane extends DefaultControlPane {
@@ -45,18 +45,23 @@ export default class ObjectControlPane extends DefaultControlPane {
         this.materialPane = tab.pages[2];
         const positionBind = this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
             const {x, y, z} = ev.value;
-            recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z)));
+            recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z),positionBind));
         });
         positionBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = positionBind.controller_.binding.value.rawValue as Point3d;
             Utils.execCoy(`${value.x},${value.y},${value.z}`)
         });
         this.bindMap.set('postion', positionBind);
-        console.log(positionBind);
+
         const scaleBind = this.objectPane.addInput(PARAMS, 'scale').on('change', (ev) => {
             const {x, y, z} = ev.value;
             recorder.execute(new SetScaleCommand(object, new Vector3(x, y, z)));
         });
+        scaleBind.controller_.view.labelElement.addEventListener("click", () => {
+            const value = scaleBind.controller_.binding.value.rawValue as Point3d;
+            Utils.execCoy(`${value.x},${value.y},${value.z}`)
+        })
+        this.bindMap.set('scale', scaleBind);
 
         // euler
         const rotationBind = this.objectPane
@@ -71,10 +76,15 @@ export default class ObjectControlPane extends DefaultControlPane {
             .on('change', (e) => {
                 const {x, y, z} = e.value;
                 recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ')));
-            });
+            })
+        rotationBind.controller_.view.labelElement.addEventListener('click', () => {
+            const value = rotationBind.controller_.binding.value.rawValue as Euler;
+            Utils.execCoy(`${value.x},${value.y},${value.z}`)
+        });
+        this.bindMap.set('rotation', rotationBind);
 
         // quaternion
-        this.objectPane
+        const quatBind = this.objectPane
             .addInput(PARAMS, 'quat', {
                 view: 'rotation',
                 rotationMode: 'quaternion', // optional, 'quaternion' by default
@@ -85,6 +95,12 @@ export default class ObjectControlPane extends DefaultControlPane {
                 const {x, y, z, w} = e.value;
                 recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w)));
             });
+        quatBind.controller_.view.labelElement.addEventListener('click', () => {
+            debugger
+            const value = quatBind.controller_.binding.value.rawValue as Quaternion;
+            Utils.execCoy(`${value.x},${value.y},${value.z},${value.w}`)
+        })
+        this.bindMap.set('quat', quatBind);
 
 
         return pane;

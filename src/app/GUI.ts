@@ -33,7 +33,6 @@ export default class GUI {
         document.body.appendChild(element);
 
         MenuBar.init();
-        Prompt.eject("ok");
         setInterval(() => {
             ObjectTree.render();
         }, 1000);

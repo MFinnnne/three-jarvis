@@ -7,9 +7,18 @@ import {View} from "@tweakpane/core/src/common/view/view";
 
 export default class DefaultControlPane implements ControlPane {
     protected pane: Pane = new Pane({container: Constant.PANE_CONTAINER, title: 'three-helper'});
-    protected bindMap: Map<String, BladeApi<any>> = new Map<String, BladeApi<any>>()
+    private _bindMap: Map<String, BladeApi<any>> = new Map<String, BladeApi<any>>()
 
     genPane(argument: Object3D | Camera | WebGLRenderer): Pane {
         return this.pane;
+    }
+
+
+    get bindMap(): Map<String, BladeApi<any>> {
+        return this._bindMap;
+    }
+
+    set bindMap(value: Map<String, BladeApi<any>>) {
+        this._bindMap = value;
     }
 }
