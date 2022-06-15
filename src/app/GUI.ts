@@ -29,6 +29,7 @@ export default class GUI {
         paneDom.id = 'three-helper-pane';
         paneDom.className = 'three-helper-pane';
         element.appendChild(paneDom);
+        Constant.PANE_CONTAINER = paneDom;
 
         document.body.appendChild(element);
 

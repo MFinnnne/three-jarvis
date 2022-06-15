@@ -93,7 +93,7 @@ export default class ObjectControlPane extends DefaultControlPane {
             })
             .on('change', (e) => {
                 const {x, y, z, w} = e.value;
-                recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w)));
+                recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w),quatBind));
             });
         quatBind.controller_.view.labelElement.addEventListener('click', () => {
             debugger
