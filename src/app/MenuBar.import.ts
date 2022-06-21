@@ -12,6 +12,7 @@ export default class MenuBarImport {
                         type="file"
                         id="file"
                         style="display: none"
+                        multiple="${true}"
                         onchange=${(e) => MenuBarImport.onClick('import', e)}
                     />
                     <label for="file"> import </label>
@@ -22,7 +23,7 @@ export default class MenuBarImport {
 
     private static onClick(type, e) {
         if (type === 'import') {
-            const file = (e.target as any).files[0];
+            const file = (e.target as any).files;
             Loader.loadFiles(file);
         }
     }
