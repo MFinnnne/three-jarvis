@@ -1,9 +1,12 @@
-import { Pane } from 'tweakpane';
-import { Camera, Object3D, Scene, WebGLRenderer } from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import {Pane} from 'tweakpane';
+import {Camera, Object3D, Scene, WebGLRenderer} from 'three';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import {TransformControls} from "three/examples/jsm/controls/TransformControls";
 
 export interface ControlPane {
     genPane(argument: Object3D | Camera | WebGLRenderer): Pane;
+
+    update(): void;
 }
 
 export interface Events {
@@ -16,6 +19,7 @@ export interface Events {
     cameraDomClick: () => void;
     renderDomClick: () => void;
     lockObject: (object3d: Object3D) => void;
+
 }
 
 export interface Command {
@@ -32,5 +36,6 @@ export type RawThreeVar = {
     render: WebGLRenderer;
     camera: Camera | Camera[];
     container: HTMLElement;
-    control?: OrbitControls;
+    control: OrbitControls;
+    transformControls:TransformControls;
 };

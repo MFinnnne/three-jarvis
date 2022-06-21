@@ -2,6 +2,7 @@ import Constant from '../constant/Constant';
 import Utils from '../util/Utils';
 import ObjectTree from './ObjectTree';
 import MenuBar from './MenuBar';
+import Prompt from "./Prompt";
 
 export default class GUI {
     public static guiContainerInit(): void {
@@ -10,6 +11,7 @@ export default class GUI {
         const element = document.createElement('div');
         element.id = 'three-helper-container';
         element.className = 'three-helper-container';
+
 
         const menuDom = document.createElement('div');
         menuDom.id = 'three-helper-menu';
@@ -27,9 +29,14 @@ export default class GUI {
         paneDom.id = 'three-helper-pane';
         paneDom.className = 'three-helper-pane';
         element.appendChild(paneDom);
+        Constant.PANE_CONTAINER = paneDom;
+
+        const switchTransDom = document.createElement('div');
+        switchTransDom.id='switch-transform-control'
+        switchTransDom.className='switch-transform-control'
+        element.appendChild(switchTransDom);
 
         document.body.appendChild(element);
-
         MenuBar.init();
         setInterval(() => {
             ObjectTree.render();
