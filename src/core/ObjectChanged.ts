@@ -12,13 +12,9 @@ import {
 import Constant from '../constant/Constant';
 import state from './State';
 import HelperManager from './HelperManager';
+import PaneManager from "./PaneManager";
 
 class ObjectChanged {
-    private highLightBox?: BoxHelper;
-    private hemisphereLightHelper?: HemisphereLightHelper;
-    private directionLightHelper?: DirectionalLightHelper;
-    private pointLightHelper?: PointLightHelper;
-    private helpers: Array<Object3D> = [];
 
     /**
      *   boxed  mesh
@@ -34,12 +30,9 @@ class ObjectChanged {
         return;
     }
 
-    private helperPostProcess(helper: Object3D) {
-        this.helpers.push(helper);
-        Constant.rawVar.scene.add(helper);
-    }
 
-    public update(object?: Object3D): void {
+    public update(): void {
+        const object = state.selectedObject;
         if (object == null) {
             return;
         }

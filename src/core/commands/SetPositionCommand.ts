@@ -29,14 +29,10 @@ export default class SetPositionCommand implements Command {
     exec(): void {
         this._object.position.copy(this.newPosition);
         this._object.updateMatrixWorld(true);
-        const {x, y, z} = this.newPosition;
-        this.bindApi.controller_.binding.value.rawValue = new Point3d(x, y, z);
     }
 
     undo(): void {
         this._object.position.copy(this.oldPosition);
         this._object.updateMatrixWorld(true);
-        const {x, y, z} = this.oldPosition;
-        this.bindApi.controller_.binding.value.rawValue = new Point3d(x, y, z);
     }
 }

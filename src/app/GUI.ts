@@ -31,8 +31,12 @@ export default class GUI {
         element.appendChild(paneDom);
         Constant.PANE_CONTAINER = paneDom;
 
-        document.body.appendChild(element);
+        const switchTransDom = document.createElement('div');
+        switchTransDom.id='switch-transform-control'
+        switchTransDom.className='switch-transform-control'
+        element.appendChild(switchTransDom);
 
+        document.body.appendChild(element);
         MenuBar.init();
         setInterval(() => {
             ObjectTree.render();

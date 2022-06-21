@@ -1,6 +1,7 @@
 @import "Constant";
 @import "prompt";
 
+
 #three-helper-container {
     top: 0;
     left: 0;
@@ -13,5 +14,6 @@
     @import "menu-bar";
     @import "left-side-bar";
     @import "pane";
+    @import "switch-transform-control";
 
 }
