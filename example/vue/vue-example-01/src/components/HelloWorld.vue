@@ -5,8 +5,9 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {onMounted} from 'vue';
 import ThreeJarvis from '../../../../../src/index.ts'
+import {TransformControls} from "three/examples/jsm/controls/TransformControls";
 
-let camera, rawScene,  renderer, controls;
+let camera, rawScene,  renderer, control;
 
 onMounted(() => {
     init();
@@ -39,26 +40,33 @@ function init() {
     renderer.outputEncoding = THREE.LinearEncoding;
     container.appendChild(renderer.domElement);
 
-    controls = new OrbitControls(camera, renderer.domElement);// use if there is no animation loop
-    controls.minDistance = 2;
-    controls.maxDistance = 1000;
-    controls.target.set(0, 0, 0);
-    controls.update();
+    control = new OrbitControls(camera, renderer.domElement);// use if there is no animation loop
+    control.minDistance = 2;
+    control.maxDistance = 1000;
+    control.target.set(0, 0, 0);
+    control.update();
     rawScene = new THREE.Scene();
 
-    ThreeJarvis.init(rawScene, camera, renderer, container, controls);
+
+    ThreeJarvis.init(rawScene, camera, renderer, container,{control});
     rawScene.add(pointLight);
     // rawScene.add(pointLightHelper)
     rawScene.add(light);
     rawScene.add(light2);
 
     let group = new Group();
-    group.name = 'group';
+    group.name = 'cube';
     const boxGeometry = new BoxGeometry(10, 10, 10);
     const material = new MeshBasicMaterial({color: 0x00ff00});
     const mesh = new THREE.Mesh(boxGeometry, material);
     rawScene.add(group);
     group.add(mesh)
+    // let transformControls = new TransformControls(camera,renderer.domElement);
+    // transformControls.attach(group)
+    // transformControls.addEventListener( 'dragging-changed', function ( event ) {
+    //     control.enabled = ! event.value;
+    // });
+    // rawScene.add(transformControls);
     // group.add(mesh);
     mesh.position.set(0, 0, 0);
     // material.wireframe = true;
@@ -83,7 +91,7 @@ function onWindowResize() {
 function render() {
     requestAnimationFrame(render);
     renderer.render(rawScene, camera);
-    controls.update();
+    control.update();
 }
 
 

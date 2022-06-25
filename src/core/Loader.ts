@@ -20,7 +20,7 @@ export default class Loader {
             const filesMap = LoaderUtils.createFilesMap(files);
             const manager = new THREE.LoadingManager();
             manager.setURLModifier(function (url) {
-                url = url.replace(/^(\.?\/)/, ''); // remove './'
+                url = url.replace(/^(\.?\/)/, '');
                 const file = filesMap[url];
                 if (file) {
                     console.log('Loading', url);
