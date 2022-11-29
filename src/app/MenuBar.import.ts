@@ -1,6 +1,5 @@
 import {html} from "million/html";
 import {VNode} from "million";
-import Ticker from "../core/Ticker";
 import Loader from "../core/Loader";
 
 export default class MenuBarImport {
