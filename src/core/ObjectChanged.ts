@@ -31,8 +31,8 @@ class ObjectChanged {
     }
 
 
-    public update(): void {
-        const object = state.selectedObject;
+    public update(target?: Object3D): void {
+        const object = target ?? state.selectedObject;
         if (object == null) {
             return;
         }

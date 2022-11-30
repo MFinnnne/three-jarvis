@@ -1,9 +1,9 @@
-import { className, Flags, m, render, VElement, VNode } from 'million';
-import { Object3D } from 'three';
+import {className, Flags, m, render, VElement, VNode} from 'million';
+import {Object3D} from 'three';
 import Ticker from '../core/Ticker';
 import state from '../core/State';
 import Constant from '../constant/Constant';
-import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 
 export default class ObjectTree {
     private static PREV_NODE: VNode;
@@ -51,7 +51,7 @@ export default class ObjectTree {
         if (object.children.length > 0) {
             node.children?.push({
                 tag: 'ul',
-                props: { className: className({ nested: true }) },
+                props: {className: className({nested: true})},
                 children: [],
                 flag: Flags.ELEMENT,
             });
@@ -97,9 +97,7 @@ export default class ObjectTree {
         if (newNode === null) {
             return;
         }
-        render(Constant.LEFT_SIDE_BAR_CONTAINER, newNode, ObjectTree.PREV_NODE, (el, newNode, oldNode) => {
-            return true;
-        });
+        render(Constant.LEFT_SIDE_BAR_CONTAINER, newNode, ObjectTree.PREV_NODE);
         ObjectTree.PREV_NODE = newNode;
     }
 

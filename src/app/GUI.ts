@@ -32,8 +32,8 @@ export default class GUI {
         Constant.PANE_CONTAINER = paneDom;
 
         const switchTransDom = document.createElement('div');
-        switchTransDom.id='switch-transform-control'
-        switchTransDom.className='switch-transform-control'
+        switchTransDom.id = 'switch-transform-control'
+        switchTransDom.className = 'switch-transform-control'
         element.appendChild(switchTransDom);
 
         document.body.appendChild(element);

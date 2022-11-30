@@ -17,7 +17,7 @@ class State {
         const camera = value.clone(true);
         this._cameras.push(camera);
         this._activeCamera = value;
-        this._activeCamera.layers.enableAll();
+        this._activeCamera.layers.mask = 0x00000003;
         this._activeCamera.position.copy(camera.position);
         if (Constant.CONTROL) {
             Constant.CONTROL.object = this._activeCamera;

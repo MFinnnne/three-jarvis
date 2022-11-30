@@ -29,7 +29,6 @@ function init() {
     let pointLightHelper = new PointLightHelper(pointLight,5,0xffff00);
     pointLight.name = 'point_light';
 
-    setTimeout(()=>{pointLight.name="111QQQ"},5000)
 
     // new RGBELoader().setPath()
     renderer = new THREE.WebGLRenderer({antialias: true});
@@ -59,6 +58,7 @@ function init() {
     const boxGeometry = new BoxGeometry(10, 10, 10);
     const material = new MeshBasicMaterial({color: 0x00ff00});
     const mesh = new THREE.Mesh(boxGeometry, material);
+    mesh.layers.set(0);
     rawScene.add(group);
     group.add(mesh)
     // let transformControls = new TransformControls(camera,renderer.domElement);

@@ -1,15 +1,14 @@
 import EventRegistry from '../EventRegistry';
-import { Raycaster, Vector2 } from 'three';
+import {Raycaster, Vector2} from 'three';
 import Constant from '../../constant/Constant';
-import { Intersection } from 'three/src/core/Raycaster';
+import {Intersection} from 'three/src/core/Raycaster';
 import objectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
-import MyCameraUtil from '../../util/MyCameraUtil';
 import state from '../State';
 import ObjectTree from '../../app/ObjectTree';
+import {OBJECT_TREE_BLACK_LIST} from "../../config/Config";
 
 const threeJarvisRayCaster = new Raycaster();
-threeJarvisRayCaster.layers.mask = 0xfffffffe | 1;
 
 function intersectObjects(e: MouseEvent): Intersection[] {
     const renderDom = Constant.rawVar.container;
@@ -27,10 +26,17 @@ export function rayCasterEvents() {
     Constant.rawVar.container.addEventListener('click', (e) => {
         const intersects = intersectObjects(e);
         if (intersects.length > 0) {
-            const fistCatchObject = intersects[0].object;
-            if (e.altKey) {
-                Ticker.emmit('objectClick', fistCatchObject);
+            for (let intersect of intersects) {
+                if (OBJECT_TREE_BLACK_LIST.find(uuid => intersect.object.uuid === uuid)) {
+                    continue;
+                }
+                if (e.altKey) {
+                    Ticker.emmit('objectClick', intersect.object);
+                    console.log(intersect.object.name)
+                }
+                return;
             }
+
         }
     });
 
@@ -52,7 +58,8 @@ export function clickObjectEvent(): void {
             return;
         }
         if (dom === null) {
-            throw new Error(`object ===${object.uuid}=== dom is null`);
+            console.log("not render object:", object);
+            throw new Error(`object ===${object.uuid}===${object.name} dom is null`);
         }
         ObjectTree.expandTreeByChildNode(dom);
         objectChanged.objectHelper(object);

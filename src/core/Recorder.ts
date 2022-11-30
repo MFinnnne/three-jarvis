@@ -1,4 +1,4 @@
-import { Command } from '../types/types';
+import {Command} from '../types/types';
 import objectChanged from './ObjectChanged';
 
 /**
