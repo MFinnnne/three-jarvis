@@ -5,9 +5,8 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {onMounted} from 'vue';
 import ThreeJarvis from '../../../../../src/index.ts'
-import {TransformControls} from "three/examples/jsm/controls/TransformControls";
 
-let camera, rawScene,  renderer, control;
+let camera, rawScene, renderer, control;
 
 onMounted(() => {
     init();
@@ -26,7 +25,7 @@ function init() {
     light2.position.set(0.5, 0, 0.866); // ~60º
     light2.name = 'main_light';
     const pointLight = new PointLight(0xffffff, 1);
-    let pointLightHelper = new PointLightHelper(pointLight,5,0xffff00);
+    let pointLightHelper = new PointLightHelper(pointLight, 5, 0xffff00);
     pointLight.name = 'point_light';
 
 
@@ -47,7 +46,7 @@ function init() {
     rawScene = new THREE.Scene();
 
 
-    ThreeJarvis.init(rawScene, camera, renderer, container,{control});
+    ThreeJarvis.init(rawScene, camera, renderer, {control});
     rawScene.add(pointLight);
     // rawScene.add(pointLightHelper)
     rawScene.add(light);

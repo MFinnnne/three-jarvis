@@ -1,16 +1,16 @@
 import EventRegistry from '../EventRegistry';
-import {Raycaster, Vector2} from 'three';
+import {Group, Object3D, Raycaster, Vector2} from 'three';
 import Constant from '../../constant/Constant';
 import {Intersection} from 'three/src/core/Raycaster';
 import objectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
 import state from '../State';
 import ObjectTree from '../../app/ObjectTree';
-import {OBJECT_TREE_BLACK_LIST} from "../../config/Config";
 
 const threeJarvisRayCaster = new Raycaster();
+const transformRayCaster = new Raycaster();
 
-function intersectObjects(e: MouseEvent): Intersection[] {
+function intersectObjects(e: MouseEvent, rayCaster: Raycaster, target: Object3D[] | Group[]): Intersection[] {
     const renderDom = Constant.rawVar.container;
     if (renderDom === undefined) {
         throw new Error('can not get threejs renderer dom');
@@ -18,30 +18,24 @@ function intersectObjects(e: MouseEvent): Intersection[] {
     const mouse = new Vector2();
     mouse.x = ((e.clientX - renderDom.offsetLeft) / renderDom.clientWidth) * 2 - 1;
     mouse.y = -((e.clientY - renderDom.offsetTop) / renderDom.clientHeight) * 2 + 1;
-    threeJarvisRayCaster.setFromCamera(mouse, state.activeCamera);
-    return threeJarvisRayCaster.intersectObjects(Constant.rawVar.scene.children, true);
+    rayCaster.setFromCamera(mouse, state.activeCamera);
+    return rayCaster.intersectObjects(target, true);
 }
+
 
 export function rayCasterEvents() {
     Constant.rawVar.container.addEventListener('click', (e) => {
-        const intersects = intersectObjects(e);
+        const intersects = intersectObjects(e, threeJarvisRayCaster,Constant.rawVar.scene.children);
         if (intersects.length > 0) {
-            for (let intersect of intersects) {
-                if (OBJECT_TREE_BLACK_LIST.find(uuid => intersect.object.uuid === uuid)) {
-                    continue;
-                }
-                if (e.altKey) {
-                    Ticker.emmit('objectClick', intersect.object);
-                    console.log(intersect.object.name)
-                }
-                return;
+            if (e.altKey) {
+                Ticker.emmit('objectClick', intersects[0].object);
             }
-
         }
+        intersectObjects(e, transformRayCaster,Constant.rawVar.transformControls.children);
     });
 
     Constant.rawVar.container.addEventListener('dblclick', (e) => {
-        const intersects = intersectObjects(e);
+        const intersects = intersectObjects(e, threeJarvisRayCaster,Constant.rawVar.scene.children);
         if (intersects.length > 0) {
             const fistCatchObject = intersects[0].object;
             Ticker.emmit('objectClick', fistCatchObject);

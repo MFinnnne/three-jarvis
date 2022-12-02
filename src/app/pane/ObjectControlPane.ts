@@ -11,6 +11,8 @@ import {Point3d} from "@tweakpane/core/dist/es6/input-binding/point-3d/model/poi
 import Utils from "../../util/Utils";
 import Prompt from "../Prompt";
 import Constant from "../../constant/Constant";
+import {InputBinding} from "@tweakpane/core/dist/cjs/common/binding/input";
+import {InputBindingApi} from "@tweakpane/core/src/blade/input-binding/api/input-binding";
 
 export default class ObjectControlPane extends DefaultControlPane {
     protected objectPane?: TabPageApi;
@@ -55,7 +57,6 @@ export default class ObjectControlPane extends DefaultControlPane {
             recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z), positionBind));
         });
         positionBind.controller_.view.labelElement.addEventListener('click', () => {
-
             const value = positionBind.controller_.binding.value.rawValue as Point3d;
             Utils.execCoy(`${value.x},${value.y},${value.z}`)
         });

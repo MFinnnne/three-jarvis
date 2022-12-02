@@ -1,10 +1,9 @@
-import {render, VElement, VNode} from 'million';
+import {render, VElement} from 'million';
 import Constant from '../constant/Constant';
 import {html} from 'million/html';
-import Ticker from '../core/Ticker';
-import {Input} from 'postcss';
 import MenuBarExport from "./MenuBar.export";
 import MenuBarImport from "./MenuBar.import";
+import MenuBarNew from "./MenuBar.new";
 
 export default class MenuBar {
     static init() {
@@ -12,6 +11,7 @@ export default class MenuBar {
             <div className=${{menu: true}}>
                 <div></div>
             </div>`;
+        element.children?.push(MenuBarNew.element())
         element.children?.push(MenuBarImport.element())
         element.children?.push(MenuBarExport.element())
         render(Constant.MENU_CONTAINER, element);

@@ -1,5 +1,6 @@
-import {html} from "million/html";
+import {b, html} from "million/html";
 import {VNode} from "million";
+import ExportComponent from "../core/component/ExportComponent";
 
 export default class MenuBarExport {
     static element(): VNode {
@@ -10,7 +11,9 @@ export default class MenuBarExport {
                 </div>
                 <div className=${{export: true}}>
                     <div className=${{'dropdown-content': true}}>
-                        <a href="#" onclick=${(e) => MenuBarExport.onClick('config', e)}>config</a>
+                        <a href="#" onclick=${(e) => MenuBarExport.onClick('config', e)}>
+                            config-js
+                        </a>
                         <a href="#">gltf</a>
                         <a href="#">glb</a>
                     </div>
@@ -20,6 +23,12 @@ export default class MenuBarExport {
     }
 
     private static onClick(type: string, e) {
-        console.log(type+" export TODO");
+        switch (type) {
+            case 'config':
+                ExportComponent.exportConfigJS();
+                break;
+            default:
+                break;
+        }
     }
 }

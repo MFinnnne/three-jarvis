@@ -1,5 +1,5 @@
 import {Pane} from 'tweakpane';
-import {Camera, Object3D, Scene, WebGLRenderer} from 'three';
+import {Camera, Group, Object3D, Scene, Vector3, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {TransformControls} from "three/examples/jsm/controls/TransformControls";
 
@@ -37,5 +37,22 @@ export type RawThreeVar = {
     camera: Camera | Camera[];
     container: HTMLElement;
     control: OrbitControls;
-    transformControls:TransformControls;
+    transformControls: TransformControls;
 };
+
+export type LoadModelConfig = {
+    id: string,
+    name: string,
+    position: { x: number, y: number, z: number },
+    scale: { x: number, y: number, z: number },
+    rotation: { x: number, y: number, z: number, order?: string },
+    quaternion: { x: number, y: number, z: number, w: number },
+    afterRender: (object: Object3D | Group) => void
+    beforeRender: () => void
+}
+
+export  type LoadConfig = {
+    loadModelConfigs: LoadModelConfig[],
+    beforeLoad: () => void,
+    afterLoad: (objects:Object3D[]) => void
+}
