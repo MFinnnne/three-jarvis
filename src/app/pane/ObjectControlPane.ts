@@ -129,7 +129,7 @@ export default class ObjectControlPane extends DefaultControlPane {
             }
             switch (k) {
                 case 'position':
-                    const position:Vector3 = this.object.position;
+                    const position: Vector3 = this.object.position;
                     v.controller_.binding.value.rawValue = new Point3d(position.x, position.y, position.z);
                     break;
                 case 'rotation':
@@ -137,11 +137,11 @@ export default class ObjectControlPane extends DefaultControlPane {
                     v.controller_.binding.value.rawValue = new Point3d(euler.x, euler.y, euler.z);
                     break;
                 case 'scale':
-                    const scale:Vector3 = this.object.scale;
+                    const scale: Vector3 = this.object.scale;
                     v.controller_.binding.value.rawValue = new Point3d(scale.x, scale.y, scale.z);
                     break;
                 case 'quat':
-                    const quat:Quaternion = this.object.quaternion;
+                    const quat: Quaternion = this.object.quaternion;
                     v.controller_.binding.value.rawValue = new Quaternion(quat.x, quat.y, quat.z, quat.w);
                     break;
                 default :
