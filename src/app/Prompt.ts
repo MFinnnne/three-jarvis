@@ -1,5 +1,5 @@
 import {html} from "million/html";
-import {createElement, render, VNode} from "million";
+import {createElement,VNode} from "million";
 
 export default class Prompt {
     static eject(text: string) {

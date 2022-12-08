@@ -7,6 +7,7 @@ specifiers:
   '@babel/plugin-transform-react-jsx': ^7.17.12
   '@babel/preset-env': ^7.18.2
   '@babel/preset-typescript': ^7.17.12
+  '@right-menu/core': 0.0.7
   '@rollup/plugin-babel': ^5.3.1
   '@rollup/plugin-commonjs': ^21.1.0
   '@rollup/plugin-node-resolve': ^13.3.0
@@ -57,8 +58,9 @@ specifiers:
 
 dependencies:
   '@0b5vr/tweakpane-plugin-rotation': 0.1.1_tweakpane@3.0.8
+  '@right-menu/core': registry.npmjs.org/@right-menu/core/0.0.7
   '@tweakpane/core': 1.0.9
-  million: 1.9.0
+  million: registry.npmjs.org/million/1.12.5
   nanoevents: r2.cnpmjs.org/nanoevents/6.0.2
   tweakpane: 3.0.8
 
@@ -78,7 +80,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.26.0_eslint@8.16.0+typescript@4.2.2
   autoprefixer: 10.4.7_postcss@8.4.14
   babel-jest: 27.5.1_@babel+core@7.18.2
-  babel-preset-million: r2.cnpmjs.org/babel-preset-million/0.0.1_@babel+core@7.18.2+million@1.9.0
+  babel-preset-million: r2.cnpmjs.org/babel-preset-million/0.0.1_917749eb24e4dc469ab14fe47c6ed9ec
   cross-env: r2.cnpmjs.org/cross-env/7.0.3
   eslint: 8.16.0
   eslint-config-prettier: 8.5.0_eslint@8.16.0
@@ -1968,7 +1970,7 @@ packages:
       normalize-path: r2.cnpmjs.org/normalize-path/3.0.0
       readdirp: r2.cnpmjs.org/readdirp/3.6.0
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: registry.npmjs.org/fsevents/2.3.2
     dev: true
 
   /ci-info/3.3.1:
@@ -2536,7 +2538,7 @@ packages:
       micromatch: 4.0.5
       walker: r2.cnpmjs.org/walker/1.0.8
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: registry.npmjs.org/fsevents/2.3.2
     dev: true
 
   /jest-haste-map/28.1.0:
@@ -2555,7 +2557,7 @@ packages:
       micromatch: 4.0.5
       walker: r2.cnpmjs.org/walker/1.0.8
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: registry.npmjs.org/fsevents/2.3.2
     dev: true
 
   /jest-leak-detector/28.1.0:
@@ -2857,10 +2859,6 @@ packages:
       braces: r2.cnpmjs.org/braces/3.0.2
       picomatch: 2.3.1
     dev: true
-
-  /million/1.9.0:
-    resolution: {integrity: sha512-1s9siPA+p+m5ItCC83rx861R40benQE0/7uecF2snIC+m/LDx5vJuXlx+bQcV0X4r8hIGqxfNDz/hudoCSjepQ==}
-    dev: false
 
   /minimatch/3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -3309,7 +3307,7 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: registry.npmjs.org/fsevents/2.3.2
     dev: true
 
   /sass/1.52.1:
@@ -4181,7 +4179,7 @@ packages:
       '@babel/plugin-syntax-top-level-await': r2.cnpmjs.org/@babel/plugin-syntax-top-level-await/7.14.5_@babel+core@7.18.2
     dev: true
 
-  r2.cnpmjs.org/babel-preset-million/0.0.1_@babel+core@7.18.2+million@1.9.0:
+  r2.cnpmjs.org/babel-preset-million/0.0.1_917749eb24e4dc469ab14fe47c6ed9ec:
     resolution: {integrity: sha512-vcctY1PnNmIiujiK6YhpbKvmMETFw3Nz15An9+utRDL6dg6pjQSXcU3b8wM0DQXcPYG8pxCZgVIpUPCYtNgioA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/babel-preset-million/-/babel-preset-million-0.0.1.tgz}
     id: r2.cnpmjs.org/babel-preset-million/0.0.1
     name: babel-preset-million
@@ -4194,7 +4192,7 @@ packages:
       '@babel/core': 7.18.2
       '@babel/plugin-transform-react-constant-elements': 7.17.12_@babel+core@7.18.2
       '@babel/plugin-transform-react-jsx': 7.17.12_@babel+core@7.18.2
-      million: 1.9.0
+      million: registry.npmjs.org/million/1.12.5
     dev: true
 
   r2.cnpmjs.org/balanced-match/1.0.2:
@@ -5004,16 +5002,6 @@ packages:
     version: 1.0.0
     dev: true
 
-  r2.cnpmjs.org/fsevents/2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/fsevents/-/fsevents-2.3.2.tgz}
-    name: fsevents
-    version: 2.3.2
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
-
   r2.cnpmjs.org/function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/function-bind/-/function-bind-1.1.1.tgz}
     name: function-bind
@@ -5493,7 +5481,7 @@ packages:
     name: jsonfile
     version: 4.0.0
     optionalDependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.10
     dev: true
 
   r2.cnpmjs.org/kleur/3.0.3:
@@ -7125,6 +7113,35 @@ packages:
     version: 3.1.1
     engines: {node: '>=6'}
     dev: true
+
+  registry.npmjs.org/@right-menu/core/0.0.7:
+    resolution: {integrity: sha512-DMqdTOfFflBWrBcmsq4oP+vDn47d4YopjOALVxSpt/KJdV0TYwsGiIXMPomd46eHjTHJS7NDDsfajPastgPR7w==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@right-menu/core/-/core-0.0.7.tgz}
+    name: '@right-menu/core'
+    version: 0.0.7
+    dev: false
+
+  registry.npmjs.org/fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz}
+    name: fsevents
+    version: 2.3.2
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  registry.npmjs.org/graceful-fs/4.2.10:
+    resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.10.tgz}
+    name: graceful-fs
+    version: 4.2.10
+    dev: true
+    optional: true
+
+  registry.npmjs.org/million/1.12.5:
+    resolution: {integrity: sha512-faOnk3o1/SRgpfjAL54M7HCACNTim5Wo6yaEEC7qjy1j3h1Wdv7cie/Iw+fYt9tJn5SXs0W8+DX4MHzfMdguzw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/million/-/million-1.12.5.tgz}
+    name: million
+    version: 1.12.5
+    dev: false
 
   registry.npmmirror.com/graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.10.tgz}

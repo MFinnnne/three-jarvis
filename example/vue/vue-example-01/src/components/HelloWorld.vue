@@ -8,6 +8,7 @@ import ThreeJarvis from '../../../../../src/index.ts'
 
 let camera, rawScene, renderer, control;
 
+
 onMounted(() => {
     init();
     render();
@@ -51,7 +52,6 @@ function init() {
     // rawScene.add(pointLightHelper)
     rawScene.add(light);
     rawScene.add(light2);
-
     let group = new Group();
     group.name = 'cube';
     const boxGeometry = new BoxGeometry(10, 10, 10);
@@ -59,6 +59,9 @@ function init() {
     const mesh = new THREE.Mesh(boxGeometry, material);
     mesh.layers.set(0);
     rawScene.add(group);
+    setTimeout(() => {
+        mesh.name = '12312312';
+    }, 5000)
     group.add(mesh)
     // let transformControls = new TransformControls(camera,renderer.domElement);
     // transformControls.attach(group)
@@ -98,6 +101,7 @@ function render() {
 
 <template>
     <div>
+        <!-- 方式1: 指令组件 -->
         <div id='container'></div>
     </div>
 </template>

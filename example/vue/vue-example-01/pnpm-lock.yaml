@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@right-menu/core': 0.0.7
+  '@right-menu/vue': 0.0.4
   '@rollup/plugin-commonjs': ^21.1.0
   '@types/three': ^0.138.0
   '@vitejs/plugin-vue': ^2.3.3
@@ -11,6 +13,8 @@ specifiers:
   vue: ^3.2.36
 
 dependencies:
+  '@right-menu/core': registry.npmjs.org/@right-menu/core/0.0.7
+  '@right-menu/vue': registry.npmjs.org/@right-menu/vue/0.0.4
   '@types/three': 0.138.0
   simplex-noise: 3.0.1
   three: 0.138.3
@@ -795,6 +799,26 @@ packages:
   /yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: true
+
+  registry.npmjs.org/@right-menu/core/0.0.6:
+    resolution: {integrity: sha512-ZaPNxw3b4jtZ/YJY5zAYwPuHC7Lu442yNxxNYIYKQzdoUfSzi8/LC2X61Wm+8sB4YYa7qYm2R611R7KYTHSCAQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@right-menu/core/-/core-0.0.6.tgz}
+    name: '@right-menu/core'
+    version: 0.0.6
+    dev: false
+
+  registry.npmjs.org/@right-menu/core/0.0.7:
+    resolution: {integrity: sha512-DMqdTOfFflBWrBcmsq4oP+vDn47d4YopjOALVxSpt/KJdV0TYwsGiIXMPomd46eHjTHJS7NDDsfajPastgPR7w==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@right-menu/core/-/core-0.0.7.tgz}
+    name: '@right-menu/core'
+    version: 0.0.7
+    dev: false
+
+  registry.npmjs.org/@right-menu/vue/0.0.4:
+    resolution: {integrity: sha512-U15xq1AAp7C1w77kF11YnRu7OxVSQTV8FD+f0nIrhWiEU1yMNZTjbnYZhxD2CVFw7qshntliaH7Q5K2W0JngrA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@right-menu/vue/-/vue-0.0.4.tgz}
+    name: '@right-menu/vue'
+    version: 0.0.4
+    dependencies:
+      '@right-menu/core': registry.npmjs.org/@right-menu/core/0.0.6
+    dev: false
 
   registry.npmjs.org/esbuild-android-64/0.14.39:
     resolution: {integrity: sha512-EJOu04p9WgZk0UoKTqLId9VnIsotmI/Z98EXrKURGb3LPNunkeffqQIkjS2cAvidh+OK5uVrXaIP229zK6GvhQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/esbuild-android-64/-/esbuild-android-64-0.14.39.tgz}

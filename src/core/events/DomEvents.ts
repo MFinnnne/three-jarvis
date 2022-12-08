@@ -5,6 +5,7 @@ import state from '../State';
 import Ticker from '../Ticker';
 import ObjectTree from '../../app/ObjectTree';
 import PaneManager from '../PaneManager';
+import {rightMenu} from "../component/RightMenu";
 
 export function domClickEvent(): void {
     EventRegistry.registry('objectDomClick', (value) => {

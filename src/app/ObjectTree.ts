@@ -4,6 +4,7 @@ import Ticker from '../core/Ticker';
 import state from '../core/State';
 import Constant from '../constant/Constant';
 import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
+import {rightMenu} from "../core/component/RightMenu";
 
 export default class ObjectTree {
     private static PREV_NODE: VNode;
@@ -42,6 +43,10 @@ export default class ObjectTree {
                             const uuid = target.id;
                             Ticker.emmit('objectDomClick', uuid);
                         },
+                        onMouseEnter:(e)=>{
+                            const target = e.target as HTMLElement;
+                            rightMenu(target);
+                        }
                     },
                     [object.name === '' ? object.type : object.name],
                     Flags.ELEMENT,

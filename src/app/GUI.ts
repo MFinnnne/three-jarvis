@@ -3,6 +3,7 @@ import Utils from '../util/Utils';
 import ObjectTree from './ObjectTree';
 import MenuBar from './MenuBar';
 import Prompt from "./Prompt";
+import {rightMenu} from "../core/component/RightMenu";
 
 export default class GUI {
     public static guiContainerInit(): void {
@@ -41,5 +42,6 @@ export default class GUI {
         setInterval(() => {
             ObjectTree.render();
         }, 1000);
+
     }
 }
