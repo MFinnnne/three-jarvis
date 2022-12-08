@@ -1,11 +1,11 @@
 import * as THREE from 'three';
 
-import { TGALoader } from 'three/examples/jsm/loaders/TGALoader.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import {TGALoader} from 'three/examples/jsm/loaders/TGALoader.js';
+import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import AddObjectCommand from './commands/AddObjectCommand';
-
-import { LoaderUtils } from '../util/LoadUtils';
+import {MeshoptDecoder} from '../lib/meshopt_decoder.module'
+import {LoaderUtils} from '../util/LoadUtils';
 import recorder from './Recorder';
 
 export default class Loader {
@@ -54,7 +54,9 @@ export default class Loader {
                         const contents = event.target?.result;
                         const dracoLoader = new DRACOLoader();
                         dracoLoader.setDecoderPath('three/examples/js/libs/draco/gltf/');
+
                         const loader = new GLTFLoader();
+                        loader.setMeshoptDecoder(MeshoptDecoder);
                         loader.setDRACOLoader(dracoLoader);
                         loader.parse(contents as any, '', function (result) {
                             const scene = result.scene;
