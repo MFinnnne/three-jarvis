@@ -5,6 +5,7 @@ import state from "../State";
 export default class ExportComponent {
     static exportConfigJS() {
         ExportComponent.exportFile('config.js', ExportComponent.objectConfig(state.selectedObject));
+
     }
 
     //导出txt格式
@@ -61,18 +62,18 @@ export default class ExportComponent {
     private static loadModelConfig2String(config: LoadConfig): string {
         return `
             export const CONFIG = {
-                loadModelConfigs:${(ExportComponent.modelConfig2String(config.loadModelConfigs))},
+                loadModelConfigs:[${(ExportComponent.modelConfig2String(config.loadModelConfigs))}],
                 afterLoad: (objects) => {
                 },
                 beforeLoad: () => {
-                },
+                }
             }
         `;
     }
 
     private static modelConfig2String(modelConfigs: LoadModelConfig[]): string {
         const configs: string[] = [];
-        modelConfigs.forEach(child => {
+        modelConfigs.forEach((child, index) => {
             let modelConfig: string = `
             {
                id: '${child.id}',
@@ -94,7 +95,6 @@ export default class ExportComponent {
         `;
             configs.push(modelConfig);
         });
-        debugger;
         return configs.toString()
     }
 }

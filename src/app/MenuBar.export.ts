@@ -1,4 +1,4 @@
-import {b, html} from "million/html";
+import {html} from "million/html";
 import {VNode} from "million";
 import ExportComponent from "../core/component/ExportComponent";
 
