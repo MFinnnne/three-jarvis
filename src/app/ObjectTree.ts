@@ -4,7 +4,7 @@ import Ticker from '../core/Ticker';
 import state from '../core/State';
 import Constant from '../constant/Constant';
 import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
-import {rightMenu} from "../core/component/RightMenu";
+import {rightMenu} from "./RightMenu";
 
 export default class ObjectTree {
     private static PREV_NODE: VNode;
