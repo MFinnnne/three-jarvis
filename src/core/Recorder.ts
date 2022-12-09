@@ -1,5 +1,5 @@
-import {Command} from '../types/types';
 import objectChanged from './ObjectChanged';
+import {Command} from "./Type";
 
 /**
  * Operation records

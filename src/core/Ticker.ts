@@ -1,5 +1,5 @@
 import { createNanoEvents, Emitter } from 'nanoevents';
-import { Events } from '../types/types';
+import {Events} from "./Type";
 
 export default class Ticker {
     private static readonly EMITTER: Emitter = createNanoEvents<Events>();

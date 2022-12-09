@@ -1,6 +1,6 @@
 import {Group, Object3D} from "three";
-import {LoadConfig, LoadModelConfig} from "../../types/types";
 import state from "../State";
+import {LoadConfig, LoadModelConfig} from "../Type";
 
 export default class ExportComponent {
     static exportConfigJS() {
@@ -38,6 +38,7 @@ export default class ExportComponent {
         for (let child of object.children) {
             const modelConfig: LoadModelConfig = {
                 id: child.uuid,
+                path:'',
                 name: child.name,
                 position: {x: child.position.x, y: child.position.y, z: child.position.z},
                 rotation: {x: child.rotation.x, y: child.rotation.y, z: child.rotation.z, order: child.rotation.order},

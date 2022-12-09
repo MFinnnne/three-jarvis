@@ -1,16 +1,17 @@
 import {render, VElement} from 'million';
 import Constant from '../constant/Constant';
-import {html} from 'million/html';
 import MenuBarExport from "./MenuBar.export";
 import MenuBarImport from "./MenuBar.import";
 import MenuBarNew from "./MenuBar.new";
+import {fromStringToVNode} from "million/utils";
 
 export default class MenuBar {
     static init() {
-        const element = <VElement>html`
+        debugger
+        const element = <VElement>fromStringToVNode(`
             <div className=${{menu: true}}>
                 <div></div>
-            </div>`;
+            </div>`);
         element.children?.push(MenuBarNew.element())
         element.children?.push(MenuBarImport.element())
         element.children?.push(MenuBarExport.element())

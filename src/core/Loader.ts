@@ -4,7 +4,7 @@ import {TGALoader} from 'three/examples/jsm/loaders/TGALoader.js';
 import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import AddObjectCommand from './commands/AddObjectCommand';
-import {MeshoptDecoder} from '../lib/meshopt_decoder.module'
+import {MeshoptDecoder} from './jsm/meshopt_decoder.module'
 import {LoaderUtils} from '../util/LoadUtils';
 import recorder from './Recorder';
 

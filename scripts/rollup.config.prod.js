@@ -27,7 +27,8 @@ export default {
         typescript({sourceMap: false, inlineSources: false}),
         copy({
             targets: [
-                {src: 'types/index.d.ts', dest: 'dist/'}
+                {src: 'types/index.d.ts', dest: 'dist/'},
+                {src: 'types/core/ThreeJarvisLoader.d.ts', dest: 'dist/'},
             ]
         })
     ],

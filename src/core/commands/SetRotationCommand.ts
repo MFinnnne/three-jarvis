@@ -1,6 +1,6 @@
-import { Command } from '../../types/types';
 import { Euler, Object3D, Vector3 } from 'three';
 import {InputBindingApi} from "@tweakpane/core";
+import {Command} from "../Type";
 
 export default class SetRotationCommand implements Command {
     name = 'change rotation';

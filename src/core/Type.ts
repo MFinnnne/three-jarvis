@@ -1,13 +1,8 @@
 import {Pane} from 'tweakpane';
-import {Camera, Group, Object3D, Scene, Vector3, WebGLRenderer} from 'three';
+import {Camera, Object3D, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-
-export interface ControlPane {
-    genPane(argument: Object3D | Camera | WebGLRenderer): Pane;
-
-    update(): void;
-}
+import {GLTF} from "three/examples/jsm/loaders/GLTFLoader";
 
 export interface Events {
     objectDomClick: (id: string) => void;
@@ -43,16 +38,17 @@ export type RawThreeVar = {
 export type LoadModelConfig = {
     id: string,
     name: string,
+    path:string,
     position: { x: number, y: number, z: number },
     scale: { x: number, y: number, z: number },
     rotation: { x: number, y: number, z: number, order?: string },
     quaternion: { x: number, y: number, z: number, w: number },
-    afterRender: (object: Object3D | Group) => void
+    afterRender: (model: GLTF) => void
     beforeRender: () => void
 }
 
 export  type LoadConfig = {
     loadModelConfigs: LoadModelConfig[],
     beforeLoad: () => void,
-    afterLoad: (objects:Object3D[]) => void
+    afterLoad: (objects:GLTF[]) => void
 }
