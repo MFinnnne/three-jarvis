@@ -85,6 +85,7 @@ const lightHelperFn = (object, color = 0xffff00): Object3D | null => {
         lightHelper.light = lightObject;
         lightHelper.update();
         lightHelper.name = name + '_' + Constant.HELPER_NAME;
+        transformControlFn(object);
         return lightHelper;
     }
     return null;

@@ -4,6 +4,7 @@ import state from "../core/State";
 import Constant from "../constant/Constant";
 import { OBJECT_TREE_BLACK_LIST } from "../config/Config";
 import { rightMenu } from "./RightMenu";
+import Ticker from "../core/Ticker";
 
 export default class ObjectTree {
     private static PREV_NODE: VNode;
@@ -42,7 +43,7 @@ export default class ObjectTree {
                             rightMenu(target);
                             const uuid = target.id;
                             state.selectedObjectDom = target;
-                            // Ticker.emmit('objectDomClick', uuid);
+                            Ticker.emmit('objectDomClick', uuid);
                         }
                     },
                     [object.name === '' ? object.type : object.name],

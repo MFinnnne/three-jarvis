@@ -14,6 +14,7 @@ export function domClickEvent(): void {
         if (!obj) {
             throw new Error(`object3d(uuid:${id}) is not in scene`);
         }
+        debugger
         objectChanged.objectHelper(obj);
         PaneManager.render(obj);
     });
