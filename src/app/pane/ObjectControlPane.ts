@@ -11,6 +11,7 @@ import {Point3d} from "@tweakpane/core/dist/es6/input-binding/point-3d/model/poi
 import Utils from "../../util/Utils";
 import Prompt from "../Prompt";
 import Constant from "../../constant/Constant";
+import TransformControlComponent from "../../core/component/TransformControlComponent";
 
 export default class ObjectControlPane extends DefaultControlPane {
     protected objectPane?: TabPageApi;
@@ -45,6 +46,18 @@ export default class ObjectControlPane extends DefaultControlPane {
             pages: [{title: 'Object'}, {title: 'Geometry'}, {title: 'Material'}],
         });
         this.objectPane = tab.pages[0];
+        this.objectPane.addButton({title:"scale"}).on('click',()=>{
+            TransformControlComponent.CONTROLS.setMode("scale");
+        });
+        this.objectPane.addSeparator();
+        this.objectPane.addButton({title:"translate"}).on('click',()=>{
+            TransformControlComponent.CONTROLS.setMode("translate");
+        });
+        this.objectPane.addSeparator();
+        this.objectPane.addButton({title:"rotate"}).on('click',()=>{
+            TransformControlComponent.CONTROLS.setMode("rotate");
+        });
+        this.objectPane.addSeparator();
         this.geometryPane = tab.pages[1];
         this.materialPane = tab.pages[2];
         const positionBind = this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
