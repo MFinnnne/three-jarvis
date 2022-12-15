@@ -5,6 +5,7 @@ import DirectionalLightControlPane from '../app/pane/DirectionalLightControlPane
 import {Object3D} from 'three';
 import {Pane} from 'tweakpane';
 import {ControlPane} from "../app/pane/DefaultControlPane";
+import CameraControlPane from "../app/pane/CameraControlPane";
 
 const OBJECT_PANE_MAP: Map<string, () => ControlPane> = new Map();
 
@@ -18,6 +19,8 @@ OBJECT_PANE_MAP.set('PointLightHelper', () => new ObjectControlPane());
 OBJECT_PANE_MAP.set('HemisphereLight', () => new HemisphereLightControlPane());
 OBJECT_PANE_MAP.set('PointLight', () => new PointLightControlPane());
 OBJECT_PANE_MAP.set('DirectionalLight', () => new DirectionalLightControlPane());
+OBJECT_PANE_MAP.set('PerspectiveCamera', () => new CameraControlPane());
+
 
 export default class PaneManager {
     private static INSTANCE: Pane | null | undefined;

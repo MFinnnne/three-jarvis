@@ -28,7 +28,7 @@ export default class Utils {
         input.setSelectionRange(0, text.length);
         document.execCommand('copy');
         document.body.removeChild(input);
-        Prompt.eject("Copied")
+        Prompt.eject(`(${text}) copied`);
         return true;
     }
 }

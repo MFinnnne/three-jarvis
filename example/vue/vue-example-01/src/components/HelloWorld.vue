@@ -21,6 +21,9 @@ function init() {
 
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.25, 1000);
     camera.position.set(100, 100, 100);
+    const camera1 = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.25, 1000);
+    camera1.position.set(0, 0, 0);
+
     const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
     const light2 = new DirectionalLight(0xffffff, 1);
     light2.position.set(0.5, 0, 0.866); // ~60º
@@ -48,6 +51,7 @@ function init() {
 
 
     ThreeJarvis.init(rawScene, camera, renderer, {control});
+    rawScene.add(camera1);
     rawScene.add(pointLight);
     // rawScene.add(pointLightHelper)
     rawScene.add(light);
