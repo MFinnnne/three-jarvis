@@ -1,8 +1,8 @@
-import {Pane} from 'tweakpane';
-import {Camera, Object3D, Scene, WebGLRenderer} from 'three';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-import {GLTF} from "three/examples/jsm/loaders/GLTFLoader";
+import { Pane } from "tweakpane";
+import { Camera, Object3D, Scene, WebGLRenderer } from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { TransformControls } from "three/examples/jsm/controls/TransformControls";
+import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 export interface Events {
     objectDomClick: (id: string) => void;
@@ -14,6 +14,7 @@ export interface Events {
     cameraDomClick: () => void;
     renderDomClick: () => void;
     lockObject: (object3d: Object3D) => void;
+    menuItemClick: (type: string, e: Event) => void;
 
 }
 
@@ -38,7 +39,7 @@ export type RawThreeVar = {
 export type LoadModelConfig = {
     id: string,
     name: string,
-    path:string,
+    path: string,
     position: { x: number, y: number, z: number },
     scale: { x: number, y: number, z: number },
     rotation: { x: number, y: number, z: number, order?: string },
@@ -50,5 +51,5 @@ export type LoadModelConfig = {
 export  type LoadConfig = {
     loadModelConfigs: LoadModelConfig[],
     beforeLoad: () => void,
-    afterLoad: (objects:GLTF[]) => void
+    afterLoad: (objects: GLTF[]) => void
 }

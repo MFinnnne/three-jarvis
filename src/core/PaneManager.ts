@@ -4,7 +4,7 @@ import PointLightControlPane from '../app/pane/PointLightControlPane';
 import DirectionalLightControlPane from '../app/pane/DirectionalLightControlPane';
 import {Object3D} from 'three';
 import {Pane} from 'tweakpane';
-import {ControlPane} from "../app/DefaultControlPane";
+import {ControlPane} from "../app/pane/DefaultControlPane";
 
 const OBJECT_PANE_MAP: Map<string, () => ControlPane> = new Map();
 

@@ -9,6 +9,7 @@ import {rightMenu} from "../../app/RightMenu";
 
 export function domClickEvent(): void {
     EventRegistry.registry('objectDomClick', (value) => {
+        debugger
         const id = value[0];
         const element = document.getElementById(id);
         if (element === null) {

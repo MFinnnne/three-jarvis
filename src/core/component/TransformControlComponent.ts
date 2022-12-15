@@ -6,6 +6,9 @@ import objectChanged from "../ObjectChanged";
 import {OBJECT_TREE_BLACK_LIST} from "../../config/Config";
 
 export default class TransformControlComponent {
+
+    public static CONTROLS;
+
     static init(camera: Camera, element: HTMLElement): TransformControls {
         const transformControls = new TransformControls(camera, element);
         transformControls.layers.set(1);
@@ -15,8 +18,10 @@ export default class TransformControlComponent {
                 object.layers.set(1);
             })
         }
+        this.CONTROLS = transformControls;
         return transformControls;
     }
+
 
     static event(){
         const control = Constant.rawVar.transformControls;

@@ -1,6 +1,6 @@
 import {Camera, Object3D, WebGLRenderer} from 'three';
 import {BladeApi, Pane} from 'tweakpane';
-import Constant from '../constant/Constant';
+import Constant from '../../constant/Constant';
 
 export interface ControlPane {
     genPane(argument: Object3D | Camera | WebGLRenderer): Pane;

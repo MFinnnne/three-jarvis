@@ -1,7 +1,7 @@
 import Constant from '../constant/Constant';
 import Utils from '../util/Utils';
 import ObjectTree from './ObjectTree';
-import MenuBar from './MenuBar';
+import MenuBar from './menu/MenuBar';
 import Prompt from "./Prompt";
 import {rightMenu} from "./RightMenu";
 

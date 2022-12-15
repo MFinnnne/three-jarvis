@@ -1,6 +1,6 @@
 import {BladeApi, Pane, TabPageApi} from 'tweakpane';
 import {Euler, Object3D, Quaternion, Vector3} from 'three';
-import DefaultControlPane from '../DefaultControlPane';
+import DefaultControlPane from './DefaultControlPane';
 import recorder from '../../core/Recorder';
 import SetPositionCommand from '../../core/commands/SetPositionCommand';
 import SetRotationCommand from '../../core/commands/SetRotationCommand';
@@ -11,8 +11,6 @@ import {Point3d} from "@tweakpane/core/dist/es6/input-binding/point-3d/model/poi
 import Utils from "../../util/Utils";
 import Prompt from "../Prompt";
 import Constant from "../../constant/Constant";
-import {InputBinding} from "@tweakpane/core/dist/cjs/common/binding/input";
-import {InputBindingApi} from "@tweakpane/core/src/blade/input-binding/api/input-binding";
 
 export default class ObjectControlPane extends DefaultControlPane {
     protected objectPane?: TabPageApi;
