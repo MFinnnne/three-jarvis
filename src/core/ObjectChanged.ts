@@ -22,17 +22,17 @@ class ObjectChanged {
      * @param color
      */
     public objectHelper(object: Object3D, color: ColorRepresentation = 0xffff00): void {
+        state.selectedObject = object;
         if (object.type === 'Scene') {
             return;
         }
-        state.selectedObject = object;
         HelperManager.render(object);
         return;
     }
 
 
-    public update(): void {
-        const object = state.selectedObject;
+    public update(target?: Object3D): void {
+        const object = target ?? state.selectedObject;
         if (object == null) {
             return;
         }

@@ -1,34 +1,19 @@
-import {Pane} from 'tweakpane';
 import EventRegistry from '../EventRegistry';
 import Constant from '../../constant/Constant';
 import objectChanged from '../ObjectChanged';
 import state from '../State';
-import ObjectControlPane from '../../app/pane/ObjectControlPane';
 import Ticker from '../Ticker';
-import HemisphereLightControlPane from '../../app/pane/HemisphereLightControlPane';
-import DirectionalLightControlPane from '../../app/pane/DirectionalLightControlPane';
-import PointLightControlPane from '../../app/pane/PointLightControlPane';
 import ObjectTree from '../../app/ObjectTree';
 import PaneManager from '../PaneManager';
-import Loader from '../Loader';
+import {rightMenu} from "../../app/RightMenu";
 
 export function domClickEvent(): void {
     EventRegistry.registry('objectDomClick', (value) => {
         const id = value[0];
-        const element = document.getElementById(id);
-        if (element === null) {
-            throw new Error(`html element (uuid:${id}) is not exist`);
-        }
-
-        state.selectedObjectDom.classList.toggle('selected');
-        state.selectedObjectDom = element;
-        element.classList.toggle('selected');
         const obj = Constant.rawVar.scene.getObjectByProperty('uuid', id);
-
         if (!obj) {
             throw new Error(`object3d(uuid:${id}) is not in scene`);
         }
-        ObjectTree.autoLocateInTree(element);
         objectChanged.objectHelper(obj);
         PaneManager.render(obj);
     });

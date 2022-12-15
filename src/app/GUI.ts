@@ -1,8 +1,9 @@
 import Constant from '../constant/Constant';
 import Utils from '../util/Utils';
 import ObjectTree from './ObjectTree';
-import MenuBar from './MenuBar';
+import MenuBar from './menu/MenuBar';
 import Prompt from "./Prompt";
+import {rightMenu} from "./RightMenu";
 
 export default class GUI {
     public static guiContainerInit(): void {
@@ -32,8 +33,8 @@ export default class GUI {
         Constant.PANE_CONTAINER = paneDom;
 
         const switchTransDom = document.createElement('div');
-        switchTransDom.id='switch-transform-control'
-        switchTransDom.className='switch-transform-control'
+        switchTransDom.id = 'switch-transform-control'
+        switchTransDom.className = 'switch-transform-control'
         element.appendChild(switchTransDom);
 
         document.body.appendChild(element);
@@ -41,5 +42,6 @@ export default class GUI {
         setInterval(() => {
             ObjectTree.render();
         }, 1000);
+
     }
 }

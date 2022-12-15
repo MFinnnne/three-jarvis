@@ -1,17 +1,16 @@
 import EventRegistry from '../EventRegistry';
-import { Raycaster, Vector2 } from 'three';
+import {Group, Object3D, Raycaster, Vector2} from 'three';
 import Constant from '../../constant/Constant';
-import { Intersection } from 'three/src/core/Raycaster';
+import {Intersection} from 'three/src/core/Raycaster';
 import objectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
-import MyCameraUtil from '../../util/MyCameraUtil';
 import state from '../State';
 import ObjectTree from '../../app/ObjectTree';
 
 const threeJarvisRayCaster = new Raycaster();
-threeJarvisRayCaster.layers.mask = 0xfffffffe | 1;
+const transformRayCaster = new Raycaster();
 
-function intersectObjects(e: MouseEvent): Intersection[] {
+function intersectObjects(e: MouseEvent, rayCaster: Raycaster, target: Object3D[] | Group[]): Intersection[] {
     const renderDom = Constant.rawVar.container;
     if (renderDom === undefined) {
         throw new Error('can not get threejs renderer dom');
@@ -19,23 +18,24 @@ function intersectObjects(e: MouseEvent): Intersection[] {
     const mouse = new Vector2();
     mouse.x = ((e.clientX - renderDom.offsetLeft) / renderDom.clientWidth) * 2 - 1;
     mouse.y = -((e.clientY - renderDom.offsetTop) / renderDom.clientHeight) * 2 + 1;
-    threeJarvisRayCaster.setFromCamera(mouse, state.activeCamera);
-    return threeJarvisRayCaster.intersectObjects(Constant.rawVar.scene.children, true);
+    rayCaster.setFromCamera(mouse, state.activeCamera);
+    return rayCaster.intersectObjects(target, true);
 }
+
 
 export function rayCasterEvents() {
     Constant.rawVar.container.addEventListener('click', (e) => {
-        const intersects = intersectObjects(e);
+        const intersects = intersectObjects(e, threeJarvisRayCaster,Constant.rawVar.scene.children);
         if (intersects.length > 0) {
-            const fistCatchObject = intersects[0].object;
             if (e.altKey) {
-                Ticker.emmit('objectClick', fistCatchObject);
+                Ticker.emmit('objectClick', intersects[0].object);
             }
         }
+        intersectObjects(e, transformRayCaster,Constant.rawVar.transformControls.children);
     });
 
     Constant.rawVar.container.addEventListener('dblclick', (e) => {
-        const intersects = intersectObjects(e);
+        const intersects = intersectObjects(e, threeJarvisRayCaster,Constant.rawVar.scene.children);
         if (intersects.length > 0) {
             const fistCatchObject = intersects[0].object;
             Ticker.emmit('objectClick', fistCatchObject);
@@ -52,7 +52,8 @@ export function clickObjectEvent(): void {
             return;
         }
         if (dom === null) {
-            throw new Error(`object ===${object.uuid}=== dom is null`);
+            console.log("not render object:", object);
+            throw new Error(`object ===${object.uuid}===${object.name} dom is null`);
         }
         ObjectTree.expandTreeByChildNode(dom);
         objectChanged.objectHelper(object);

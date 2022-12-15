@@ -5,9 +5,9 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {onMounted} from 'vue';
 import ThreeJarvis from '../../../../../src/index.ts'
-import {TransformControls} from "three/examples/jsm/controls/TransformControls";
 
-let camera, rawScene,  renderer, control;
+let camera, rawScene, renderer, control;
+
 
 onMounted(() => {
     init();
@@ -26,10 +26,9 @@ function init() {
     light2.position.set(0.5, 0, 0.866); // ~60º
     light2.name = 'main_light';
     const pointLight = new PointLight(0xffffff, 1);
-    let pointLightHelper = new PointLightHelper(pointLight,5,0xffff00);
+    let pointLightHelper = new PointLightHelper(pointLight, 5, 0xffff00);
     pointLight.name = 'point_light';
 
-    setTimeout(()=>{pointLight.name="111QQQ"},5000)
 
     // new RGBELoader().setPath()
     renderer = new THREE.WebGLRenderer({antialias: true});
@@ -48,18 +47,21 @@ function init() {
     rawScene = new THREE.Scene();
 
 
-    ThreeJarvis.init(rawScene, camera, renderer, container,{control});
+    ThreeJarvis.init(rawScene, camera, renderer, {control});
     rawScene.add(pointLight);
     // rawScene.add(pointLightHelper)
     rawScene.add(light);
     rawScene.add(light2);
-
     let group = new Group();
     group.name = 'cube';
     const boxGeometry = new BoxGeometry(10, 10, 10);
     const material = new MeshBasicMaterial({color: 0x00ff00});
     const mesh = new THREE.Mesh(boxGeometry, material);
+    mesh.layers.set(0);
     rawScene.add(group);
+    setTimeout(() => {
+        mesh.name = '12312312';
+    }, 5000)
     group.add(mesh)
     // let transformControls = new TransformControls(camera,renderer.domElement);
     // transformControls.attach(group)
@@ -99,6 +101,7 @@ function render() {
 
 <template>
     <div>
+        <!-- 方式1: 指令组件 -->
         <div id='container'></div>
     </div>
 </template>

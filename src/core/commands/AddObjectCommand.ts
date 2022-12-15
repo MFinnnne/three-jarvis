@@ -1,6 +1,6 @@
-import {Command} from '../../types/types';
 import {Object3D} from 'three';
 import Constant from '../../constant/Constant';
+import {Command} from "../Type";
 
 export default class AddObjectCommand implements Command {
     name = 'add object';

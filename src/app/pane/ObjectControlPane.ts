@@ -1,6 +1,6 @@
 import {BladeApi, Pane, TabPageApi} from 'tweakpane';
 import {Euler, Object3D, Quaternion, Vector3} from 'three';
-import DefaultControlPane from '../DefaultControlPane';
+import DefaultControlPane from './DefaultControlPane';
 import recorder from '../../core/Recorder';
 import SetPositionCommand from '../../core/commands/SetPositionCommand';
 import SetRotationCommand from '../../core/commands/SetRotationCommand';
@@ -55,7 +55,6 @@ export default class ObjectControlPane extends DefaultControlPane {
             recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z), positionBind));
         });
         positionBind.controller_.view.labelElement.addEventListener('click', () => {
-
             const value = positionBind.controller_.binding.value.rawValue as Point3d;
             Utils.execCoy(`${value.x},${value.y},${value.z}`)
         });
@@ -128,7 +127,7 @@ export default class ObjectControlPane extends DefaultControlPane {
             }
             switch (k) {
                 case 'position':
-                    const position:Vector3 = this.object.position;
+                    const position: Vector3 = this.object.position;
                     v.controller_.binding.value.rawValue = new Point3d(position.x, position.y, position.z);
                     break;
                 case 'rotation':
@@ -136,11 +135,11 @@ export default class ObjectControlPane extends DefaultControlPane {
                     v.controller_.binding.value.rawValue = new Point3d(euler.x, euler.y, euler.z);
                     break;
                 case 'scale':
-                    const scale:Vector3 = this.object.scale;
+                    const scale: Vector3 = this.object.scale;
                     v.controller_.binding.value.rawValue = new Point3d(scale.x, scale.y, scale.z);
                     break;
                 case 'quat':
-                    const quat:Quaternion = this.object.quaternion;
+                    const quat: Quaternion = this.object.quaternion;
                     v.controller_.binding.value.rawValue = new Quaternion(quat.x, quat.y, quat.z, quat.w);
                     break;
                 default :

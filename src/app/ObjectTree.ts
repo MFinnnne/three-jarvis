@@ -1,9 +1,9 @@
-import { className, Flags, m, render, VElement, VNode } from 'million';
-import { Object3D } from 'three';
-import Ticker from '../core/Ticker';
-import state from '../core/State';
-import Constant from '../constant/Constant';
-import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import { className, Flags, m, render, VElement, VNode } from "million";
+import { Object3D } from "three";
+import state from "../core/State";
+import Constant from "../constant/Constant";
+import { OBJECT_TREE_BLACK_LIST } from "../config/Config";
+import { rightMenu } from "./RightMenu";
 
 export default class ObjectTree {
     private static PREV_NODE: VNode;
@@ -39,9 +39,11 @@ export default class ObjectTree {
                                 (e.target as HTMLElement).classList.toggle('caretDown');
                             }
                             const target = e.target as HTMLElement;
+                            rightMenu(target);
                             const uuid = target.id;
-                            Ticker.emmit('objectDomClick', uuid);
-                        },
+                            state.selectedObjectDom = target;
+                            // Ticker.emmit('objectDomClick', uuid);
+                        }
                     },
                     [object.name === '' ? object.type : object.name],
                     Flags.ELEMENT,
@@ -51,7 +53,7 @@ export default class ObjectTree {
         if (object.children.length > 0) {
             node.children?.push({
                 tag: 'ul',
-                props: { className: className({ nested: true }) },
+                props: {className: className({nested: true})},
                 children: [],
                 flag: Flags.ELEMENT,
             });
@@ -97,9 +99,7 @@ export default class ObjectTree {
         if (newNode === null) {
             return;
         }
-        render(Constant.LEFT_SIDE_BAR_CONTAINER, newNode, ObjectTree.PREV_NODE, (el, newNode, oldNode) => {
-            return true;
-        });
+        render(Constant.LEFT_SIDE_BAR_CONTAINER, newNode, ObjectTree.PREV_NODE);
         ObjectTree.PREV_NODE = newNode;
     }
 
@@ -108,9 +108,8 @@ export default class ObjectTree {
      * @param dom
      */
     static autoLocateInTree(dom: HTMLElement) {
-        state.selectedObjectDom.classList.toggle('find-out');
+        state.selectedObjectDom?.classList.toggle('find-out');
         dom.classList.toggle('find-out');
-        state.selectedObjectDom = dom;
         let offsetTop: number = dom.offsetTop - Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight / 2;
         if (dom.offsetTop < Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight) {
             offsetTop = 0;

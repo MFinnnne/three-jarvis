@@ -29,7 +29,7 @@
     "format"
   ],
   "devDependencies": {
-    "@babel/core": "^7.18.2",
+    "@babel/core": "^7.20.5",
     "@babel/plugin-transform-modules-commonjs": "^7.18.2",
     "@babel/plugin-transform-react-jsx": "^7.17.12",
     "@babel/preset-env": "^7.18.2",
@@ -80,8 +80,9 @@
   },
   "dependencies": {
     "@0b5vr/tweakpane-plugin-rotation": "^0.1.1",
+    "@right-menu/core": "0.0.7",
     "@tweakpane/core": "^1.0.9",
-    "million": "^1.9.0",
+    "million": "^1.8.8",
     "nanoevents": "^6.0.2",
     "tweakpane": "^3.0.8"
   },

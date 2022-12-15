@@ -1,5 +1,6 @@
-import { Command } from '../../types/types';
+
 import { Group, Object3D, Vector3 } from 'three';
+import {Command} from "../Type";
 
 export default class SetScaleCommand implements Command {
     name = 'change scale';

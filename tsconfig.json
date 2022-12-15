@@ -16,7 +16,7 @@
       "esnext"
     ],
     //    编译过程中需要引入的库文件的列表
-    "allowJs": true,
+    "allowJs": false,
     //允许编译javascript文件。
     "skipLibCheck": true,
     //忽略所有的声明文件（ *.d.ts）的类型检查
@@ -49,6 +49,7 @@
     }
     // "suppressImplicitAnyIndexErrors": true, //阻止对缺少索引签名的索引对象报错
   },
+  
   "exclude": [
     "node_modules/**/*",
     "dist/**/*",

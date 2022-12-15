@@ -1,11 +1,12 @@
-import { Camera, Object3D, PerspectiveCamera } from 'three';
-import Constant from '../constant/Constant';
+import { Camera, Object3D, PerspectiveCamera } from "three";
+import Constant from "../constant/Constant";
+import ObjectTree from "../app/ObjectTree";
 
 class State {
     private static instance: State;
 
     private _selectedObject: Object3D = new Object3D();
-    private _selectedObjectDom: HTMLElement = document.createElement('div');
+    private _selectedObjectDom: HTMLElement = document.createElement("div");
     private _activeCamera: Camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     private _cameras: Camera[] = [];
 
@@ -17,7 +18,7 @@ class State {
         const camera = value.clone(true);
         this._cameras.push(camera);
         this._activeCamera = value;
-        this._activeCamera.layers.enableAll();
+        this._activeCamera.layers.mask = 0x00000003;
         this._activeCamera.position.copy(camera.position);
         if (Constant.CONTROL) {
             Constant.CONTROL.object = this._activeCamera;
@@ -27,12 +28,21 @@ class State {
         }
     }
 
-    get selectedObjectDom(): HTMLElement {
+    get selectedObjectDom(): HTMLElement | null {
         return this._selectedObjectDom;
     }
 
-    set selectedObjectDom(value: HTMLElement) {
+    set selectedObjectDom(value: HTMLElement | null) {
+        if (value == null) {
+            this._selectedObjectDom = document.createElement('div');
+            return;
+        }
+        this._selectedObjectDom.classList.toggle("selected");
+        console.log(this._selectedObjectDom.innerText);
         this._selectedObjectDom = value;
+        console.log(this._selectedObjectDom.innerText);
+        this._selectedObjectDom.classList.toggle("selected");
+        ObjectTree.autoLocateInTree(this._selectedObjectDom);
     }
 
     get selectedObject(): Object3D {

@@ -1,6 +1,6 @@
-import { RawThreeVar } from '../types/types';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import {TransformControls} from "three/examples/jsm/controls/TransformControls";
+import {RawThreeVar} from "../core/Type";
 
 export default class Constant {
     static HELPER_NAME = 'helper';
