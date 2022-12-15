@@ -1,10 +1,9 @@
-import {className, Flags, m, render, VElement, VNode} from 'million';
-import {Object3D} from 'three';
-import Ticker from '../core/Ticker';
-import state from '../core/State';
-import Constant from '../constant/Constant';
-import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
-import {rightMenu} from "./RightMenu";
+import { className, Flags, m, render, VElement, VNode } from "million";
+import { Object3D } from "three";
+import state from "../core/State";
+import Constant from "../constant/Constant";
+import { OBJECT_TREE_BLACK_LIST } from "../config/Config";
+import { rightMenu } from "./RightMenu";
 
 export default class ObjectTree {
     private static PREV_NODE: VNode;
@@ -40,12 +39,10 @@ export default class ObjectTree {
                                 (e.target as HTMLElement).classList.toggle('caretDown');
                             }
                             const target = e.target as HTMLElement;
-                            const uuid = target.id;
-                            Ticker.emmit('objectDomClick', uuid);
-                        },
-                        onMouseEnter:(e)=>{
-                            const target = e.target as HTMLElement;
                             rightMenu(target);
+                            const uuid = target.id;
+                            state.selectedObjectDom = target;
+                            // Ticker.emmit('objectDomClick', uuid);
                         }
                     },
                     [object.name === '' ? object.type : object.name],
@@ -111,9 +108,8 @@ export default class ObjectTree {
      * @param dom
      */
     static autoLocateInTree(dom: HTMLElement) {
-        state.selectedObjectDom.classList.toggle('find-out');
+        state.selectedObjectDom?.classList.toggle('find-out');
         dom.classList.toggle('find-out');
-        state.selectedObjectDom = dom;
         let offsetTop: number = dom.offsetTop - Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight / 2;
         if (dom.offsetTop < Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight) {
             offsetTop = 0;

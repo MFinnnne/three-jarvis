@@ -13,7 +13,6 @@ import {
 import Constant from '../constant/Constant';
 import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-import objectChanged from "./ObjectChanged";
 
 type helperFns = (object: Object3D, color?: ColorRepresentation) => Object3D | null
 const OBJECT_HELPER_MAP: Map<string, helperFns[] | helperFns> = new Map()
