@@ -8,18 +8,13 @@ class State {
     private _selectedObject: Object3D = new Object3D();
     private _selectedObjectDom: HTMLElement = document.createElement("div");
     private _activeCamera: Camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    private _cameras: Camera[] = [];
-
     get activeCamera(): Camera {
         return this._activeCamera;
     }
 
     set activeCamera(value: Camera) {
-        const camera = value.clone(true);
-        this._cameras.push(camera);
         this._activeCamera = value;
         this._activeCamera.layers.mask = 0x00000003;
-        this._activeCamera.position.copy(camera.position);
         if (Constant.CONTROL) {
             Constant.CONTROL.object = this._activeCamera;
         }
@@ -34,7 +29,7 @@ class State {
 
     set selectedObjectDom(value: HTMLElement | null) {
         if (value == null) {
-            this._selectedObjectDom = document.createElement('div');
+            this._selectedObjectDom = document.createElement("div");
             return;
         }
         this._selectedObjectDom.classList.toggle("selected");

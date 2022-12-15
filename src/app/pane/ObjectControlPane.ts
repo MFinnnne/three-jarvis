@@ -61,7 +61,7 @@ export default class ObjectControlPane extends DefaultControlPane {
         this.geometryPane = tab.pages[1];
         this.materialPane = tab.pages[2];
         const positionBind = this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
-            if (Constant.rawVar.transformControls.dragging) {
+            if (TransformControlComponent.CONTROLS.dragging) {
                 return;
             }
             const {x, y, z} = ev.value;
@@ -69,12 +69,12 @@ export default class ObjectControlPane extends DefaultControlPane {
         });
         positionBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = positionBind.controller_.binding.value.rawValue as Point3d;
-            Utils.execCoy(`${value.x},${value.y},${value.z}`)
+            Utils.execCoy(`${value.x.toFixed(2)},${value.y.toFixed(2)},${value.z.toFixed(2)}`)
         });
         this.bindMap.set('position', positionBind);
 
         const scaleBind = this.objectPane.addInput(PARAMS, 'scale').on('change', (ev) => {
-            if (Constant.rawVar.transformControls.dragging) {
+            if (TransformControlComponent.CONTROLS.dragging) {
                 return;
             }
             const {x, y, z} = ev.value;
@@ -82,7 +82,7 @@ export default class ObjectControlPane extends DefaultControlPane {
         });
         scaleBind.controller_.view.labelElement.addEventListener("click", () => {
             const value = scaleBind.controller_.binding.value.rawValue as Point3d;
-            Utils.execCoy(`${value.x},${value.y},${value.z}`)
+            Utils.execCoy(`${value.x.toFixed(2)},${value.y.toFixed(2)},${value.z.toFixed(2)}`)
         })
         this.bindMap.set('scale', scaleBind);
 
@@ -97,15 +97,15 @@ export default class ObjectControlPane extends DefaultControlPane {
                 expanded: false,
             })
             .on('change', (e) => {
-                if (Constant.rawVar.transformControls.dragging) {
+                if (TransformControlComponent.CONTROLS.dragging) {
                     return;
                 }
                 const {x, y, z} = e.value;
                 recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ'), scaleBind));
-            })
+            });
         rotationBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = rotationBind.controller_.binding.value.rawValue as Euler;
-            Utils.execCoy(`${value.x},${value.y},${value.z}`)
+            Utils.execCoy(`${value.x.toFixed(2)},${value.y.toFixed(2)},${value.z.toFixed(2)}`);
         });
         this.bindMap.set('rotation', rotationBind);
 
@@ -118,7 +118,7 @@ export default class ObjectControlPane extends DefaultControlPane {
                 expanded: false, // optional, false by default
             })
             .on('change', (e) => {
-                if (Constant.rawVar.transformControls.dragging) {
+                if (TransformControlComponent.CONTROLS.dragging) {
                     return;
                 }
                 const {x, y, z, w} = e.value;

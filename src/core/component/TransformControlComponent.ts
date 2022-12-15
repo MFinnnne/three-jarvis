@@ -1,9 +1,9 @@
-import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-import {Camera} from "three";
+import { TransformControls } from "three/examples/jsm/controls/TransformControls";
+import { Camera } from "three";
 import Constant from "../../constant/Constant";
 import PaneManager from "../PaneManager";
 import objectChanged from "../ObjectChanged";
-import {OBJECT_TREE_BLACK_LIST} from "../../config/Config";
+import { OBJECT_TREE_BLACK_LIST } from "../../config/Config";
 
 export default class TransformControlComponent {
 
@@ -16,53 +16,45 @@ export default class TransformControlComponent {
         for (let child of transformControls.children) {
             child.traverse(object => {
                 object.layers.set(1);
-            })
+            });
         }
         this.CONTROLS = transformControls;
         return transformControls;
     }
 
 
-    static event(){
-        const control = Constant.rawVar.transformControls;
-        Constant.rawVar.scene.add(control);
-        control.addEventListener('dragging-changed', (e) => {
-            if (Constant.rawVar.control) {
-                Constant.rawVar.control.enabled = !e.value
-            }
-
-        })
-        control.addEventListener('change', (e) => {
+    static event() {
+        Constant.rawVar.scene.add(this.CONTROLS);
+        this.CONTROLS.addEventListener("dragging-changed", (e) => {
+        });
+        this.CONTROLS.addEventListener("change", (e) => {
 
         });
-
-        control.addEventListener('objectChange', (e) => {
+        this.CONTROLS.addEventListener("objectChange", (e) => {
             PaneManager.update();
             objectChanged.update();
         });
-        control.addEventListener('mouseDown', function () {
-
+        this.CONTROLS.addEventListener("mouseDown", function(e) {
+            Constant.rawVar.control.enabled = false;
         });
-        control.addEventListener('mouseUp', function () {
-
+        this.CONTROLS.addEventListener("mouseUp", function(e) {
+            Constant.rawVar.control.enabled = true;
         });
-        window.addEventListener('keydown', e => {
+        window.addEventListener("keydown", e => {
             switch (e.key) {
-                case '=':
-                    control.setSize(control.size + 0.1);
+                case "=":
+                    this.CONTROLS.setSize(this.CONTROLS.size + 0.1);
                     break;
-
-                case '-':
-                    control.setSize(Math.max(control.size - 0.1, 0.1));
+                case "-":
+                    this.CONTROLS.setSize(Math.max(this.CONTROLS.size - 0.1, 0.1));
                     break;
-                case 's':
+                case "s":
                     if (Constant.rawVar.control) {
                         Constant.rawVar.control.enabled = true;
                     }
             }
         });
-        OBJECT_TREE_BLACK_LIST.push(control.uuid);
-        Constant.rawVar.scene.add(control);
+        OBJECT_TREE_BLACK_LIST.push(this.CONTROLS.uuid);
     }
 
 }

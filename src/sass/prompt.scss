@@ -1,4 +1,4 @@
-$promptWidth:120px;
+$promptWidth:200px;
 $promptHeight:50px;
 
 
@@ -7,7 +7,7 @@ $promptHeight:50px;
     top: 0;
     width: $promptWidth;
     height: $promptHeight;
-    right: -110px;
+    right: -220px;
     animation: moveIn 4s;
     background-color: white;
     display: flex;

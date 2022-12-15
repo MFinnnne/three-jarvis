@@ -1,11 +1,8 @@
-import EventRegistry from '../EventRegistry';
-import Constant from '../../constant/Constant';
-import objectChanged from '../ObjectChanged';
-import state from '../State';
-import Ticker from '../Ticker';
-import ObjectTree from '../../app/ObjectTree';
-import PaneManager from '../PaneManager';
-import {rightMenu} from "../../app/RightMenu";
+import EventRegistry from "../EventRegistry";
+import Constant from "../../constant/Constant";
+import objectChanged from "../ObjectChanged";
+import Ticker from "../Ticker";
+import PaneManager from "../PaneManager";
 
 export function domClickEvent(): void {
     EventRegistry.registry('objectDomClick', (value) => {
@@ -14,7 +11,6 @@ export function domClickEvent(): void {
         if (!obj) {
             throw new Error(`object3d(uuid:${id}) is not in scene`);
         }
-        debugger
         objectChanged.objectHelper(obj);
         PaneManager.render(obj);
     });
