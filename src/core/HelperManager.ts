@@ -48,12 +48,12 @@ const transformControlFn = (object: Object3D): void => {
 };
 
 const cameraHelperFn = (camera: Camera): CameraHelper | null => {
-    if (cameraHelper == null) {
-        cameraHelper = new CameraHelper(camera);
-        return cameraHelper;
+    if (cameraHelper != null) {
+        cameraHelper.dispose();
+        Constant.rawVar.scene.remove(cameraHelper);
     }
-    cameraHelper.camera = camera;
-    return null;
+    cameraHelper = new CameraHelper(camera);
+    return cameraHelper;
 };
 
 const lightHelperFn = (object, color = 0xffff00): Object3D | null => {
