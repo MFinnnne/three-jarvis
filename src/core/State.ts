@@ -33,9 +33,7 @@ class State {
             return;
         }
         this._selectedObjectDom.classList.toggle("selected");
-        console.log(this._selectedObjectDom.innerText);
         this._selectedObjectDom = value;
-        console.log(this._selectedObjectDom.innerText);
         this._selectedObjectDom.classList.toggle("selected");
         ObjectTree.autoLocateInTree(this._selectedObjectDom);
     }
