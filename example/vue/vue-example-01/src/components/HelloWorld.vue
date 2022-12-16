@@ -50,7 +50,7 @@ function init() {
     rawScene = new THREE.Scene();
 
 
-    ThreeJarvis.init(rawScene, camera, renderer, {control});
+    ThreeJarvis.init(rawScene,renderer);
     rawScene.add(camera1);
     rawScene.add(pointLight);
     // rawScene.add(pointLightHelper)

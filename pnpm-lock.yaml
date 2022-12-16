@@ -22,10 +22,12 @@ specifiers:
   babel-jest: ^27.5.1
   babel-preset-million: ^0.0.1
   cross-env: ^7.0.3
+  dexie: ^3.2.2
   eslint: ^8.16.0
   eslint-config-prettier: ^8.5.0
   jest: ^28.1.0
   million: ^1.8.8
+  moment: ^2.29.4
   nanoevents: ^6.0.2
   nanoid: ^3.3.4
   postcss: ^8.4.14
@@ -62,7 +64,9 @@ dependencies:
   '@right-menu/core': registry.npmjs.org/@right-menu/core/0.0.7
   '@tweakpane/core': registry.npmjs.org/@tweakpane/core/1.1.1
   '@tweakpane/plugin-essentials': registry.npmjs.org/@tweakpane/plugin-essentials/0.1.5_tweakpane@3.1.1
+  dexie: registry.npmjs.org/dexie/3.2.2
   million: registry.npmjs.org/million/1.12.5
+  moment: registry.npmjs.org/moment/2.29.4
   nanoevents: registry.npmjs.org/nanoevents/6.0.2
   tweakpane: registry.npmjs.org/tweakpane/3.1.1
 
@@ -3612,6 +3616,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  registry.npmjs.org/dexie/3.2.2:
+    resolution: {integrity: sha512-q5dC3HPmir2DERlX+toCBbHQXW5MsyrFqPFcovkH9N2S/UW/H3H5AWAB6iEOExeraAu+j+zRDG+zg/D7YhH0qg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/dexie/-/dexie-3.2.2.tgz}
+    name: dexie
+    version: 3.2.2
+    engines: {node: '>=6.0'}
+    dev: false
+
   registry.npmjs.org/diff-sequences/27.5.1:
     resolution: {integrity: sha512-k1gCAXAsNgLwEL+Y8Wvl+M6oEFj5bgazfZULpS5CneoPPXRaCCW7dm+q21Ky2VEE5X+VeRDBVg1Pcvvsr4TtNQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/diff-sequences/-/diff-sequences-27.5.1.tgz}
     name: diff-sequences
@@ -5663,6 +5674,12 @@ packages:
     dependencies:
       minimist: registry.npmjs.org/minimist/1.2.7
     dev: true
+
+  registry.npmjs.org/moment/2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/moment/-/moment-2.29.4.tgz}
+    name: moment
+    version: 2.29.4
+    dev: false
 
   registry.npmjs.org/ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/ms/-/ms-2.1.2.tgz}

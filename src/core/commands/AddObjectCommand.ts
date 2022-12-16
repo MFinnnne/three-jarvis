@@ -1,9 +1,10 @@
-import {Object3D} from 'three';
-import Constant from '../../constant/Constant';
-import {Command} from "../Type";
+import { Object3D } from "three";
+import { Command } from "../Type";
+import objectDB from "../mapper/ObjectDB";
+import state from "../State";
 
 export default class AddObjectCommand implements Command {
-    name = 'add object';
+    name = "add object";
     private readonly _object: Object3D;
 
     constructor(object: Object3D) {
@@ -11,10 +12,18 @@ export default class AddObjectCommand implements Command {
     }
 
     exec(): void {
-        Constant.rawVar.scene.add(this._object);
+        if (state.selectedObject.type === "Scene") {
+            objectDB.addObject(this._object);
+            state.selectedObject.add(this._object);
+        }
+        if (state.selectedObject.id !== null) {
+            objectDB.addObject(this._object, state.selectedObject.id);
+            state.selectedObject.add(this._object);
+        }
+        console.error("imported object's parent must be set id property");
     }
 
     undo(): void {
-        Constant.rawVar.scene.remove(this._object);
+        this._object.removeFromParent();
     }
 }
