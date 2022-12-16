@@ -1,9 +1,9 @@
 // 模型存储实体
-import Dexie from "dexie";
+import Dexie, { PromiseExtended } from "dexie";
 import Table = Dexie.Table;
 import { Object3D } from "three";
 
-interface ObjectEntity {
+export interface ObjectEntity {
     key?: number
     id: number,
     parentId?: number,
@@ -50,6 +50,10 @@ class ObjectDB extends Dexie {
 
     updateObject(object: Object3D) {
         this.objects.where("id").equals(object.id).modify({ content: object.toJSON() });
+    }
+
+    findParentObject(id: number):PromiseExtended<ObjectEntity | undefined> {
+        return this.objects.where("id").equals(id).first();
     }
 }
 

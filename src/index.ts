@@ -8,6 +8,7 @@ import GUI from "./app/GUI";
 import TransformControlComponent from "./core/component/TransformControlComponent";
 import MonitorControlPane from "./app/pane/MonitorControlPane";
 import { PerspectiveCamera } from "three";
+import Recover from "./core/Recover";
 
 export default class ThreeJarvis {
     public static init(
@@ -36,5 +37,7 @@ export default class ThreeJarvis {
             allEvents[allEventsKey]();
         }
         new MonitorControlPane().genPane();
+        debugger
+        Recover.start();
     }
 }

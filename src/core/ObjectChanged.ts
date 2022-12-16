@@ -1,18 +1,6 @@
-import {
-    BoxHelper,
-    ColorRepresentation,
-    DirectionalLight,
-    DirectionalLightHelper,
-    HemisphereLight,
-    HemisphereLightHelper,
-    Object3D,
-    PointLight,
-    PointLightHelper,
-} from 'three';
-import Constant from '../constant/Constant';
-import state from './State';
-import HelperManager from './HelperManager';
-import PaneManager from "./PaneManager";
+import { ColorRepresentation, Object3D } from "three";
+import state from "./State";
+import HelperManager from "./HelperManager";
 
 class ObjectChanged {
 
