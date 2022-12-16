@@ -6,9 +6,6 @@ import Prompt from "../Prompt";
 import Constant from "../../constant/Constant";
 
 export default class MonitorControlPane extends DefaultControlPane {
-    protected objectPane?: TabPageApi;
-    protected geometryPane?: TabPageApi;
-    protected materialPane?: TabPageApi;
     protected object?: Object3D;
 
     public genPane(object?: Object3D): Pane {
@@ -29,7 +26,7 @@ export default class MonitorControlPane extends DefaultControlPane {
         monitorFolder.addMonitor(info, "page", { multiline: true, lineCount: 3 }).on("update", () => {
             const memory = (window.performance as any).memory;
             info.page = `total: ${(memory.totalJSHeapSize / base).toFixed(2)}\nused: ${(memory.usedJSHeapSize / base)
-                .toFixed(2)}\nlLimit: ${(memory.jsHeapSizeLimit / base).toFixed(2)}`;
+                .toFixed(2)}\nlimit: ${(memory.jsHeapSizeLimit / base).toFixed(2)}`;
         });
         monitorFolder.addSeparator();
         return pane;

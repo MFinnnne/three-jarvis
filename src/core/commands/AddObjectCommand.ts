@@ -4,7 +4,7 @@ import {Command} from "../Type";
 
 export default class AddObjectCommand implements Command {
     name = 'add object';
-    private _object: Object3D;
+    private readonly _object: Object3D;
 
     constructor(object: Object3D) {
         this._object = object;

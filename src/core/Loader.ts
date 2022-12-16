@@ -54,7 +54,6 @@ export default class Loader {
                         const contents = event.target?.result;
                         const dracoLoader = new DRACOLoader();
                         dracoLoader.setDecoderPath('three/examples/js/libs/draco/gltf/');
-
                         const loader = new GLTFLoader();
                         loader.setMeshoptDecoder(MeshoptDecoder);
                         loader.setDRACOLoader(dracoLoader);
