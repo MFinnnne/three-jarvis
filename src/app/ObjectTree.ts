@@ -138,5 +138,6 @@ export default class ObjectTree {
             }
             divElement = divElement.parentElement?.parentElement;
         }
+        ObjectTree.autoLocateInTree(element);
     }
 }
