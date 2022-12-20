@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { PerspectiveCamera } from "three";
 import Constant from "./constant/Constant";
 import "./sass/full.scss";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -7,8 +8,6 @@ import state from "./core/State";
 import GUI from "./app/GUI";
 import TransformControlComponent from "./core/component/TransformControlComponent";
 import MonitorControlPane from "./app/pane/MonitorControlPane";
-import { PerspectiveCamera } from "three";
-import Recover from "./core/Recover";
 
 export default class ThreeJarvis {
     public static init(
@@ -18,7 +17,7 @@ export default class ThreeJarvis {
             control?: OrbitControls;
         }
     ) {
-        const jarvisCamera = new PerspectiveCamera();
+        const jarvisCamera = new PerspectiveCamera(45, renderer.domElement.clientWidth / renderer.domElement.clientHeight, 0.25, 1000);
         jarvisCamera.position.set(100, 100, 100);
         jarvisCamera.name="jarvis camera"
         scene.add(jarvisCamera);
@@ -27,9 +26,8 @@ export default class ThreeJarvis {
             render: renderer,
             camera: jarvisCamera,
             control: options?.control ?? new OrbitControls(jarvisCamera, renderer.domElement),
-            container: renderer.domElement,
-            transformControls: TransformControlComponent.init(jarvisCamera, renderer.domElement)
         };
+        TransformControlComponent.init(jarvisCamera, renderer.domElement)
         GUI.guiContainerInit();
         state.activeCamera = jarvisCamera;
         // register events
@@ -37,7 +35,6 @@ export default class ThreeJarvis {
             allEvents[allEventsKey]();
         }
         new MonitorControlPane().genPane();
-        debugger
-        Recover.start();
+        // Recover.start();
     }
 }

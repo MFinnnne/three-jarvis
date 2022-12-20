@@ -31,9 +31,7 @@ export type RawThreeVar = {
     scene: Scene;
     render: WebGLRenderer;
     camera: Camera | Camera[];
-    container: HTMLElement;
     control: OrbitControls;
-    transformControls: TransformControls;
 };
 
 export type LoadModelConfig = {

@@ -19,12 +19,12 @@ export default class TransformControlComponent {
             });
         }
         this.CONTROLS = transformControls;
+        Constant.rawVar.scene.add(transformControls);
         return transformControls;
     }
 
 
     static event() {
-        Constant.rawVar.scene.add(this.CONTROLS);
         this.CONTROLS.addEventListener("dragging-changed", (e) => {
         });
         this.CONTROLS.addEventListener("change", (e) => {
