@@ -42,11 +42,6 @@ const boxHelperFn = (object, color = 0xffff00): Object3D | null => {
     return highLightBox;
 };
 
-
-const transformControlFn = (object: Object3D): void => {
-    TransformControlComponent.CONTROLS.attach(object);
-};
-
 const cameraHelperFn = (camera: Camera): CameraHelper | null => {
     if (cameraHelper != null) {
         cameraHelper.dispose();
@@ -98,31 +93,27 @@ const lightHelperFn = (object, color = 0xffff00): Object3D | null => {
 };
 
 //light helper
-OBJECT_HELPER_MAP.set("HemisphereLight", [(object) => lightHelperFn(object), (object, color) => transformControlFn(object)]);
-OBJECT_HELPER_MAP.set("PointLight", [(object) => lightHelperFn(object), transformControlFn]);
-OBJECT_HELPER_MAP.set("DirectionalLight", [(object) => lightHelperFn(object), transformControlFn]);
+OBJECT_HELPER_MAP.set("HemisphereLight", [(object) => lightHelperFn(object)]);
+OBJECT_HELPER_MAP.set("PointLight", [(object) => lightHelperFn(object)]);
+OBJECT_HELPER_MAP.set("DirectionalLight", [(object) => lightHelperFn(object)]);
 OBJECT_HELPER_MAP.set("PerspectiveCamera",
     [
         (object, color) => cameraHelperFn(object as Camera),
-        (object, color) => transformControlFn(object)
     ]
 );
 OBJECT_HELPER_MAP.set("Group",
     [
         (object, color) => boxHelperFn(object),
-        (object, color) => transformControlFn(object)
     ]
 );
 OBJECT_HELPER_MAP.set("Object3D",
     [
         (object, color) => boxHelperFn(object),
-        (object, color) => transformControlFn(object)
     ]
 );
 OBJECT_HELPER_MAP.set("Mesh",
     [
         (object, color) => boxHelperFn(object),
-        (object, color) => transformControlFn(object)
     ]
 );
 

@@ -20,6 +20,7 @@ class ObjectChanged {
 
 
     public update(target?: Object3D): void {
+        debugger
         const object = target ?? state.selectedObject;
         if (object == null) {
             return;

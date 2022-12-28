@@ -1,6 +1,7 @@
 import { Camera, Object3D, PerspectiveCamera } from "three";
 import Constant from "../constant/Constant";
 import ObjectTree from "../app/ObjectTree";
+import TransformControlComponent from "./component/TransformControlComponent";
 
 class State {
     private static instance: State;
@@ -13,8 +14,8 @@ class State {
     }
 
     set activeCamera(value: Camera) {
+        value.layers.enableAll();
         this._activeCamera = value;
-        this._activeCamera.layers.mask = 0x00000003;
         if (Constant.CONTROL) {
             Constant.CONTROL.object = this._activeCamera;
         }
@@ -44,6 +45,7 @@ class State {
 
     set selectedObject(value: Object3D) {
         this._selectedObject = value;
+        TransformControlComponent.CONTROLS.attach(value);
     }
 
     public static getInstance(): State {

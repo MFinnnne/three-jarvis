@@ -87,6 +87,7 @@
     "million": "^1.8.8",
     "moment": "^2.29.4",
     "nanoevents": "^6.0.2",
+    "pino": "^8.8.0",
     "tweakpane": "^3.0.8"
   },
   "peerDependencies": {

@@ -12,24 +12,21 @@ import MonitorControlPane from "./app/pane/MonitorControlPane";
 export default class ThreeJarvis {
     public static init(
         scene: THREE.Scene,
+        camera: THREE.Camera,
         renderer: THREE.WebGLRenderer,
         options?: {
             control?: OrbitControls;
         }
     ) {
-        const jarvisCamera = new PerspectiveCamera(45, renderer.domElement.clientWidth / renderer.domElement.clientHeight, 0.25, 1000);
-        jarvisCamera.position.set(100, 100, 100);
-        jarvisCamera.name="jarvis camera"
-        scene.add(jarvisCamera);
         Constant.rawVar = {
             scene: scene,
             render: renderer,
-            camera: jarvisCamera,
-            control: options?.control ?? new OrbitControls(jarvisCamera, renderer.domElement),
+            camera: camera,
+            control: options?.control ?? new OrbitControls(camera, renderer.domElement)
         };
-        TransformControlComponent.init(jarvisCamera, renderer.domElement)
+        TransformControlComponent.init(camera, renderer.domElement);
         GUI.guiContainerInit();
-        state.activeCamera = jarvisCamera;
+        state.activeCamera = camera;
         // register events
         for (const allEventsKey in allEvents) {
             allEvents[allEventsKey]();
