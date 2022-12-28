@@ -4,10 +4,15 @@ import Constant from "../../constant/Constant";
 import PaneManager from "../PaneManager";
 import objectChanged from "../ObjectChanged";
 import { OBJECT_TREE_BLACK_LIST } from "../../config/Config";
+import Pino from "pino";
+import state from "../State";
 
+export const logger = Pino({
+    level: "info"
+});
 export default class TransformControlComponent {
 
-    public static CONTROLS;
+    public static CONTROLS: TransformControls;
 
     static init(camera: Camera, element: HTMLElement): TransformControls {
         const transformControls = new TransformControls(camera, element);
@@ -19,17 +24,13 @@ export default class TransformControlComponent {
             });
         }
         this.CONTROLS = transformControls;
+        Constant.rawVar.scene.add(transformControls);
         return transformControls;
     }
 
 
     static event() {
-        Constant.rawVar.scene.add(this.CONTROLS);
-        this.CONTROLS.addEventListener("dragging-changed", (e) => {
-        });
-        this.CONTROLS.addEventListener("change", (e) => {
 
-        });
         this.CONTROLS.addEventListener("objectChange", (e) => {
             PaneManager.update();
             objectChanged.update();
