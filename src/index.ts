@@ -8,6 +8,7 @@ import state from "./core/State";
 import GUI from "./app/GUI";
 import TransformControlComponent from "./core/component/TransformControlComponent";
 import MonitorControlPane from "./app/pane/MonitorControlPane";
+import Recover from "./core/Recover";
 
 export default class ThreeJarvis {
     public static init(
@@ -32,6 +33,6 @@ export default class ThreeJarvis {
             allEvents[allEventsKey]();
         }
         new MonitorControlPane().genPane();
-        // Recover.start();
+        Recover.start();
     }
 }

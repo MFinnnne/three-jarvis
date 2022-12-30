@@ -1,5 +1,5 @@
 @import "Constant";
-@import "prompt";
+@import "toast";
 
 
 #three-helper-container {
@@ -14,6 +14,5 @@
     @import "menu-bar";
     @import "left-side-bar";
     @import "pane";
-    @import "switch-transform-control";
 
 }

@@ -47,6 +47,7 @@ function init() {
     rawScene.add(pointLight);
     rawScene.add(light);
     rawScene.add(light2);
+    rawScene.add(new Group());
     let group = new Group();
     group.name = "cube";
     const boxGeometry = new BoxGeometry(10, 10, 10);
@@ -60,7 +61,6 @@ function init() {
     group.add(mesh);
     mesh.position.set(0, 0, 0);
     // material.wireframe = true;
-    rawScene.add(camera);
     const loader = new GLTFLoader().setPath("../../static/");
     window.addEventListener("resize", onWindowResize);
     loader.load("test.glb", function (gltf) {
