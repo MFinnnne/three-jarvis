@@ -20,7 +20,7 @@ export default class ObjectControlPane extends DefaultControlPane {
 
     public genPane(object: Object3D): Pane {
         const pane = super.genPane(object);
-        pane.title='object';
+        pane.title = "object";
         this.object = object;
         const PARAMS = {
             position: {
@@ -43,7 +43,45 @@ export default class ObjectControlPane extends DefaultControlPane {
         const tab = pane.addTab({
             pages: [{ title: "Object" }, { title: "Geometry" }, { title: "Material" }]
         });
+
         this.objectPane = tab.pages[0];
+        this.objectPane.addBlade(
+            {
+                view: "text",
+                label: "id",
+                parse: (v) => String(v),
+                value: object.id
+            }
+        );
+        this.objectPane.addBlade(
+            {
+                view: "text",
+                label: "uuid",
+                parse: (v) => String(v),
+                value: object.uuid
+            }
+        );
+        this.objectPane.addInput({ visible: object.visible }, "visible").on("change", (ev) => {
+            object.visible = ev.value;
+        });
+        this.objectPane.addBlade(
+            {
+                view: "text",
+                label: "layer",
+                parse: (v) => String(v),
+                value: object.layers.mask
+            }
+        );
+        if (this.object.userData.id) {
+            this.objectPane.addBlade(
+                {
+                    view: "text",
+                    label: "userData.id",
+                    parse: (v) => String(v),
+                    value: object.userData.id
+                }
+            );
+        }
         const controlsGridPane = this.objectPane.addBlade({
             view: "buttongrid",
             size: [3, 1],
@@ -69,6 +107,7 @@ export default class ObjectControlPane extends DefaultControlPane {
                 TransformControlComponent.CONTROLS.setMode("translate");
             }
         });
+
         this.geometryPane = tab.pages[1];
         this.materialPane = tab.pages[2];
         const positionBind = this.objectPane.addInput(PARAMS, "position").on("change", (ev) => {
@@ -137,7 +176,7 @@ export default class ObjectControlPane extends DefaultControlPane {
             });
         quatBind.controller_.view.labelElement.addEventListener("click", () => {
             const value = quatBind.controller_.binding.value.rawValue as Quaternion;
-            Utils.execCoy(`${value.x},${value.y},${value.z},${value.w}`);
+            Utils.execCoy(`${value.x.toFixed(2)},${value.y},${value.z},${value.w}`);
         });
         this.bindMap.set("quat", quatBind);
         return pane;

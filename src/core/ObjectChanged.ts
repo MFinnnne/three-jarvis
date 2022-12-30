@@ -1,6 +1,7 @@
 import { ColorRepresentation, Object3D } from "three";
 import state from "./State";
 import HelperManager from "./HelperManager";
+import TransformControlComponent from "./component/TransformControlComponent";
 
 class ObjectChanged {
 
@@ -15,12 +16,12 @@ class ObjectChanged {
             return;
         }
         HelperManager.render(object);
+        TransformControlComponent.CONTROLS.attach(object);
         return;
     }
 
 
     public update(target?: Object3D): void {
-        debugger
         const object = target ?? state.selectedObject;
         if (object == null) {
             return;

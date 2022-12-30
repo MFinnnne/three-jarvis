@@ -8,7 +8,7 @@ export interface ObjectEntity {
     id: number,
     parentId?: number,
     uuid: string,
-    content: string
+    content: { geometries?: any; materials?: any; textures?: any; images?: any, object?: any }
 }
 
 class ObjectDB extends Dexie {
@@ -23,7 +23,12 @@ class ObjectDB extends Dexie {
 
     addObject(object: Object3D, parentId?: number) {
         this.transaction("rw", this.objects, async () => {
-            await this.objects.add({ id: object.id, parentId: parentId, uuid: object.uuid, content: object.toJSON() });
+            await this.objects.add({
+                id: object.userData.id,
+                parentId: parentId,
+                uuid: object.uuid,
+                content: object.toJSON()
+            });
         }).then(() => {
             console.info(`模型 ${object.uuid} 存储成功`);
         }).catch(reason => {
@@ -40,8 +45,8 @@ class ObjectDB extends Dexie {
         return this.objects.where("uuid").equals(uuid).first();
     }
 
-    deleteObject(uuid: number) {
-        this.objects.where("uuid").equals(uuid).delete();
+    deleteObject(id: number) {
+        this.objects.where("id").equals(id).delete();
     }
 
     deleteObjects() {
@@ -49,10 +54,10 @@ class ObjectDB extends Dexie {
     }
 
     updateObject(object: Object3D) {
-        this.objects.where("id").equals(object.id).modify({ content: object.toJSON() });
+        this.objects.where("id").equals(object.userData.id).modify({ content: object.toJSON() });
     }
 
-    findParentObject(id: number):PromiseExtended<ObjectEntity | undefined> {
+    findParentObject(id: number): PromiseExtended<ObjectEntity | undefined> {
         return this.objects.where("id").equals(id).first();
     }
 }

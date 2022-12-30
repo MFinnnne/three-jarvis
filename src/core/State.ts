@@ -45,7 +45,6 @@ class State {
 
     set selectedObject(value: Object3D) {
         this._selectedObject = value;
-        TransformControlComponent.CONTROLS.attach(value);
     }
 
     public static getInstance(): State {
