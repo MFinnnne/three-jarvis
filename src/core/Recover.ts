@@ -23,6 +23,9 @@ export default class Recover {
                             objectById.add(this.loader.parse(item.content));
                         } else {
                             newObjects.push(item);
+                            if (!objects.find(child => child.id === item.parentId)) {
+
+                            }
                         }
                     }
                 }

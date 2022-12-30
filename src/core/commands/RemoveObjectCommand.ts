@@ -4,7 +4,7 @@ import Constant from "../../constant/Constant";
 import ObjectTree from "../../app/ObjectTree";
 import ObjectDB from "../mapper/ObjectDB";
 
-export  default  class RemoveObjectCommand implements Command {
+export default class RemoveObjectCommand implements Command {
     name: string = "remove object";
     object!: Object3D;
     parent: Object3D | null;
@@ -17,6 +17,11 @@ export  default  class RemoveObjectCommand implements Command {
     exec(): void {
         this.object.removeFromParent();
         ObjectDB.deleteObject(this.object.userData.id);
+        this.object.traverse(object => {
+            if (object.userData.id) {
+                ObjectDB.deleteObject(object.userData.id);
+            }
+        });
         ObjectTree.render();
     }
 
