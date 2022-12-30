@@ -24,6 +24,7 @@ export default class AddObjectCommand implements Command {
             return;
         }
         if (state.selectedObject.userData.id !== undefined) {
+            this._object.userData.id = moment().milliseconds();
             objectDB.addObject(this._object, state.selectedObject.userData.id);
             state.selectedObject.add(this._object);
             ObjectTree.render();

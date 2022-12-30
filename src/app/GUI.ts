@@ -35,7 +35,7 @@ export default class GUI {
         MenuBar.render();
         setInterval(() => {
             ObjectTree.render();
-        }, 1000);
+        }, 2000);
 
     }
 }
