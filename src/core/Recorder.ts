@@ -1,5 +1,6 @@
 import objectChanged from './ObjectChanged';
 import {Command} from "./Type";
+import ObjectChanged from "./ObjectChanged";
 
 /**
  * Operation records
@@ -12,7 +13,7 @@ class Recorder {
 
     public execute(cmd: Command, optionalName?: string): void {
         cmd.exec();
-        objectChanged.update(cmd.object);
+        ObjectChanged.getInstance().update(cmd.object);
     }
 }
 

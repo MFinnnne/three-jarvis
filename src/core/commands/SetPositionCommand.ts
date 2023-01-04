@@ -1,8 +1,7 @@
-import {Object3D, Quaternion, Vector3} from 'three';
-import {InputBindingApi} from "@tweakpane/core";
-import {Point3d, Point3dObject} from "@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d";
-import {Point3dInputParams} from "tweakpane";
-import {Command} from "../Type";
+import { Object3D, Vector3 } from "three";
+import { InputBindingApi } from "@tweakpane/core";
+import { Point3dObject } from "@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d";
+import { Command } from "../Type";
 
 export default class SetPositionCommand implements Command {
     oldPosition: Vector3;
@@ -28,11 +27,9 @@ export default class SetPositionCommand implements Command {
 
     exec(): void {
         this._object.position.copy(this.newPosition);
-        this._object.updateMatrixWorld(true);
     }
 
     undo(): void {
         this._object.position.copy(this.oldPosition);
-        this._object.updateMatrixWorld(true);
     }
 }

@@ -1,9 +1,12 @@
 import Constant from "../constant/Constant";
 import ObjectTree from "./ObjectTree";
 import MenuBar from "./menu/MenuBar";
+import { Scene } from "three";
+import Jarvis from "../core/Jarvis";
+import { clickObjectEvent } from "../core/events/ObjectEvents";
 
 export default class GUI {
-    public static guiContainerInit(): void {
+    public static guiContainerInit(creator: Jarvis): void {
         const container = document.querySelector("#three-helper-container");
         container && container.remove();
         const element = document.createElement("div");
@@ -17,7 +20,6 @@ export default class GUI {
         const menuDom = document.createElement("div");
         menuDom.id = "three-helper-menu";
         menuDom.className = "three-helper-menu";
-        Constant.MENU_CONTAINER = menuDom;
         element.appendChild(menuDom);
 
         const leftSideBarDom = document.createElement("div");
@@ -32,10 +34,8 @@ export default class GUI {
         element.appendChild(paneDom);
         Constant.PANE_CONTAINER = paneDom;
         document.body.appendChild(element);
-        MenuBar.render();
-        setInterval(() => {
-            ObjectTree.render();
-        }, 2000);
-
+        MenuBar.render(menuDom);
+        const objectTree = new ObjectTree(leftSideBarDom, creator);
+        clickObjectEvent(objectTree);
     }
 }

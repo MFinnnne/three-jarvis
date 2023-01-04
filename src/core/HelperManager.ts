@@ -9,11 +9,10 @@ import {
     HemisphereLightHelper,
     Object3D,
     PointLight,
-    PointLightHelper
+    PointLightHelper, Scene
 } from "three";
 import Constant from "../constant/Constant";
 import { OBJECT_TREE_BLACK_LIST } from "../config/Config";
-import TransformControlComponent from "./component/TransformControlComponent";
 
 type helperFns = (object: Object3D, color?: ColorRepresentation) => Object3D | null | void
 const OBJECT_HELPER_MAP: Map<string, helperFns[] | helperFns> = new Map();
@@ -34,9 +33,9 @@ const boxHelperFn = (object, color = 0xffff00): Object3D | null => {
         highLightBox.update();
         return null;
     }
-    highLightBox = new BoxHelper(Constant.rawVar.scene, color);
+    highLightBox = new BoxHelper(object, color);
     highLightBox.layers.mask = 0x00000001 | 1;
-    highLightBox.name = "BoxHelper_" + Constant.HELPER_NAME;
+    highLightBox.name = "BoxHelper_" + object.id;
     highLightBox.setFromObject(object);
     highLightBox.update(object);
     return highLightBox;
@@ -45,9 +44,10 @@ const boxHelperFn = (object, color = 0xffff00): Object3D | null => {
 const cameraHelperFn = (camera: Camera): CameraHelper | null => {
     if (cameraHelper != null) {
         cameraHelper.dispose();
-        Constant.rawVar.scene.remove(cameraHelper);
+        cameraHelper.removeFromParent();
     }
     cameraHelper = new CameraHelper(camera);
+    cameraHelper.layers.set(3);
     return cameraHelper;
 };
 
@@ -118,7 +118,7 @@ OBJECT_HELPER_MAP.set("Mesh",
 );
 
 export default class HelperManager {
-    static render(object: Object3D): void {
+    static render(object: Object3D,scene:Scene): void {
         helpers.forEach((helper) => {
             helper.visible = false;
         });
@@ -142,7 +142,7 @@ export default class HelperManager {
                 }
                 OBJECT_TREE_BLACK_LIST.push(helper.uuid);
                 helpers.push(helper);
-                Constant.rawVar.scene.add(helper);
+                scene.add(helper);
             }
         });
     }

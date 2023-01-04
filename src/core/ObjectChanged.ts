@@ -1,22 +1,49 @@
-import { ColorRepresentation, Object3D } from "three";
+import { Box3, Object3D, Sphere } from "three";
 import state from "./State";
 import HelperManager from "./HelperManager";
-import TransformControlComponent from "./component/TransformControlComponent";
+import Jarvis from "./Jarvis";
 
-class ObjectChanged {
+export default class ObjectChanged {
+
+    private static instance?: ObjectChanged;
+    private jarvis!: Jarvis;
 
     /**
      *   boxed  mesh
-     * @param object
-     * @param color
      */
-    public objectHelper(object: Object3D, color: ColorRepresentation = 0xffff00): void {
+    private constructor() {
+    }
+
+
+    public static getInstance(jarvis?: Jarvis): ObjectChanged {
+        if (jarvis) {
+            if (this.instance) {
+                return this.instance;
+            }
+            this.instance = new ObjectChanged();
+            this.instance.jarvis = jarvis;
+            return this.instance;
+        } else {
+            if (this.instance === undefined) {
+                throw new Error("object changed is null ");
+            }
+            return this.instance;
+        }
+    }
+
+
+    public objectHelper(object: Object3D): void {
         state.selectedObject = object;
-        if (object.type === 'Scene') {
+        if (object.type === "Scene") {
             return;
         }
-        HelperManager.render(object);
-        TransformControlComponent.CONTROLS.attach(object);
+        const box3 = new Box3();
+        const sphere = new Sphere();
+        const box = box3.expandByObject(object);
+        const boundingSphere = box.getBoundingSphere(sphere);
+        this.jarvis.transformControl.setSize(boundingSphere.radius);
+        this.jarvis.transformControl.attach(object);
+        HelperManager.render(object, this.jarvis.scene);
         return;
     }
 
@@ -32,5 +59,3 @@ class ObjectChanged {
     }
 }
 
-const objectChanged = new ObjectChanged();
-export default objectChanged;

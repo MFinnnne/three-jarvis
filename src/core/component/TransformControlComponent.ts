@@ -1,21 +1,26 @@
-import { TransformControls } from "three/examples/jsm/controls/TransformControls";
-import { Camera } from "three";
-import Constant from "../../constant/Constant";
 import PaneManager from "../PaneManager";
 import objectChanged from "../ObjectChanged";
 import { OBJECT_TREE_BLACK_LIST } from "../../config/Config";
-import Pino from "pino";
 import state from "../State";
+import Jarvis from "../Jarvis";
+import { TransformControls } from "three/examples/jsm/controls/TransformControls";
 
-export const logger = Pino({
-    level: "info"
-});
 export default class TransformControlComponent {
 
-    public static CONTROLS: TransformControls;
+    private readonly jarvis: Jarvis;
+    private _control!: TransformControls;
 
-    static init(camera: Camera, element: HTMLElement): TransformControls {
-        const transformControls = new TransformControls(camera, element);
+    constructor(jarvis: Jarvis) {
+        this.jarvis = jarvis;
+    }
+
+
+    get control(): TransformControls {
+        return this._control;
+    }
+
+    init(){
+        const transformControls = new TransformControls(state.activeCamera, this.jarvis.renderer.domElement);
         transformControls.layers.set(1);
         transformControls.getRaycaster().layers.set(1);
         for (let child of transformControls.children) {
@@ -23,39 +28,25 @@ export default class TransformControlComponent {
                 object.layers.set(1);
             });
         }
-        this.CONTROLS = transformControls;
-        Constant.rawVar.scene.add(transformControls);
-        return transformControls;
+        this._control = transformControls;
+        this.jarvis.scene.add(transformControls);
+        this.event(this.jarvis);
     }
 
 
-    static event() {
-
-        this.CONTROLS.addEventListener("objectChange", (e) => {
+    private event(jarvis:Jarvis) {
+        this._control.addEventListener("objectChange", (e) => {
             PaneManager.update();
-            objectChanged.update();
+            objectChanged.getInstance().update();
         });
-        this.CONTROLS.addEventListener("mouseDown", function(e) {
-            Constant.rawVar.control.enabled = false;
+        this._control.addEventListener("mouseDown", function(e) {
+            jarvis.control.enabled = false;
         });
-        this.CONTROLS.addEventListener("mouseUp", function(e) {
-            Constant.rawVar.control.enabled = true;
+        this._control.addEventListener("mouseUp", function(e) {
+            jarvis.control.enabled = true;
         });
-        window.addEventListener("keydown", e => {
-            switch (e.key) {
-                case "=":
-                    this.CONTROLS.setSize(this.CONTROLS.size + 0.1);
-                    break;
-                case "-":
-                    this.CONTROLS.setSize(Math.max(this.CONTROLS.size - 0.1, 0.1));
-                    break;
-                case "s":
-                    if (Constant.rawVar.control) {
-                        Constant.rawVar.control.enabled = true;
-                    }
-            }
-        });
-        OBJECT_TREE_BLACK_LIST.push(this.CONTROLS.uuid);
+
+        OBJECT_TREE_BLACK_LIST.push(this._control.uuid);
     }
 
 }

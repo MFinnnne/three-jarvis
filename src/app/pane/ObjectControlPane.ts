@@ -11,12 +11,19 @@ import Utils from "../../util/Utils";
 import Prompt from "../Prompt";
 import TransformControlComponent from "../../core/component/TransformControlComponent";
 import { TpButtonGridEvent } from "@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event";
+import { TransformControls } from "three/examples/jsm/controls/TransformControls";
+import Jarvis from "../../core/Jarvis";
 
 export default class ObjectControlPane extends DefaultControlPane {
     protected objectPane?: TabPageApi;
     protected geometryPane?: TabPageApi;
     protected materialPane?: TabPageApi;
     protected object?: Object3D;
+
+
+    constructor(creator: Jarvis) {
+        super(creator);
+    }
 
     public genPane(object: Object3D): Pane {
         const pane = super.genPane(object);
@@ -96,22 +103,22 @@ export default class ObjectControlPane extends DefaultControlPane {
             const tpEvent = ev as TpButtonGridEvent;
             if (tpEvent.index[0] === 0) {
                 // rotate
-                TransformControlComponent.CONTROLS.setMode("rotate");
+                this.jarvis.transformControl.setMode("rotate");
             }
             if (tpEvent.index[0] === 1) {
                 // scale
-                TransformControlComponent.CONTROLS.setMode("scale");
+                this.jarvis.transformControl.setMode("scale");
             }
             if (tpEvent.index[0] === 2) {
                 // translate
-                TransformControlComponent.CONTROLS.setMode("translate");
+                this.jarvis.transformControl.setMode("translate");
             }
         });
 
         this.geometryPane = tab.pages[1];
         this.materialPane = tab.pages[2];
         const positionBind = this.objectPane.addInput(PARAMS, "position").on("change", (ev) => {
-            if (TransformControlComponent.CONTROLS.dragging) {
+            if (this.jarvis.transformControl.dragging) {
                 return;
             }
             const { x, y, z } = ev.value;
@@ -124,7 +131,7 @@ export default class ObjectControlPane extends DefaultControlPane {
         this.bindMap.set("position", positionBind);
 
         const scaleBind = this.objectPane.addInput(PARAMS, "scale").on("change", (ev) => {
-            if (TransformControlComponent.CONTROLS.dragging) {
+            if (this.jarvis.transformControl.dragging) {
                 return;
             }
             const { x, y, z } = ev.value;
@@ -147,7 +154,7 @@ export default class ObjectControlPane extends DefaultControlPane {
                 expanded: false
             })
             .on("change", (e) => {
-                if (TransformControlComponent.CONTROLS.dragging) {
+                if (this.jarvis.transformControl.dragging) {
                     return;
                 }
                 const { x, y, z } = e.value;
@@ -168,7 +175,7 @@ export default class ObjectControlPane extends DefaultControlPane {
                 expanded: false // optional, false by default
             })
             .on("change", (e) => {
-                if (TransformControlComponent.CONTROLS.dragging) {
+                if (this.jarvis.transformControl.dragging) {
                     return;
                 }
                 const { x, y, z, w } = e.value;

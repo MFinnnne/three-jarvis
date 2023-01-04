@@ -2,6 +2,7 @@ import { Camera, Object3D, PerspectiveCamera } from "three";
 import Constant from "../constant/Constant";
 import ObjectTree from "../app/ObjectTree";
 import TransformControlComponent from "./component/TransformControlComponent";
+import { domClickEvent } from "./events/DomEvents";
 
 class State {
     private static instance: State;
@@ -14,11 +15,7 @@ class State {
     }
 
     set activeCamera(value: Camera) {
-        value.layers.enableAll();
         this._activeCamera = value;
-        if (Constant.CONTROL) {
-            Constant.CONTROL.object = this._activeCamera;
-        }
         if (this._activeCamera instanceof PerspectiveCamera) {
             this._activeCamera.updateProjectionMatrix();
         }
@@ -36,7 +33,6 @@ class State {
         this._selectedObjectDom.classList.toggle("selected");
         this._selectedObjectDom = value;
         this._selectedObjectDom.classList.toggle("selected");
-        ObjectTree.autoLocateInTree(this._selectedObjectDom);
     }
 
     get selectedObject(): Object3D {

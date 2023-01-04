@@ -22,7 +22,6 @@ export default class RemoveObjectCommand implements Command {
                 ObjectDB.deleteObject(object.userData.id);
             }
         });
-        ObjectTree.render();
     }
 
     undo(): void {

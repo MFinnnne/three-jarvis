@@ -42,12 +42,12 @@ function init() {
     rawScene = new THREE.Scene();
 
 
-    ThreeJarvis.init(rawScene,camera, renderer,{control});
+    ThreeJarvis.init(rawScene,camera1, renderer,{control});
+    rawScene.add(camera);
     rawScene.add(camera1);
     rawScene.add(pointLight);
     rawScene.add(light);
     rawScene.add(light2);
-    rawScene.add(new Group());
     let group = new Group();
     group.name = "cube";
     const boxGeometry = new BoxGeometry(10, 10, 10);
@@ -70,7 +70,6 @@ function init() {
 }
 
 function onWindowResize() {
-
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);

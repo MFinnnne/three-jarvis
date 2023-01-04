@@ -4,9 +4,17 @@ import DefaultControlPane from "./DefaultControlPane";
 import { Point3d } from "@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d";
 import Prompt from "../Prompt";
 import Constant from "../../constant/Constant";
+import Jarvis from "../../core/Jarvis";
 
 export default class MonitorControlPane extends DefaultControlPane {
     protected object?: Object3D;
+    protected jarvis: Jarvis;
+
+
+    constructor(creator: Jarvis) {
+        super(creator);
+        this.jarvis = creator;
+    }
 
     public genPane(object?: Object3D): Pane {
         const base = Math.pow(1024, 2);
@@ -14,12 +22,12 @@ export default class MonitorControlPane extends DefaultControlPane {
         const monitorFolder = this.pane.addFolder({ title: "monitor" });
         const info = { memory: "", render: "", page: "" };
         monitorFolder.addMonitor(info, "memory", { multiline: true, lineCount: 2 }).on("update", () => {
-            const memory = Constant.rawVar.render.info.memory;
+            const memory = this.jarvis.renderer.info.memory;
             info.memory = `textures: ${memory.textures}\ngeometries: ${memory.geometries}`;
         });
         monitorFolder.addSeparator();
         monitorFolder.addMonitor(info, "render", { multiline: true, lineCount: 5 }).on("update", () => {
-            const render = Constant.rawVar.render.info.render;
+            const render = this.jarvis.renderer.info.render;
             info.render = `frame: ${render.frame}\ntriangles: ${render.triangles}\ncalls: ${render.calls}\npoints: ${render.points}\nlines: ${render.lines}`;
         });
         monitorFolder.addSeparator();

@@ -20,14 +20,12 @@ export default class AddObjectCommand implements Command {
             objectDB.addObject(this._object);
             Constant.rawVar.scene.add(this._object);
             this._object.userData.id = moment().milliseconds();
-            ObjectTree.render();
             return;
         }
         if (state.selectedObject.userData.id !== undefined) {
             this._object.userData.id = moment().milliseconds();
             objectDB.addObject(this._object, state.selectedObject.userData.id);
             state.selectedObject.add(this._object);
-            ObjectTree.render();
             return;
         }
         Toast.show("imported object's parent must be set userData.id property");
