@@ -1,15 +1,16 @@
-import objectChanged from './ObjectChanged';
-import {Command} from "./Type";
 import ObjectChanged from "./ObjectChanged";
+import { Command } from "./Type";
 
 /**
  * Operation records
  * @class Recorder
  */
-class Recorder {
+export  default  class Recorder {
     private static instance: Recorder;
 
+
     // private operatorHistories: Command[] = [];
+
 
     public execute(cmd: Command, optionalName?: string): void {
         cmd.exec();
@@ -17,5 +18,3 @@ class Recorder {
     }
 }
 
-const recorder = new Recorder();
-export default recorder;

@@ -29,6 +29,7 @@
     "forceConsistentCasingInFileNames": true,
     //禁止对同一个文件的不一致的引用
     "module": "ESNext",
+    "experimentalDecorators": true,
     //指定生成哪个模块系统代码
     "moduleResolution": "node",
     //决定如何处理模块。
@@ -49,7 +50,7 @@
     }
     // "suppressImplicitAnyIndexErrors": true, //阻止对缺少索引签名的索引对象报错
   },
-  
+
   "exclude": [
     "node_modules/**/*",
     "dist/**/*",

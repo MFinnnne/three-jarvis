@@ -6,7 +6,7 @@ import Jarvis from "../core/Jarvis";
 import { clickObjectEvent } from "../core/events/ObjectEvents";
 
 export default class GUI {
-    public static guiContainerInit(creator: Jarvis): void {
+    public static guiContainerInit(jarvis: Jarvis): void {
         const container = document.querySelector("#three-helper-container");
         container && container.remove();
         const element = document.createElement("div");
@@ -34,8 +34,8 @@ export default class GUI {
         element.appendChild(paneDom);
         Constant.PANE_CONTAINER = paneDom;
         document.body.appendChild(element);
-        MenuBar.render(menuDom);
-        const objectTree = new ObjectTree(leftSideBarDom, creator);
+        MenuBar.render(menuDom,jarvis);
+        const objectTree = new ObjectTree(leftSideBarDom, jarvis);
         clickObjectEvent(objectTree);
     }
 }

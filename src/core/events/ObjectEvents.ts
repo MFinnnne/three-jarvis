@@ -9,19 +9,19 @@ import Jarvis from "../Jarvis";
 
 const threeJarvisRayCaster = new Raycaster();
 threeJarvisRayCaster.layers.enable(1);
-function intersectObjects(dom: HTMLElement, e: MouseEvent, rayCaster: Raycaster, target: Object3D[] | Group[]): Intersection[] {
+function intersectObjects(jarvis:Jarvis, e: MouseEvent, rayCaster: Raycaster, target: Object3D[] | Group[]): Intersection[] {
 
     const mouse = new Vector2();
-    mouse.x = ((e.clientX - dom.offsetLeft) / dom.clientWidth) * 2 - 1;
-    mouse.y = -((e.clientY - dom.offsetTop) / dom.clientHeight) * 2 + 1;
-    rayCaster.setFromCamera(mouse, state.activeCamera);
+    mouse.x = ((e.clientX - jarvis.container.offsetLeft) / jarvis.container.clientWidth) * 2 - 1;
+    mouse.y = -((e.clientY - jarvis.container.offsetTop) / jarvis.container.clientHeight) * 2 + 1;
+    rayCaster.setFromCamera(mouse, jarvis.state.activeCamera);
     return rayCaster.intersectObjects(target, true);
 }
 
 
 export function rayCasterEvents(creator: Jarvis) {
     creator.container.addEventListener("click", (e) => {
-        const intersects = intersectObjects(creator.container, e, threeJarvisRayCaster, creator.scene.children);
+        const intersects = intersectObjects(creator, e, threeJarvisRayCaster, creator.scene.children);
         if (intersects.length > 0) {
             if (e.altKey) {
                 Ticker.emmit("objectClick", intersects[0].object);
@@ -30,7 +30,7 @@ export function rayCasterEvents(creator: Jarvis) {
     });
 
     creator.container.addEventListener("dblclick", (e) => {
-        const intersects = intersectObjects(creator.container,e, threeJarvisRayCaster, creator.scene.children);
+        const intersects = intersectObjects(creator,e, threeJarvisRayCaster, creator.scene.children);
         if (intersects.length > 0) {
             const fistCatchObject = intersects[0].object;
             Ticker.emmit("objectClick", fistCatchObject);

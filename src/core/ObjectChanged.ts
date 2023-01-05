@@ -33,15 +33,10 @@ export default class ObjectChanged {
 
 
     public objectHelper(object: Object3D): void {
-        state.selectedObject = object;
+        this.jarvis.state.selectedObject = object;
         if (object.type === "Scene") {
             return;
         }
-        const box3 = new Box3();
-        const sphere = new Sphere();
-        const box = box3.expandByObject(object);
-        const boundingSphere = box.getBoundingSphere(sphere);
-        this.jarvis.transformControl.setSize(boundingSphere.radius);
         this.jarvis.transformControl.attach(object);
         HelperManager.render(object, this.jarvis.scene);
         return;
@@ -49,11 +44,11 @@ export default class ObjectChanged {
 
 
     public update(target?: Object3D): void {
-        const object = target ?? state.selectedObject;
+        const object = target ?? this.jarvis.state.selectedObject;
         if (object == null) {
             return;
         }
-        if (state.selectedObject.uuid === object.uuid) {
+        if (this.jarvis.state.selectedObject.uuid === object.uuid) {
             this.objectHelper(object);
         }
     }

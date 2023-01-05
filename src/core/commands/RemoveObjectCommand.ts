@@ -16,12 +16,6 @@ export default class RemoveObjectCommand implements Command {
 
     exec(): void {
         this.object.removeFromParent();
-        ObjectDB.deleteObject(this.object.userData.id);
-        this.object.traverse(object => {
-            if (object.userData.id) {
-                ObjectDB.deleteObject(object.userData.id);
-            }
-        });
     }
 
     undo(): void {

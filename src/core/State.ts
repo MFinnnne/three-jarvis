@@ -4,8 +4,7 @@ import ObjectTree from "../app/ObjectTree";
 import TransformControlComponent from "./component/TransformControlComponent";
 import { domClickEvent } from "./events/DomEvents";
 
-class State {
-    private static instance: State;
+export default class State {
 
     private _selectedObject: Object3D = new Object3D();
     private _selectedObjectDom: HTMLElement = document.createElement("div");
@@ -42,14 +41,5 @@ class State {
     set selectedObject(value: Object3D) {
         this._selectedObject = value;
     }
-
-    public static getInstance(): State {
-        if (!State.instance) {
-            State.instance = new State();
-        }
-        return State.instance;
-    }
 }
 
-const state = new State();
-export default state;

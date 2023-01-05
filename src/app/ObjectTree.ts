@@ -57,9 +57,9 @@ export default class ObjectTree {
                                 (e.target as HTMLElement).classList.toggle("caretDown");
                             }
                             const target = e.target as HTMLElement;
-                            rightMenu(target);
+                            rightMenu(target,this.creator);
                             const uuid = target.id;
-                            state.selectedObjectDom = target;
+                            this.creator.state.selectedObjectDom = target;
                             Ticker.emmit("objectDomClick", uuid);
                             // this.autoLocateInTree(this.container);
                         }
@@ -127,7 +127,7 @@ export default class ObjectTree {
      * @param dom
      */
    autoLocateInTree(dom: HTMLElement) {
-        state.selectedObjectDom?.classList.toggle("find-out");
+        this.creator.state.selectedObjectDom?.classList.toggle("find-out");
         dom.classList.toggle("find-out");
         let offsetTop: number = dom.offsetTop - this.container.clientHeight / 2;
         if (dom.offsetTop < this.container.clientHeight) {

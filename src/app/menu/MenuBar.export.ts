@@ -5,7 +5,7 @@ import MenuUtils from "./MenuUtils";
 
 export default class MenuBarExport {
     static element(): VNode {
-        return MenuUtils.menItem("export", ["config-js"], MenuBarExport.onClick);
+        return MenuUtils.menItem("export", ["config-js", "json"], MenuBarExport.onClick);
     }
 
     private static onClick(type: string, e) {

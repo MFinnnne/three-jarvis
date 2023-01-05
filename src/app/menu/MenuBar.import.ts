@@ -2,9 +2,16 @@ import { html } from "million/html";
 import { m, VNode } from "million";
 import Loader from "../../core/Loader";
 import MenuUtils from "./MenuUtils";
+import Jarvis from "../../core/Jarvis";
 
 export default class MenuBarImport {
-    static element(): VNode {
+    private readonly jarvis: Jarvis;
+
+    constructor(jarvis: Jarvis) {
+        this.jarvis = jarvis;
+    }
+
+    element(): VNode {
 
         return m("div",
             {
@@ -19,7 +26,7 @@ export default class MenuBarImport {
                             "input",
                             {
                                 type: "file", id: "file", style: "display:none", multiple: true, onchange: (e) => {
-                                    MenuBarImport.onClick("import", e);
+                                    this.onClick("import", e);
                                 }
                             }),
                         m(
@@ -34,10 +41,10 @@ export default class MenuBarImport {
         );
     }
 
-    private static onClick(type, e) {
+    private onClick(type, e) {
         if (type === "import") {
             const file = (e.target as any).files;
-            Loader.loadFiles(file);
+            Loader.loadFiles(file, this.jarvis.state.selectedObject);
         }
     }
 }

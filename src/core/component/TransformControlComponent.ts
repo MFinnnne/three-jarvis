@@ -20,7 +20,7 @@ export default class TransformControlComponent {
     }
 
     init(){
-        const transformControls = new TransformControls(state.activeCamera, this.jarvis.renderer.domElement);
+        const transformControls = new TransformControls(this.jarvis.state.activeCamera, this.jarvis.renderer.domElement);
         transformControls.layers.set(1);
         transformControls.getRaycaster().layers.set(1);
         for (let child of transformControls.children) {
@@ -29,7 +29,7 @@ export default class TransformControlComponent {
             });
         }
         this._control = transformControls;
-        this.jarvis.scene.add(transformControls);
+        OBJECT_TREE_BLACK_LIST.push(this._control.uuid);
         this.event(this.jarvis);
     }
 

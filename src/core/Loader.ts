@@ -7,15 +7,11 @@ import AddObjectCommand from './commands/AddObjectCommand';
 import {MeshoptDecoder} from './jsm/meshopt_decoder.module'
 import {LoaderUtils} from '../util/LoadUtils';
 import recorder from './Recorder';
+import { Object3D } from "three";
 
 export default class Loader {
-    public loadItemList(items): void {
-        LoaderUtils.getFilesFromItemList(items, function (files, filesMa) {
-            Loader.loadFiles(files);
-        });
-    }
 
-    public static loadFiles(files) {
+    public static loadFiles(files,parent:Object3D) {
         if (files.length > 0) {
             const filesMap = LoaderUtils.createFilesMap(files);
             const manager = new THREE.LoadingManager();
@@ -30,12 +26,12 @@ export default class Loader {
             });
             manager.addHandler(/\.tga$/i, new TGALoader());
             for (let i = 0; i < files.length; i++) {
-                Loader.loadFile(files[i], manager);
+                Loader.loadFile(files[i], manager,parent);
             }
         }
     }
 
-    public static loadFile(file, manager) {
+    public static loadFile(file, manager,parent:Object3D) {
         const filename = file.name;
         const extension = filename.split('.').pop().toLowerCase();
 
@@ -61,7 +57,7 @@ export default class Loader {
                             const scene = result.scene;
                             scene.name = filename;
                             scene.animations.push(...result.animations);
-                            recorder.execute(new AddObjectCommand(scene));
+                            recorder.execute(new AddObjectCommand(parent,scene));
                         });
                     },
                     false,
@@ -89,7 +85,7 @@ export default class Loader {
                             const scene = result.scene;
                             scene.name = filename;
                             scene.animations.push(...result.animations);
-                            recorder.execute(new AddObjectCommand(scene));
+                            recorder.execute(new AddObjectCommand(parent,scene));
                         });
                     },
                     false,
