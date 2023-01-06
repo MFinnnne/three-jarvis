@@ -10,7 +10,8 @@ export default class ObjectChanged {
     /**
      *   boxed  mesh
      */
-    private constructor() {}
+    private constructor() {
+    }
 
     public static getInstance(jarvis?: Jarvis): ObjectChanged {
         if (jarvis) {

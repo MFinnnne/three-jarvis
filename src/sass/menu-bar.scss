@@ -60,7 +60,6 @@
                     }
                 }
 
-                /* 下拉内容 (默认隐藏) */
                 .dropdown-content {
                     top: 100%;
                     display: none;
@@ -69,21 +68,14 @@
                     min-width: 80px;
                     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 
-
                     a {
                         color: white;
-                        padding: 5px 5px;
+                        padding: 10px 10px;
                         text-decoration: none;
                         display: block;
 
                         &:hover {
                             background-color: #798d8d;
-                        }
-
-                        &:active {
-                            &.dropdown-content {
-                                border: red 1px;
-                            }
                         }
                     }
                 }

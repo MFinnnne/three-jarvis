@@ -1,8 +1,4 @@
 import { Camera, Object3D, PerspectiveCamera } from 'three';
-import Constant from '../constant/Constant';
-import ObjectTree from '../app/ObjectTree';
-import TransformControlComponent from './component/TransformControlComponent';
-import { domClickEvent } from './events/DomEvents';
 
 export default class State {
     private _selectedObject: Object3D = new Object3D();

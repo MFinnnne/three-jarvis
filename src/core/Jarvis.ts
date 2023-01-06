@@ -25,7 +25,6 @@ import sceneDB, { SceneEntity } from './mapper/SceneDB';
 import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
 import Recorder from './Recorder';
 import dayjs from 'dayjs';
-
 type AfterSceneInitCallBack = () => void;
 
 export default class Jarvis {
@@ -134,6 +133,7 @@ export default class Jarvis {
         }
         this.init();
         this.render();
+        ObjectChanged.getInstance().objectHelper(this.scene);
         window.addEventListener('resize', () => {
             this.onWindowResize();
         });
@@ -199,4 +199,5 @@ export default class Jarvis {
         OBJECT_TREE_BLACK_LIST.length = 0;
         this._scene = scene as Scene;
     }
+
 }

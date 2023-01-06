@@ -24,6 +24,18 @@ class SceneDB extends Dexie {
         });
     }
 
+    addJson(json: SceneEntity) {
+        this.transaction('rw', this.scene, async () => {
+            await this.scene.add(json);
+        })
+            .then(() => {
+                console.info(`scene ${json.id} store success`);
+            })
+            .catch((reason) => {
+                console.warn(`scene ${json.id} store fail`);
+            });
+    }
+
     addScene(jarvis: Jarvis) {
         this.transaction('rw', this.scene, async () => {
             await this.scene.add({
@@ -46,6 +58,7 @@ class SceneDB extends Dexie {
     deleteScene(containerId: string) {
         this.scene.where('id').equals(containerId).delete();
     }
+
 
     async get(id: string): Promise<SceneEntity | undefined> {
         return this.scene.where('id').equals(id).first();

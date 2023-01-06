@@ -19,34 +19,38 @@ export default class MenuUtils {
                         className: 'tag',
                     },
                     [
-                        // tag
                         m('div', { className: 'dropbtn' }, [itemName]),
                     ],
                 ),
                 //child
                 child instanceof Array
-                    ? m('div', { className: 'export' }, [
-                          m('div', { className: 'dropdown-content' }, [
-                              ...child.map((value) => {
-                                  if (value === '-') {
-                                      return m('hr');
-                                  }
-                                  return m(
-                                      'a',
-                                      {
-                                          className: 'dropdown-item',
-                                          href: '#',
-                                          onClick: (e) => {
-                                              if (callBack) {
-                                                  callBack(value, e);
-                                              }
-                                          },
-                                      },
-                                      [value],
-                                  );
-                              }),
-                          ]),
-                      ])
+                    ? m('div', {
+                        className: 'export',
+                    }, [
+                        m('div', {
+                            className: 'dropdown-content',
+                        }, [
+                            ...child.map((value) => {
+                                if (value === '-') {
+                                    return m('hr');
+                                }
+                                return m(
+                                    'a',
+                                    {
+                                        className: 'dropdown-item',
+                                        href: '#',
+                                        onClick: (e) => {
+                                            if (callBack) {
+                                                callBack(value, e);
+                                            }
+
+                                        },
+                                    },
+                                    [value],
+                                );
+                            }),
+                        ]),
+                    ])
                     : child,
             ],
         );
