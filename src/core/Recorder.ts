@@ -1,20 +1,34 @@
-import { Command } from '../types/types';
-import objectChanged from './ObjectChanged';
+import ObjectChanged from "./ObjectChanged";
+import {Command} from "./Type";
+import Jarvis from "./Jarvis";
 
+
+type afterExecuteCallBack = (cmd: Command, optionalName?: string) => void;
 /**
  * Operation records
  * @class Recorder
  */
-class Recorder {
-    private static instance: Recorder;
+export default class Recorder {
 
-    // private operatorHistories: Command[] = [];
+    private jarvis: Jarvis;
+
+    private _afterExecute: afterExecuteCallBack[] = [];
+    get afterExecute(): afterExecuteCallBack[] {
+        return this._afterExecute;
+    }
+
+    constructor(jarvis: Jarvis) {
+        this.jarvis = jarvis;
+    }
 
     public execute(cmd: Command, optionalName?: string): void {
         cmd.exec();
-        objectChanged.update(cmd.object);
+        ObjectChanged.getInstance().update(cmd.object);
+        this.afterExecute.forEach(fn => {
+            fn(cmd, optionalName);
+        })
     }
+
+    public
 }
 
-const recorder = new Recorder();
-export default recorder;

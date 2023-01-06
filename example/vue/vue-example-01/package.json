@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@right-menu/core": "0.0.7",
+    "@right-menu/vue": "0.0.4",
     "@types/three": "^0.138.0",
     "simplex-noise": "^3.0.1",
     "three": "^0.138.3",

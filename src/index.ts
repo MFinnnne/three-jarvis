@@ -1,39 +1,35 @@
-import * as THREE from 'three';
-import Constant from './constant/Constant';
-import './sass/full.scss';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-import * as allEvents from './core/events';
-import state from './core/State';
-import GUI from './app/GUI';
-import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-import objectChanged from "./core/ObjectChanged";
+import * as THREE from "three";
+import "./sass/full.scss";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import TransformControlComponent from "./core/component/TransformControlComponent";
+import Jarvis from "./core/Jarvis";
+import Toast from "./app/Toast";
+import sceneDB from "./core/mapper/SceneDB";
+
+type JarvisHook = {
+    afterRender: () => void,
+    beforeRender: () => void,
+};
 
 export default class ThreeJarvis {
-    public static init(
+    public static monitor(
         scene: THREE.Scene,
-        camera: THREE.Camera,
+        camera: THREE.PerspectiveCamera,
         renderer: THREE.WebGLRenderer,
-        container: HTMLElement,
         options?: {
             control?: OrbitControls;
-            lazyLoad: false;
-        },
-    ) {
-        Constant.rawVar = {
-            scene: scene,
-            render: renderer,
-            control: options?.control ?? new OrbitControls(camera, renderer.domElement),
-            container: container,
-            camera: camera,
-            transformControls: new TransformControls(camera, renderer.domElement)
-        };
-
-        console.log("5");
-        GUI.guiContainerInit();
-        state.activeCamera = camera;
-        // register events
-        for (const allEventsKey in allEvents) {
-            allEvents[allEventsKey]();
         }
+    ) {
+        const creator = new Jarvis();
+        creator.monitor(scene, renderer, camera, { control: options?.control ?? new OrbitControls(camera, renderer.domElement) });
+    }
+
+    public static async create(container: HTMLCanvasElement, url?: string, options?: JarvisHook) {
+        if (container.id === undefined) {
+            Toast.show("container id  must be set and only");
+            return;
+        }
+        const creator = new Jarvis();
+        await creator.creator(container);
     }
 }

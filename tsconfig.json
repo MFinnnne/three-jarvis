@@ -16,7 +16,7 @@
       "esnext"
     ],
     //    编译过程中需要引入的库文件的列表
-    "allowJs": true,
+    "allowJs": false,
     //允许编译javascript文件。
     "skipLibCheck": true,
     //忽略所有的声明文件（ *.d.ts）的类型检查
@@ -29,6 +29,7 @@
     "forceConsistentCasingInFileNames": true,
     //禁止对同一个文件的不一致的引用
     "module": "ESNext",
+    "experimentalDecorators": true,
     //指定生成哪个模块系统代码
     "moduleResolution": "node",
     //决定如何处理模块。
@@ -49,6 +50,7 @@
     }
     // "suppressImplicitAnyIndexErrors": true, //阻止对缺少索引签名的索引对象报错
   },
+
   "exclude": [
     "node_modules/**/*",
     "dist/**/*",

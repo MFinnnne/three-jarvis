@@ -1,46 +1,57 @@
-import {
-    BoxHelper,
-    ColorRepresentation,
-    DirectionalLight,
-    DirectionalLightHelper,
-    HemisphereLight,
-    HemisphereLightHelper,
-    Object3D,
-    PointLight,
-    PointLightHelper,
-} from 'three';
-import Constant from '../constant/Constant';
-import state from './State';
-import HelperManager from './HelperManager';
-import PaneManager from "./PaneManager";
+import { Box3, Object3D, Sphere } from "three";
+import state from "./State";
+import HelperManager from "./HelperManager";
+import Jarvis from "./Jarvis";
 
-class ObjectChanged {
+export default class ObjectChanged {
+
+    private static instance?: ObjectChanged;
+    private jarvis!: Jarvis;
 
     /**
      *   boxed  mesh
-     * @param object
-     * @param color
      */
-    public objectHelper(object: Object3D, color: ColorRepresentation = 0xffff00): void {
-        if (object.type === 'Scene') {
+    private constructor() {
+    }
+
+
+    public static getInstance(jarvis?: Jarvis): ObjectChanged {
+        if (jarvis) {
+            if (this.instance) {
+                return this.instance;
+            }
+            this.instance = new ObjectChanged();
+            this.instance.jarvis = jarvis;
+            return this.instance;
+        } else {
+            if (this.instance === undefined) {
+                throw new Error("object changed is null ");
+            }
+            return this.instance;
+        }
+    }
+
+
+    public objectHelper(object: Object3D): void {
+        this.jarvis.state.selectedObject = object;
+        console.log(this.jarvis.state.selectedObject.type);
+        if (object.type === "Scene") {
             return;
         }
-        state.selectedObject = object;
-        HelperManager.render(object);
+        this.jarvis.transformControl.attach(object);
+        HelperManager.render(object, this.jarvis.scene);
         return;
     }
 
 
-    public update(): void {
-        const object = state.selectedObject;
+    public update(target?: Object3D): void {
+        const object = target ?? this.jarvis.state.selectedObject;
         if (object == null) {
             return;
         }
-        if (state.selectedObject.uuid === object.uuid) {
+        if (this.jarvis.state.selectedObject.uuid === object.uuid) {
             this.objectHelper(object);
         }
     }
 }
 
-const objectChanged = new ObjectChanged();
-export default objectChanged;

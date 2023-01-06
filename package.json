@@ -29,7 +29,7 @@
     "format"
   ],
   "devDependencies": {
-    "@babel/core": "^7.18.2",
+    "@babel/core": "^7.20.5",
     "@babel/plugin-transform-modules-commonjs": "^7.18.2",
     "@babel/plugin-transform-react-jsx": "^7.17.12",
     "@babel/preset-env": "^7.18.2",
@@ -70,7 +70,7 @@
     "rollup-plugin-threads": "^1.2.0",
     "rollup-plugin-web-worker-loader": "^1.6.1",
     "sass": "^1.52.1",
-    "three": "^0.140.2",
+    "three": "^0.148.0",
     "ts-babel": "^6.1.7",
     "ts-jest": "^28.0.3",
     "ts-node": "^10.8.0",
@@ -80,9 +80,16 @@
   },
   "dependencies": {
     "@0b5vr/tweakpane-plugin-rotation": "^0.1.1",
+    "@right-menu/core": "0.0.7",
     "@tweakpane/core": "^1.0.9",
-    "million": "^1.9.0",
+    "@tweakpane/plugin-essentials": "^0.1.5",
+    "@types/toastify-js": "^1.11.1",
+    "dayjs": "^1.11.7",
+    "dexie": "^3.2.2",
+    "million": "^1.8.8",
     "nanoevents": "^6.0.2",
+    "pino": "^8.8.0",
+    "toastify-js": "^1.12.0",
     "tweakpane": "^3.0.8"
   },
   "peerDependencies": {
