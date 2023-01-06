@@ -1,11 +1,8 @@
-import { Command } from "core/Type";
-import { Object3D } from "three";
-import Constant from "../../constant/Constant";
-import ObjectTree from "../../app/ObjectTree";
-import ObjectDB from "../mapper/ObjectDB";
+import { Object3D } from 'three';
+import { Command } from '../Type';
 
 export default class RemoveObjectCommand implements Command {
-    name = "remove object";
+    name = 'remove object';
     object!: Object3D;
     parent: Object3D | null;
 
@@ -21,5 +18,4 @@ export default class RemoveObjectCommand implements Command {
     undo(): void {
         this.parent?.add(this.object);
     }
-
 }

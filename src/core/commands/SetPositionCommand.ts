@@ -1,7 +1,7 @@
-import { Object3D, Vector3 } from "three";
-import { InputBindingApi } from "@tweakpane/core";
-import { Point3dObject } from "@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d";
-import { Command } from "../Type";
+import { Object3D, Vector3 } from 'three';
+import { InputBindingApi } from '@tweakpane/core';
+import { Point3dObject } from '@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d';
+import { Command } from '../Type';
 
 export default class SetPositionCommand implements Command {
     oldPosition: Vector3;

@@ -1,4 +1,4 @@
-import {Command} from "../Type";
+import { Command } from '../Type';
 
 export default class SetSceneCommand implements Command {
     name = 'set scene';

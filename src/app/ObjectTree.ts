@@ -1,12 +1,12 @@
-import {className, Flags, m, render, VElement, VNode} from "million";
-import {Object3D} from "three";
-import state from "../core/State";
-import Constant from "../constant/Constant";
-import {OBJECT_TREE_BLACK_LIST} from "../config/Config";
-import {rightMenu} from "./RightMenu";
-import Ticker from "../core/Ticker";
-import Jarvis from "../core/Jarvis";
-import {domClickEvent, domDoubleClickEvent} from "../core/events/DomEvents";
+import { className, Flags, m, render, VElement, VNode } from 'million';
+import { Object3D } from 'three';
+import state from '../core/State';
+import Constant from '../constant/Constant';
+import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import { rightMenu } from './RightMenu';
+import Ticker from '../core/Ticker';
+import Jarvis from '../core/Jarvis';
+import { domClickEvent, domDoubleClickEvent } from '../core/events/DomEvents';
 
 export default class ObjectTree {
     private prevNode: VNode | undefined;
@@ -14,12 +14,11 @@ export default class ObjectTree {
 
     private container: HTMLElement;
 
-
     constructor(container: HTMLElement, creator: Jarvis) {
         this.jarvis = creator;
         this.container = container;
         domDoubleClickEvent(container, creator.scene);
-        domClickEvent(creator.scene)
+        domClickEvent(creator.scene);
     }
 
     private object2VNode(object: Object3D): VElement | null {
@@ -28,49 +27,49 @@ export default class ObjectTree {
         }
         const node: VElement = {
             flag: Flags.ELEMENT,
-            tag: "div",
+            tag: 'div',
             props: {
-                className: object.name === "" ? object.type : object.name,
+                className: object.name === '' ? object.type : object.name,
                 uuid: object.uuid,
                 parent: null,
-                hasChildren: object.children.length > 0
+                hasChildren: object.children.length > 0,
             },
             children: [
                 m(
-                    "span",
+                    'span',
                     {
                         id: object.uuid,
                         className: className({
                             caret: object.children.length > 0,
                             caretOver: object.children.length <= 0,
-                            threeObject: true
+                            threeObject: true,
                         }),
                         onClick: (e) => {
                             if (object.children.length > 0) {
                                 const parentElement = (e.target as HTMLElement).parentElement;
-                                const element = parentElement?.querySelector(".nested");
-                                element?.classList.toggle("active");
-                                (e.target as HTMLElement).classList.toggle("caretDown");
+                                const element = parentElement?.querySelector('.nested');
+                                element?.classList.toggle('active');
+                                (e.target as HTMLElement).classList.toggle('caretDown');
                             }
                             const target = e.target as HTMLElement;
                             rightMenu(target, this.jarvis);
                             const uuid = target.id;
                             this.jarvis.state.selectedObjectDom = target;
-                            Ticker.emmit("objectDomClick", uuid);
+                            Ticker.emmit('objectDomClick', uuid);
                             // this.autoLocateInTree(this.container);
-                        }
+                        },
                     },
-                    [object.name === "" ? object.type : object.name],
-                    Flags.ELEMENT
-                )
-            ]
+                    [object.name === '' ? object.type : object.name],
+                    Flags.ELEMENT,
+                ),
+            ],
         };
         if (object.children.length > 0) {
             node.children?.push({
-                tag: "ul",
-                props: {className: className({nested: true})},
+                tag: 'ul',
+                props: { className: className({ nested: true }) },
                 children: [],
-                flag: Flags.ELEMENT
+                flag: Flags.ELEMENT,
             });
         }
         return node;
@@ -102,7 +101,7 @@ export default class ObjectTree {
         if (!props) {
             return;
         }
-        const indent = "-".repeat(level * 2);
+        const indent = '-'.repeat(level * 2);
         console.log(`${indent}${props.value}#${props.id} ${props.value}`);
         vNode.children?.forEach((child) => {
             ObjectTree.print(child as VElement, level + 1);
@@ -123,8 +122,8 @@ export default class ObjectTree {
      * @param dom
      */
     autoLocateInTree(dom: HTMLElement) {
-        this.jarvis.state.selectedObjectDom?.classList.toggle("find-out");
-        dom.classList.toggle("find-out");
+        this.jarvis.state.selectedObjectDom?.classList.toggle('find-out');
+        dom.classList.toggle('find-out');
         let offsetTop: number = dom.offsetTop - this.container.clientHeight / 2;
         if (dom.offsetTop < this.container.clientHeight) {
             offsetTop = 0;
@@ -143,11 +142,11 @@ export default class ObjectTree {
     expandTreeByChildNode(element: HTMLElement) {
         let divElement = element.parentElement?.parentElement?.parentElement;
         while (divElement) {
-            const classList = divElement.querySelector(".nested")?.classList;
-            if (!classList?.contains("active")) {
-                classList?.toggle("active");
+            const classList = divElement.querySelector('.nested')?.classList;
+            if (!classList?.contains('active')) {
+                classList?.toggle('active');
             }
-            if (divElement.className === "scene") {
+            if (divElement.className === 'scene') {
                 break;
             }
             divElement = divElement.parentElement?.parentElement;

@@ -1,7 +1,6 @@
-import ObjectChanged from "./ObjectChanged";
-import {Command} from "./Type";
-import Jarvis from "./Jarvis";
-
+import ObjectChanged from './ObjectChanged';
+import { Command } from './Type';
+import Jarvis from './Jarvis';
 
 type afterExecuteCallBack = (cmd: Command, optionalName?: string) => void;
 /**
@@ -9,7 +8,6 @@ type afterExecuteCallBack = (cmd: Command, optionalName?: string) => void;
  * @class Recorder
  */
 export default class Recorder {
-
     private jarvis: Jarvis;
 
     private _afterExecute: afterExecuteCallBack[] = [];
@@ -24,11 +22,10 @@ export default class Recorder {
     public execute(cmd: Command, optionalName?: string): void {
         cmd.exec();
         ObjectChanged.getInstance().update(cmd.object);
-        this.afterExecute.forEach(fn => {
+        this.afterExecute.forEach((fn) => {
             fn(cmd, optionalName);
-        })
+        });
     }
 
-    public
+    public;
 }
-

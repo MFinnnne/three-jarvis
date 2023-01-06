@@ -1,6 +1,6 @@
 import ObjectControlPane from './ObjectControlPane';
-import {Light, Object3D} from 'three';
-import {Pane} from 'tweakpane';
+import { Light, Object3D } from 'three';
+import { Pane } from 'tweakpane';
 
 export default class LightControlPane extends ObjectControlPane {
     genPane(object: Object3D): Pane {

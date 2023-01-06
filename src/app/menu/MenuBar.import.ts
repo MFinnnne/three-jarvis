@@ -1,13 +1,13 @@
-import {m, VNode} from "million";
-import Jarvis from "../../core/Jarvis";
-import {LoaderUtils} from "../../util/LoadUtils";
-import * as THREE from "three";
-import {TGALoader} from "three/examples/jsm/loaders/TGALoader";
-import PromiseFileReader from "../../util/PromiseFileReader";
-import {DRACOLoader} from "three/examples/jsm/loaders/DRACOLoader";
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
-import AddObjectCommand from "../../core/commands/AddObjectCommand";
-import {MeshoptDecoder} from '../../core/jsm/meshopt_decoder.module'
+import { m, VNode } from 'million';
+import Jarvis from '../../core/Jarvis';
+import { LoaderUtils } from '../../util/LoadUtils';
+import * as THREE from 'three';
+import { TGALoader } from 'three/examples/jsm/loaders/TGALoader';
+import PromiseFileReader from '../../util/PromiseFileReader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import AddObjectCommand from '../../core/commands/AddObjectCommand';
+import { MeshoptDecoder } from '../../core/jsm/meshopt_decoder.module';
 
 export default class MenuBarImport {
     private readonly jarvis: Jarvis;
@@ -17,37 +17,42 @@ export default class MenuBarImport {
     }
 
     element(): VNode {
-
-        return m("div",
+        return m(
+            'div',
             {
-                className: "menu-item"
+                className: 'menu-item',
             },
             [
                 m(
-                    "div", {
-                        className: "tag import"
-                    }, [
+                    'div',
+                    {
+                        className: 'tag import',
+                    },
+                    [
+                        m('input', {
+                            type: 'file',
+                            id: 'file',
+                            style: 'display:none',
+                            multiple: true,
+                            onchange: (e) => {
+                                this.onClick('import', e);
+                            },
+                        }),
                         m(
-                            "input",
+                            'label',
                             {
-                                type: "file", id: "file", style: "display:none", multiple: true, onchange: (e) => {
-                                    this.onClick("import", e);
-                                }
-                            }),
-                        m(
-                            "label",
-                            {
-                                for: "file"
-                            }, ["import"]
-                        )
-                    ]
-                )
-            ]
+                                for: 'file',
+                            },
+                            ['import'],
+                        ),
+                    ],
+                ),
+            ],
         );
     }
 
     private onClick(type, e) {
-        if (type === "import") {
+        if (type === 'import') {
             this.importModel(e);
         }
     }
@@ -70,13 +75,13 @@ export default class MenuBarImport {
 
             for (let i = 0; i < files.length; i++) {
                 const jarvis = this.jarvis;
-                PromiseFileReader.readAsArrayBuffer(files[i]).then(event => {
+                PromiseFileReader.readAsArrayBuffer(files[i]).then((event) => {
                     const extension = files[i].name.split('.').pop().toLowerCase();
                     const filename = files[i].name;
-                    console.log(`file type:${extension}`)
+                    console.log(`file type:${extension}`);
                     switch (extension) {
                         case 'glb': {
-                            const contents = event
+                            const contents = event;
                             const dracoLoader = new DRACOLoader();
                             dracoLoader.setDecoderPath('three/examples/js/libs/draco/gltf/');
                             const loader = new GLTFLoader();
@@ -91,7 +96,6 @@ export default class MenuBarImport {
                             break;
                         }
                         case 'gltf': {
-
                             const contents = event;
                             let loader;
                             if (this.isGLTF1(contents)) {
@@ -109,7 +113,7 @@ export default class MenuBarImport {
                                 scene.name = filename;
                                 scene.animations.push(...result.animations);
                                 jarvis.recorder.execute(new AddObjectCommand(jarvis.state.selectedObject, scene));
-                            })
+                            });
                             break;
                         }
                     }
@@ -138,4 +142,3 @@ export default class MenuBarImport {
         return json.asset != undefined && json.asset.version[0] < 2;
     }
 }
-

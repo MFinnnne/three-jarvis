@@ -8,8 +8,8 @@ import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
 import webWorkerLoader from 'rollup-plugin-web-worker-loader';
 import babel from '@rollup/plugin-babel';
-import {name} from '../package.json';
-import {DEFAULT_EXTENSIONS} from "@babel/core";
+import { name } from '../package.json';
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 
 export default {
     input: 'src/index.ts',
@@ -37,11 +37,7 @@ export default {
         babel({
             exclude: '**/node_modules/**',
             babelHelpers: 'bundled',
-            extensions:[
-                ...DEFAULT_EXTENSIONS,
-                '.ts',
-                '.tsx'
-            ]
+            extensions: [...DEFAULT_EXTENSIONS, '.ts', '.tsx'],
         }),
         replace({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
@@ -57,6 +53,5 @@ export default {
                     .then((result) => result.css),
         }),
         commonjs(),
-
     ],
 };

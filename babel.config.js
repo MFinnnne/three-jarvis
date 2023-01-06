@@ -1,6 +1,6 @@
 module.exports = {
     env: {
-        "development": {
+        development: {
             presets: [
                 [
                     '@babel/preset-env',
@@ -13,8 +13,8 @@ module.exports = {
                 '@babel/preset-typescript',
             ],
         },
-        "production": {
-            presets: ['@babel/preset-env','@babel/preset-typescript']
-        }
+        production: {
+            presets: ['@babel/preset-env', '@babel/preset-typescript'],
+        },
     },
 };
