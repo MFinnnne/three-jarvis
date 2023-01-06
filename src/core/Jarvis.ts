@@ -128,6 +128,9 @@ export default class Jarvis {
         }
         this.init();
         this.render();
+        window.addEventListener('resize',()=>{
+            this.onWindowResize();
+        })
     }
 
 

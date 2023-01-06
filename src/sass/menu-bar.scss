@@ -69,14 +69,21 @@
                     min-width: 80px;
                     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 
+
                     a {
                         color: white;
-                        padding: 12px 16px;
+                        padding: 5px 5px;
                         text-decoration: none;
                         display: block;
 
                         &:hover {
                             background-color: #798d8d;
+                        }
+
+                        &:active {
+                            &.dropdown-content {
+                                border: red 1px;
+                            }
                         }
                     }
                 }

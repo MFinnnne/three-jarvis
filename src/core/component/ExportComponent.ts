@@ -1,11 +1,13 @@
-import {Group, Object3D} from "three";
-import state from "../State";
-import {LoadConfig, LoadModelConfig} from "../Type";
+import { Group, Object3D } from 'three';
+import state from '../State';
+import { LoadConfig, LoadModelConfig } from '../Type';
+import sceneDB from '../mapper/SceneDB';
+import dayjs from 'dayjs';
 
 export default class ExportComponent {
-    static exportConfigJS() {
-        ExportComponent.exportFile('config.js', ExportComponent.objectConfig(state.selectedObject));
 
+    static exportJson(fileName:string,json: string) {
+        ExportComponent.exportFile(fileName+'.json', json);
     }
 
     //导出txt格式
@@ -33,28 +35,33 @@ export default class ExportComponent {
             afterLoad: (objects) => {
             },
             beforeLoad: () => {
-            }
-        }
+            },
+        };
         for (const child of object.children) {
             const modelConfig: LoadModelConfig = {
                 id: child.uuid,
-                path:'',
+                path: '',
                 name: child.name,
-                position: {x: child.position.x, y: child.position.y, z: child.position.z},
-                rotation: {x: child.rotation.x, y: child.rotation.y, z: child.rotation.z, order: child.rotation.order},
-                scale: {x: child.scale.x, y: child.scale.y, z: child.scale.z},
+                position: { x: child.position.x, y: child.position.y, z: child.position.z },
+                rotation: {
+                    x: child.rotation.x,
+                    y: child.rotation.y,
+                    z: child.rotation.z,
+                    order: child.rotation.order,
+                },
+                scale: { x: child.scale.x, y: child.scale.y, z: child.scale.z },
                 quaternion: {
                     x: child.quaternion.x,
                     y: child.quaternion.y,
                     z: child.quaternion.z,
-                    w: child.quaternion.w
+                    w: child.quaternion.w,
                 },
                 afterRender: (object) => {
                 },
                 beforeRender: () => {
-                }
-            }
-            config.loadModelConfigs.push(modelConfig)
+                },
+            };
+            config.loadModelConfigs.push(modelConfig);
         }
         return ExportComponent.loadModelConfig2String(config);
     }
@@ -96,7 +103,7 @@ export default class ExportComponent {
         `;
             configs.push(modelConfig);
         });
-        return configs.toString()
+        return configs.toString();
     }
 }
 

@@ -19,7 +19,7 @@ export default class MenuBar {
         );
         element.children?.push(new MenuBarNew(jarvis).element());
         element.children?.push(new MenuBarImport(jarvis).element());
-        element.children?.push(MenuBarExport.element());
+        element.children?.push(new MenuBarExport(jarvis).element());
         render(parent, element);
     }
 

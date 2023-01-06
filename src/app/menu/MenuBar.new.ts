@@ -13,7 +13,7 @@ export default class MenuBarNew {
     }
 
     element(): VNode {
-        return MenuUtils.menItem("new", ["Group", "PointLight", "SpotLight", "AmbientLight", "DirectionalLight", "HemisphereLight", "RectAreaLight"], this.onClick.bind(this));
+        return MenuUtils.menItem("new", ["Group",'-', "PointLight", "SpotLight", "AmbientLight", "DirectionalLight", "HemisphereLight", "RectAreaLight"], this.onClick.bind(this));
     }
     onClick(type: string, e: Event) {
         switch (type) {

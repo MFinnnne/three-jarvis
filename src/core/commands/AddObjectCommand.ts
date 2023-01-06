@@ -1,8 +1,9 @@
-import {Object3D} from "three";
-import {Command} from "../Type";
+import { Object3D } from 'three';
+import { Command } from '../Type';
+import Toast from '../../app/Toast';
 
 export default class AddObjectCommand implements Command {
-    name = "add object";
+    name = 'add object';
     private readonly _object: Object3D;
     private readonly _parent: Object3D;
 
@@ -12,7 +13,11 @@ export default class AddObjectCommand implements Command {
     }
 
     exec(): void {
-        this._parent.add(this._object);
+        if (this._parent && this._parent.parent != null) {
+            this._parent.add(this._object);
+            return;
+        }
+        Toast.show('The added model must select the parent object');
     }
 
     undo(): void {
