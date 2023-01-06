@@ -4,29 +4,31 @@ import {
     GridHelper,
     HemisphereLight,
     Mesh,
-    MeshBasicMaterial, Object3D, ObjectLoader, OrthographicCamera,
+    MeshBasicMaterial,
+    Object3D,
+    ObjectLoader,
+    OrthographicCamera,
     PerspectiveCamera,
     Scene,
-    WebGLRenderer
-} from "three";
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import GUI from "../app/GUI";
-import State from "./State";
-import MonitorControlPane from "../app/pane/MonitorControlPane";
-import TransformControlComponent from "./component/TransformControlComponent";
-import ObjectChanged from "./ObjectChanged";
-import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-import PaneManager from "./PaneManager";
-import {rayCasterEvents} from "./events/ObjectEvents";
-import sceneDB, {SceneEntity} from "./mapper/SceneDB";
-import {OBJECT_TREE_BLACK_LIST} from "../config/Config";
-import Recorder from "./Recorder";
-import dayjs from "dayjs";
+    WebGLRenderer,
+} from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import GUI from '../app/GUI';
+import State from './State';
+import MonitorControlPane from '../app/pane/MonitorControlPane';
+import TransformControlComponent from './component/TransformControlComponent';
+import ObjectChanged from './ObjectChanged';
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import PaneManager from './PaneManager';
+import { rayCasterEvents } from './events/ObjectEvents';
+import sceneDB, { SceneEntity } from './mapper/SceneDB';
+import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import Recorder from './Recorder';
+import dayjs from 'dayjs';
 
 type AfterSceneInitCallBack = () => void;
 
 export default class Jarvis {
-
     get recorder(): Recorder {
         return this._recorder;
     }
@@ -66,7 +68,6 @@ export default class Jarvis {
         return this._light;
     }
 
-
     get scene(): Scene {
         return this._scene;
     }
@@ -83,9 +84,14 @@ export default class Jarvis {
         return this._control;
     }
 
-    monitor(scene: Scene, renderer: WebGLRenderer, camera: PerspectiveCamera, option?: {
-        control: OrbitControls
-    }) {
+    monitor(
+        scene: Scene,
+        renderer: WebGLRenderer,
+        camera: PerspectiveCamera,
+        option?: {
+            control: OrbitControls;
+        },
+    ) {
         this._scene = scene;
         this._camera = camera;
         this._renderer = renderer;
@@ -101,7 +107,7 @@ export default class Jarvis {
     }
 
     async creator(container: HTMLCanvasElement) {
-        this._renderer = new WebGLRenderer({canvas: container});
+        this._renderer = new WebGLRenderer({ canvas: container });
         this._container = container;
         this._state = new State();
         this._recorder = new Recorder(this);
@@ -114,25 +120,24 @@ export default class Jarvis {
             this._scene = new Scene();
             this._camera = new PerspectiveCamera();
             this._camera.lookAt(0, 0, 0);
-            this._camera.name = "jarvis-camera";
+            this._camera.name = 'jarvis-camera';
             this._camera.layers.enableAll();
             this._camera.position.set(8, 8, 8);
             this._scene.add(this._camera);
             this.state.activeCamera = this._camera;
             this._scene.add(this._light);
             const boxGeometry = new BoxGeometry(1, 1, 1);
-            const material = new MeshBasicMaterial({color: 0x00ff00});
+            const material = new MeshBasicMaterial({ color: 0x00ff00 });
             const mesh = new Mesh(boxGeometry, material);
             mesh.position.set(1, 1, 1);
             this._scene?.add(mesh);
         }
         this.init();
         this.render();
-        window.addEventListener('resize',()=>{
+        window.addEventListener('resize', () => {
             this.onWindowResize();
-        })
+        });
     }
-
 
     private init() {
         this._control = new OrbitControls(this._camera, this._renderer.domElement);
@@ -143,12 +148,12 @@ export default class Jarvis {
         const controlComponent = new TransformControlComponent(this);
         controlComponent.init();
         this._transformControl = controlComponent.control;
-        this._transformControl.name = "jarvis-transform-control";
+        this._transformControl.name = 'jarvis-transform-control';
         this._scene.add(this._transformControl);
 
         const gridHelper = new GridHelper(20, 20);
         gridHelper.layers.set(3);
-        gridHelper.name = "jarvis-grid-helper";
+        gridHelper.name = 'jarvis-grid-helper';
         OBJECT_TREE_BLACK_LIST.push(gridHelper.uuid);
 
         this._scene.add(gridHelper);
@@ -160,7 +165,6 @@ export default class Jarvis {
         rayCasterEvents(this);
         new MonitorControlPane(this).genPane();
     }
-
 
     private onWindowResize() {
         if (this._camera instanceof PerspectiveCamera) {
@@ -186,7 +190,7 @@ export default class Jarvis {
         this.state.activeCamera = this._camera;
         const scene = await loader.parseAsync(json.scene);
         for (const uuid of json.treeBlackList) {
-            const obj: Object3D | undefined = scene.getObjectByProperty("uuid", uuid);
+            const obj: Object3D | undefined = scene.getObjectByProperty('uuid', uuid);
             if (obj) {
                 obj.removeFromParent();
             }
@@ -194,8 +198,5 @@ export default class Jarvis {
         json.treeBlackList.length = 0;
         OBJECT_TREE_BLACK_LIST.length = 0;
         this._scene = scene as Scene;
-
     }
-
-
 }

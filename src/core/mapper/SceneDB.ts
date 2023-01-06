@@ -4,15 +4,15 @@ import dayjs from 'dayjs';
 import { OBJECT_TREE_BLACK_LIST } from '../../config/Config';
 
 export type SceneEntity = {
-    key?: number
-    id: string,
-    ts: number,
-    updateTime: string,
-    treeBlackList: Array<string>,
-    script?: { uuid: string, code: string }[]
-    camera: { metadata?: any, geometries?: any; materials?: any; textures?: any; images?: any, object?: any }
-    scene: { metadata?: any, geometries?: any; materials?: any; textures?: any; images?: any, object?: any }
-}
+    key?: number;
+    id: string;
+    ts: number;
+    updateTime: string;
+    treeBlackList: Array<string>;
+    script?: { uuid: string; code: string }[];
+    camera: { metadata?: any; geometries?: any; materials?: any; textures?: any; images?: any; object?: any };
+    scene: { metadata?: any; geometries?: any; materials?: any; textures?: any; images?: any; object?: any };
+};
 
 class SceneDB extends Dexie {
     private scene!: Table<SceneEntity, number>;
@@ -34,11 +34,13 @@ class SceneDB extends Dexie {
                 updateTime: dayjs().format(),
                 treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST)),
             });
-        }).then(() => {
-            console.info(`scene ${jarvis.container.id} store success`);
-        }).catch(reason => {
-            console.warn(`scene ${jarvis.container.id} store fail`);
-        });
+        })
+            .then(() => {
+                console.info(`scene ${jarvis.container.id} store success`);
+            })
+            .catch((reason) => {
+                console.warn(`scene ${jarvis.container.id} store fail`);
+            });
     }
 
     deleteScene(containerId: string) {
@@ -49,20 +51,22 @@ class SceneDB extends Dexie {
         return this.scene.where('id').equals(id).first();
     }
 
-    getAll():PromiseExtended<Array<SceneEntity>> {
+    getAll(): PromiseExtended<Array<SceneEntity>> {
         return this.scene.toArray();
     }
 
     async updateScene(jarvis: Jarvis) {
-
-        await this.scene.where('id').equals(jarvis.container.id).modify({
-            script: {},
-            camera: jarvis.camera.toJSON(),
-            scene: jarvis.scene.toJSON(),
-            ts: dayjs().unix(),
-            updateTime: dayjs().format(),
-            treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST)),
-        });
+        await this.scene
+            .where('id')
+            .equals(jarvis.container.id)
+            .modify({
+                script: {},
+                camera: jarvis.camera.toJSON(),
+                scene: jarvis.scene.toJSON(),
+                ts: dayjs().unix(),
+                updateTime: dayjs().format(),
+                treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST)),
+            });
     }
 
     async countById(id: string): Promise<number> {

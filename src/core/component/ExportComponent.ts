@@ -5,9 +5,8 @@ import sceneDB from '../mapper/SceneDB';
 import dayjs from 'dayjs';
 
 export default class ExportComponent {
-
-    static exportJson(fileName:string,json: string) {
-        ExportComponent.exportFile(fileName+'.json', json);
+    static exportJson(fileName: string, json: string) {
+        ExportComponent.exportFile(fileName + '.json', json);
     }
 
     //导出txt格式
@@ -28,14 +27,11 @@ export default class ExportComponent {
         return object.toJSON();
     }
 
-
     private static objectConfig(object: Object3D | Group): string {
         const config: LoadConfig = {
             loadModelConfigs: [],
-            afterLoad: (objects) => {
-            },
-            beforeLoad: () => {
-            },
+            afterLoad: (objects) => {},
+            beforeLoad: () => {},
         };
         for (const child of object.children) {
             const modelConfig: LoadModelConfig = {
@@ -56,21 +52,18 @@ export default class ExportComponent {
                     z: child.quaternion.z,
                     w: child.quaternion.w,
                 },
-                afterRender: (object) => {
-                },
-                beforeRender: () => {
-                },
+                afterRender: (object) => {},
+                beforeRender: () => {},
             };
             config.loadModelConfigs.push(modelConfig);
         }
         return ExportComponent.loadModelConfig2String(config);
     }
 
-
     private static loadModelConfig2String(config: LoadConfig): string {
         return `
             export const CONFIG = {
-                loadModelConfigs:[${(ExportComponent.modelConfig2String(config.loadModelConfigs))}],
+                loadModelConfigs:[${ExportComponent.modelConfig2String(config.loadModelConfigs)}],
                 afterLoad: (objects) => {
                 },
                 beforeLoad: () => {
@@ -106,5 +99,3 @@ export default class ExportComponent {
         return configs.toString();
     }
 }
-
-
