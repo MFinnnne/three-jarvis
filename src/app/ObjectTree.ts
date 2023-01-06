@@ -1,29 +1,25 @@
-import { className, Flags, m, render, VElement, VNode } from "million";
-import { Object3D } from "three";
+import {className, Flags, m, render, VElement, VNode} from "million";
+import {Object3D} from "three";
 import state from "../core/State";
 import Constant from "../constant/Constant";
-import { OBJECT_TREE_BLACK_LIST } from "../config/Config";
-import { rightMenu } from "./RightMenu";
+import {OBJECT_TREE_BLACK_LIST} from "../config/Config";
+import {rightMenu} from "./RightMenu";
 import Ticker from "../core/Ticker";
 import Jarvis from "../core/Jarvis";
-import { domClickEvent, domDoubleClickEvent } from "../core/events/DomEvents";
+import {domClickEvent, domDoubleClickEvent} from "../core/events/DomEvents";
 
 export default class ObjectTree {
-    private static PREV_NODE: VNode;
-    private creator: Jarvis;
+    private prevNode: VNode | undefined;
+    private readonly creator: Jarvis;
 
     private container: HTMLElement;
 
 
-    constructor(container: HTMLElement,creator:Jarvis) {
+    constructor(container: HTMLElement, creator: Jarvis) {
         this.creator = creator;
         this.container = container;
-        domDoubleClickEvent(container,creator.scene);
+        domDoubleClickEvent(container, creator.scene);
         domClickEvent(creator.scene)
-
-        setInterval(() => {
-            this.render(container);
-        }, 200);
     }
 
     private object2VNode(object: Object3D): VElement | null {
@@ -57,7 +53,7 @@ export default class ObjectTree {
                                 (e.target as HTMLElement).classList.toggle("caretDown");
                             }
                             const target = e.target as HTMLElement;
-                            rightMenu(target,this.creator);
+                            rightMenu(target, this.creator);
                             const uuid = target.id;
                             this.creator.state.selectedObjectDom = target;
                             Ticker.emmit("objectDomClick", uuid);
@@ -72,7 +68,7 @@ export default class ObjectTree {
         if (object.children.length > 0) {
             node.children?.push({
                 tag: "ul",
-                props: { className: className({ nested: true }) },
+                props: {className: className({nested: true})},
                 children: [],
                 flag: Flags.ELEMENT
             });
@@ -118,15 +114,15 @@ export default class ObjectTree {
         if (newNode === null) {
             return;
         }
-        render(parent, newNode, ObjectTree.PREV_NODE);
-        ObjectTree.PREV_NODE = newNode;
+        render(parent, newNode, this.prevNode ?? newNode);
+        this.prevNode = newNode;
     }
 
     /**
      * find dom in three and auto scroll to it
      * @param dom
      */
-   autoLocateInTree(dom: HTMLElement) {
+    autoLocateInTree(dom: HTMLElement) {
         this.creator.state.selectedObjectDom?.classList.toggle("find-out");
         dom.classList.toggle("find-out");
         let offsetTop: number = dom.offsetTop - this.container.clientHeight / 2;

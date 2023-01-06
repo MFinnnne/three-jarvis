@@ -1,4 +1,4 @@
-import { m, VElement, VNode } from "million";
+import {m, VElement, VNode} from "million";
 import Ticker from "../../core/Ticker";
 
 
@@ -7,7 +7,6 @@ export default class MenuUtils {
         return m("div", {
             className: "menu-item"
         }, [
-            // item
             m(
                 "div",
                 {
@@ -15,18 +14,19 @@ export default class MenuUtils {
                 }
                 , [
                     // tag
-                    m("div", { className: "dropbtn" }, [itemName])
+                    m("div", {className: "dropbtn"}, [itemName])
                 ]
             ),
             //child
             child instanceof Array
                 ?
-                m("div", { className: "export" }, [
-                    m("div", { className: "dropdown-content" }, [
+                m("div", {className: "export"}, [
+                    m("div", {className: "dropdown-content"}, [
                         ...child.map(value => {
                             return m(
                                 "a",
                                 {
+                                    className: 'dropdown-item',
                                     href: "#", onClick: (e) => {
                                         if (callBack) {
                                             callBack(value, e);

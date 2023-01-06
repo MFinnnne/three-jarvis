@@ -4,7 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { TransformControls } from "three/examples/jsm/controls/TransformControls";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
-export interface Events {
+export type Events = {
     objectDomClick: (id: string) => void;
     objectDomDoubleClick: (id: string) => void;
     objectClick: (object3D: Object3D) => void;
@@ -18,7 +18,7 @@ export interface Events {
 
 }
 
-export interface Command {
+export type Command = {
     object?: Object3D;
     name?: string;
 

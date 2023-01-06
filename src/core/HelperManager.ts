@@ -126,7 +126,7 @@ export default class HelperManager {
             return;
         }
         const fn = OBJECT_HELPER_MAP.get(object.type);
-        let fns: Array<helperFns> = [];
+        const fns: Array<helperFns> = [];
         if (fn !== undefined) {
             if (!(fn instanceof Array)) {
                 fns.push(fn);

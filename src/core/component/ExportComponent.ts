@@ -35,7 +35,7 @@ export default class ExportComponent {
             beforeLoad: () => {
             }
         }
-        for (let child of object.children) {
+        for (const child of object.children) {
             const modelConfig: LoadModelConfig = {
                 id: child.uuid,
                 path:'',
@@ -75,7 +75,7 @@ export default class ExportComponent {
     private static modelConfig2String(modelConfigs: LoadModelConfig[]): string {
         const configs: string[] = [];
         modelConfigs.forEach((child, index) => {
-            let modelConfig: string = `
+            const modelConfig = `
             {
                id: '${child.id}',
                 name: '${child.name}',

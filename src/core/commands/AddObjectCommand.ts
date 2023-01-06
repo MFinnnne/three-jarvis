@@ -1,6 +1,5 @@
-import { Object3D } from "three";
-import { Command } from "../Type";
-import Toast from "../../app/Toast";
+import {Object3D} from "three";
+import {Command} from "../Type";
 
 export default class AddObjectCommand implements Command {
     name = "add object";

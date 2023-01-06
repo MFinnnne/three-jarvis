@@ -5,7 +5,7 @@ import ObjectTree from "../../app/ObjectTree";
 import ObjectDB from "../mapper/ObjectDB";
 
 export default class RemoveObjectCommand implements Command {
-    name: string = "remove object";
+    name = "remove object";
     object!: Object3D;
     parent: Object3D | null;
 

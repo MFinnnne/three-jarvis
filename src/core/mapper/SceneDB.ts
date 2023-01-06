@@ -1,15 +1,15 @@
-import Dexie, { Table } from "dexie";
+import Dexie, {Table} from "dexie";
 import Jarvis from "../Jarvis";
 import dayjs from "dayjs";
-import { OBJECT_TREE_BLACK_LIST } from "../../config/Config";
+import {OBJECT_TREE_BLACK_LIST} from "../../config/Config";
 
-export interface SceneEntity {
+export type SceneEntity = {
     key?: number
     id: string,
     ts: number,
     updateTime: string,
     treeBlackList: Array<string>,
-    script?: { uuid: string, code: string }[] | {}
+    script?: { uuid: string, code: string }[]
     camera: { metadata?: any, geometries?: any; materials?: any; textures?: any; images?: any, object?: any }
     scene: { metadata?: any, geometries?: any; materials?: any; textures?: any; images?: any, object?: any }
 }
@@ -28,12 +28,11 @@ class SceneDB extends Dexie {
         this.transaction("rw", this.scene, async () => {
             await this.scene.add({
                 id: jarvis.container.id,
-                script: {},
                 camera: jarvis.camera.toJSON(),
                 scene: jarvis.scene.toJSON(),
                 ts: dayjs().unix(),
                 updateTime: dayjs().format(),
-                treeBlackList: OBJECT_TREE_BLACK_LIST
+                treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST))
             });
         }).then(() => {
             console.info(`scene ${jarvis.container.id} store success`);
@@ -51,13 +50,14 @@ class SceneDB extends Dexie {
     }
 
     async updateScene(jarvis: Jarvis) {
+
         await this.scene.where("id").equals(jarvis.container.id).modify({
             script: {},
             camera: jarvis.camera.toJSON(),
             scene: jarvis.scene.toJSON(),
             ts: dayjs().unix(),
             updateTime: dayjs().format(),
-            treeBlackList: OBJECT_TREE_BLACK_LIST
+            treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST))
         });
     }
 

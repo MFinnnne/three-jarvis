@@ -23,7 +23,7 @@ export default class TransformControlComponent {
         const transformControls = new TransformControls(this.jarvis.state.activeCamera, this.jarvis.renderer.domElement);
         transformControls.layers.set(1);
         transformControls.getRaycaster().layers.set(1);
-        for (let child of transformControls.children) {
+        for (const child of transformControls.children) {
             child.traverse(object => {
                 object.layers.set(1);
             });

@@ -9,22 +9,27 @@ import {
     Scene,
     WebGLRenderer
 } from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import GUI from "../app/GUI";
 import State from "./State";
 import MonitorControlPane from "../app/pane/MonitorControlPane";
 import TransformControlComponent from "./component/TransformControlComponent";
 import ObjectChanged from "./ObjectChanged";
-import { TransformControls } from "three/examples/jsm/controls/TransformControls";
+import {TransformControls} from "three/examples/jsm/controls/TransformControls";
 import PaneManager from "./PaneManager";
-import { rayCasterEvents } from "./events/ObjectEvents";
-import sceneDB, { SceneEntity } from "./mapper/SceneDB";
-import { l } from "million/dist/types-9663cfda";
-import { OBJECT_TREE_BLACK_LIST } from "../config/Config";
+import {rayCasterEvents} from "./events/ObjectEvents";
+import sceneDB, {SceneEntity} from "./mapper/SceneDB";
+import {OBJECT_TREE_BLACK_LIST} from "../config/Config";
+import Recorder from "./Recorder";
+import dayjs from "dayjs";
 
+type AfterSceneInitCallBack = () => void;
 
 export default class Jarvis {
 
+    get recorder(): Recorder {
+        return this._recorder;
+    }
 
     private _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
     private _renderer!: WebGLRenderer;
@@ -36,6 +41,14 @@ export default class Jarvis {
     private _transformControl!: TransformControls;
 
     private _state!: State;
+
+    private _recorder!: Recorder;
+
+    private _afterSceneInitCallBack: AfterSceneInitCallBack[] = [];
+
+    get afterSceneInitCallBack(): AfterSceneInitCallBack[] {
+        return this._afterSceneInitCallBack;
+    }
 
     get transformControl(): TransformControls {
         return this._transformControl;
@@ -88,9 +101,11 @@ export default class Jarvis {
     }
 
     async creator(container: HTMLCanvasElement) {
-        this._renderer = new WebGLRenderer({ canvas: container });
+        this._renderer = new WebGLRenderer({canvas: container});
         this._container = container;
         this._state = new State();
+        this._recorder = new Recorder(this);
+        this._recorder.afterExecute.push(() => this.toJson());
         const sceneInfo = await sceneDB.get(container.id);
 
         if (sceneInfo) {
@@ -106,7 +121,7 @@ export default class Jarvis {
             this.state.activeCamera = this._camera;
             this._scene.add(this._light);
             const boxGeometry = new BoxGeometry(1, 1, 1);
-            const material = new MeshBasicMaterial({ color: 0x00ff00 });
+            const material = new MeshBasicMaterial({color: 0x00ff00});
             const mesh = new Mesh(boxGeometry, material);
             mesh.position.set(1, 1, 1);
             this._scene?.add(mesh);
@@ -158,18 +173,26 @@ export default class Jarvis {
         this._control.update();
     }
 
+    public toJson() {
+        sceneDB.upsertScene(this).then(() => console.log(`store scene:${dayjs().format()}`));
+    }
+
     async fromJson(json: SceneEntity) {
         const loader = new ObjectLoader();
         this._camera = await loader.parseAsync(json.camera);
         this.state.activeCamera = this._camera;
         const scene = await loader.parseAsync(json.scene);
-        for (let uuid of json.treeBlackList) {
-            const obj = scene.getObjectByProperty("uuid", uuid);
-            obj?.removeFromParent();
+        for (const uuid of json.treeBlackList) {
+            const obj: Object3D | undefined = scene.getObjectByProperty("uuid", uuid);
+            if (obj) {
+                obj.removeFromParent();
+            }
         }
         json.treeBlackList.length = 0;
         OBJECT_TREE_BLACK_LIST.length = 0;
         this._scene = scene as Scene;
+
     }
+
 
 }

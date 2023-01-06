@@ -1,9 +1,11 @@
 import Constant from "../constant/Constant";
 import ObjectTree from "./ObjectTree";
 import MenuBar from "./menu/MenuBar";
-import { Scene } from "three";
 import Jarvis from "../core/Jarvis";
-import { clickObjectEvent } from "../core/events/ObjectEvents";
+import {clickObjectEvent} from "../core/events/ObjectEvents";
+import AddObjectCommand from "../core/commands/AddObjectCommand";
+import RemoveObjectCommand from "../core/commands/RemoveObjectCommand";
+
 
 export default class GUI {
     public static guiContainerInit(jarvis: Jarvis): void {
@@ -34,8 +36,23 @@ export default class GUI {
         element.appendChild(paneDom);
         Constant.PANE_CONTAINER = paneDom;
         document.body.appendChild(element);
-        MenuBar.render(menuDom,jarvis);
+        MenuBar.render(menuDom, jarvis);
         const objectTree = new ObjectTree(leftSideBarDom, jarvis);
+
+
+        jarvis.recorder.afterExecute.push((cmd, optionalName) => {
+            if (cmd.name === 'add object' || cmd.name === 'remove object') {
+                objectTree.render(leftSideBarDom);
+            }
+        })
+        let prevGeometries = 0;
+        jarvis.scene.onAfterRender = (renderer) => {
+            const geometries = renderer.info.memory.geometries;
+            if (geometries !== prevGeometries) {
+                objectTree.render(leftSideBarDom);
+            }
+            prevGeometries = geometries;
+        }
         clickObjectEvent(objectTree);
     }
 }

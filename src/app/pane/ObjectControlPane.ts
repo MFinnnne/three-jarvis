@@ -1,17 +1,17 @@
-import { BladeApi, ButtonApi, Pane, TabPageApi } from "tweakpane";
-import { Euler, Object3D, Quaternion, Vector3 } from "three";
+import {BladeApi, ButtonApi, Pane, TabPageApi} from "tweakpane";
+import {Euler, Object3D, Quaternion, Vector3} from "three";
 import DefaultControlPane from "./DefaultControlPane";
 import recorder from "../../core/Recorder";
 import SetPositionCommand from "../../core/commands/SetPositionCommand";
 import SetRotationCommand from "../../core/commands/SetRotationCommand";
 import SetScaleCommand from "../../core/commands/SetScaleCommand";
 import SetQuaternionCommand from "../../core/commands/SetQuaternionCommand";
-import { Point3d } from "@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d";
+import {Point3d} from "@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d";
 import Utils from "../../util/Utils";
 import Prompt from "../Prompt";
 import TransformControlComponent from "../../core/component/TransformControlComponent";
-import { TpButtonGridEvent } from "@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event";
-import { TransformControls } from "three/examples/jsm/controls/TransformControls";
+import {TpButtonGridEvent} from "@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event";
+import {TransformControls} from "three/examples/jsm/controls/TransformControls";
 import Jarvis from "../../core/Jarvis";
 
 export default class ObjectControlPane extends DefaultControlPane {
@@ -45,10 +45,10 @@ export default class ObjectControlPane extends DefaultControlPane {
                 y: object.rotation.y,
                 z: object.rotation.z
             },
-            quat: { x: object.quaternion.x, y: object.quaternion.y, z: object.quaternion.z, w: object.quaternion.w }
+            quat: {x: object.quaternion.x, y: object.quaternion.y, z: object.quaternion.z, w: object.quaternion.w}
         };
         const tab = pane.addTab({
-            pages: [{ title: "Object" }, { title: "Geometry" }, { title: "Material" }]
+            pages: [{title: "Object"}, {title: "Geometry"}, {title: "Material"}]
         });
 
         this.objectPane = tab.pages[0];
@@ -68,7 +68,7 @@ export default class ObjectControlPane extends DefaultControlPane {
                 value: object.uuid
             }
         );
-        this.objectPane.addInput({ visible: object.visible }, "visible").on("change", (ev) => {
+        this.objectPane.addInput({visible: object.visible}, "visible").on("change", (ev) => {
             object.visible = ev.value;
         });
         this.objectPane.addBlade(
@@ -121,8 +121,8 @@ export default class ObjectControlPane extends DefaultControlPane {
             if (this.jarvis.transformControl.dragging) {
                 return;
             }
-            const { x, y, z } = ev.value;
-            recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z), positionBind));
+            const {x, y, z} = ev.value;
+            this.jarvis.recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z), positionBind));
         });
         positionBind.controller_.view.labelElement.addEventListener("click", () => {
             const value = positionBind.controller_.binding.value.rawValue as Point3d;
@@ -134,8 +134,8 @@ export default class ObjectControlPane extends DefaultControlPane {
             if (this.jarvis.transformControl.dragging) {
                 return;
             }
-            const { x, y, z } = ev.value;
-            recorder.execute(new SetScaleCommand(object, new Vector3(x, y, z)));
+            const {x, y, z} = ev.value;
+            this.jarvis.recorder.execute(new SetScaleCommand(object, new Vector3(x, y, z)));
         });
         scaleBind.controller_.view.labelElement.addEventListener("click", () => {
             const value = scaleBind.controller_.binding.value.rawValue as Point3d;
@@ -157,8 +157,8 @@ export default class ObjectControlPane extends DefaultControlPane {
                 if (this.jarvis.transformControl.dragging) {
                     return;
                 }
-                const { x, y, z } = e.value;
-                recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, "XYZ"), scaleBind));
+                const {x, y, z} = e.value;
+                this.jarvis.recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, "XYZ"), scaleBind));
             });
         rotationBind.controller_.view.labelElement.addEventListener("click", () => {
             const value = rotationBind.controller_.binding.value.rawValue as Euler;
@@ -178,8 +178,8 @@ export default class ObjectControlPane extends DefaultControlPane {
                 if (this.jarvis.transformControl.dragging) {
                     return;
                 }
-                const { x, y, z, w } = e.value;
-                recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w), quatBind));
+                const {x, y, z, w} = e.value;
+                this.jarvis.recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w), quatBind));
             });
         quatBind.controller_.view.labelElement.addEventListener("click", () => {
             const value = quatBind.controller_.binding.value.rawValue as Quaternion;
@@ -196,22 +196,26 @@ export default class ObjectControlPane extends DefaultControlPane {
                 return;
             }
             switch (k) {
-                case "position":
+                case "position": {
                     const position: Vector3 = this.object.position;
                     v.controller_.binding.value.rawValue = new Point3d(position.x, position.y, position.z);
                     break;
-                case "rotation":
+                }
+                case "rotation": {
                     const euler: Euler = this.object.rotation;
                     v.controller_.binding.value.rawValue = new Point3d(euler.x, euler.y, euler.z);
                     break;
-                case "scale":
+                }
+                case "scale": {
                     const scale: Vector3 = this.object.scale;
                     v.controller_.binding.value.rawValue = new Point3d(scale.x, scale.y, scale.z);
                     break;
-                case "quat":
+                }
+                case "quat": {
                     const quat: Quaternion = this.object.quaternion;
                     v.controller_.binding.value.rawValue = new Quaternion(quat.x, quat.y, quat.z, quat.w);
                     break;
+                }
                 default :
                     break;
             }

@@ -3,7 +3,7 @@ import Dexie, { PromiseExtended } from "dexie";
 import Table = Dexie.Table;
 import { Object3D } from "three";
 
-export interface ObjectEntity {
+export type ObjectEntity = {
     key?: number
     id: number,
     parentId?: number,

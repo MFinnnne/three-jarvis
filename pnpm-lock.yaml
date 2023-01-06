@@ -35,6 +35,7 @@ specifiers:
   postcss: ^8.4.14
   pre-commit: ^1.2.2
   prettier: 2.5.1
+  promise-file-reader: ^1.0.3
   rimraf: ^3.0.2
   rollup: ^2.74.1
   rollup-plugin-alias: ^2.2.0
@@ -73,6 +74,7 @@ dependencies:
   million: registry.npmjs.org/million/1.12.5
   nanoevents: registry.npmjs.org/nanoevents/6.0.2
   pino: registry.npmjs.org/pino/8.8.0
+  promise-file-reader: registry.npmjs.org/promise-file-reader/1.0.3
   toastify-js: registry.npmjs.org/toastify-js/1.12.0
   tweakpane: registry.npmjs.org/tweakpane/3.1.1
 
@@ -6689,6 +6691,12 @@ packages:
     version: 2.0.3
     engines: {node: '>=0.4.0'}
     dev: true
+
+  registry.npmjs.org/promise-file-reader/1.0.3:
+    resolution: {integrity: sha512-/sumzg8xjurm6PchjhlXb592lv3tFFaO13DtsFqbglhdZjCzxhDgvmPv/vMcarpfGiCRPC4ZvZ+YsV0am0d4+g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/promise-file-reader/-/promise-file-reader-1.0.3.tgz}
+    name: promise-file-reader
+    version: 1.0.3
+    dev: false
 
   registry.npmjs.org/promise.series/0.2.0:
     resolution: {integrity: sha512-VWQJyU2bcDTgZw8kpfBpB/ejZASlCrzwz5f2hjb/zlujOEB4oeiAhHygAWq8ubsX2GVkD4kCU5V2dwOTaCY5EQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/promise.series/-/promise.series-0.2.0.tgz}

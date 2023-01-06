@@ -6,7 +6,7 @@ import * as EssentialsPlugin from "@tweakpane/plugin-essentials";
 import Jarvis from "../../core/Jarvis";
 import { TransformControls } from "three/examples/jsm/controls/TransformControls";
 
-export interface ControlPane {
+export type ControlPane = {
 
 
     genPane(argument: Object3D | Camera | WebGLRenderer): Pane;

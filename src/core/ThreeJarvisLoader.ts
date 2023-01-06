@@ -7,7 +7,7 @@ const gltfLoader = new GLTFLoader();
 gltfLoader.setMeshoptDecoder(MeshoptDecoder)
 
 export class ThreeJarvisLoader {
-    static load(config: LoadConfig, async: boolean = false) {
+    static load(config: LoadConfig, async = false) {
         if (!async) {
             config.beforeLoad();
             const modelPromises: Promise<GLTF>[] = config.loadModelConfigs.map(async (value) => {
