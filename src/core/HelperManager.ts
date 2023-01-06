@@ -34,7 +34,7 @@ const boxHelperFn = (object, color = 0xffff00): Object3D | null => {
         return null;
     }
     highLightBox = new BoxHelper(object, color);
-    highLightBox.layers.mask = 0x00000001 | 1;
+    highLightBox.layers.set(1);
     highLightBox.name = "BoxHelper_" + object.id;
     highLightBox.setFromObject(object);
     highLightBox.update(object);

@@ -8,7 +8,6 @@ import ObjectTree from "../../app/ObjectTree";
 import Jarvis from "../Jarvis";
 
 const threeJarvisRayCaster = new Raycaster();
-threeJarvisRayCaster.layers.enable(1);
 function intersectObjects(jarvis:Jarvis, e: MouseEvent, rayCaster: Raycaster, target: Object3D[] | Group[]): Intersection[] {
 
     const mouse = new Vector2();

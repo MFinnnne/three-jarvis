@@ -34,6 +34,7 @@ export default class ObjectChanged {
 
     public objectHelper(object: Object3D): void {
         this.jarvis.state.selectedObject = object;
+        console.log(this.jarvis.state.selectedObject.type);
         if (object.type === "Scene") {
             return;
         }

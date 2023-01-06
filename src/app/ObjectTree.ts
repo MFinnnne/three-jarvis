@@ -10,13 +10,13 @@ import {domClickEvent, domDoubleClickEvent} from "../core/events/DomEvents";
 
 export default class ObjectTree {
     private prevNode: VNode | undefined;
-    private readonly creator: Jarvis;
+    private readonly jarvis: Jarvis;
 
     private container: HTMLElement;
 
 
     constructor(container: HTMLElement, creator: Jarvis) {
-        this.creator = creator;
+        this.jarvis = creator;
         this.container = container;
         domDoubleClickEvent(container, creator.scene);
         domClickEvent(creator.scene)
@@ -53,9 +53,9 @@ export default class ObjectTree {
                                 (e.target as HTMLElement).classList.toggle("caretDown");
                             }
                             const target = e.target as HTMLElement;
-                            rightMenu(target, this.creator);
+                            rightMenu(target, this.jarvis);
                             const uuid = target.id;
-                            this.creator.state.selectedObjectDom = target;
+                            this.jarvis.state.selectedObjectDom = target;
                             Ticker.emmit("objectDomClick", uuid);
                             // this.autoLocateInTree(this.container);
                         }
@@ -110,7 +110,7 @@ export default class ObjectTree {
     }
 
     render(parent: HTMLElement): void {
-        const newNode = this.object2VNodeTree(this.creator.scene);
+        const newNode = this.object2VNodeTree(this.jarvis.scene);
         if (newNode === null) {
             return;
         }
@@ -123,7 +123,7 @@ export default class ObjectTree {
      * @param dom
      */
     autoLocateInTree(dom: HTMLElement) {
-        this.creator.state.selectedObjectDom?.classList.toggle("find-out");
+        this.jarvis.state.selectedObjectDom?.classList.toggle("find-out");
         dom.classList.toggle("find-out");
         let offsetTop: number = dom.offsetTop - this.container.clientHeight / 2;
         if (dom.offsetTop < this.container.clientHeight) {
