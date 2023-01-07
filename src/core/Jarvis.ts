@@ -25,6 +25,7 @@ import sceneDB, { SceneEntity } from './mapper/SceneDB';
 import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
 import Recorder from './Recorder';
 import dayjs from 'dayjs';
+
 type AfterSceneInitCallBack = () => void;
 
 export default class Jarvis {
@@ -109,7 +110,7 @@ export default class Jarvis {
         this._renderer = new WebGLRenderer({ canvas: container });
         this._container = container;
         this._state = new State();
-        this._recorder = new Recorder(this);
+        this._recorder = new Recorder();
         this._recorder.afterExecute.push(() => this.toJson());
         const sceneInfo = await sceneDB.get(container.id);
 
@@ -181,7 +182,7 @@ export default class Jarvis {
     }
 
     public toJson() {
-        sceneDB.upsertScene(this).then(() => console.log(`store scene:${dayjs().format()}`));
+        sceneDB.upsertScene(this);
     }
 
     async fromJson(json: SceneEntity) {
@@ -199,5 +200,4 @@ export default class Jarvis {
         OBJECT_TREE_BLACK_LIST.length = 0;
         this._scene = scene as Scene;
     }
-
 }

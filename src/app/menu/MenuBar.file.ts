@@ -1,15 +1,19 @@
 import { m, VNode } from 'million';
-import Jarvis from '../../core/Jarvis';
-import { LoaderUtils } from '../../util/LoadUtils';
+import MenuUtils from './MenuUtils';
 import * as THREE from 'three';
-import { TGALoader } from 'three/examples/jsm/loaders/TGALoader';
+import AddObjectCommand from '../../core/commands/AddObjectCommand';
+import Jarvis from '../../core/Jarvis';
+import sceneDB from '../../core/mapper/SceneDB';
+import ExportComponent from '../../core/component/ExportComponent';
+import dayjs from 'dayjs';
 import PromiseFileReader from '../../util/PromiseFileReader';
+import { LoaderUtils } from '../../util/LoadUtils';
+import { TGALoader } from 'three/examples/jsm/loaders/TGALoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import AddObjectCommand from '../../core/commands/AddObjectCommand';
 import { MeshoptDecoder } from '../../core/jsm/meshopt_decoder.module';
 
-export default class MenuBarImport {
+export default class MenuBarFile {
     private readonly jarvis: Jarvis;
 
     constructor(jarvis: Jarvis) {
@@ -17,12 +21,13 @@ export default class MenuBarImport {
     }
 
     element(): VNode {
-        return m(
-            'div',
-            {
-                className: 'menu-item',
-            },
+        return MenuUtils.menItem(
+            'file',
             [
+                'undo',
+                'redo',
+                '-',
+                'export',
                 m(
                     'div',
                     {
@@ -48,12 +53,31 @@ export default class MenuBarImport {
                     ],
                 ),
             ],
+            this.onClick.bind(this),
         );
     }
 
-    private onClick(type, e) {
-        if (type === 'import') {
-            this.importModel(e);
+    onClick(type: string, e: Event) {
+        switch (type) {
+            case 'export':
+                sceneDB.get(this.jarvis.container.id).then((scene) => {
+                    ExportComponent.exportJson(
+                        `${this.jarvis.container.id}_scene_${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
+                        JSON.stringify(scene),
+                    );
+                });
+                break;
+            case 'import':
+                this.importModel(e);
+                break;
+            case 'undo':
+                this.jarvis.recorder.undo();
+                break;
+            case 'redo':
+                this.jarvis.recorder.redo();
+                break;
+            default:
+                break;
         }
     }
 
@@ -62,7 +86,7 @@ export default class MenuBarImport {
         if (files.length > 0) {
             const filesMap = LoaderUtils.createFilesMap(files);
             const manager = new THREE.LoadingManager();
-            manager.setURLModifier(function (url) {
+            manager.setURLModifier(function(url) {
                 url = url.replace(/^(\.?\/)/, '');
                 const file = filesMap[url];
                 if (file) {
@@ -87,7 +111,7 @@ export default class MenuBarImport {
                             const loader = new GLTFLoader();
                             loader.setMeshoptDecoder(MeshoptDecoder);
                             loader.setDRACOLoader(dracoLoader);
-                            loader.parse(contents as any, '', function (result) {
+                            loader.parse(contents as any, '', function(result) {
                                 const scene = result.scene;
                                 scene.name = filename;
                                 scene.animations.push(...result.animations);
@@ -108,7 +132,7 @@ export default class MenuBarImport {
                                 loader = new GLTFLoader(manager);
                                 loader.setDRACOLoader(dracoLoader);
                             }
-                            loader.parse(contents, '', function (result) {
+                            loader.parse(contents, '', function(result) {
                                 const scene = result.scene;
                                 scene.name = filename;
                                 scene.animations.push(...result.animations);

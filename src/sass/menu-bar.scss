@@ -78,6 +78,10 @@
                             background-color: #798d8d;
                         }
                     }
+
+                    label {
+                        @extend a
+                    }
                 }
             }
         }

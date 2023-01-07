@@ -8,13 +8,11 @@ export default class SetPositionCommand implements Command {
     newPosition: Vector3;
     private _object: Object3D;
     name = '';
-    bindApi: InputBindingApi<unknown, Point3dObject>;
 
-    constructor(object: Object3D, position: Vector3, bindApi: InputBindingApi<unknown, Point3dObject>) {
+    constructor(object: Object3D, position: Vector3) {
         this._object = object;
         this.oldPosition = object.position.clone();
         this.newPosition = position.clone();
-        this.bindApi = bindApi;
     }
 
     get object(): Object3D {

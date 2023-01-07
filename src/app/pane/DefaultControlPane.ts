@@ -14,8 +14,8 @@ export type ControlPane = {
 
 export default class DefaultControlPane implements ControlPane {
     protected jarvis: Jarvis;
-    constructor(creator: Jarvis) {
-        this.jarvis = creator;
+    constructor(jarvis: Jarvis) {
+        this.jarvis = jarvis;
     }
 
     protected pane: Pane = new Pane({ container: Constant.PANE_CONTAINER });

@@ -4,6 +4,11 @@ import { OBJECT_TREE_BLACK_LIST } from '../../config/Config';
 import state from '../State';
 import Jarvis from '../Jarvis';
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import sceneDB from '../mapper/SceneDB';
+import SetPositionCommand from '../commands/SetPositionCommand';
+import SetQuaternionCommand from '../commands/SetQuaternionCommand';
+import SetScaleCommand from '../commands/SetScaleCommand';
+import SetRotationCommand from '../commands/SetRotationCommand';
 
 export default class TransformControlComponent {
     private readonly jarvis: Jarvis;
@@ -31,19 +36,28 @@ export default class TransformControlComponent {
         }
         this._control = transformControls;
         OBJECT_TREE_BLACK_LIST.push(this._control.uuid);
-        this.event(this.jarvis);
+        this.event();
     }
 
-    private event(jarvis: Jarvis) {
+    private event() {
+
         this._control.addEventListener('objectChange', (e) => {
             PaneManager.update();
             objectChanged.getInstance().update();
+
         });
-        this._control.addEventListener('mouseDown', function (e) {
-            jarvis.control.enabled = false;
+        this._control.addEventListener('mouseDown', (e) => {
+            this.jarvis.control.enabled = false;
         });
-        this._control.addEventListener('mouseUp', function (e) {
-            jarvis.control.enabled = true;
+        this._control.addEventListener('mouseUp', (e) => {
+            this.jarvis.control.enabled = true;
+            sceneDB.upsertScene(this.jarvis);
+            if (this._control.object) {
+                this.jarvis.recorder.execute(new SetPositionCommand(this._control.object, this._control.object.position));
+                this.jarvis.recorder.execute(new SetQuaternionCommand(this._control.object, this._control.object.quaternion));
+                this.jarvis.recorder.execute(new SetScaleCommand(this._control.object, this._control.object.scale));
+                this.jarvis.recorder.execute(new SetRotationCommand(this._control.object, this._control.object.rotation));
+            }
         });
 
         OBJECT_TREE_BLACK_LIST.push(this._control.uuid);

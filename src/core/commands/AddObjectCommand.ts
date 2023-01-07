@@ -13,7 +13,7 @@ export default class AddObjectCommand implements Command {
     }
 
     exec(): void {
-        if (this._parent ) {
+        if (this._parent) {
             this._parent.add(this._object);
             return;
         }

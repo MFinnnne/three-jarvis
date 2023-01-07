@@ -1,10 +1,9 @@
 import { m, VElement, VNode } from 'million';
-import Ticker from '../../core/Ticker';
 
 export default class MenuUtils {
     public static menItem(
         itemName: string,
-        child: string[] | VNode,
+        child: (VNode | string)[],
         callBack?: (type: string, e: Event) => void,
     ): VElement {
         return m(
@@ -18,40 +17,47 @@ export default class MenuUtils {
                     {
                         className: 'tag',
                     },
-                    [
-                        m('div', { className: 'dropbtn' }, [itemName]),
-                    ],
+                    [m('div', { className: 'dropbtn' }, [itemName])],
                 ),
                 //child
-                child instanceof Array
-                    ? m('div', {
+                m(
+                    'div',
+                    {
                         className: 'export',
-                    }, [
-                        m('div', {
-                            className: 'dropdown-content',
-                        }, [
-                            ...child.map((value) => {
-                                if (value === '-') {
-                                    return m('hr');
-                                }
-                                return m(
-                                    'a',
-                                    {
-                                        className: 'dropdown-item',
-                                        href: '#',
-                                        onClick: (e) => {
-                                            if (callBack) {
-                                                callBack(value, e);
-                                            }
-
-                                        },
-                                    },
-                                    [value],
-                                );
-                            }),
-                        ]),
-                    ])
-                    : child,
+                    },
+                    [
+                        m(
+                            'div',
+                            {
+                                className: 'dropdown-content',
+                            },
+                            [
+                                ...child.map((value) => {
+                                    if (typeof value !== 'string') {
+                                        return value;
+                                    } else {
+                                        if (value === '-') {
+                                            return m('hr');
+                                        }
+                                        return m(
+                                            'a',
+                                            {
+                                                className: 'dropdown-item',
+                                                href: '#',
+                                                onClick: (e) => {
+                                                    if (callBack) {
+                                                        callBack(value, e);
+                                                    }
+                                                },
+                                            },
+                                            [value],
+                                        );
+                                    }
+                                }),
+                            ],
+                        ),
+                    ],
+                ),
             ],
         );
     }

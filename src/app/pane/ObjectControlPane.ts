@@ -111,7 +111,7 @@ export default class ObjectControlPane extends DefaultControlPane {
                 return;
             }
             const { x, y, z } = ev.value;
-            this.jarvis.recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z), positionBind));
+            this.jarvis.recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z)));
         });
         positionBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = positionBind.controller_.binding.value.rawValue as Point3d;
@@ -146,8 +146,10 @@ export default class ObjectControlPane extends DefaultControlPane {
                 if (this.jarvis.transformControl.dragging) {
                     return;
                 }
+                // eslint-disable-next-line no-debugger
+                debugger
                 const { x, y, z } = e.value;
-                this.jarvis.recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ'), scaleBind));
+                this.jarvis.recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ')));
             });
         rotationBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = rotationBind.controller_.binding.value.rawValue as Euler;
@@ -168,7 +170,7 @@ export default class ObjectControlPane extends DefaultControlPane {
                     return;
                 }
                 const { x, y, z, w } = e.value;
-                this.jarvis.recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w), quatBind));
+                this.jarvis.recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w)));
             });
         quatBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = quatBind.controller_.binding.value.rawValue as Quaternion;

@@ -59,7 +59,6 @@ class SceneDB extends Dexie {
         this.scene.where('id').equals(containerId).delete();
     }
 
-
     async get(id: string): Promise<SceneEntity | undefined> {
         return this.scene.where('id').equals(id).first();
     }
@@ -68,8 +67,8 @@ class SceneDB extends Dexie {
         return this.scene.toArray();
     }
 
-    async updateScene(jarvis: Jarvis) {
-        await this.scene
+    updateScene(jarvis: Jarvis) {
+        this.scene
             .where('id')
             .equals(jarvis.container.id)
             .modify({
@@ -86,13 +85,17 @@ class SceneDB extends Dexie {
         return this.scene.where('id').equals(id).count();
     }
 
-    async upsertScene(jarvis: Jarvis): Promise<void> {
-        const res = await this.scene.where('id').equals(jarvis.container.id).count();
-        if (res !== 0) {
-            await this.updateScene(jarvis);
-        } else {
-            this.addScene(jarvis);
-        }
+    upsertScene(jarvis: Jarvis) {
+        this.scene.where('id').equals(jarvis.container.id).count().then(count => {
+            if (count !== 0) {
+                this.updateScene(jarvis);
+            } else {
+                this.addScene(jarvis);
+            }
+        }).then(() => {
+            console.info('store scene:' + dayjs().format());
+        });
+
     }
 }
 

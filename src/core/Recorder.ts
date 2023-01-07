@@ -1,6 +1,5 @@
 import ObjectChanged from './ObjectChanged';
 import { Command } from './Type';
-import Jarvis from './Jarvis';
 
 type afterExecuteCallBack = (cmd: Command, optionalName?: string) => void;
 /**
@@ -8,15 +7,12 @@ type afterExecuteCallBack = (cmd: Command, optionalName?: string) => void;
  * @class Recorder
  */
 export default class Recorder {
-    private jarvis: Jarvis;
+    private undoStack: Command[] = [];
+    private redoStack: Command[] = [];
 
     private _afterExecute: afterExecuteCallBack[] = [];
     get afterExecute(): afterExecuteCallBack[] {
         return this._afterExecute;
-    }
-
-    constructor(jarvis: Jarvis) {
-        this.jarvis = jarvis;
     }
 
     public execute(cmd: Command, optionalName?: string): void {
@@ -25,7 +21,23 @@ export default class Recorder {
         this.afterExecute.forEach((fn) => {
             fn(cmd, optionalName);
         });
+        this.undoStack.push(cmd);
     }
 
-    public;
+    public undo() {
+        const command = this.undoStack.pop();
+        if (command) {
+            command.undo();
+            this.redoStack.push(command);
+            ObjectChanged.getInstance().update(command.object);
+        }
+    }
+
+    public redo() {
+        const command = this.redoStack.pop();
+        if (command) {
+            command.exec();
+            ObjectChanged.getInstance().update(command.object);
+        }
+    }
 }

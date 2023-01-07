@@ -38,7 +38,7 @@ export default class ThreeJarvis {
                 if (typeof res === 'string') {
                     const exist = await sceneDB.countById(container.id);
                     if (exist) {
-                        console.warn('this json has already exist in indexed db,we will select indexedDB\'s json');
+                        console.warn("this json has already exist in indexed db,we will select indexedDB's json");
                     } else {
                         const parse = JSON.parse(res) as SceneEntity;
                         sceneDB.addJson(parse);

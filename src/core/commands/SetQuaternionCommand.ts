@@ -8,13 +8,11 @@ export default class SetQuaternionCommand implements Command {
     oldQuaternion: Quaternion;
     newQuaternion: Quaternion;
     object: Object3D;
-    bindApi: InputBindingApi<unknown, Quaternion>;
 
-    constructor(object: Object3D, rotation: Quaternion, bindApi: InputBindingApi<unknown, Quaternion>) {
+    constructor(object: Object3D, rotation: Quaternion) {
         this.object = object;
         this.oldQuaternion = object.quaternion.clone();
         this.newQuaternion = rotation.clone();
-        this.bindApi = bindApi;
     }
 
     exec(): void {
