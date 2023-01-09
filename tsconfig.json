@@ -10,11 +10,7 @@
     //在表达式和声明上有隐含的 any类型时报错。
     "target": "es5",
     //指定ECMAScript目标版本 "ES3"（默认）
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     //    编译过程中需要引入的库文件的列表
     "allowJs": false,
     //允许编译javascript文件。
@@ -29,6 +25,7 @@
     "forceConsistentCasingInFileNames": true,
     //禁止对同一个文件的不一致的引用
     "module": "ESNext",
+    "experimentalDecorators": true,
     //指定生成哪个模块系统代码
     "moduleResolution": "node",
     //决定如何处理模块。
@@ -40,22 +37,12 @@
     "jsxImportSource": "million",
     "baseUrl": "./",
     "paths": {
-      "*": [
-        "types/*"
-      ],
-      "tslib": [
-        "node_modules/tslib/tslib.d.ts"
-      ]
+      "*": ["types/*"],
+      "tslib": ["node_modules/tslib/tslib.d.ts"]
     }
     // "suppressImplicitAnyIndexErrors": true, //阻止对缺少索引签名的索引对象报错
   },
-  
-  "exclude": [
-    "node_modules/**/*",
-    "dist/**/*",
-    "lib/**/*"
-  ],
-  "include": [
-    "src/**/*.ts"
-  ]
+
+  "exclude": ["node_modules/**/*", "dist/**/*", "lib/**/*"],
+  "include": ["src/**/*.ts"]
 }

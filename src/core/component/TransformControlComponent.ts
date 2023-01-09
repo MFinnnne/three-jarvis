@@ -1,61 +1,69 @@
-import { TransformControls } from "three/examples/jsm/controls/TransformControls";
-import { Camera } from "three";
-import Constant from "../../constant/Constant";
-import PaneManager from "../PaneManager";
-import objectChanged from "../ObjectChanged";
-import { OBJECT_TREE_BLACK_LIST } from "../../config/Config";
-import Pino from "pino";
-import state from "../State";
+import PaneManager from '../PaneManager';
+import objectChanged from '../ObjectChanged';
+import { OBJECT_TREE_BLACK_LIST } from '../../config/Config';
+import state from '../State';
+import Jarvis from '../Jarvis';
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import sceneDB from '../mapper/SceneDB';
+import SetPositionCommand from '../commands/SetPositionCommand';
+import SetQuaternionCommand from '../commands/SetQuaternionCommand';
+import SetScaleCommand from '../commands/SetScaleCommand';
+import SetRotationCommand from '../commands/SetRotationCommand';
 
-export const logger = Pino({
-    level: "info"
-});
 export default class TransformControlComponent {
+    private readonly jarvis: Jarvis;
+    private _control!: TransformControls;
 
-    public static CONTROLS: TransformControls;
+    constructor(jarvis: Jarvis) {
+        this.jarvis = jarvis;
+    }
 
-    static init(camera: Camera, element: HTMLElement): TransformControls {
-        const transformControls = new TransformControls(camera, element);
+    get control(): TransformControls {
+        return this._control;
+    }
+
+    init() {
+        const transformControls = new TransformControls(
+            this.jarvis.state.activeCamera,
+            this.jarvis.renderer.domElement,
+        );
         transformControls.layers.set(1);
         transformControls.getRaycaster().layers.set(1);
-        for (let child of transformControls.children) {
-            child.traverse(object => {
+        for (const child of transformControls.children) {
+            child.traverse((object) => {
                 object.layers.set(1);
             });
         }
-        this.CONTROLS = transformControls;
-        Constant.rawVar.scene.add(transformControls);
-        return transformControls;
+        this._control = transformControls;
+        OBJECT_TREE_BLACK_LIST.push(this._control.uuid);
+        this.event();
     }
 
-
-    static event() {
-
-        this.CONTROLS.addEventListener("objectChange", (e) => {
+    private event() {
+        this._control.addEventListener('objectChange', (e) => {
             PaneManager.update();
-            objectChanged.update();
+            objectChanged.getInstance().update();
         });
-        this.CONTROLS.addEventListener("mouseDown", function(e) {
-            Constant.rawVar.control.enabled = false;
+        this._control.addEventListener('mouseDown', (e) => {
+            this.jarvis.control.enabled = false;
         });
-        this.CONTROLS.addEventListener("mouseUp", function(e) {
-            Constant.rawVar.control.enabled = true;
-        });
-        window.addEventListener("keydown", e => {
-            switch (e.key) {
-                case "=":
-                    this.CONTROLS.setSize(this.CONTROLS.size + 0.1);
-                    break;
-                case "-":
-                    this.CONTROLS.setSize(Math.max(this.CONTROLS.size - 0.1, 0.1));
-                    break;
-                case "s":
-                    if (Constant.rawVar.control) {
-                        Constant.rawVar.control.enabled = true;
-                    }
+        this._control.addEventListener('mouseUp', (e) => {
+            this.jarvis.control.enabled = true;
+            sceneDB.upsertScene(this.jarvis);
+            if (this._control.object) {
+                this.jarvis.recorder.execute(
+                    new SetPositionCommand(this._control.object, this._control.object.position),
+                );
+                this.jarvis.recorder.execute(
+                    new SetQuaternionCommand(this._control.object, this._control.object.quaternion),
+                );
+                this.jarvis.recorder.execute(new SetScaleCommand(this._control.object, this._control.object.scale));
+                this.jarvis.recorder.execute(
+                    new SetRotationCommand(this._control.object, this._control.object.rotation),
+                );
             }
         });
-        OBJECT_TREE_BLACK_LIST.push(this.CONTROLS.uuid);
-    }
 
+        OBJECT_TREE_BLACK_LIST.push(this._control.uuid);
+    }
 }

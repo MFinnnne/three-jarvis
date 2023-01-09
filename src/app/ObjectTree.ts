@@ -1,15 +1,27 @@
-import { className, Flags, m, render, VElement, VNode } from "million";
-import { Object3D } from "three";
-import state from "../core/State";
-import Constant from "../constant/Constant";
-import { OBJECT_TREE_BLACK_LIST } from "../config/Config";
-import { rightMenu } from "./RightMenu";
-import Ticker from "../core/Ticker";
+import { className, Flags, m, render, VElement, VNode } from 'million';
+import { Object3D } from 'three';
+import state from '../core/State';
+import Constant from '../constant/Constant';
+import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import { rightMenu } from './RightMenu';
+import Ticker from '../core/Ticker';
+import Jarvis from '../core/Jarvis';
+import { domClickEvent, domDoubleClickEvent } from '../core/events/DomEvents';
 
 export default class ObjectTree {
-    private static PREV_NODE: VNode;
+    private prevNode: VNode | undefined;
+    private readonly jarvis: Jarvis;
 
-    private static object2VNode(object: Object3D): VElement | null {
+    private container: HTMLElement;
+
+    constructor(container: HTMLElement, creator: Jarvis) {
+        this.jarvis = creator;
+        this.container = container;
+        domDoubleClickEvent(container, creator.scene);
+        domClickEvent(creator.scene);
+    }
+
+    private object2VNode(object: Object3D): VElement | null {
         if (OBJECT_TREE_BLACK_LIST.find((item) => item === object.uuid)) {
             return null;
         }
@@ -40,11 +52,12 @@ export default class ObjectTree {
                                 (e.target as HTMLElement).classList.toggle('caretDown');
                             }
                             const target = e.target as HTMLElement;
-                            rightMenu(target);
+                            rightMenu(target, this.jarvis);
                             const uuid = target.id;
-                            state.selectedObjectDom = target;
+                            this.jarvis.state.selectedObjectDom = target;
                             Ticker.emmit('objectDomClick', uuid);
-                        }
+                            // this.autoLocateInTree(this.container);
+                        },
                     },
                     [object.name === '' ? object.type : object.name],
                     Flags.ELEMENT,
@@ -54,7 +67,7 @@ export default class ObjectTree {
         if (object.children.length > 0) {
             node.children?.push({
                 tag: 'ul',
-                props: {className: className({nested: true})},
+                props: { className: className({ nested: true }) },
                 children: [],
                 flag: Flags.ELEMENT,
             });
@@ -62,11 +75,11 @@ export default class ObjectTree {
         return node;
     }
 
-    static object2VNodeTree(object: Object3D): VElement | null {
-        const node = ObjectTree.object2VNode(object);
+    private object2VNodeTree(object: Object3D): VElement | null {
+        const node = this.object2VNode(object);
         if (node !== null) {
             object.children.forEach((child) => {
-                const childNode: VNode | null = ObjectTree.object2VNodeTree(child);
+                const childNode: VNode | null = this.object2VNodeTree(child);
                 if (childNode == null) {
                     return;
                 }
@@ -95,38 +108,38 @@ export default class ObjectTree {
         });
     }
 
-    static render(): void {
-        const newNode = ObjectTree.object2VNodeTree(Constant.rawVar.scene);
+    render(parent: HTMLElement): void {
+        const newNode = this.object2VNodeTree(this.jarvis.scene);
         if (newNode === null) {
             return;
         }
-        render(Constant.LEFT_SIDE_BAR_CONTAINER, newNode, ObjectTree.PREV_NODE);
-        ObjectTree.PREV_NODE = newNode;
+        render(parent, newNode, this.prevNode ?? newNode);
+        this.prevNode = newNode;
     }
 
     /**
      * find dom in three and auto scroll to it
      * @param dom
      */
-    static autoLocateInTree(dom: HTMLElement) {
-        state.selectedObjectDom?.classList.toggle('find-out');
+    autoLocateInTree(dom: HTMLElement) {
+        this.jarvis.state.selectedObjectDom?.classList.toggle('find-out');
         dom.classList.toggle('find-out');
-        let offsetTop: number = dom.offsetTop - Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight / 2;
-        if (dom.offsetTop < Constant.LEFT_SIDE_BAR_CONTAINER.clientHeight) {
+        let offsetTop: number = dom.offsetTop - this.container.clientHeight / 2;
+        if (dom.offsetTop < this.container.clientHeight) {
             offsetTop = 0;
         }
-        let offsetLeft: number = dom.offsetLeft - Constant.LEFT_SIDE_BAR_CONTAINER.clientWidth / 2;
-        if (dom.offsetLeft < Constant.LEFT_SIDE_BAR_CONTAINER.clientWidth / 4) {
+        let offsetLeft: number = dom.offsetLeft - this.container.clientWidth / 2;
+        if (dom.offsetLeft < this.container.clientWidth / 4) {
             offsetLeft = 0;
         }
-        Constant.LEFT_SIDE_BAR_CONTAINER.scrollTo(offsetLeft, offsetTop);
+        this.container.scrollTo(offsetLeft, offsetTop);
     }
 
     /**
      * find dom in tree and expand
      * @param element
      */
-    static expandTreeByChildNode(element: HTMLElement) {
+    expandTreeByChildNode(element: HTMLElement) {
         let divElement = element.parentElement?.parentElement?.parentElement;
         while (divElement) {
             const classList = divElement.querySelector('.nested')?.classList;
@@ -138,6 +151,6 @@ export default class ObjectTree {
             }
             divElement = divElement.parentElement?.parentElement;
         }
-        ObjectTree.autoLocateInTree(element);
+        this.autoLocateInTree(element);
     }
 }
