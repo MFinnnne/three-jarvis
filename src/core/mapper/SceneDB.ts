@@ -86,16 +86,20 @@ class SceneDB extends Dexie {
     }
 
     upsertScene(jarvis: Jarvis) {
-        this.scene.where('id').equals(jarvis.container.id).count().then(count => {
-            if (count !== 0) {
-                this.updateScene(jarvis);
-            } else {
-                this.addScene(jarvis);
-            }
-        }).then(() => {
-            console.info('store scene:' + dayjs().format());
-        });
-
+        this.scene
+            .where('id')
+            .equals(jarvis.container.id)
+            .count()
+            .then((count) => {
+                if (count !== 0) {
+                    this.updateScene(jarvis);
+                } else {
+                    this.addScene(jarvis);
+                }
+            })
+            .then(() => {
+                console.info('store scene:' + dayjs().format());
+            });
     }
 }
 

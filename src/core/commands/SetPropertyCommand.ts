@@ -1,14 +1,13 @@
 import { Command } from '../Type';
 import { Object3D } from 'three';
 
-export  default class SetPropertyCommand implements Command {
+export default class SetPropertyCommand implements Command {
     name = 'set property';
     object: Object3D;
     private readonly _propertyName: string;
     private _value: any;
 
     private _oldValue: any;
-
 
     constructor(object: Object3D, propertyName: string, value: any) {
         this.object = object;
@@ -24,6 +23,4 @@ export  default class SetPropertyCommand implements Command {
     undo(): void {
         this.object[this._propertyName] = this._oldValue;
     }
-
-
 }

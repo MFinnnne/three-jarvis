@@ -4,8 +4,7 @@ import Jarvis from '../../core/Jarvis';
 import MenuBarFile from './MenuBar.file';
 
 export default class MenuBar {
-    constructor() {
-    }
+    constructor() {}
 
     static render(parent: HTMLElement, jarvis: Jarvis) {
         const element = m(

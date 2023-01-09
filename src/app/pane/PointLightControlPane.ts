@@ -5,7 +5,6 @@ import Jarvis from '../../core/Jarvis';
 import SetPropertyCommand from '../../core/commands/SetPropertyCommand';
 
 export default class PointLightControlPane extends LightControlPane {
-
     constructor(creator: Jarvis) {
         super(creator);
     }

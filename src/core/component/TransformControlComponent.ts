@@ -40,11 +40,9 @@ export default class TransformControlComponent {
     }
 
     private event() {
-
         this._control.addEventListener('objectChange', (e) => {
             PaneManager.update();
             objectChanged.getInstance().update();
-
         });
         this._control.addEventListener('mouseDown', (e) => {
             this.jarvis.control.enabled = false;
@@ -53,10 +51,16 @@ export default class TransformControlComponent {
             this.jarvis.control.enabled = true;
             sceneDB.upsertScene(this.jarvis);
             if (this._control.object) {
-                this.jarvis.recorder.execute(new SetPositionCommand(this._control.object, this._control.object.position));
-                this.jarvis.recorder.execute(new SetQuaternionCommand(this._control.object, this._control.object.quaternion));
+                this.jarvis.recorder.execute(
+                    new SetPositionCommand(this._control.object, this._control.object.position),
+                );
+                this.jarvis.recorder.execute(
+                    new SetQuaternionCommand(this._control.object, this._control.object.quaternion),
+                );
                 this.jarvis.recorder.execute(new SetScaleCommand(this._control.object, this._control.object.scale));
-                this.jarvis.recorder.execute(new SetRotationCommand(this._control.object, this._control.object.rotation));
+                this.jarvis.recorder.execute(
+                    new SetRotationCommand(this._control.object, this._control.object.rotation),
+                );
             }
         });
 

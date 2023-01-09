@@ -147,7 +147,7 @@ export default class ObjectControlPane extends DefaultControlPane {
                     return;
                 }
                 // eslint-disable-next-line no-debugger
-                debugger
+                debugger;
                 const { x, y, z } = e.value;
                 this.jarvis.recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ')));
             });

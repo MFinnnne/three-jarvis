@@ -15,7 +15,6 @@ export default class SceneControlPane extends ObjectControlPane {
         this.object = argument as Scene;
         pane.title = 'scene';
 
-
         return pane;
     }
 

@@ -4,8 +4,6 @@ import { Pane } from 'tweakpane';
 import Jarvis from '../../core/Jarvis';
 
 export default class LightControlPane extends ObjectControlPane {
-
-
     constructor(creator: Jarvis) {
         super(creator);
     }

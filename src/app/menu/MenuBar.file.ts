@@ -86,7 +86,7 @@ export default class MenuBarFile {
         if (files.length > 0) {
             const filesMap = LoaderUtils.createFilesMap(files);
             const manager = new THREE.LoadingManager();
-            manager.setURLModifier(function(url) {
+            manager.setURLModifier(function (url) {
                 url = url.replace(/^(\.?\/)/, '');
                 const file = filesMap[url];
                 if (file) {
@@ -111,7 +111,7 @@ export default class MenuBarFile {
                             const loader = new GLTFLoader();
                             loader.setMeshoptDecoder(MeshoptDecoder);
                             loader.setDRACOLoader(dracoLoader);
-                            loader.parse(contents as any, '', function(result) {
+                            loader.parse(contents as any, '', function (result) {
                                 const scene = result.scene;
                                 scene.name = filename;
                                 scene.animations.push(...result.animations);
@@ -132,7 +132,7 @@ export default class MenuBarFile {
                                 loader = new GLTFLoader(manager);
                                 loader.setDRACOLoader(dracoLoader);
                             }
-                            loader.parse(contents, '', function(result) {
+                            loader.parse(contents, '', function (result) {
                                 const scene = result.scene;
                                 scene.name = filename;
                                 scene.animations.push(...result.animations);
