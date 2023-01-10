@@ -2,7 +2,7 @@ import Constant from '../constant/Constant';
 import ObjectTree from './ObjectTree';
 import MenuBar from './menu/MenuBar';
 import Jarvis from '../core/Jarvis';
-import { clickObjectEvent } from '../core/events/ObjectEvents';
+import {clickObjectEvent} from '../core/events/ObjectEvents';
 import AddObjectCommand from '../core/commands/AddObjectCommand';
 import RemoveObjectCommand from '../core/commands/RemoveObjectCommand';
 
@@ -44,7 +44,7 @@ export default class GUI {
             }
         });
         let prevGeometries = 0;
-        jarvis.scene.onAfterRender = (renderer) => {
+        jarvis.scene.onAfterRender = (renderer, scene) => {
             const geometries = renderer.info.memory.geometries;
             if (geometries !== prevGeometries) {
                 objectTree.render(leftSideBarDom);

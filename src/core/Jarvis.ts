@@ -12,17 +12,17 @@ import {
     Scene,
     WebGLRenderer,
 } from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import GUI from '../app/GUI';
 import State from './State';
 import MonitorControlPane from '../app/pane/MonitorControlPane';
 import TransformControlComponent from './component/TransformControlComponent';
 import ObjectChanged from './ObjectChanged';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
 import PaneManager from './PaneManager';
-import { rayCasterEvents } from './events/ObjectEvents';
-import sceneDB, { SceneEntity } from './mapper/SceneDB';
-import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import {rayCasterEvents} from './events/ObjectEvents';
+import sceneDB, {SceneEntity} from './mapper/SceneDB';
+import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 import Recorder from './Recorder';
 import dayjs from 'dayjs';
 
@@ -107,7 +107,7 @@ export default class Jarvis {
     }
 
     async creator(container: HTMLCanvasElement) {
-        this._renderer = new WebGLRenderer({ canvas: container });
+        this._renderer = new WebGLRenderer({canvas: container});
         this._container = container;
         this._state = new State();
         this._recorder = new Recorder();
@@ -127,7 +127,7 @@ export default class Jarvis {
             this.state.activeCamera = this._camera;
             this._scene.add(this._light);
             const boxGeometry = new BoxGeometry(1, 1, 1);
-            const material = new MeshBasicMaterial({ color: 0x00ff00 });
+            const material = new MeshBasicMaterial({color: 0x00ff00});
             const mesh = new Mesh(boxGeometry, material);
             mesh.position.set(1, 1, 1);
             this._scene?.add(mesh);
@@ -182,7 +182,7 @@ export default class Jarvis {
     }
 
     public toJson() {
-        sceneDB.upsertScene(this);
+        sceneDB.lazyUpsertScene(this);
     }
 
     async fromJson(json: SceneEntity) {
@@ -190,14 +190,17 @@ export default class Jarvis {
         this._camera = await loader.parseAsync(json.camera);
         this.state.activeCamera = this._camera;
         const scene = await loader.parseAsync(json.scene);
-        for (const uuid of json.treeBlackList) {
-            const obj: Object3D | undefined = scene.getObjectByProperty('uuid', uuid);
-            if (obj) {
-                obj.removeFromParent();
+        if (json.treeBlackList) {
+            for (const uuid of json.treeBlackList) {
+                const obj: Object3D | undefined = scene.getObjectByProperty('uuid', uuid);
+                if (obj) {
+                    obj.removeFromParent();
+                }
             }
+            json.treeBlackList.length = 0;
+            OBJECT_TREE_BLACK_LIST.length = 0;
         }
-        json.treeBlackList.length = 0;
-        OBJECT_TREE_BLACK_LIST.length = 0;
+
         this._scene = scene as Scene;
     }
 }

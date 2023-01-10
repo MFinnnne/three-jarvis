@@ -1,17 +1,18 @@
 import * as THREE from 'three';
+import {FileLoader} from 'three';
 import './sass/full.scss';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import TransformControlComponent from './core/component/TransformControlComponent';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import Jarvis from './core/Jarvis';
 import Toast from './app/Toast';
-import sceneDB, { SceneEntity } from './core/mapper/SceneDB';
-import { FileLoader } from 'three';
+import sceneDB, {SceneEntity} from './core/mapper/SceneDB';
+import EventDispatch from "./core/EventDispatch";
+import {MessageManager} from "./core/MessageManager";
+
 
 type JarvisHook = {
     afterRender: () => void;
     beforeRender: () => void;
 };
-
 export default class ThreeJarvis {
     public static monitor(
         scene: THREE.Scene,
@@ -27,11 +28,12 @@ export default class ThreeJarvis {
         });
     }
 
-    public static async create(container: HTMLCanvasElement, url?: string, options?: JarvisHook) {
+    public static async create(container: HTMLCanvasElement, url?: string, options?: JarvisHook): Promise<EventDispatch> {
         if (container.id === undefined) {
             Toast.show('container id  must be set and only');
-            return;
+            throw new Error();
         }
+        let creator: Jarvis;
         if (url) {
             const loader = new FileLoader();
             loader.load(url, async (res) => {
@@ -44,12 +46,15 @@ export default class ThreeJarvis {
                         sceneDB.addJson(parse);
                     }
                 }
-                const creator = new Jarvis();
+                creator = new Jarvis();
                 await creator.creator(container);
+
             });
         } else {
-            const creator = new Jarvis();
+            creator = new Jarvis();
             await creator.creator(container);
         }
+        return new EventDispatch(container.id);
     }
 }
+

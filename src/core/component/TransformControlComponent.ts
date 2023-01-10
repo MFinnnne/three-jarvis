@@ -49,7 +49,7 @@ export default class TransformControlComponent {
         });
         this._control.addEventListener('mouseUp', (e) => {
             this.jarvis.control.enabled = true;
-            sceneDB.upsertScene(this.jarvis);
+            sceneDB.lazyUpsertScene(this.jarvis);
             if (this._control.object) {
                 this.jarvis.recorder.execute(
                     new SetPositionCommand(this._control.object, this._control.object.position),
