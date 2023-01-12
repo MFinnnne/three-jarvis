@@ -29,7 +29,6 @@ export default {
         },
     ],
     plugins: [
-        webWorkerLoader(),
         alias({
             resolve: ['.ts'],
         }),

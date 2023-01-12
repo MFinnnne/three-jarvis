@@ -20,6 +20,8 @@ class SceneDB extends Dexie {
     private scene!: Table<realSceneEntity, string>;
     private lastUpdateId?: number;
 
+    private isExistSet: Set<string> = new Set();
+
     public constructor() {
         super('SceneDB');
         this.version(1).stores({
@@ -72,7 +74,9 @@ class SceneDB extends Dexie {
 
     async get(id: string): Promise<SceneEntity | undefined> {
         return this.scene.where('id').equals(id).first().then(value => {
-            return JSON.parse(new TextDecoder().decode(value?.content));
+            if (value) {
+                return JSON.parse(new TextDecoder().decode(value?.content));
+            }
         });
     }
 
@@ -81,21 +85,23 @@ class SceneDB extends Dexie {
     }
 
     updateScene(jarvis: Jarvis) {
+        const sceneJson = jarvis.scene.toJSON();
         const res = {
             script: {},
             camera: jarvis.camera.toJSON(),
-            scene: jarvis.scene.toJSON(),
+            scene: sceneJson,
             ts: dayjs().unix(),
             updateTime: dayjs().format(),
             treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST)),
         };
+        const uint8Array = new TextEncoder().encode(JSON.stringify(res));
         this.scene
             .where('id')
             .equals(jarvis.container.id)
             .modify({
                 ts: res.ts,
                 updateTime: res.updateTime,
-                content: new TextEncoder().encode(JSON.stringify(res))
+                content: uint8Array
             });
     }
 
@@ -108,12 +114,25 @@ class SceneDB extends Dexie {
             clearTimeout(this.lastUpdateId);
         }
         this.lastUpdateId = window.setTimeout(() => {
-            const startTime =  Date.now();
+            const startTime = Date.now();
+            if (this.isExistSet.has(jarvis.container.id)) {
+                if (jarvis.orbitControlIsWorking) {
+                    this.lazyUpsertScene(jarvis);
+                    return;
+                }
+                this.updateScene(jarvis);
+                console.info(`store scene:${dayjs().format()},time:${Date.now() - startTime}ms`);
+                return;
+            }
             this.scene
                 .where('id')
                 .equals(jarvis.container.id)
                 .count()
                 .then((count) => {
+                    if (jarvis.orbitControlIsWorking) {
+                        this.lazyUpsertScene(jarvis);
+                        return;
+                    }
                     if (count !== 0) {
                         this.updateScene(jarvis);
                     } else {
@@ -121,9 +140,10 @@ class SceneDB extends Dexie {
                     }
                 })
                 .then(() => {
-                    console.info(`store scene:${dayjs().format()},time:${ Date.now() - startTime}ms`);
+                    this.isExistSet.add(jarvis.container.id);
+                    console.info(`store scene:${dayjs().format()},time:${Date.now() - startTime}ms`);
                 });
-        }, 1000);
+        }, 2000);
     }
 }
 

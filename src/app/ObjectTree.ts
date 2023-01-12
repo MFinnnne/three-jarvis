@@ -56,7 +56,7 @@ export default class ObjectTree {
                             const uuid = target.id;
                             this.jarvis.state.selectedObjectDom = target;
                             Ticker.emmit('objectDomClick', uuid);
-                            // this.autoLocateInTree(this.container);
+                            this.autoLocateInTree(this.container);
                         },
                     },
                     [object.name === '' ? object.type : object.name],
@@ -123,7 +123,6 @@ export default class ObjectTree {
      */
     autoLocateInTree(dom: HTMLElement) {
         this.jarvis.state.selectedObjectDom?.classList.toggle('find-out');
-        dom.classList.toggle('find-out');
         let offsetTop: number = dom.offsetTop - this.container.clientHeight / 2;
         if (dom.offsetTop < this.container.clientHeight) {
             offsetTop = 0;
@@ -133,8 +132,10 @@ export default class ObjectTree {
             offsetLeft = 0;
         }
         this.container.scrollTo(offsetLeft, offsetTop);
+        dom.classList.toggle('find-out');
+        dom.classList.toggle('selected');
     }
-
+    
     /**
      * find dom in tree and expand
      * @param element

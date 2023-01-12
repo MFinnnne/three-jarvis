@@ -6,12 +6,12 @@ import Jarvis from './core/Jarvis';
 import Toast from './app/Toast';
 import sceneDB, {SceneEntity} from './core/mapper/SceneDB';
 import EventDispatch from "./core/EventDispatch";
-import {MessageManager} from "./core/MessageManager";
-
 
 type JarvisHook = {
-    afterRender: () => void;
-    beforeRender: () => void;
+    afterRender?: () => void;
+    beforeRender?: () => void;
+    dataGet?: () => string;
+    dataStore?: (content: string) => void;
 };
 export default class ThreeJarvis {
     public static monitor(
@@ -36,11 +36,13 @@ export default class ThreeJarvis {
         let creator: Jarvis;
         if (url) {
             const loader = new FileLoader();
+
             loader.load(url, async (res) => {
                 if (typeof res === 'string') {
                     const exist = await sceneDB.countById(container.id);
                     if (exist) {
                         console.warn("this json has already exist in indexed db,we will select indexedDB's json");
+
                     } else {
                         const parse = JSON.parse(res) as SceneEntity;
                         sceneDB.addJson(parse);

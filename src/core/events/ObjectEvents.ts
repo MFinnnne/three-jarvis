@@ -53,7 +53,6 @@ export function clickObjectEvent(objectTree: ObjectTree): void {
             throw new Error(`object ===${object.uuid}===${object.name} dom is null`);
         }
         objectTree.expandTreeByChildNode(dom);
-        objectTree.autoLocateInTree(dom);
         ObjectChanged.getInstance().objectHelper(object);
         Ticker.emmit('objectDomClick', object.uuid);
     });

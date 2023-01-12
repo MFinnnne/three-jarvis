@@ -36,6 +36,7 @@ export default class Jarvis {
     private _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
     private _renderer!: WebGLRenderer;
 
+    private _time: string = dayjs().format();
     private _light = new HemisphereLight(0xffffbb, 0x080820, 1);
     private _scene!: Scene;
     private _container!: HTMLCanvasElement;
@@ -46,7 +47,19 @@ export default class Jarvis {
 
     private _recorder!: Recorder;
 
+    private _orbitControlIsWorking: boolean = false;
+
+    private _orbitControlTimeoutId?: number;
     private _afterSceneInitCallBack: AfterSceneInitCallBack[] = [];
+
+
+    get orbitControlIsWorking(): boolean {
+        return this._orbitControlIsWorking;
+    }
+
+    get time(): string {
+        return this._time;
+    }
 
     get afterSceneInitCallBack(): AfterSceneInitCallBack[] {
         return this._afterSceneInitCallBack;
@@ -113,7 +126,6 @@ export default class Jarvis {
         this._recorder = new Recorder();
         this._recorder.afterExecute.push(() => this.toJson());
         const sceneInfo = await sceneDB.get(container.id);
-
         if (sceneInfo) {
             await this.fromJson(sceneInfo);
         } else {
@@ -134,7 +146,7 @@ export default class Jarvis {
         }
         this.init();
         this.render();
-        ObjectChanged.getInstance().objectHelper(this.scene);
+        ObjectChanged.getInstance(this).objectHelper(this.scene);
         window.addEventListener('resize', () => {
             this.onWindowResize();
         });
@@ -145,7 +157,12 @@ export default class Jarvis {
         this._control.minDistance = 2;
         this._control.maxDistance = 1000;
         this._control.update();
-
+        this._control.addEventListener('end', () => {
+            this._orbitControlIsWorking = false;
+        })
+        this._control.addEventListener('start', () => {
+            this._orbitControlIsWorking = true;
+        })
         const controlComponent = new TransformControlComponent(this);
         controlComponent.init();
         this._transformControl = controlComponent.control;
@@ -158,8 +175,6 @@ export default class Jarvis {
         OBJECT_TREE_BLACK_LIST.push(gridHelper.uuid);
 
         this._scene.add(gridHelper);
-
-        ObjectChanged.getInstance(this);
         PaneManager.init(this);
         this.onWindowResize();
         GUI.guiContainerInit(this);
@@ -169,9 +184,9 @@ export default class Jarvis {
 
     private onWindowResize() {
         if (this._camera instanceof PerspectiveCamera) {
-            this._camera!.aspect = this._container!.offsetWidth / this._container!.offsetHeight;
+            this._camera.aspect = this._container?.offsetWidth / this._container?.offsetHeight;
         }
-        this._camera!.updateProjectionMatrix();
+        this._camera.updateProjectionMatrix();
         this._renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
@@ -200,7 +215,6 @@ export default class Jarvis {
             json.treeBlackList.length = 0;
             OBJECT_TREE_BLACK_LIST.length = 0;
         }
-
         this._scene = scene as Scene;
     }
 }
