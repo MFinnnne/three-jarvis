@@ -56,7 +56,6 @@ export default class ObjectTree {
                             const uuid = target.id;
                             this.jarvis.state.selectedObjectDom = target;
                             Ticker.emmit('objectDomClick', uuid);
-                            this.autoLocateInTree(this.container);
                         },
                     },
                     [object.name === '' ? object.type : object.name],
