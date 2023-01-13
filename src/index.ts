@@ -5,7 +5,8 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import Jarvis from './core/Jarvis';
 import Toast from './app/Toast';
 import sceneDB, {SceneEntity} from './core/mapper/SceneDB';
-import EventDispatch from "./core/EventDispatch";
+import ObjectEventDispatch from "./core/ObjectEventDispatch";
+import ObjectEventSubscribe from "./core/ObjectEventSubscribe";
 
 type JarvisHook = {
     afterRender?: () => void;
@@ -13,6 +14,10 @@ type JarvisHook = {
     dataGet?: () => string;
     dataStore?: (content: string) => void;
 };
+
+type JarvisReturn = {
+    subscribe?: (uuid: string) => ObjectEventDispatch;
+}
 export default class ThreeJarvis {
     public static monitor(
         scene: THREE.Scene,
@@ -28,7 +33,7 @@ export default class ThreeJarvis {
         });
     }
 
-    public static async create(container: HTMLCanvasElement, url?: string, options?: JarvisHook): Promise<EventDispatch> {
+    public static create(container: HTMLCanvasElement, url?: string, options?: JarvisHook): JarvisReturn {
         if (container.id === undefined) {
             Toast.show('container id  must be set and only');
             throw new Error();
@@ -36,27 +41,37 @@ export default class ThreeJarvis {
         let creator: Jarvis;
         if (url) {
             const loader = new FileLoader();
-
-            loader.load(url, async (res) => {
-                if (typeof res === 'string') {
-                    const exist = await sceneDB.countById(container.id);
+            Promise.all([loader.loadAsync(url), sceneDB.countById(container.id)]).then(res => {
+                if (typeof res[0] === 'string') {
+                    const exist = res[1];
                     if (exist) {
                         console.warn("this json has already exist in indexed db,we will select indexedDB's json");
 
                     } else {
-                        const parse = JSON.parse(res) as SceneEntity;
+                        const parse = JSON.parse(res[0]) as SceneEntity;
                         sceneDB.addJson(parse);
                     }
                 }
                 creator = new Jarvis();
-                await creator.creator(container);
-
-            });
+                creator.creator(container).then(r =>{});
+            })
         } else {
             creator = new Jarvis();
-            await creator.creator(container);
+            creator.creator(container).then(r => {});
         }
-        return new EventDispatch(container.id);
+
+        function subscribe(uuid: string):ObjectEventDispatch {
+            const obj = creator.scene.getObjectByProperty('uuid', uuid);
+            if (obj) {
+                return new ObjectEventDispatch(obj);
+            }
+            throw new Error(`can not find a uuid for ${uuid} object in scene`);
+        }
+
+        return {subscribe};
     }
+
 }
+
+
 

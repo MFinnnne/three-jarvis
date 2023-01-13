@@ -32,4 +32,17 @@ export default class Utils {
         Toast.show(`(${text}) copied`);
         return true;
     }
+    static once(f) {
+        let result;
+        let revoked = false;
+
+        return (...args) => {
+            if (revoked) return result;
+            const r = f(...args);
+            revoked = true;
+            result = r;
+            return r;
+        };
+    }
 }
+
