@@ -25,13 +25,11 @@ import sceneDB, {SceneEntity} from './mapper/SceneDB';
 import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 import Recorder from './Recorder';
 import dayjs from 'dayjs';
+import ObjectEventBus from "./ObjectEventBus";
 
 type AfterSceneInitCallBack = () => void;
 
 export default class Jarvis {
-    get recorder(): Recorder {
-        return this._recorder;
-    }
 
     private _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
     private _renderer!: WebGLRenderer;
@@ -44,14 +42,21 @@ export default class Jarvis {
     private _transformControl!: TransformControls;
 
     private _state!: State;
-
     private _recorder!: Recorder;
-
-    private _orbitControlIsWorking: boolean = false;
+    private _orbitControlIsWorking = false;
 
     private _orbitControlTimeoutId?: number;
     private _afterSceneInitCallBack: AfterSceneInitCallBack[] = [];
+    private readonly _objectEvents: ObjectEventBus[];
 
+
+    constructor(objectEvents: ObjectEventBus[]) {
+        this._objectEvents = objectEvents;
+    }
+
+    get recorder(): Recorder {
+        return this._recorder;
+    }
 
     get orbitControlIsWorking(): boolean {
         return this._orbitControlIsWorking;
@@ -119,13 +124,14 @@ export default class Jarvis {
         new MonitorControlPane(this).genPane();
     }
 
-    async creator(container: HTMLCanvasElement) {
+
+    async creator(container: HTMLCanvasElement, se?: SceneEntity) {
         this._renderer = new WebGLRenderer({canvas: container});
         this._container = container;
         this._state = new State();
         this._recorder = new Recorder();
         this._recorder.afterExecute.push(() => this.toJson());
-        const sceneInfo = await sceneDB.get(container.id);
+        const sceneInfo = se ?? await sceneDB.get(container.id);
         if (sceneInfo) {
             await this.fromJson(sceneInfo);
         } else {
@@ -205,6 +211,12 @@ export default class Jarvis {
         this._camera = await loader.parseAsync(json.camera);
         this.state.activeCamera = this._camera;
         const scene = await loader.parseAsync(json.scene);
+        for (const objectEvent of this._objectEvents) {
+            const obj = scene.getObjectByProperty(objectEvent.propertyName, objectEvent.propertyValue);
+            if (obj) {
+                objectEvent.bind(obj);
+            }
+        }
         if (json.treeBlackList) {
             for (const uuid of json.treeBlackList) {
                 const obj: Object3D | undefined = scene.getObjectByProperty('uuid', uuid);
@@ -215,6 +227,22 @@ export default class Jarvis {
             json.treeBlackList.length = 0;
             OBJECT_TREE_BLACK_LIST.length = 0;
         }
-        this._scene = scene as Scene;
+        this.setScene(scene as Scene);
     }
+
+    private setScene(scene: Scene) {
+
+        this.scene.uuid = scene.uuid;
+        this.scene.name = scene.name;
+
+        this.scene.background = scene.background;
+        this.scene.environment = scene.environment;
+        this.scene.fog = scene.fog;
+
+        this.scene.userData = JSON.parse(JSON.stringify(scene.userData));
+        for (const child of scene.children) {
+            this.scene.add(child);
+        }
+    }
+
 }

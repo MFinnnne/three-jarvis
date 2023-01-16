@@ -13,8 +13,9 @@ import {Mesh, Object3D} from "three";
 
 onMounted(async () => {
     const container = document.querySelector('#container');
-
-    const res = await ThreeJarvis.create(container, '../../static/CONFIG.json');
+    let threeJarvis = new ThreeJarvis(container);
+    threeJarvis.create();
+    const res = await ThreeJarvis.create('../../static/CONFIG.json');
     const sub = res.subscribe('fdceba65-9019-4033-bf20-8e09c8bf00de');
     sub.afterAdd = (object: Mesh) => {
         console.log(object);
