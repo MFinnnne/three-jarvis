@@ -37,8 +37,7 @@ export default class Creator extends General {
 
     private _uuidSubMap: Map<string, ObjectObserver[]> = new Map();
 
-
-    constructor(container:HTMLCanvasElement) {
+    constructor(container: HTMLCanvasElement) {
         super();
         this._container = container;
     }
@@ -55,7 +54,7 @@ export default class Creator extends General {
                     rawString = res;
                 }
                 const se = JSON.parse(rawString) as SceneEntity;
-                creator =new Creator(this.container);
+                creator = new Creator(this.container);
                 creator.create(this.container, se).then(r => {
                 });
             });
@@ -128,7 +127,6 @@ export default class Creator extends General {
         gridHelper.layers.set(3);
         gridHelper.name = 'jarvis-grid-helper';
         OBJECT_TREE_BLACK_LIST.push(gridHelper.uuid);
-
         this.scene.add(gridHelper);
         PaneManager.init(this);
         this.onWindowResize();
@@ -155,10 +153,15 @@ export default class Creator extends General {
     }
 
     public subscribeByUUID(uuid: string): { on: (resolve: (observer: ObjectObserver) => void) => Creator } {
-        const eventBus = new ObjectObserver('uuid', uuid);
+        const observer = new ObjectObserver('uuid', uuid);
+        if (this._uuidSubMap.has(uuid)) {
+            this._uuidSubMap.get(uuid)?.push(observer)
+        } else {
+            this._uuidSubMap.set(uuid, [observer]);
+        }
         return {
             on: (resolve: (observer: ObjectObserver) => void) => {
-                resolve(eventBus);
+                resolve(observer);
                 return this;
             }
         }
@@ -201,7 +204,6 @@ export default class Creator extends General {
     private initOrbitControl() {
 
     }
-
 
 
     private initCamera() {
