@@ -12,7 +12,7 @@ import SetQuaternionCommand from "./commands/SetQuaternionCommand";
 import SetScaleCommand from "./commands/SetScaleCommand";
 import SetRotationCommand from "./commands/SetRotationCommand";
 
-export  default abstract class General {
+export default abstract class General {
 
 
     protected _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
@@ -29,6 +29,26 @@ export  default abstract class General {
     protected _recorder!: Recorder;
     protected _orbitControlIsWorking = false;
 
+    protected _paneContainer!: HTMLElement;
+
+    private _leftSideBarContainer!: HTMLElement;
+
+
+    get leftSideBarContainer(): HTMLElement {
+        return this._leftSideBarContainer;
+    }
+
+    set leftSideBarContainer(value: HTMLElement) {
+        this._leftSideBarContainer = value;
+    }
+
+    get paneContainer(): HTMLElement {
+        return this._paneContainer;
+    }
+
+    set paneContainer(value: HTMLElement) {
+        this._paneContainer = value;
+    }
 
     get camera(): PerspectiveCamera | OrthographicCamera {
         return this._camera;

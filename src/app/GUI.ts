@@ -1,4 +1,3 @@
-import Constant from '../constant/Constant';
 import ObjectTree from './ObjectTree';
 import MenuBar from './menu/MenuBar';
 import {clickObjectEvent} from '../core/events/ObjectEvents';
@@ -25,13 +24,13 @@ export default class GUI {
         leftSideBarDom.id = 'three-helper-left-side-bar';
         leftSideBarDom.className = 'three-helper-left-side-bar';
         element.appendChild(leftSideBarDom);
-        Constant.LEFT_SIDE_BAR_CONTAINER = leftSideBarDom;
+        general.leftSideBarContainer = leftSideBarDom;
 
         const paneDom = document.createElement('div');
         paneDom.id = 'three-helper-pane';
         paneDom.className = 'three-helper-pane';
         element.appendChild(paneDom);
-        Constant.PANE_CONTAINER = paneDom;
+        general.paneContainer = paneDom;
         document.body.appendChild(element);
         MenuBar.render(menuDom, general);
         const objectTree = new ObjectTree(leftSideBarDom, general);
