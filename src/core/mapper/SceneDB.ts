@@ -1,7 +1,7 @@
 import Dexie, {PromiseExtended, Table} from 'dexie';
-import Jarvis from '../Jarvis';
 import dayjs from 'dayjs';
 import {OBJECT_TREE_BLACK_LIST} from '../../config/Config';
+import Creator from "../Creator";
 
 
 export type SceneEntity = {
@@ -43,12 +43,12 @@ class SceneDB extends Dexie {
             });
     }
 
-    addScene(jarvis: Jarvis) {
+    addScene(creator: Creator) {
         this.transaction('rw', this.scene, async () => {
             const res = {
-                id: jarvis.container.id,
-                camera: jarvis.camera.toJSON(),
-                scene: jarvis.scene.toJSON(),
+                id: creator.container.id,
+                camera: creator.camera.toJSON(),
+                scene: creator.scene.toJSON(),
                 ts: dayjs().unix(),
                 updateTime: dayjs().format(),
                 treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST))
@@ -61,10 +61,10 @@ class SceneDB extends Dexie {
             });
         })
             .then(() => {
-                console.info(`scene ${jarvis.container.id} store success`);
+                console.info(`scene ${creator.container.id} store success`);
             })
             .catch((reason) => {
-                console.warn(`scene ${jarvis.container.id} store fail`);
+                console.warn(`scene ${creator.container.id} store fail`);
             });
     }
 
@@ -84,11 +84,11 @@ class SceneDB extends Dexie {
         return this.scene.toArray();
     }
 
-    updateScene(jarvis: Jarvis) {
-        const sceneJson = jarvis.scene.toJSON();
+    updateScene(creator: Creator) {
+        const sceneJson = creator.scene.toJSON();
         const res = {
             script: {},
-            camera: jarvis.camera.toJSON(),
+            camera: creator.camera.toJSON(),
             scene: sceneJson,
             ts: dayjs().unix(),
             updateTime: dayjs().format(),
@@ -97,7 +97,7 @@ class SceneDB extends Dexie {
         const uint8Array = new TextEncoder().encode(JSON.stringify(res));
         this.scene
             .where('id')
-            .equals(jarvis.container.id)
+            .equals(creator.container.id)
             .modify({
                 ts: res.ts,
                 updateTime: res.updateTime,
@@ -109,38 +109,38 @@ class SceneDB extends Dexie {
         return this.scene.where('id').equals(id).count();
     }
 
-    lazyUpsertScene(jarvis: Jarvis) {
+    lazyUpsertScene(creator: Creator) {
         if (this.lastUpdateId) {
             clearTimeout(this.lastUpdateId);
         }
         this.lastUpdateId = window.setTimeout(() => {
             const startTime = Date.now();
-            if (this.isExistSet.has(jarvis.container.id)) {
-                if (jarvis.orbitControlIsWorking) {
-                    this.lazyUpsertScene(jarvis);
+            if (this.isExistSet.has(creator.container.id)) {
+                if (creator.orbitControlIsWorking) {
+                    this.lazyUpsertScene(creator);
                     return;
                 }
-                this.updateScene(jarvis);
+                this.updateScene(creator);
                 console.info(`store scene:${dayjs().format()},time:${Date.now() - startTime}ms`);
                 return;
             }
             this.scene
                 .where('id')
-                .equals(jarvis.container.id)
+                .equals(creator.container.id)
                 .count()
                 .then((count) => {
-                    if (jarvis.orbitControlIsWorking) {
-                        this.lazyUpsertScene(jarvis);
+                    if (creator.orbitControlIsWorking) {
+                        this.lazyUpsertScene(creator);
                         return;
                     }
                     if (count !== 0) {
-                        this.updateScene(jarvis);
+                        this.updateScene(creator);
                     } else {
-                        this.addScene(jarvis);
+                        this.addScene(creator);
                     }
                 })
                 .then(() => {
-                    this.isExistSet.add(jarvis.container.id);
+                    this.isExistSet.add(creator.container.id);
                     console.info(`store scene:${dayjs().format()},time:${Date.now() - startTime}ms`);
                 });
         }, 2000);

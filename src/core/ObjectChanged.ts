@@ -1,24 +1,23 @@
-import { Box3, Object3D, Sphere } from 'three';
-import state from './State';
+import {Object3D} from 'three';
 import HelperManager from './HelperManager';
-import Jarvis from './Jarvis';
+import General from "./General";
 
 export default class ObjectChanged {
     private static instance?: ObjectChanged;
-    private jarvis!: Jarvis;
+    private jarvis!: General;
 
     /**
      *   boxed  mesh
      */
     private constructor() {}
 
-    public static getInstance(jarvis?: Jarvis): ObjectChanged {
-        if (jarvis) {
+    public static getInstance(general?: General): ObjectChanged {
+        if (general) {
             if (this.instance) {
                 return this.instance;
             }
             this.instance = new ObjectChanged();
-            this.instance.jarvis = jarvis;
+            this.instance.jarvis = general;
             return this.instance;
         } else {
             if (this.instance === undefined) {

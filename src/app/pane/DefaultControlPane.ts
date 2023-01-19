@@ -3,8 +3,8 @@ import { BladeApi, Pane } from 'tweakpane';
 import Constant from '../../constant/Constant';
 import * as TweakpaneRotationInputPlugin from '@0b5vr/tweakpane-plugin-rotation';
 import * as EssentialsPlugin from '@tweakpane/plugin-essentials';
-import Jarvis from '../../core/Jarvis';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+
+import General from "../../core/General";
 
 export type ControlPane = {
     genPane(argument: Object3D | Camera | WebGLRenderer): Pane;
@@ -13,9 +13,9 @@ export type ControlPane = {
 };
 
 export default class DefaultControlPane implements ControlPane {
-    protected jarvis: Jarvis;
-    constructor(jarvis: Jarvis) {
-        this.jarvis = jarvis;
+    protected general: General;
+    constructor(jarvis: General) {
+        this.general = jarvis;
     }
 
     protected pane: Pane = new Pane({ container: Constant.PANE_CONTAINER });

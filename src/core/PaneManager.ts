@@ -2,11 +2,11 @@ import ObjectControlPane from '../app/pane/ObjectControlPane';
 import HemisphereLightControlPane from '../app/pane/HemisphereLightControlPane';
 import PointLightControlPane from '../app/pane/PointLightControlPane';
 import DirectionalLightControlPane from '../app/pane/DirectionalLightControlPane';
-import { Object3D } from 'three';
-import { Pane } from 'tweakpane';
-import { ControlPane } from '../app/pane/DefaultControlPane';
+import {Object3D} from 'three';
+import {Pane} from 'tweakpane';
+import {ControlPane} from '../app/pane/DefaultControlPane';
 import CameraControlPane from '../app/pane/CameraControlPane';
-import Jarvis from './Jarvis';
+import General from "./General";
 
 const OBJECT_PANE_MAP: Map<string, () => ControlPane> = new Map();
 
@@ -14,7 +14,7 @@ export default class PaneManager {
     private static INSTANCE: Pane | null | undefined;
     private static CONTROL_PANE: ControlPane | undefined;
 
-    static init(jarvis: Jarvis) {
+    static init(jarvis: General) {
         OBJECT_PANE_MAP.set('Sprite', () => new ObjectControlPane(jarvis));
         OBJECT_PANE_MAP.set('Points', () => new ObjectControlPane(jarvis));
         OBJECT_PANE_MAP.set('Group', () => new ObjectControlPane(jarvis));

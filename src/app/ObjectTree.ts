@@ -1,24 +1,22 @@
-import { className, Flags, m, render, VElement, VNode } from 'million';
-import { Object3D } from 'three';
-import state from '../core/State';
-import Constant from '../constant/Constant';
-import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
-import { rightMenu } from './RightMenu';
+import {className, Flags, m, render, VElement, VNode} from 'million';
+import {Object3D} from 'three';
+import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
+import {rightMenu} from './RightMenu';
 import Ticker from '../core/Ticker';
-import Jarvis from '../core/Jarvis';
-import { domClickEvent, domDoubleClickEvent } from '../core/events/DomEvents';
+import {domClickEvent, domDoubleClickEvent} from '../core/events/DomEvents';
+import General from "../core/General";
 
 export default class ObjectTree {
     private prevNode: VNode | undefined;
-    private readonly jarvis: Jarvis;
+    private readonly general: General;
 
     private container: HTMLElement;
 
-    constructor(container: HTMLElement, creator: Jarvis) {
-        this.jarvis = creator;
+    constructor(container: HTMLElement, general: General) {
+        this.general = general;
         this.container = container;
-        domDoubleClickEvent(container, creator.scene);
-        domClickEvent(creator.scene);
+        domDoubleClickEvent(container, general.scene);
+        domClickEvent(general.scene);
     }
 
     private object2VNode(object: Object3D): VElement | null {
@@ -52,9 +50,9 @@ export default class ObjectTree {
                                 (e.target as HTMLElement).classList.toggle('caretDown');
                             }
                             const target = e.target as HTMLElement;
-                            rightMenu(target, this.jarvis);
+                            rightMenu(target, this.general);
                             const uuid = target.id;
-                            this.jarvis.state.selectedObjectDom = target;
+                            this.general.state.selectedObjectDom = target;
                             Ticker.emmit('objectDomClick', uuid);
                         },
                     },
@@ -108,7 +106,7 @@ export default class ObjectTree {
     }
 
     render(parent: HTMLElement): void {
-        const newNode = this.object2VNodeTree(this.jarvis.scene);
+        const newNode = this.object2VNodeTree(this.general.scene);
         if (newNode === null) {
             return;
         }
@@ -121,7 +119,7 @@ export default class ObjectTree {
      * @param dom
      */
     autoLocateInTree(dom: HTMLElement) {
-        this.jarvis.state.selectedObjectDom?.classList.toggle('find-out');
+        this.general.state.selectedObjectDom?.classList.toggle('find-out');
         let offsetTop: number = dom.offsetTop - this.container.clientHeight / 2;
         if (dom.offsetTop < this.container.clientHeight) {
             offsetTop = 0;
@@ -134,7 +132,7 @@ export default class ObjectTree {
         dom.classList.toggle('find-out');
         dom.classList.toggle('selected');
     }
-    
+
     /**
      * find dom in tree and expand
      * @param element

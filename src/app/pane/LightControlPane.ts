@@ -1,11 +1,11 @@
 import ObjectControlPane from './ObjectControlPane';
 import { Light, Object3D } from 'three';
 import { Pane } from 'tweakpane';
-import Jarvis from '../../core/Jarvis';
+import General from "../../core/General";
 
 export default class LightControlPane extends ObjectControlPane {
-    constructor(creator: Jarvis) {
-        super(creator);
+    constructor(general: General) {
+        super(general);
     }
 
     genPane(object: Object3D): Pane {

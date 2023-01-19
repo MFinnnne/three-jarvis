@@ -1,12 +1,12 @@
 import LightControlPane from './LightControlPane';
-import { Object3D, PointLight } from 'three';
-import { Pane } from 'tweakpane';
-import Jarvis from '../../core/Jarvis';
+import {Object3D, PointLight} from 'three';
+import {Pane} from 'tweakpane';
 import SetPropertyCommand from '../../core/commands/SetPropertyCommand';
+import General from "../../core/General";
 
 export default class PointLightControlPane extends LightControlPane {
-    constructor(creator: Jarvis) {
-        super(creator);
+    constructor(general: General) {
+        super(general);
     }
 
     genPane(object: Object3D): Pane {
@@ -18,13 +18,13 @@ export default class PointLightControlPane extends LightControlPane {
             power: light.power,
         };
         this.objectPane?.addInput(PARAMS, 'distance').on('change', (value) => {
-            this.jarvis.recorder.execute(new SetPropertyCommand(light, 'distance', value.value));
+            this.general.recorder.execute(new SetPropertyCommand(light, 'distance', value.value));
         });
         this.objectPane?.addInput(PARAMS, 'decay').on('change', (value) => {
-            this.jarvis.recorder.execute(new SetPropertyCommand(light, 'decay', value.value));
+            this.general.recorder.execute(new SetPropertyCommand(light, 'decay', value.value));
         });
         this.objectPane?.addInput(PARAMS, 'power').on('change', (value) => {
-            this.jarvis.recorder.execute(new SetPropertyCommand(light, 'power', value.value));
+            this.general.recorder.execute(new SetPropertyCommand(light, 'power', value.value));
         });
         return this.pane;
     }

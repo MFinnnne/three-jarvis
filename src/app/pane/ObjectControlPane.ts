@@ -1,18 +1,15 @@
-import { BladeApi, ButtonApi, Pane, TabPageApi } from 'tweakpane';
-import { Euler, Object3D, Quaternion, Vector3 } from 'three';
+import {BladeApi, ButtonApi, Pane, TabPageApi} from 'tweakpane';
+import {Euler, Object3D, Quaternion, Vector3} from 'three';
 import DefaultControlPane from './DefaultControlPane';
-import recorder from '../../core/Recorder';
 import SetPositionCommand from '../../core/commands/SetPositionCommand';
 import SetRotationCommand from '../../core/commands/SetRotationCommand';
 import SetScaleCommand from '../../core/commands/SetScaleCommand';
 import SetQuaternionCommand from '../../core/commands/SetQuaternionCommand';
-import { Point3d } from '@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d';
+import {Point3d} from '@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d';
 import Utils from '../../util/Utils';
 import Prompt from '../Prompt';
-import TransformControlComponent from '../../core/component/TransformControlComponent';
-import { TpButtonGridEvent } from '@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
-import Jarvis from '../../core/Jarvis';
+import {TpButtonGridEvent} from '@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event';
+import General from "../../core/General";
 
 export default class ObjectControlPane extends DefaultControlPane {
     protected objectPane?: TabPageApi;
@@ -20,8 +17,8 @@ export default class ObjectControlPane extends DefaultControlPane {
     protected materialPane?: TabPageApi;
     protected object?: Object3D;
 
-    constructor(creator: Jarvis) {
-        super(creator);
+    constructor(general: General) {
+        super(general);
     }
 
     public genPane(object: Object3D): Pane {
@@ -92,26 +89,26 @@ export default class ObjectControlPane extends DefaultControlPane {
             const tpEvent = ev as TpButtonGridEvent;
             if (tpEvent.index[0] === 0) {
                 // rotate
-                this.jarvis.transformControl.setMode('rotate');
+                this.general.transformControl.setMode('rotate');
             }
             if (tpEvent.index[0] === 1) {
                 // scale
-                this.jarvis.transformControl.setMode('scale');
+                this.general.transformControl.setMode('scale');
             }
             if (tpEvent.index[0] === 2) {
                 // translate
-                this.jarvis.transformControl.setMode('translate');
+                this.general.transformControl.setMode('translate');
             }
         });
 
         this.geometryPane = tab.pages[1];
         this.materialPane = tab.pages[2];
         const positionBind = this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
-            if (this.jarvis.transformControl.dragging) {
+            if (this.general.transformControl.dragging) {
                 return;
             }
             const { x, y, z } = ev.value;
-            this.jarvis.recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z)));
+            this.general.recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z)));
         });
         positionBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = positionBind.controller_.binding.value.rawValue as Point3d;
@@ -120,11 +117,11 @@ export default class ObjectControlPane extends DefaultControlPane {
         this.bindMap.set('position', positionBind);
 
         const scaleBind = this.objectPane.addInput(PARAMS, 'scale').on('change', (ev) => {
-            if (this.jarvis.transformControl.dragging) {
+            if (this.general.transformControl.dragging) {
                 return;
             }
             const { x, y, z } = ev.value;
-            this.jarvis.recorder.execute(new SetScaleCommand(object, new Vector3(x, y, z)));
+            this.general.recorder.execute(new SetScaleCommand(object, new Vector3(x, y, z)));
         });
         scaleBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = scaleBind.controller_.binding.value.rawValue as Point3d;
@@ -143,13 +140,13 @@ export default class ObjectControlPane extends DefaultControlPane {
                 expanded: false,
             })
             .on('change', (e) => {
-                if (this.jarvis.transformControl.dragging) {
+                if (this.general.transformControl.dragging) {
                     return;
                 }
                 // eslint-disable-next-line no-debugger
                 debugger;
                 const { x, y, z } = e.value;
-                this.jarvis.recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ')));
+                this.general.recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ')));
             });
         rotationBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = rotationBind.controller_.binding.value.rawValue as Euler;
@@ -166,11 +163,11 @@ export default class ObjectControlPane extends DefaultControlPane {
                 expanded: false, // optional, false by default
             })
             .on('change', (e) => {
-                if (this.jarvis.transformControl.dragging) {
+                if (this.general.transformControl.dragging) {
                     return;
                 }
                 const { x, y, z, w } = e.value;
-                this.jarvis.recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w)));
+                this.general.recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w)));
             });
         quatBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = quatBind.controller_.binding.value.rawValue as Quaternion;

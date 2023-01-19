@@ -1,10 +1,10 @@
 import RightMenu from '@right-menu/core';
 import RemoveObjectCommand from '../core/commands/RemoveObjectCommand';
-import Jarvis from '../core/Jarvis';
+import General from "../core/General";
 
 const FINISH = new Map();
 
-export const rightMenu = (el: HTMLElement, jarvis: Jarvis) => {
+export const rightMenu = (el: HTMLElement, general: General) => {
     if (FINISH.has(el.id)) {
         return;
     }
@@ -14,11 +14,11 @@ export const rightMenu = (el: HTMLElement, jarvis: Jarvis) => {
             type: 'li',
             text: 'delete',
             callback: () => {
-                const object3D = jarvis.scene.getObjectByProperty('uuid', el.id);
+                const object3D = general.scene.getObjectByProperty('uuid', el.id);
                 if (object3D) {
-                    jarvis.recorder.execute(new RemoveObjectCommand(object3D));
-                    jarvis.transformControl.detach();
-                    jarvis.state.selectedObjectDom = null;
+                    general.recorder.execute(new RemoveObjectCommand(object3D));
+                    general.transformControl.detach();
+                    general.state.selectedObjectDom = null;
                 }
             },
         },

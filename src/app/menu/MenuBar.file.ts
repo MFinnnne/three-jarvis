@@ -1,23 +1,23 @@
-import { m, VNode } from 'million';
+import {m, VNode} from 'million';
 import MenuUtils from './MenuUtils';
 import * as THREE from 'three';
 import AddObjectCommand from '../../core/commands/AddObjectCommand';
-import Jarvis from '../../core/Jarvis';
 import sceneDB from '../../core/mapper/SceneDB';
 import ExportComponent from '../../core/component/ExportComponent';
 import dayjs from 'dayjs';
 import PromiseFileReader from '../../util/PromiseFileReader';
-import { LoaderUtils } from '../../util/LoadUtils';
-import { TGALoader } from 'three/examples/jsm/loaders/TGALoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { MeshoptDecoder } from '../../core/jsm/meshopt_decoder.module';
+import {LoaderUtils} from '../../util/LoadUtils';
+import {TGALoader} from 'three/examples/jsm/loaders/TGALoader';
+import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
+import {MeshoptDecoder} from '../../core/jsm/meshopt_decoder.module';
+import General from "../../core/General";
 
 export default class MenuBarFile {
-    private readonly jarvis: Jarvis;
+    private readonly general: General;
 
-    constructor(jarvis: Jarvis) {
-        this.jarvis = jarvis;
+    constructor(general: General) {
+        this.general = general;
     }
 
     element(): VNode {
@@ -60,9 +60,9 @@ export default class MenuBarFile {
     onClick(type: string, e: Event) {
         switch (type) {
             case 'export':
-                sceneDB.get(this.jarvis.container.id).then((scene) => {
+                sceneDB.get(this.general.container.id).then((scene) => {
                     ExportComponent.exportJson(
-                        `${this.jarvis.container.id}_scene_${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
+                        `${this.general.container.id}_scene_${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
                         JSON.stringify(scene),
                     );
                 });
@@ -71,10 +71,10 @@ export default class MenuBarFile {
                 this.importModel(e);
                 break;
             case 'undo':
-                this.jarvis.recorder.undo();
+                this.general.recorder.undo();
                 break;
             case 'redo':
-                this.jarvis.recorder.redo();
+                this.general.recorder.redo();
                 break;
             default:
                 break;
@@ -98,7 +98,7 @@ export default class MenuBarFile {
             manager.addHandler(/\.tga$/i, new TGALoader());
 
             for (let i = 0; i < files.length; i++) {
-                const jarvis = this.jarvis;
+                const jarvis = this.general;
                 PromiseFileReader.readAsArrayBuffer(files[i]).then((event) => {
                     const extension = files[i].name.split('.').pop().toLowerCase();
                     const filename = files[i].name;

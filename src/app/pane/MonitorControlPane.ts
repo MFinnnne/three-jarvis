@@ -1,18 +1,16 @@
-import { BladeApi, Pane, TabPageApi } from 'tweakpane';
-import { Euler, Object3D, Quaternion, Vector3 } from 'three';
+import {Pane} from 'tweakpane';
+import {Object3D} from 'three';
 import DefaultControlPane from './DefaultControlPane';
-import { Point3d } from '@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d';
-import Prompt from '../Prompt';
-import Constant from '../../constant/Constant';
-import Jarvis from '../../core/Jarvis';
+
+import General from "../../core/General";
 
 export default class MonitorControlPane extends DefaultControlPane {
     protected object?: Object3D;
-    protected jarvis: Jarvis;
+    protected general: General;
 
-    constructor(creator: Jarvis) {
-        super(creator);
-        this.jarvis = creator;
+    constructor(general: General) {
+        super(general);
+        this.general = general;
     }
 
     public genPane(object?: Object3D): Pane {
@@ -21,12 +19,12 @@ export default class MonitorControlPane extends DefaultControlPane {
         const monitorFolder = this.pane.addFolder({ title: 'monitor' });
         const info = { memory: '', render: '', page: '' };
         monitorFolder.addMonitor(info, 'memory', { multiline: true, lineCount: 2 }).on('update', () => {
-            const memory = this.jarvis.renderer.info.memory;
+            const memory = this.general.renderer.info.memory;
             info.memory = `textures: ${memory.textures}\ngeometries: ${memory.geometries}`;
         });
         monitorFolder.addSeparator();
         monitorFolder.addMonitor(info, 'render', { multiline: true, lineCount: 5 }).on('update', () => {
-            const render = this.jarvis.renderer.info.render;
+            const render = this.general.renderer.info.render;
             info.render = `frame: ${render.frame}\ntriangles: ${render.triangles}\ncalls: ${render.calls}\npoints: ${render.points}\nlines: ${render.lines}`;
         });
         monitorFolder.addSeparator();
