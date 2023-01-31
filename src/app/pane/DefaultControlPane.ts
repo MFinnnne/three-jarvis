@@ -21,7 +21,6 @@ export default class DefaultControlPane implements ControlPane {
     }
 
 
-
     genPane(argument?: Object3D | Camera | WebGLRenderer): Pane {
         this.pane.registerPlugin(TweakpaneRotationInputPlugin);
         this.pane.registerPlugin(EssentialsPlugin);

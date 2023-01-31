@@ -2,7 +2,7 @@ import * as THREE from "three";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import Monitor from "./core/Monitor";
 import Creator from "./core/Creator";
-
+import './sass/full.scss';
 export default class ThreeJarvis {
 
     private static CONTAINER_ID_SET: Set<string> = new Set<string>();
@@ -30,7 +30,8 @@ export default class ThreeJarvis {
             // console.error(`this container(id:${container.id}) has been already used`);
             throw new Error(`this container(id:${container.id}) has been already used`);
         }
-        return new Creator(container);
+        const creator = new Creator(container);
+        creator.create().then(r => console.log('create'))
     }
 
 }

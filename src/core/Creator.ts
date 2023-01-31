@@ -55,7 +55,7 @@ export default class Creator extends General {
                 }
                 const se = JSON.parse(rawString) as SceneEntity;
                 creator = new Creator(this.container);
-                creator.create(this.container, se).then(r => {
+                creator.create(se).then(r => {
                 });
             });
         } else {
@@ -71,18 +71,17 @@ export default class Creator extends General {
                 }
             }
             creator = new Creator(this.container);
-            creator.create(this.container).then(r => {
+            creator.create().then(r => {
             });
         }
     }
 
-    async create(container: HTMLCanvasElement, se?: SceneEntity) {
-        this._renderer = new WebGLRenderer({canvas: container});
-        this._container = container;
+    async create(se?: SceneEntity) {
+        this._renderer = new WebGLRenderer({canvas: this.container});
         this._state = new State();
         this._recorder = new Recorder();
         this._recorder.afterExecute.push(() => this.toJson());
-        const sceneInfo = se ?? await sceneDB.get(container.id);
+        const sceneInfo = se ?? await sceneDB.get(this.container.id);
         if (sceneInfo) {
             await this.fromJson(sceneInfo);
         } else {
@@ -120,9 +119,8 @@ export default class Creator extends General {
         this.control.addEventListener('start', () => {
             this._orbitControlIsWorking = true;
         })
-        this.transformControl.name = 'jarvis-transform-control';
+        this.initTransformControl();
         this.scene.add(this.transformControl);
-
         const gridHelper = new GridHelper(20, 20);
         gridHelper.layers.set(3);
         gridHelper.name = 'jarvis-grid-helper';
@@ -186,7 +184,7 @@ export default class Creator extends General {
     }
 
     private setScene(scene: Scene) {
-
+        this._scene = scene;
         this.scene.uuid = scene.uuid;
         this.scene.name = scene.name;
 
@@ -201,18 +199,6 @@ export default class Creator extends General {
     }
 
 
-    private initOrbitControl() {
-
-    }
-
-
-    private initCamera() {
-
-    }
-
-    private initScene() {
-
-    }
 
 }
 

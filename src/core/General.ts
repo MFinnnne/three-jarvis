@@ -100,7 +100,7 @@ export default abstract class General {
             this.renderer.domElement,
         );
         this._transformControl = transformControl;
-
+        this._transformControl.name = 'jarvis-transform-control';
         transformControl.layers.set(1);
         transformControl.getRaycaster().layers.set(1);
         for (const child of transformControl.children) {
