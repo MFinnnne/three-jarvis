@@ -1,20 +1,18 @@
-import {HemisphereLight, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from "three";
-import dayjs from "dayjs";
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import {TransformControls} from "three/examples/jsm/controls/TransformControls";
-import State from "./State";
-import Recorder from "./Recorder";
-import {OBJECT_TREE_BLACK_LIST} from "../config/Config";
-import PaneManager from "./PaneManager";
-import objectChanged from "./ObjectChanged";
-import SetPositionCommand from "./commands/SetPositionCommand";
-import SetQuaternionCommand from "./commands/SetQuaternionCommand";
-import SetScaleCommand from "./commands/SetScaleCommand";
-import SetRotationCommand from "./commands/SetRotationCommand";
+import { HemisphereLight, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import dayjs from 'dayjs';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import State from './State';
+import Recorder from './Recorder';
+import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import PaneManager from './PaneManager';
+import objectChanged from './ObjectChanged';
+import SetPositionCommand from './commands/SetPositionCommand';
+import SetQuaternionCommand from './commands/SetQuaternionCommand';
+import SetScaleCommand from './commands/SetScaleCommand';
+import SetRotationCommand from './commands/SetRotationCommand';
 
 export default abstract class General {
-
-
     protected _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
     protected _renderer!: WebGLRenderer;
 
@@ -32,7 +30,6 @@ export default abstract class General {
     protected _paneContainer!: HTMLElement;
 
     private _leftSideBarContainer!: HTMLElement;
-
 
     get leftSideBarContainer(): HTMLElement {
         return this._leftSideBarContainer;
@@ -95,10 +92,7 @@ export default abstract class General {
     }
 
     protected initTransformControl() {
-        const transformControl = new TransformControls(
-            this.state.activeCamera,
-            this.renderer.domElement,
-        );
+        const transformControl = new TransformControls(this.state.activeCamera, this.renderer.domElement);
         this._transformControl = transformControl;
         this._transformControl.name = 'jarvis-transform-control';
         transformControl.layers.set(1);

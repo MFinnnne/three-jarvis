@@ -1,5 +1,5 @@
-import ObjectObserver from "./ObjectObserver";
-import General from "./General";
+import ObjectObserver from './ObjectObserver';
+import General from './General';
 import {
     BoxGeometry,
     FileLoader,
@@ -10,19 +10,18 @@ import {
     ObjectLoader,
     PerspectiveCamera,
     Scene,
-    WebGLRenderer
-} from "three";
-import State from "./State";
-import Recorder from "./Recorder";
-import sceneDB, {SceneEntity} from "./mapper/SceneDB";
-import ObjectChanged from "./ObjectChanged";
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import {OBJECT_TREE_BLACK_LIST} from "../config/Config";
-import PaneManager from "./PaneManager";
-import GUI from "../app/GUI";
-import {rayCasterEvents} from "./events/ObjectEvents";
-import MonitorControlPane from "../app/pane/MonitorControlPane";
-
+    WebGLRenderer,
+} from 'three';
+import State from './State';
+import Recorder from './Recorder';
+import sceneDB, { SceneEntity } from './mapper/SceneDB';
+import ObjectChanged from './ObjectChanged';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import PaneManager from './PaneManager';
+import GUI from '../app/GUI';
+import { rayCasterEvents } from './events/ObjectEvents';
+import MonitorControlPane from '../app/pane/MonitorControlPane';
 
 type JarvisHook = {
     afterRender?: () => void;
@@ -31,10 +30,7 @@ type JarvisHook = {
     dataStore?: (content: string) => void;
 };
 
-
 export default class Creator extends General {
-
-
     private _uuidSubMap: Map<string, ObjectObserver[]> = new Map();
 
     constructor(container: HTMLCanvasElement) {
@@ -46,7 +42,7 @@ export default class Creator extends General {
         let creator: Creator;
         const loader = new FileLoader();
         if (typeof from === 'string') {
-            loader.loadAsync(from).then(res => {
+            loader.loadAsync(from).then((res) => {
                 let rawString: string;
                 if (typeof res !== 'string') {
                     rawString = new TextDecoder().decode(res);
@@ -55,8 +51,7 @@ export default class Creator extends General {
                 }
                 const se = JSON.parse(rawString) as SceneEntity;
                 creator = new Creator(this.container);
-                creator.create(se).then(r => {
-                });
+                creator.create(se).then((r) => {});
             });
         } else {
             const data = from();
@@ -64,24 +59,22 @@ export default class Creator extends General {
                 const exist = data;
                 if (exist) {
                     console.warn("this json has already exist in indexed db,we will select indexedDB's json");
-
                 } else {
                     const parse = JSON.parse(data) as SceneEntity;
                     sceneDB.addJson(parse);
                 }
             }
             creator = new Creator(this.container);
-            creator.create().then(r => {
-            });
+            creator.create().then((r) => {});
         }
     }
 
     async create(se?: SceneEntity) {
-        this._renderer = new WebGLRenderer({canvas: this.container});
+        this._renderer = new WebGLRenderer({ canvas: this.container });
         this._state = new State();
         this._recorder = new Recorder();
         this._recorder.afterExecute.push(() => this.toJson());
-        const sceneInfo = se ?? await sceneDB.get(this.container.id);
+        const sceneInfo = se ?? (await sceneDB.get(this.container.id));
         if (sceneInfo) {
             await this.fromJson(sceneInfo);
         } else {
@@ -95,7 +88,7 @@ export default class Creator extends General {
             this.state.activeCamera = this.camera;
             this.scene.add(this.light);
             const boxGeometry = new BoxGeometry(1, 1, 1);
-            const material = new MeshBasicMaterial({color: 0x00ff00});
+            const material = new MeshBasicMaterial({ color: 0x00ff00 });
             const mesh = new Mesh(boxGeometry, material);
             mesh.position.set(1, 1, 1);
             this.scene?.add(mesh);
@@ -115,10 +108,10 @@ export default class Creator extends General {
         this.control.update();
         this.control.addEventListener('end', () => {
             this._orbitControlIsWorking = false;
-        })
+        });
         this.control.addEventListener('start', () => {
             this._orbitControlIsWorking = true;
-        })
+        });
         this.initTransformControl();
         this.scene.add(this.transformControl);
         const gridHelper = new GridHelper(20, 20);
@@ -153,7 +146,7 @@ export default class Creator extends General {
     public subscribeByUUID(uuid: string): { on: (resolve: (observer: ObjectObserver) => void) => Creator } {
         const observer = new ObjectObserver('uuid', uuid);
         if (this._uuidSubMap.has(uuid)) {
-            this._uuidSubMap.get(uuid)?.push(observer)
+            this._uuidSubMap.get(uuid)?.push(observer);
         } else {
             this._uuidSubMap.set(uuid, [observer]);
         }
@@ -161,8 +154,8 @@ export default class Creator extends General {
             on: (resolve: (observer: ObjectObserver) => void) => {
                 resolve(observer);
                 return this;
-            }
-        }
+            },
+        };
     }
 
     async fromJson(json: SceneEntity) {
@@ -197,9 +190,4 @@ export default class Creator extends General {
             this.scene.add(child);
         }
     }
-
-
-
 }
-
-

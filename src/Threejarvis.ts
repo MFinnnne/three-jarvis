@@ -1,10 +1,9 @@
-import * as THREE from "three";
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import Monitor from "./core/Monitor";
-import Creator from "./core/Creator";
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import Monitor from './core/Monitor';
+import Creator from './core/Creator';
 import './sass/full.scss';
 export default class ThreeJarvis {
-
     private static CONTAINER_ID_SET: Set<string> = new Set<string>();
 
     public static monitor(
@@ -31,7 +30,6 @@ export default class ThreeJarvis {
             throw new Error(`this container(id:${container.id}) has been already used`);
         }
         const creator = new Creator(container);
-        creator.create().then(r => console.log('create'))
+        creator.create().then((r) => console.log('create'));
     }
-
 }

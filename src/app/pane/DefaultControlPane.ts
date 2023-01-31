@@ -1,9 +1,9 @@
-import {Camera, Object3D, WebGLRenderer} from 'three';
-import {BladeApi, Pane} from 'tweakpane';
+import { Camera, Object3D, WebGLRenderer } from 'three';
+import { BladeApi, Pane } from 'tweakpane';
 import * as TweakpaneRotationInputPlugin from '@0b5vr/tweakpane-plugin-rotation';
 import * as EssentialsPlugin from '@tweakpane/plugin-essentials';
 
-import General from "../../core/General";
+import General from '../../core/General';
 
 export type ControlPane = {
     genPane(argument: Object3D | Camera | WebGLRenderer): Pane;
@@ -17,9 +17,8 @@ export default class DefaultControlPane implements ControlPane {
     private _bindMap: Map<string, BladeApi<any>> = new Map<string, BladeApi<any>>();
     constructor(general: General) {
         this.general = general;
-        this.pane = new Pane({container: this.general.paneContainer});
+        this.pane = new Pane({ container: this.general.paneContainer });
     }
-
 
     genPane(argument?: Object3D | Camera | WebGLRenderer): Pane {
         this.pane.registerPlugin(TweakpaneRotationInputPlugin);
