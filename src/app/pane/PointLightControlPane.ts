@@ -1,8 +1,8 @@
 import LightControlPane from './LightControlPane';
-import {Object3D, PointLight} from 'three';
-import {Pane} from 'tweakpane';
+import { Object3D, PointLight } from 'three';
+import { Pane } from 'tweakpane';
 import SetPropertyCommand from '../../core/commands/SetPropertyCommand';
-import General from "../../core/General";
+import General from '../../core/General';
 
 export default class PointLightControlPane extends LightControlPane {
     constructor(general: General) {

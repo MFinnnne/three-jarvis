@@ -1,8 +1,7 @@
-import Dexie, {PromiseExtended, Table} from 'dexie';
+import Dexie, { PromiseExtended, Table } from 'dexie';
 import dayjs from 'dayjs';
-import {OBJECT_TREE_BLACK_LIST} from '../../config/Config';
-import Creator from "../Creator";
-
+import { OBJECT_TREE_BLACK_LIST } from '../../config/Config';
+import Creator from '../Creator';
 
 export type SceneEntity = {
     id: string;
@@ -14,7 +13,7 @@ export type SceneEntity = {
     scene?: { metadata?: any; geometries?: any; materials?: any; textures?: any; images?: any; object?: any };
 };
 
-type realSceneEntity = { id: string, ts: number, updateTime: string, content: ArrayBuffer }
+type realSceneEntity = { id: string; ts: number; updateTime: string; content: ArrayBuffer };
 
 class SceneDB extends Dexie {
     private scene!: Table<realSceneEntity, string>;
@@ -33,7 +32,7 @@ class SceneDB extends Dexie {
         this.transaction('rw', this.scene, async () => {
             const stringify = JSON.stringify(json);
             const array = new TextEncoder().encode(stringify);
-            await this.scene.add({id: json.id, updateTime: dayjs().format(), ts: dayjs().unix(), content: array});
+            await this.scene.add({ id: json.id, updateTime: dayjs().format(), ts: dayjs().unix(), content: array });
         })
             .then(() => {
                 console.info(`scene ${json.id} store success`);
@@ -51,13 +50,13 @@ class SceneDB extends Dexie {
                 scene: creator.scene.toJSON(),
                 ts: dayjs().unix(),
                 updateTime: dayjs().format(),
-                treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST))
+                treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST)),
             };
             await this.scene.add({
                 id: res.id,
                 ts: res.ts,
                 updateTime: res.updateTime,
-                content: new TextEncoder().encode(JSON.stringify(res))
+                content: new TextEncoder().encode(JSON.stringify(res)),
             });
         })
             .then(() => {
@@ -73,11 +72,15 @@ class SceneDB extends Dexie {
     }
 
     async get(id: string): Promise<SceneEntity | undefined> {
-        return this.scene.where('id').equals(id).first().then(value => {
-            if (value) {
-                return JSON.parse(new TextDecoder().decode(value?.content));
-            }
-        });
+        return this.scene
+            .where('id')
+            .equals(id)
+            .first()
+            .then((value) => {
+                if (value) {
+                    return JSON.parse(new TextDecoder().decode(value?.content));
+                }
+            });
     }
 
     getAll(): PromiseExtended<Array<SceneEntity>> {
@@ -95,14 +98,11 @@ class SceneDB extends Dexie {
             treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST)),
         };
         const uint8Array = new TextEncoder().encode(JSON.stringify(res));
-        this.scene
-            .where('id')
-            .equals(creator.container.id)
-            .modify({
-                ts: res.ts,
-                updateTime: res.updateTime,
-                content: uint8Array
-            });
+        this.scene.where('id').equals(creator.container.id).modify({
+            ts: res.ts,
+            updateTime: res.updateTime,
+            content: uint8Array,
+        });
     }
 
     async countById(id: string): Promise<number> {
@@ -146,7 +146,6 @@ class SceneDB extends Dexie {
         }, 2000);
     }
 }
-
 
 const sceneDB = new SceneDB();
 export default sceneDB;

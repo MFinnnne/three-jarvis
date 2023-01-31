@@ -1,8 +1,8 @@
-import {Pane} from 'tweakpane';
-import {Object3D} from 'three';
+import { Pane } from 'tweakpane';
+import { Object3D } from 'three';
 import DefaultControlPane from './DefaultControlPane';
 
-import General from "../../core/General";
+import General from '../../core/General';
 
 export default class MonitorControlPane extends DefaultControlPane {
     protected object?: Object3D;

@@ -1,6 +1,6 @@
-import {Object3D} from 'three';
+import { Object3D } from 'three';
 import HelperManager from './HelperManager';
-import General from "./General";
+import General from './General';
 
 export default class ObjectChanged {
     private static instance?: ObjectChanged;

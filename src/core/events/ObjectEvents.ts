@@ -1,10 +1,10 @@
 import EventRegistry from '../EventRegistry';
-import {Group, Object3D, Raycaster, Vector2} from 'three';
-import {Intersection} from 'three/src/core/Raycaster';
+import { Group, Object3D, Raycaster, Vector2 } from 'three';
+import { Intersection } from 'three/src/core/Raycaster';
 import ObjectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
 import ObjectTree from '../../app/ObjectTree';
-import General from "../General";
+import General from '../General';
 
 const threeJarvisRayCaster = new Raycaster();
 function intersectObjects(

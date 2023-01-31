@@ -1,10 +1,10 @@
-import {className, Flags, m, render, VElement, VNode} from 'million';
-import {Object3D} from 'three';
-import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
-import {rightMenu} from './RightMenu';
+import { className, Flags, m, render, VElement, VNode } from 'million';
+import { Object3D } from 'three';
+import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import { rightMenu } from './RightMenu';
 import Ticker from '../core/Ticker';
-import {domClickEvent, domDoubleClickEvent} from '../core/events/DomEvents';
-import General from "../core/General";
+import { domClickEvent, domDoubleClickEvent } from '../core/events/DomEvents';
+import General from '../core/General';
 
 export default class ObjectTree {
     private prevNode: VNode | undefined;

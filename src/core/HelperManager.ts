@@ -12,7 +12,7 @@ import {
     PointLightHelper,
     Scene,
 } from 'three';
-import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
+import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
 
 type helperFns = (object: Object3D, color?: ColorRepresentation) => Object3D | null | void;
 const OBJECT_HELPER_MAP: Map<string, helperFns[] | helperFns> = new Map();

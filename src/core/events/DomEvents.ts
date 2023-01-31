@@ -13,7 +13,6 @@ export function domClickEvent(scene: Scene): void {
         }
         ObjectChanged.getInstance().objectHelper(obj);
         PaneManager.render(obj);
-
     });
 }
 

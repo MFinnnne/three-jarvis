@@ -1,6 +1,6 @@
 import RightMenu from '@right-menu/core';
 import RemoveObjectCommand from '../core/commands/RemoveObjectCommand';
-import General from "../core/General";
+import General from '../core/General';
 
 const FINISH = new Map();
 

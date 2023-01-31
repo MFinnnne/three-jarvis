@@ -1,5 +1,3 @@
-import ThreeJarvis from "./Threejarvis";
+import ThreeJarvis from './Threejarvis';
 
-export {
-    ThreeJarvis
-}
+export { ThreeJarvis };

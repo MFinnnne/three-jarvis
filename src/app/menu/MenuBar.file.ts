@@ -1,4 +1,4 @@
-import {m, VNode} from 'million';
+import { m, VNode } from 'million';
 import MenuUtils from './MenuUtils';
 import * as THREE from 'three';
 import AddObjectCommand from '../../core/commands/AddObjectCommand';
@@ -6,12 +6,12 @@ import sceneDB from '../../core/mapper/SceneDB';
 import ExportComponent from '../../core/component/ExportComponent';
 import dayjs from 'dayjs';
 import PromiseFileReader from '../../util/PromiseFileReader';
-import {LoaderUtils} from '../../util/LoadUtils';
-import {TGALoader} from 'three/examples/jsm/loaders/TGALoader';
-import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
-import {MeshoptDecoder} from '../../core/jsm/meshopt_decoder.module';
-import General from "../../core/General";
+import { LoaderUtils } from '../../util/LoadUtils';
+import { TGALoader } from 'three/examples/jsm/loaders/TGALoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { MeshoptDecoder } from '../../core/jsm/meshopt_decoder.module';
+import General from '../../core/General';
 
 export default class MenuBarFile {
     private readonly general: General;

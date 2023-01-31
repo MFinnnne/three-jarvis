@@ -1,7 +1,7 @@
 import ObjectControlPane from './ObjectControlPane';
-import {Pane} from 'tweakpane';
-import {Object3D, Scene} from 'three';
-import General from "../../core/General";
+import { Pane } from 'tweakpane';
+import { Object3D, Scene } from 'three';
+import General from '../../core/General';
 
 export default class SceneControlPane extends ObjectControlPane {
     object!: Scene;

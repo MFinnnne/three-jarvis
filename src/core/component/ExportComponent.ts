@@ -1,5 +1,5 @@
-import {Group, Object3D} from 'three';
-import {LoadConfig, LoadModelConfig} from '../Type';
+import { Group, Object3D } from 'three';
+import { LoadConfig, LoadModelConfig } from '../Type';
 
 export default class ExportComponent {
     static exportJson(fileName: string, json: string) {

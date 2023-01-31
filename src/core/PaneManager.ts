@@ -2,11 +2,11 @@ import ObjectControlPane from '../app/pane/ObjectControlPane';
 import HemisphereLightControlPane from '../app/pane/HemisphereLightControlPane';
 import PointLightControlPane from '../app/pane/PointLightControlPane';
 import DirectionalLightControlPane from '../app/pane/DirectionalLightControlPane';
-import {Object3D} from 'three';
-import {Pane} from 'tweakpane';
-import {ControlPane} from '../app/pane/DefaultControlPane';
+import { Object3D } from 'three';
+import { Pane } from 'tweakpane';
+import { ControlPane } from '../app/pane/DefaultControlPane';
 import CameraControlPane from '../app/pane/CameraControlPane';
-import General from "./General";
+import General from './General';
 
 const OBJECT_PANE_MAP: Map<string, () => ControlPane> = new Map();
 

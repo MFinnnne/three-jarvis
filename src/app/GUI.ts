@@ -1,7 +1,7 @@
 import ObjectTree from './ObjectTree';
 import MenuBar from './menu/MenuBar';
-import {clickObjectEvent} from '../core/events/ObjectEvents';
-import General from "../core/General";
+import { clickObjectEvent } from '../core/events/ObjectEvents';
+import General from '../core/General';
 
 export default class GUI {
     public static guiContainerInit(general: General): void {

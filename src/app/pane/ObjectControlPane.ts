@@ -1,15 +1,15 @@
-import {BladeApi, ButtonApi, Pane, TabPageApi} from 'tweakpane';
-import {Euler, Object3D, Quaternion, Vector3} from 'three';
+import { BladeApi, ButtonApi, Pane, TabPageApi } from 'tweakpane';
+import { Euler, Object3D, Quaternion, Vector3 } from 'three';
 import DefaultControlPane from './DefaultControlPane';
 import SetPositionCommand from '../../core/commands/SetPositionCommand';
 import SetRotationCommand from '../../core/commands/SetRotationCommand';
 import SetScaleCommand from '../../core/commands/SetScaleCommand';
 import SetQuaternionCommand from '../../core/commands/SetQuaternionCommand';
-import {Point3d} from '@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d';
+import { Point3d } from '@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d';
 import Utils from '../../util/Utils';
 import Prompt from '../Prompt';
-import {TpButtonGridEvent} from '@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event';
-import General from "../../core/General";
+import { TpButtonGridEvent } from '@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event';
+import General from '../../core/General';
 
 export default class ObjectControlPane extends DefaultControlPane {
     protected objectPane?: TabPageApi;

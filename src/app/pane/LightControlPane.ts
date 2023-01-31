@@ -1,7 +1,7 @@
 import ObjectControlPane from './ObjectControlPane';
 import { Light, Object3D } from 'three';
 import { Pane } from 'tweakpane';
-import General from "../../core/General";
+import General from '../../core/General';
 
 export default class LightControlPane extends ObjectControlPane {
     constructor(general: General) {

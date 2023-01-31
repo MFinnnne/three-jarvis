@@ -1,7 +1,7 @@
-import {m, render} from 'million';
+import { m, render } from 'million';
 import MenuBarNew from './MenuBar.new';
 import MenuBarFile from './MenuBar.file';
-import General from "../../core/General";
+import General from '../../core/General';
 
 export default class MenuBar {
     constructor() {}

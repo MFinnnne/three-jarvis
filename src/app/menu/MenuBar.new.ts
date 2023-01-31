@@ -1,8 +1,8 @@
-import {VNode} from 'million';
+import { VNode } from 'million';
 import MenuUtils from './MenuUtils';
-import {AmbientLight, DirectionalLight, Group, HemisphereLight, PointLight, RectAreaLight, SpotLight} from 'three';
+import { AmbientLight, DirectionalLight, Group, HemisphereLight, PointLight, RectAreaLight, SpotLight } from 'three';
 import AddObjectCommand from '../../core/commands/AddObjectCommand';
-import General from "../../core/General";
+import General from '../../core/General';
 
 export default class MenuBarNew {
     private readonly general: General;

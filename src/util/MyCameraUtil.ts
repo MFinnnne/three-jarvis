@@ -1,4 +1,4 @@
-import {Box3, Object3D, Vector3} from 'three';
+import { Box3, Object3D, Vector3 } from 'three';
 
 export default class MyCameraUtil {
     static faceObject(object: Object3D): void {
