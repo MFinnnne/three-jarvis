@@ -7,12 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted} from "vue";
-import ThreeJarvis from "../../../../../src/index.ts";
+import { onMounted } from 'vue';
+import { ThreeJarvis } from '../../../../../src/index.ts';
 
-onMounted(() => {
-    const container = document.querySelector('#container');
-    ThreeJarvis.create(container, '../../static/CONFIG.json');
+onMounted(async () => {
+    const container = document.querySelector<HTMLCanvasElement>('#container');
+    ThreeJarvis.create(container);
 });
 
 </script>

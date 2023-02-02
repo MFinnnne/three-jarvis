@@ -4,6 +4,9 @@ export default class State {
     private _selectedObject: Object3D = new Object3D();
     private _selectedObjectDom: HTMLElement = document.createElement('div');
     private _activeCamera: Camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    constructor() {}
+
     get activeCamera(): Camera {
         return this._activeCamera;
     }

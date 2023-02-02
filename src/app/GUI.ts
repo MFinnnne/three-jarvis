@@ -1,13 +1,10 @@
-import Constant from '../constant/Constant';
 import ObjectTree from './ObjectTree';
 import MenuBar from './menu/MenuBar';
-import Jarvis from '../core/Jarvis';
 import { clickObjectEvent } from '../core/events/ObjectEvents';
-import AddObjectCommand from '../core/commands/AddObjectCommand';
-import RemoveObjectCommand from '../core/commands/RemoveObjectCommand';
+import General from '../core/General';
 
 export default class GUI {
-    public static guiContainerInit(jarvis: Jarvis): void {
+    public static guiContainerInit(general: General): void {
         const container = document.querySelector('#three-helper-container');
         container && container.remove();
         const element = document.createElement('div');
@@ -27,24 +24,24 @@ export default class GUI {
         leftSideBarDom.id = 'three-helper-left-side-bar';
         leftSideBarDom.className = 'three-helper-left-side-bar';
         element.appendChild(leftSideBarDom);
-        Constant.LEFT_SIDE_BAR_CONTAINER = leftSideBarDom;
+        general.leftSideBarContainer = leftSideBarDom;
 
         const paneDom = document.createElement('div');
         paneDom.id = 'three-helper-pane';
         paneDom.className = 'three-helper-pane';
         element.appendChild(paneDom);
-        Constant.PANE_CONTAINER = paneDom;
+        general.paneContainer = paneDom;
         document.body.appendChild(element);
-        MenuBar.render(menuDom, jarvis);
-        const objectTree = new ObjectTree(leftSideBarDom, jarvis);
+        MenuBar.render(menuDom, general);
+        const objectTree = new ObjectTree(leftSideBarDom, general);
 
-        jarvis.recorder.afterExecute.push((cmd, optionalName) => {
+        general.recorder.afterExecute.push((cmd, optionalName) => {
             if (cmd.name === 'add object' || cmd.name === 'remove object') {
                 objectTree.render(leftSideBarDom);
             }
         });
         let prevGeometries = 0;
-        jarvis.scene.onAfterRender = (renderer) => {
+        general.scene.onAfterRender = (renderer, scene) => {
             const geometries = renderer.info.memory.geometries;
             if (geometries !== prevGeometries) {
                 objectTree.render(leftSideBarDom);

@@ -3,27 +3,26 @@ import { Group, Object3D, Raycaster, Vector2 } from 'three';
 import { Intersection } from 'three/src/core/Raycaster';
 import ObjectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
-import state from '../State';
 import ObjectTree from '../../app/ObjectTree';
-import Jarvis from '../Jarvis';
+import General from '../General';
 
 const threeJarvisRayCaster = new Raycaster();
 function intersectObjects(
-    jarvis: Jarvis,
+    general: General,
     e: MouseEvent,
     rayCaster: Raycaster,
     target: Object3D[] | Group[],
 ): Intersection[] {
     const mouse = new Vector2();
-    mouse.x = ((e.clientX - jarvis.container.offsetLeft) / jarvis.container.clientWidth) * 2 - 1;
-    mouse.y = -((e.clientY - jarvis.container.offsetTop) / jarvis.container.clientHeight) * 2 + 1;
-    rayCaster.setFromCamera(mouse, jarvis.state.activeCamera);
+    mouse.x = ((e.clientX - general.container.offsetLeft) / general.container.clientWidth) * 2 - 1;
+    mouse.y = -((e.clientY - general.container.offsetTop) / general.container.clientHeight) * 2 + 1;
+    rayCaster.setFromCamera(mouse, general.state.activeCamera);
     return rayCaster.intersectObjects(target, true);
 }
 
-export function rayCasterEvents(creator: Jarvis) {
-    creator.container.addEventListener('click', (e) => {
-        const intersects = intersectObjects(creator, e, threeJarvisRayCaster, creator.scene.children);
+export function rayCasterEvents(general: General) {
+    general.container.addEventListener('click', (e) => {
+        const intersects = intersectObjects(general, e, threeJarvisRayCaster, general.scene.children);
         if (intersects.length > 0) {
             if (e.altKey) {
                 Ticker.emmit('objectClick', intersects[0].object);
@@ -31,8 +30,8 @@ export function rayCasterEvents(creator: Jarvis) {
         }
     });
 
-    creator.container.addEventListener('dblclick', (e) => {
-        const intersects = intersectObjects(creator, e, threeJarvisRayCaster, creator.scene.children);
+    general.container.addEventListener('dblclick', (e) => {
+        const intersects = intersectObjects(general, e, threeJarvisRayCaster, general.scene.children);
         if (intersects.length > 0) {
             const fistCatchObject = intersects[0].object;
             Ticker.emmit('objectClick', fistCatchObject);
@@ -53,7 +52,6 @@ export function clickObjectEvent(objectTree: ObjectTree): void {
             throw new Error(`object ===${object.uuid}===${object.name} dom is null`);
         }
         objectTree.expandTreeByChildNode(dom);
-        objectTree.autoLocateInTree(dom);
         ObjectChanged.getInstance().objectHelper(object);
         Ticker.emmit('objectDomClick', object.uuid);
     });

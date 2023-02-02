@@ -6,7 +6,6 @@ import postcss from 'postcss';
 import sass from 'rollup-plugin-scss';
 import autoprefixer from 'autoprefixer';
 import commonjs from '@rollup/plugin-commonjs';
-import webWorkerLoader from 'rollup-plugin-web-worker-loader';
 import babel from '@rollup/plugin-babel';
 import { name } from '../package.json';
 import { DEFAULT_EXTENSIONS } from '@babel/core';
@@ -30,7 +29,6 @@ export default {
         },
     ],
     plugins: [
-        webWorkerLoader({}),
         alias({
             resolve: ['.ts'],
         }),
@@ -54,4 +52,5 @@ export default {
         }),
         commonjs(),
     ],
+    format: 'esm',
 };

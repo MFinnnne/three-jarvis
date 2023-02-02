@@ -1,32 +1,38 @@
 import Dexie, { PromiseExtended, Table } from 'dexie';
-import Jarvis from '../Jarvis';
 import dayjs from 'dayjs';
 import { OBJECT_TREE_BLACK_LIST } from '../../config/Config';
+import Creator from '../Creator';
 
 export type SceneEntity = {
-    key?: number;
     id: string;
     ts: number;
     updateTime: string;
-    treeBlackList: Array<string>;
+    treeBlackList?: Array<string>;
     script?: { uuid: string; code: string }[];
-    camera: { metadata?: any; geometries?: any; materials?: any; textures?: any; images?: any; object?: any };
-    scene: { metadata?: any; geometries?: any; materials?: any; textures?: any; images?: any; object?: any };
+    camera?: { metadata?: any; geometries?: any; materials?: any; textures?: any; images?: any; object?: any };
+    scene?: { metadata?: any; geometries?: any; materials?: any; textures?: any; images?: any; object?: any };
 };
 
+type realSceneEntity = { id: string; ts: number; updateTime: string; content: ArrayBuffer };
+
 class SceneDB extends Dexie {
-    private scene!: Table<SceneEntity, number>;
+    private scene!: Table<realSceneEntity, string>;
+    private lastUpdateId?: number;
+
+    private isExistSet: Set<string> = new Set();
 
     public constructor() {
         super('SceneDB');
         this.version(1).stores({
-            scene: '++key,ts,id,updateTime,treeBlackList,script,camera,scene',
+            scene: '&id,ts,updateTime,content',
         });
     }
 
     addJson(json: SceneEntity) {
         this.transaction('rw', this.scene, async () => {
-            await this.scene.add(json);
+            const stringify = JSON.stringify(json);
+            const array = new TextEncoder().encode(stringify);
+            await this.scene.add({ id: json.id, updateTime: dayjs().format(), ts: dayjs().unix(), content: array });
         })
             .then(() => {
                 console.info(`scene ${json.id} store success`);
@@ -36,22 +42,28 @@ class SceneDB extends Dexie {
             });
     }
 
-    addScene(jarvis: Jarvis) {
+    addScene(creator: Creator) {
         this.transaction('rw', this.scene, async () => {
-            await this.scene.add({
-                id: jarvis.container.id,
-                camera: jarvis.camera.toJSON(),
-                scene: jarvis.scene.toJSON(),
+            const res = {
+                id: creator.container.id,
+                camera: creator.camera.toJSON(),
+                scene: creator.scene.toJSON(),
                 ts: dayjs().unix(),
                 updateTime: dayjs().format(),
                 treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST)),
+            };
+            await this.scene.add({
+                id: res.id,
+                ts: res.ts,
+                updateTime: res.updateTime,
+                content: new TextEncoder().encode(JSON.stringify(res)),
             });
         })
             .then(() => {
-                console.info(`scene ${jarvis.container.id} store success`);
+                console.info(`scene ${creator.container.id} store success`);
             })
             .catch((reason) => {
-                console.warn(`scene ${jarvis.container.id} store fail`);
+                console.warn(`scene ${creator.container.id} store fail`);
             });
     }
 
@@ -60,46 +72,78 @@ class SceneDB extends Dexie {
     }
 
     async get(id: string): Promise<SceneEntity | undefined> {
-        return this.scene.where('id').equals(id).first();
+        return this.scene
+            .where('id')
+            .equals(id)
+            .first()
+            .then((value) => {
+                if (value) {
+                    return JSON.parse(new TextDecoder().decode(value?.content));
+                }
+            });
     }
 
     getAll(): PromiseExtended<Array<SceneEntity>> {
         return this.scene.toArray();
     }
 
-    updateScene(jarvis: Jarvis) {
-        this.scene
-            .where('id')
-            .equals(jarvis.container.id)
-            .modify({
-                script: {},
-                camera: jarvis.camera.toJSON(),
-                scene: jarvis.scene.toJSON(),
-                ts: dayjs().unix(),
-                updateTime: dayjs().format(),
-                treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST)),
-            });
+    updateScene(creator: Creator) {
+        const sceneJson = creator.scene.toJSON();
+        const res = {
+            script: {},
+            camera: creator.camera.toJSON(),
+            scene: sceneJson,
+            ts: dayjs().unix(),
+            updateTime: dayjs().format(),
+            treeBlackList: Array.from(new Set(OBJECT_TREE_BLACK_LIST)),
+        };
+        const uint8Array = new TextEncoder().encode(JSON.stringify(res));
+        this.scene.where('id').equals(creator.container.id).modify({
+            ts: res.ts,
+            updateTime: res.updateTime,
+            content: uint8Array,
+        });
     }
 
     async countById(id: string): Promise<number> {
         return this.scene.where('id').equals(id).count();
     }
 
-    upsertScene(jarvis: Jarvis) {
-        this.scene
-            .where('id')
-            .equals(jarvis.container.id)
-            .count()
-            .then((count) => {
-                if (count !== 0) {
-                    this.updateScene(jarvis);
-                } else {
-                    this.addScene(jarvis);
+    lazyUpsertScene(creator: Creator) {
+        if (this.lastUpdateId) {
+            clearTimeout(this.lastUpdateId);
+        }
+        this.lastUpdateId = window.setTimeout(() => {
+            const startTime = Date.now();
+            if (this.isExistSet.has(creator.container.id)) {
+                if (creator.orbitControlIsWorking) {
+                    this.lazyUpsertScene(creator);
+                    return;
                 }
-            })
-            .then(() => {
-                console.info('store scene:' + dayjs().format());
-            });
+                this.updateScene(creator);
+                console.info(`store scene:${dayjs().format()},time:${Date.now() - startTime}ms`);
+                return;
+            }
+            this.scene
+                .where('id')
+                .equals(creator.container.id)
+                .count()
+                .then((count) => {
+                    if (creator.orbitControlIsWorking) {
+                        this.lazyUpsertScene(creator);
+                        return;
+                    }
+                    if (count !== 0) {
+                        this.updateScene(creator);
+                    } else {
+                        this.addScene(creator);
+                    }
+                })
+                .then(() => {
+                    this.isExistSet.add(creator.container.id);
+                    console.info(`store scene:${dayjs().format()},time:${Date.now() - startTime}ms`);
+                });
+        }, 2000);
     }
 }
 

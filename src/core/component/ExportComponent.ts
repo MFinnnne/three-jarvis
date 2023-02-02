@@ -1,8 +1,5 @@
 import { Group, Object3D } from 'three';
-import state from '../State';
 import { LoadConfig, LoadModelConfig } from '../Type';
-import sceneDB from '../mapper/SceneDB';
-import dayjs from 'dayjs';
 
 export default class ExportComponent {
     static exportJson(fileName: string, json: string) {

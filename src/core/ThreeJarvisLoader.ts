@@ -1,6 +1,5 @@
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { MeshoptDecoder } from './jsm/meshopt_decoder.module';
-import Constant from '../constant/Constant';
 import { LoadConfig } from './Type';
 
 const gltfLoader = new GLTFLoader();
