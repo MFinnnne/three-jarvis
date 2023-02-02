@@ -52,6 +52,7 @@ export default class ObjectTree {
                             const target = e.target as HTMLElement;
                             rightMenu(target, this.general);
                             const uuid = target.id;
+
                             this.general.state.selectedObjectDom = target;
                             Ticker.emmit('objectDomClick', uuid);
                         },
@@ -119,7 +120,6 @@ export default class ObjectTree {
      * @param dom
      */
     autoLocateInTree(dom: HTMLElement) {
-        this.general.state.selectedObjectDom?.classList.toggle('find-out');
         let offsetTop: number = dom.offsetTop - this.container.clientHeight / 2;
         if (dom.offsetTop < this.container.clientHeight) {
             offsetTop = 0;
@@ -129,8 +129,7 @@ export default class ObjectTree {
             offsetLeft = 0;
         }
         this.container.scrollTo(offsetLeft, offsetTop);
-        dom.classList.toggle('find-out');
-        dom.classList.toggle('selected');
+        this.general.state.selectedObjectDom = dom;
     }
 
     /**
