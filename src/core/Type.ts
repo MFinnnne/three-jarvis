@@ -1,7 +1,5 @@
-import { Pane } from 'tweakpane';
 import { Camera, Object3D, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export type Events = {
@@ -24,13 +22,6 @@ export type Command = {
     exec(): void;
 
     undo(): void;
-};
-
-export type RawThreeVar = {
-    scene: Scene;
-    render: WebGLRenderer;
-    camera: Camera | Camera[];
-    control: OrbitControls;
 };
 
 export type LoadModelConfig = {

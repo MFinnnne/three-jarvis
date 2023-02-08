@@ -12,7 +12,7 @@ import { ThreeJarvis } from '../../../../../src/index.ts';
 
 onMounted(async () => {
     const container = document.querySelector<HTMLCanvasElement>('#container');
-    ThreeJarvis.create(container);
+    ThreeJarvis.creator(container).create().then();
 });
 
 </script>

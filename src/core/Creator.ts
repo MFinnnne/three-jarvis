@@ -1,7 +1,7 @@
 import ObjectObserver from './ObjectObserver';
 import General from './General';
 import {
-    BoxGeometry,
+    BoxGeometry, Camera,
     FileLoader,
     GridHelper,
     Mesh,
@@ -30,12 +30,23 @@ type JarvisHook = {
     dataStore?: (content: string) => void;
 };
 
+type ObjectHook = {
+    beforeAdd: (object: Object3D) => void;
+    afterAdd: (object: Object3D) => void;
+    beforeRender: (object: Object3D) => void;
+    afterRender: (object: Object3D) => void;
+
+}
 export default class Creator extends General {
     private _uuidSubMap: Map<string, ObjectObserver[]> = new Map();
 
     constructor(container: HTMLCanvasElement) {
         super();
         this._container = container;
+    }
+
+    public subscribeById(id: string, callBack: ObjectHook): Creator {
+        return this;
     }
 
     public createFrom(from: string | (() => string | ArrayBuffer), options?: JarvisHook) {
@@ -51,21 +62,23 @@ export default class Creator extends General {
                 }
                 const se = JSON.parse(rawString) as SceneEntity;
                 creator = new Creator(this.container);
-                creator.create(se).then((r) => {});
+                creator.create(se).then((r) => {
+                });
             });
         } else {
             const data = from();
             if (typeof data === 'string') {
                 const exist = data;
                 if (exist) {
-                    console.warn("this json has already exist in indexed db,we will select indexedDB's json");
+                    console.warn('this json has already exist in indexed db,we will select indexedDB\'s json');
                 } else {
                     const parse = JSON.parse(data) as SceneEntity;
                     sceneDB.addJson(parse);
                 }
             }
             creator = new Creator(this.container);
-            creator.create().then((r) => {});
+            creator.create().then((r) => {
+            });
         }
     }
 
