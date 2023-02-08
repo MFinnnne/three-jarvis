@@ -21,7 +21,6 @@ export default class ThreeJarvis {
         });
     }
 
-
     public static creator(container: HTMLCanvasElement): Creator {
         if (container.id === undefined) {
             // Toast.show('container id  must be set and only');
