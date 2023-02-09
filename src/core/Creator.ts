@@ -2,6 +2,7 @@ import ObjectObserver from './ObjectObserver';
 import General from './General';
 import {
     BoxGeometry,
+    Camera,
     FileLoader,
     GridHelper,
     Mesh,
@@ -30,6 +31,12 @@ type JarvisHook = {
     dataStore?: (content: string) => void;
 };
 
+type ObjectHook = {
+    beforeAdd: (object: Object3D) => void;
+    afterAdd: (object: Object3D) => void;
+    beforeRender: (object: Object3D) => void;
+    afterRender: (object: Object3D) => void;
+};
 export default class Creator extends General {
     private _uuidSubMap: Map<string, ObjectObserver[]> = new Map();
 
@@ -90,8 +97,12 @@ export default class Creator extends General {
             const boxGeometry = new BoxGeometry(1, 1, 1);
             const material = new MeshBasicMaterial({ color: 0x00ff00 });
             const mesh = new Mesh(boxGeometry, material);
+            mesh.uuid = '315f511e-0080-46dc-8df0-6585c3619cb8';
             mesh.position.set(1, 1, 1);
+            this.beforeAdd(mesh);
+            this.setRenderHook(mesh);
             this.scene?.add(mesh);
+            this.afterAdd(mesh);
         }
         this.init();
         this.render();
@@ -187,7 +198,50 @@ export default class Creator extends General {
 
         this.scene.userData = JSON.parse(JSON.stringify(scene.userData));
         for (const child of scene.children) {
+            this.beforeAdd(child);
+            this.setRenderHook(child);
             this.scene.add(child);
+            this.afterAdd(child);
+        }
+    }
+
+    private afterAdd(child: Object3D) {
+        if (this._uuidSubMap.has(child.uuid)) {
+            const observers = this._uuidSubMap.get(child.uuid);
+            if (observers) {
+                for (const observer of observers) {
+                    observer.afterAdd(child, this.renderer, this.scene, this.camera);
+                }
+            }
+        }
+    }
+
+    private beforeAdd(child: Object3D) {
+        if (this._uuidSubMap.has(child.uuid)) {
+            const observers = this._uuidSubMap.get(child.uuid);
+            if (observers) {
+                for (const observer of observers) {
+                    observer.beforeAdd(child, this.renderer, this.scene, this.camera);
+                }
+            }
+        }
+    }
+
+    private setRenderHook(child: Object3D) {
+        if (this._uuidSubMap.has(child.uuid)) {
+            const observers = this._uuidSubMap.get(child.uuid);
+            if (observers) {
+                child.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {
+                    for (const observer of observers) {
+                        observer.beforeRender(child, renderer, scene, camera);
+                    }
+                };
+                child.onAfterRender = (renderer, scene, camera, geometry, material, group) => {
+                    for (const observer of observers) {
+                        observer.afterRender(child, renderer, scene, camera);
+                    }
+                };
+            }
         }
     }
 }
