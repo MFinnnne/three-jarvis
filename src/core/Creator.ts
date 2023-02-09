@@ -45,9 +45,6 @@ export default class Creator extends General {
         this._container = container;
     }
 
-    public subscribeById(id: string, callBack: ObjectHook): Creator {
-        return this;
-    }
 
     public createFrom(from: string | (() => string | ArrayBuffer), options?: JarvisHook) {
         let creator: Creator;
@@ -62,21 +59,23 @@ export default class Creator extends General {
                 }
                 const se = JSON.parse(rawString) as SceneEntity;
                 creator = new Creator(this.container);
-                creator.create(se).then((r) => {});
+                creator.create(se).then((r) => {
+                });
             });
         } else {
             const data = from();
             if (typeof data === 'string') {
                 const exist = data;
                 if (exist) {
-                    console.warn("this json has already exist in indexed db,we will select indexedDB's json");
+                    console.warn('this json has already exist in indexed db,we will select indexedDB\'s json');
                 } else {
                     const parse = JSON.parse(data) as SceneEntity;
                     sceneDB.addJson(parse);
                 }
             }
             creator = new Creator(this.container);
-            creator.create().then((r) => {});
+            creator.create().then((r) => {
+            });
         }
     }
 
@@ -101,8 +100,12 @@ export default class Creator extends General {
             const boxGeometry = new BoxGeometry(1, 1, 1);
             const material = new MeshBasicMaterial({ color: 0x00ff00 });
             const mesh = new Mesh(boxGeometry, material);
+            mesh.uuid = '315f511e-0080-46dc-8df0-6585c3619cb8';
             mesh.position.set(1, 1, 1);
+            this.beforeAdd(mesh);
+            this.setRenderHook(mesh);
             this.scene?.add(mesh);
+            this.afterAdd(mesh);
         }
         this.init();
         this.render();
@@ -198,7 +201,50 @@ export default class Creator extends General {
 
         this.scene.userData = JSON.parse(JSON.stringify(scene.userData));
         for (const child of scene.children) {
+            this.beforeAdd(child);
+            this.setRenderHook(child);
             this.scene.add(child);
+            this.afterAdd(child);
+        }
+    }
+
+    private afterAdd(child: Object3D) {
+        if (this._uuidSubMap.has(child.uuid)) {
+            const observers = this._uuidSubMap.get(child.uuid);
+            if (observers) {
+                for (const observer of observers) {
+                    observer.afterAdd(child, this.renderer, this.scene, this.camera);
+                }
+            }
+        }
+    }
+
+    private beforeAdd(child: Object3D) {
+        if (this._uuidSubMap.has(child.uuid)) {
+            const observers = this._uuidSubMap.get(child.uuid);
+            if (observers) {
+                for (const observer of observers) {
+                    observer.beforeAdd(child, this.renderer, this.scene, this.camera);
+                }
+            }
+        }
+    }
+
+    private setRenderHook(child: Object3D) {
+        if (this._uuidSubMap.has(child.uuid)) {
+            const observers = this._uuidSubMap.get(child.uuid);
+            if (observers) {
+                child.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {
+                    for (const observer of observers) {
+                        observer.beforeRender(child, renderer, scene, camera);
+                    }
+                };
+                child.onAfterRender = (renderer, scene, camera, geometry, material, group) => {
+                    for (const observer of observers) {
+                        observer.afterRender(child, renderer, scene, camera);
+                    }
+                };
+            }
         }
     }
 }
