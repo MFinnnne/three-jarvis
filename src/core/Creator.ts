@@ -53,23 +53,21 @@ export default class Creator extends General {
                 }
                 const se = JSON.parse(rawString) as SceneEntity;
                 creator = new Creator(this.container);
-                creator.create(se).then((r) => {
-                });
+                creator.create(se).then((r) => {});
             });
         } else {
             const data = from();
             if (typeof data === 'string') {
                 const exist = data;
                 if (exist) {
-                    console.warn('this json has already exist in indexed db,we will select indexedDB\'s json');
+                    console.warn("this json has already exist in indexed db,we will select indexedDB's json");
                 } else {
                     const parse = JSON.parse(data) as SceneEntity;
                     sceneDB.addJson(parse);
                 }
             }
             creator = new Creator(this.container);
-            creator.create().then((r) => {
-            });
+            creator.create().then((r) => {});
         }
     }
 

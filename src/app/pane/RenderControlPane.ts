@@ -13,19 +13,17 @@ export default class RenderControlPane extends DefaultControlPane {
     public genPane(render: WebGLRenderer): Pane {
         const pane = super.genPane(render);
         const renderPane = pane.addFolder({ title: 'render' });
-        renderPane.addInput({ gamaOutput: true }, 'gamaOutput').on('change', ev => {
-            (<any>render).gammaOutput  = ev.value;
+        renderPane.addInput({ gamaOutput: true }, 'gamaOutput').on('change', (ev) => {
+            (<any>render).gammaOutput = ev.value;
         });
-        renderPane.addInput({ gammaFactor: 1 }, 'gammaFactor').on('change', ev => {
+        renderPane.addInput({ gammaFactor: 1 }, 'gammaFactor').on('change', (ev) => {
             (<any>render).gammaFactor = ev.value;
         });
-        renderPane.addInput({ antialias: true }, 'antialias').on('change', ev => {
+        renderPane.addInput({ antialias: true }, 'antialias').on('change', (ev) => {
             (<any>render).antialias = ev.value;
         });
         return pane;
     }
 
-    update() {
-
-    }
+    update() {}
 }
