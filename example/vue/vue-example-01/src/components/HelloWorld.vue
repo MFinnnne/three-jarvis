@@ -63,6 +63,7 @@ function init() {
     // material.wireframe = true;
     const loader = new GLTFLoader().setPath("../../static/");
     window.addEventListener("resize", onWindowResize);
+    // renderer.antialias = t
     loader.load("test.glb", function (gltf) {
         rawScene.add(gltf.scene);
         gltf.scene.scale.set(0.01, 0.01, 0.01);

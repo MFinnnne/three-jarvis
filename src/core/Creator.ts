@@ -23,6 +23,7 @@ import PaneManager from './PaneManager';
 import GUI from '../app/GUI';
 import { rayCasterEvents } from './events/ObjectEvents';
 import MonitorControlPane from '../app/pane/MonitorControlPane';
+import RenderControlPane from '../app/pane/RenderControlPane';
 
 type JarvisHook = {
     afterRender?: () => void;
@@ -31,12 +32,6 @@ type JarvisHook = {
     dataStore?: (content: string) => void;
 };
 
-type ObjectHook = {
-    beforeAdd: (object: Object3D) => void;
-    afterAdd: (object: Object3D) => void;
-    beforeRender: (object: Object3D) => void;
-    afterRender: (object: Object3D) => void;
-};
 export default class Creator extends General {
     private _uuidSubMap: Map<string, ObjectObserver[]> = new Map();
 
@@ -58,26 +53,29 @@ export default class Creator extends General {
                 }
                 const se = JSON.parse(rawString) as SceneEntity;
                 creator = new Creator(this.container);
-                creator.create(se).then((r) => {});
+                creator.create(se).then((r) => {
+                });
             });
         } else {
             const data = from();
             if (typeof data === 'string') {
                 const exist = data;
                 if (exist) {
-                    console.warn("this json has already exist in indexed db,we will select indexedDB's json");
+                    console.warn('this json has already exist in indexed db,we will select indexedDB\'s json');
                 } else {
                     const parse = JSON.parse(data) as SceneEntity;
                     sceneDB.addJson(parse);
                 }
             }
             creator = new Creator(this.container);
-            creator.create().then((r) => {});
+            creator.create().then((r) => {
+            });
         }
     }
 
     async create(se?: SceneEntity) {
         this._renderer = new WebGLRenderer({ canvas: this.container });
+        this._renderer.setPixelRatio(window.devicePixelRatio);
         this._state = new State();
         this._recorder = new Recorder();
         this._recorder.afterExecute.push(() => this.toJson());
@@ -135,6 +133,7 @@ export default class Creator extends General {
         GUI.guiContainerInit(this);
         rayCasterEvents(this);
         new MonitorControlPane(this).genPane();
+        new RenderControlPane(this).genPane(this.renderer);
     }
 
     private onWindowResize() {
