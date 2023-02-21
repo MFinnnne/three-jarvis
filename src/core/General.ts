@@ -1,10 +1,10 @@
-import { HemisphereLight, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import {HemisphereLight, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import dayjs from 'dayjs';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
 import State from './State';
 import Recorder from './Recorder';
-import { OBJECT_TREE_BLACK_LIST } from '../config/Config';
+import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 import PaneManager from './PaneManager';
 import objectChanged from './ObjectChanged';
 import SetPositionCommand from './commands/SetPositionCommand';
@@ -109,21 +109,32 @@ export default abstract class General {
         });
         transformControl.addEventListener('mouseDown', (e) => {
             this.control.enabled = false;
+            this.recordByTransformControl(transformControl);
         });
         transformControl.addEventListener('mouseUp', (e) => {
             this.control.enabled = true;
-            if (transformControl.object) {
-                this.recorder.execute(
-                    new SetPositionCommand(transformControl.object, transformControl.object.position),
-                );
-                this.recorder.execute(
-                    new SetQuaternionCommand(transformControl.object, transformControl.object.quaternion),
-                );
-                this.recorder.execute(new SetScaleCommand(transformControl.object, transformControl.object.scale));
-                this.recorder.execute(
-                    new SetRotationCommand(transformControl.object, transformControl.object.rotation),
-                );
-            }
         });
+    }
+
+    private recordByTransformControl(transformControl: TransformControls) {
+        if (transformControl.object) {
+            switch (transformControl.getMode()) {
+                case "rotate":
+                    this.recorder.execute(
+                        new SetRotationCommand(transformControl.object, transformControl.object.rotation),
+                    );
+                    break;
+                case "scale":
+                    this.recorder.execute(new SetScaleCommand(transformControl.object, transformControl.object.scale));
+                    break;
+                case "translate":
+                    this.recorder.execute(
+                        new SetPositionCommand(transformControl.object, transformControl.object.position),
+                    );
+                    break
+                default:
+                    break;
+            }
+        }
     }
 }
