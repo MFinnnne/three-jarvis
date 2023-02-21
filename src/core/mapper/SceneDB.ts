@@ -7,6 +7,7 @@ export type SceneEntity = {
     id: string;
     ts: number;
     updateTime: string;
+
     treeBlackList?: Array<string>;
     script?: { uuid: string; code: string }[];
     camera?: { metadata?: any; geometries?: any; materials?: any; textures?: any; images?: any; object?: any };

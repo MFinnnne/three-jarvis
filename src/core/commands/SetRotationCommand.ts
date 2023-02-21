@@ -21,5 +21,6 @@ export default class SetRotationCommand implements Command {
 
     undo(): void {
         this.name = 'change rotation';
+        this.object.rotation.copy(this.oldRotation);
     }
 }

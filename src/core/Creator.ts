@@ -23,6 +23,7 @@ import PaneManager from './PaneManager';
 import GUI from '../app/GUI';
 import { rayCasterEvents } from './events/ObjectEvents';
 import MonitorControlPane from '../app/pane/MonitorControlPane';
+import RenderControlPane from '../app/pane/RenderControlPane';
 
 type JarvisHook = {
     afterRender?: () => void;
@@ -31,12 +32,6 @@ type JarvisHook = {
     dataStore?: (content: string) => void;
 };
 
-type ObjectHook = {
-    beforeAdd: (object: Object3D) => void;
-    afterAdd: (object: Object3D) => void;
-    beforeRender: (object: Object3D) => void;
-    afterRender: (object: Object3D) => void;
-};
 export default class Creator extends General {
     private _uuidSubMap: Map<string, ObjectObserver[]> = new Map();
 
@@ -78,6 +73,7 @@ export default class Creator extends General {
 
     async create(se?: SceneEntity) {
         this._renderer = new WebGLRenderer({ canvas: this.container });
+        this._renderer.setPixelRatio(window.devicePixelRatio);
         this._state = new State();
         this._recorder = new Recorder();
         this._recorder.afterExecute.push(() => this.toJson());
@@ -135,6 +131,7 @@ export default class Creator extends General {
         GUI.guiContainerInit(this);
         rayCasterEvents(this);
         new MonitorControlPane(this).genPane();
+        new RenderControlPane(this).genPane(this.renderer);
     }
 
     private onWindowResize() {

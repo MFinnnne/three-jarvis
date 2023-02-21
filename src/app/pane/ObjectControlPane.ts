@@ -1,15 +1,16 @@
-import { BladeApi, ButtonApi, Pane, TabPageApi } from 'tweakpane';
-import { Euler, Object3D, Quaternion, Vector3 } from 'three';
+import {BladeApi, ButtonApi, Pane, TabPageApi} from 'tweakpane';
+import {Euler, Object3D, Quaternion, Vector3} from 'three';
 import DefaultControlPane from './DefaultControlPane';
 import SetPositionCommand from '../../core/commands/SetPositionCommand';
 import SetRotationCommand from '../../core/commands/SetRotationCommand';
 import SetScaleCommand from '../../core/commands/SetScaleCommand';
 import SetQuaternionCommand from '../../core/commands/SetQuaternionCommand';
-import { Point3d } from '@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d';
+import {Point3d} from '@tweakpane/core/dist/es6/input-binding/point-3d/model/point-3d';
 import Utils from '../../util/Utils';
 import Prompt from '../Prompt';
-import { TpButtonGridEvent } from '@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event';
+import {TpButtonGridEvent} from '@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event';
 import General from '../../core/General';
+import ObjectChanged from "../../core/ObjectChanged";
 
 export default class ObjectControlPane extends DefaultControlPane {
     protected objectPane?: TabPageApi;
@@ -41,10 +42,10 @@ export default class ObjectControlPane extends DefaultControlPane {
                 y: object.rotation.y,
                 z: object.rotation.z,
             },
-            quat: { x: object.quaternion.x, y: object.quaternion.y, z: object.quaternion.z, w: object.quaternion.w },
+            quat: {x: object.quaternion.x, y: object.quaternion.y, z: object.quaternion.z, w: object.quaternion.w},
         };
         const tab = pane.addTab({
-            pages: [{ title: 'Object' }, { title: 'Geometry' }, { title: 'Material' }],
+            pages: [{title: 'Object'}, {title: 'Geometry'}, {title: 'Material'}],
         });
 
         this.objectPane = tab.pages[0];
@@ -60,7 +61,7 @@ export default class ObjectControlPane extends DefaultControlPane {
             parse: (v) => String(v),
             value: object.uuid,
         });
-        this.objectPane.addInput({ visible: object.visible }, 'visible').on('change', (ev) => {
+        this.objectPane.addInput({visible: object.visible}, 'visible').on('change', (ev) => {
             object.visible = ev.value;
         });
         this.objectPane.addBlade({
@@ -103,26 +104,46 @@ export default class ObjectControlPane extends DefaultControlPane {
 
         this.geometryPane = tab.pages[1];
         this.materialPane = tab.pages[2];
+        let isFirstPotion = false;
         const positionBind = this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
             if (this.general.transformControl.dragging) {
                 return;
             }
-            const { x, y, z } = ev.value;
-            this.general.recorder.execute(new SetPositionCommand(object, new Vector3(x, y, z)));
+
+            const {x, y, z} = ev.value;
+            if (!isFirstPotion) {
+                isFirstPotion = true;
+                this.general.recorder.execute(new SetPositionCommand(object, this.object!.position));
+            }
+            this.object?.position.set(x, y, z);
+            ObjectChanged.getInstance().update(this.object);
+            if (ev.last) {
+                isFirstPotion = false;
+            }
         });
         positionBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = positionBind.controller_.binding.value.rawValue as Point3d;
             Utils.execCoy(`${value.x.toFixed(2)},${value.y.toFixed(2)},${value.z.toFixed(2)}`);
         });
         this.bindMap.set('position', positionBind);
-
+        let isFirstScale: boolean = false;
         const scaleBind = this.objectPane.addInput(PARAMS, 'scale').on('change', (ev) => {
             if (this.general.transformControl.dragging) {
                 return;
             }
-            const { x, y, z } = ev.value;
-            this.general.recorder.execute(new SetScaleCommand(object, new Vector3(x, y, z)));
+            const {x, y, z} = ev.value;
+            if (!isFirstScale) {
+                this.general.recorder.execute(new SetScaleCommand(object, this.object!.scale));
+                isFirstScale = true;
+            }
+            this.object?.scale.set(x, y, z);
+            ObjectChanged.getInstance().update(this.object);
+            if (ev.last) {
+                isFirstScale = false;
+            }
+
         });
+
         scaleBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = scaleBind.controller_.binding.value.rawValue as Point3d;
             Utils.execCoy(`${value.x.toFixed(2)},${value.y.toFixed(2)},${value.z.toFixed(2)}`);
@@ -130,6 +151,7 @@ export default class ObjectControlPane extends DefaultControlPane {
         this.bindMap.set('scale', scaleBind);
 
         // euler
+        let isFirstRotation = false;
         const rotationBind = this.objectPane
             .addInput(PARAMS, 'rotation', {
                 view: 'rotation',
@@ -143,10 +165,16 @@ export default class ObjectControlPane extends DefaultControlPane {
                 if (this.general.transformControl.dragging) {
                     return;
                 }
-                // eslint-disable-next-line no-debugger
-                debugger;
-                const { x, y, z } = e.value;
-                this.general.recorder.execute(new SetRotationCommand(object, new Euler(x, y, z, 'XYZ')));
+                if (!isFirstRotation) {
+                    this.general.recorder.execute(new SetRotationCommand(object, this.object!.rotation));
+                    isFirstRotation = true;
+                }
+                const {x, y, z} = e.value;
+                this.object?.rotation.set(x, y, z);
+                ObjectChanged.getInstance().update(this.object);
+                if (e.last) {
+                    isFirstRotation = false;
+                }
             });
         rotationBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = rotationBind.controller_.binding.value.rawValue as Euler;
@@ -155,6 +183,7 @@ export default class ObjectControlPane extends DefaultControlPane {
         this.bindMap.set('rotation', rotationBind);
 
         // quaternion
+        let isFirstQuat = false;
         const quatBind = this.objectPane
             .addInput(PARAMS, 'quat', {
                 view: 'rotation',
@@ -166,8 +195,15 @@ export default class ObjectControlPane extends DefaultControlPane {
                 if (this.general.transformControl.dragging) {
                     return;
                 }
-                const { x, y, z, w } = e.value;
-                this.general.recorder.execute(new SetQuaternionCommand(object, new Quaternion(x, y, z, w)));
+                const {x, y, z, w} = e.value;
+                if (!isFirstQuat) {
+                    this.general.recorder.execute(new SetQuaternionCommand(object, this.object!.quaternion));
+                }
+                this.object?.quaternion.set(x, y, z, w);
+                ObjectChanged.getInstance().update(this.object);
+                if (e.last) {
+                    isFirstQuat = false;
+                }
             });
         quatBind.controller_.view.labelElement.addEventListener('click', () => {
             const value = quatBind.controller_.binding.value.rawValue as Quaternion;
