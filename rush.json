@@ -1,0 +1,36 @@
+{
+	"$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+
+	"rushVersion": "5.93.1",
+
+	"pnpmVersion": "6.7.1",
+
+	"nodeSupportedVersionRange": ">=16.13.0 <17.0.0",
+
+	"gitPolicy": {},
+
+	"repository": {},
+
+	"eventHooks": {
+		"preRushInstall": [],
+
+		"postRushInstall": [],
+
+		"preRushBuild": [],
+
+		"postRushBuild": []
+	},
+
+	"variants": [],
+
+	"projects": [
+		{
+			"packageName": "three-jarvis",
+			"projectFolder": "packages/three-jarvis"
+		},
+		{
+			"packageName": "vue-example",
+			"projectFolder": "packages/vue-example"
+		}
+	]
+}

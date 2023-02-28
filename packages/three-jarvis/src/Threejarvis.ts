@@ -23,7 +23,6 @@ export default class ThreeJarvis {
 
     public static creator(container: HTMLCanvasElement): Creator {
         if (container.id === undefined) {
-            // Toast.show('container id  must be set and only');
             throw new Error('container id  must be set and only');
         }
         if (ThreeJarvis.CONTAINER_ID_SET.has(container.id)) {
