@@ -6,9 +6,9 @@
 	"author": "MFine <1737374338@qq.com>",
 	"license": "GPL-3.0 License",
 	"private": false,
-	"main": "dist/three-jarvis.cjs.js",
+	"main": "dist/three-jarvis.esm.js",
 	"module": "dist/three-jarvis.esm.js",
-	"types": "dist/types/index.d.ts",
+	"types": "dist/index.d.ts",
 	"prettier": "../../prettier.config.js",
 	"files": [
 		"dist/**/*",
@@ -59,9 +59,7 @@
 		"rollup-plugin-copy": "^3.4.0",
 		"rollup-plugin-eslint": "^7.0.0",
 		"rollup-plugin-livereload": "^2.0.5",
-		"rollup-plugin-postcss": "^4.0.2",
-		"rollup-plugin-scss": "^3.0.0",
-		"rollup-plugin-serve": "^1.1.0",
+		"rollup-plugin-postcss": "~4.0.2",
 		"rollup-plugin-sourcemaps": "^0.6.3",
 		"@rollup/plugin-alias": "~4.0.3",
 		"@rollup/plugin-replace": "~5.0.2",
@@ -88,7 +86,8 @@
 		"tweakpane": "^3.0.8",
 		"npm-run-all": "~4.1.5",
 		"onchange": "~7.1.0",
-		"ts-node": "~10.9.1"
+		"ts-node": "~10.9.1",
+		"rollup-plugin-scss": "~4.0.0"
 	},
 	"peerDependencies": {
 		"three": "*"

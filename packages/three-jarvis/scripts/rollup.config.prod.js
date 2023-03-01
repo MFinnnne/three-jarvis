@@ -22,14 +22,5 @@ export default {
 			sourcemap: false,
 		},
 	],
-	plugins: [
-		...baseConfig.plugins,
-		typescript({sourceMap: false, inlineSources: false}),
-		copy({
-			targets: [
-				{src: 'types/index.d.ts', dest: 'dist/'},
-				{src: 'types/core/ThreeJarvisLoader.d.ts', dest: 'dist/'},
-			],
-		}),
-	],
+	plugins: [...baseConfig.plugins, typescript({sourceMap: false, inlineSources: false})],
 };

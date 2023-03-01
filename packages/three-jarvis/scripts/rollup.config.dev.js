@@ -1,8 +1,9 @@
 import {nodeResolve} from '@rollup/plugin-node-resolve';
-import baseConfig from './rollup.config.base.js';
-import typescript from 'rollup-plugin-typescript2';
 import path from 'path';
+import postcss from 'postcss';
 import sourceMaps from 'rollup-plugin-sourcemaps';
+import typescript from 'rollup-plugin-typescript2';
+import baseConfig from './rollup.config.base.js';
 const getPath = (_path) => path.resolve(__dirname, _path);
 
 const tsPlugin = typescript({
@@ -20,5 +21,6 @@ export default {
 		}),
 		sourceMaps(),
 		tsPlugin,
+		postcss(),
 	],
 };

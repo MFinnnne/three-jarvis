@@ -1,10 +1,8 @@
-import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import autoprefixer from 'autoprefixer';
-import postcss from 'postcss';
+import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
-import sass from 'rollup-plugin-scss';
 import {name} from '../package.json';
+import scss from 'rollup-plugin-scss';
 
 export default {
 	input: 'src/index.ts',
@@ -30,15 +28,6 @@ export default {
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
 		}),
 		resolve(),
-		sass({
-			input: '../src/sass/full.scss',
-			output: '../dist/bundle.css',
-			insert: true,
-			processor: (css) =>
-				postcss([autoprefixer])
-					.process(css, {from: undefined})
-					.then((result) => result.css),
-		}),
+		scss({fileName: 'bundle.css', insert: true}),
 	],
-	format: 'esm',
 };
