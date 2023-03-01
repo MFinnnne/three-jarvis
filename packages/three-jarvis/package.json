@@ -6,9 +6,9 @@
 	"author": "MFine <1737374338@qq.com>",
 	"license": "GPL-3.0 License",
 	"private": false,
-	"main": "dist/cjs/index.js",
-	"module": "dist/cjs/index.js",
-	"typings": "dist/cjs/index.d.ts",
+	"main": "dist/three-jarvis.cjs.js",
+	"module": "dist/three-jarvis.esm.js",
+	"types": "dist/types/index.d.ts",
 	"prettier": "../../prettier.config.js",
 	"files": [
 		"dist/**/*",
@@ -19,7 +19,7 @@
 		"lint": "eslint . --ext .ts",
 		"lint:fix": "eslint . --ext .ts --fix",
 		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-		"build": "run-s clean build:ts",
+		"build": "run-s clean build:type dev",
 		"build:ts": "run-p build:ts:*",
 		"build:ts:cjs": "tsc --project ./tsconfig.cjs.json",
 		"build:ts:es6": "tsc --project ./tsconfig.es6.json",
@@ -28,7 +28,7 @@
 		"watch": "run-p watch:*",
 		"watch:ts": "onchange --initial --kill \"src/**/*.ts\" -- pnpm run build:ts",
 		"clean": "rimraf dist",
-		"dev": "pnpm run clean && cross-env NODE_ENV=development rollup -w -c scripts/rollup.config.dev.js",
+		"dev": "cross-env NODE_ENV=development rollup  --bundleConfigAsCjs -c ./scripts/rollup.config.dev.js ",
 		"test": "jest"
 	},
 	"pre-commit": [
@@ -38,13 +38,10 @@
 	"devDependencies": {
 		"@babel/core": "^7.20.5",
 		"@babel/plugin-transform-modules-commonjs": "^7.18.2",
-		"@babel/plugin-transform-react-jsx": "^7.17.12",
 		"@babel/preset-env": "^7.18.2",
-		"@babel/preset-typescript": "^7.17.12",
 		"@rollup/plugin-babel": "^5.3.1",
 		"@rollup/plugin-commonjs": "^21.1.0",
 		"@rollup/plugin-node-resolve": "~15.0.1",
-		"@rollup/plugin-typescript": "^8.3.2",
 		"@types/three": "^0.138.0",
 		"@typescript-eslint/eslint-plugin": "^5.26.0",
 		"@typescript-eslint/parser": "^5.26.0",
@@ -72,8 +69,9 @@
 		"sass": "^1.52.1",
 		"three": "^0.148.0",
 		"tslib": "^2.4.0",
-		"typescript": "4.2.2",
-		"utility-types": "^3.10.0"
+		"typescript": "4.2.3",
+		"utility-types": "^3.10.0",
+		"rollup-plugin-typescript2": "~0.34.1"
 	},
 	"dependencies": {
 		"@0b5vr/tweakpane-plugin-rotation": "^0.1.1",
@@ -93,7 +91,6 @@
 		"ts-node": "~10.9.1"
 	},
 	"peerDependencies": {
-		"three": "*",
-		"@types/node@*": "*"
+		"three": "*"
 	}
 }
