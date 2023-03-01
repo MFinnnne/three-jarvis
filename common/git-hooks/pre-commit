@@ -5,4 +5,4 @@
 # are committed. The command is defined in common/config/rush/command-line.json
 # and uses the "rush-prettier" autoinstaller.
 # 当 commit 时调用自定义指令 "rush prettier" 来重新格式化文件。该指令定义在 common/config/rush/command-line.json, 并通过 "rush-prettier" 自动安装并使用。
-# node common/scripts/install-run-rush.js prettier || exit $?
+node common/scripts/install-run-rush.js prettier || exit $?
