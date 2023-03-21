@@ -13,6 +13,12 @@
       "shellCommand": "pretty-quick --staged"
     },
     {
+      "name": "start-dev",
+      "commandKind": "global",
+      "summary": "Build projects and watch for changes",
+      "shellCommand": "rush build --to-except vue-example"
+    },
+    {
       "name": "build",
       "commandKind": "bulk",
       "summary": "Build projects and watch for changes",

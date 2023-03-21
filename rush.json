@@ -5,9 +5,8 @@
 
 	"pnpmVersion": "6.7.1",
 
-
 	"nodeSupportedVersionRange": ">=16.13.0 <17.0.0",
-
+	"projectFolderMaxDepth": 4,
 	"gitPolicy": {},
 
 	"repository": {},
@@ -32,6 +31,10 @@
 		{
 			"packageName": "vue-example",
 			"projectFolder": "packages/vue-example"
+		},
+		{
+			"packageName": "@tweakpane/core",
+			"projectFolder": "packages/tweakpane-core"
 		}
 	]
 }
