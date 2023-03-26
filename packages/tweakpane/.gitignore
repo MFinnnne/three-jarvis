@@ -4,7 +4,9 @@
 /packages/tweakpane/dist/
 /packages/tweakpane/docs/
 /packages/tweakpane/test-module/*/dist/
-
+/docs
+/dist
+/node_modules/
 *.tgz
 *.zip
 

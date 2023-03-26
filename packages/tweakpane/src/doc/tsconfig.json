@@ -2,9 +2,9 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		"baseUrl": ".",
+		"esModuleInterop": true,
 		"moduleResolution": "Node",
 		"paths": {
-			"@tweakpane/core": ["../../../core/src/index"],
 			"tweakpane": ["../main/ts/index"]
 		}
 	}
