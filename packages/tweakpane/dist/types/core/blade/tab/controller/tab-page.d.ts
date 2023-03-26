@@ -2,10 +2,10 @@ import { ValueMap } from '../../../common/model/value-map';
 import { RackController } from '../../rack/controller/rack';
 import { TabItemProps } from '../view/tab-item';
 import { TabItemController } from './tab-item';
-export declare type TabPagePropsObject = {
+export type TabPagePropsObject = {
     selected: boolean;
 };
-export declare type TabPageProps = ValueMap<TabPagePropsObject>;
+export type TabPageProps = ValueMap<TabPagePropsObject>;
 interface Config {
     itemProps: TabItemProps;
     props: TabPageProps;

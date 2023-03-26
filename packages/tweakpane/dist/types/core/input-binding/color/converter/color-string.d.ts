@@ -6,8 +6,8 @@ import { ColorMode, ColorType } from '../model/color-model';
 /**
  * @deprecated
  */
-export declare type StringColorNotation = 'hex.rgb' | 'hex.rgba' | 'func.hsl' | 'func.hsla' | 'func.rgb' | 'func.rgba';
-declare type StringColorNotation2 = 'func' | 'hex' | 'object';
+export type StringColorNotation = 'hex.rgb' | 'hex.rgba' | 'func.hsl' | 'func.hsla' | 'func.rgb' | 'func.rgba';
+type StringColorNotation2 = 'func' | 'hex' | 'object';
 export interface StringColorFormat {
     alpha: boolean;
     mode: ColorMode;

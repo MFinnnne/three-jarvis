@@ -1,5 +1,5 @@
 {
-	"entryPoints": ["../../", "../../../core/"],
+	"entryPoints": ["../../", "../../core/"],
 	"entryPointStrategy": "packages",
 	"exclude": ["**/*.d.ts", "**/*-test.ts"],
 	"excludePrivate": true,

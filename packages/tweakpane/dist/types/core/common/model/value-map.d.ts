@@ -6,7 +6,7 @@ export interface ValueMapEvents<O extends Record<string, unknown>> {
         sender: ValueMap<O>;
     };
 }
-export declare type ValueMapCore<O extends Record<string, unknown>> = {
+export type ValueMapCore<O extends Record<string, unknown>> = {
     [Key in keyof O]: Value<O[Key]>;
 };
 export declare class ValueMap<O extends Record<string, unknown>> {

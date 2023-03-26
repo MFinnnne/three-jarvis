@@ -7,7 +7,7 @@ export declare function getCanvasContext(canvasElement: HTMLCanvasElement): Canv
 declare const ICON_ID_TO_INNER_HTML_MAP: {
     [key in string]: string;
 };
-declare type IconId = keyof typeof ICON_ID_TO_INNER_HTML_MAP;
+type IconId = keyof typeof ICON_ID_TO_INNER_HTML_MAP;
 export declare function createSvgIconElement(document: Document, iconId: IconId): Element;
 export declare function insertElementAt(parentElement: Element, element: Element, index: number): void;
 export declare function removeElement(element: Element): void;

@@ -1,8 +1,8 @@
 import { Tuple3, Tuple4 } from '../../../misc/type-util';
-export declare type ColorComponents3 = Tuple3<number>;
-export declare type ColorComponents4 = Tuple4<number>;
-export declare type ColorMode = 'hsl' | 'hsv' | 'rgb';
-export declare type ColorType = 'float' | 'int';
+export type ColorComponents3 = Tuple3<number>;
+export type ColorComponents4 = Tuple4<number>;
+export type ColorMode = 'hsl' | 'hsv' | 'rgb';
+export type ColorType = 'float' | 'int';
 /**
  * @hidden
  */

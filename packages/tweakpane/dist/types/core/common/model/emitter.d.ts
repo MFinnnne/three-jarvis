@@ -1,4 +1,4 @@
-declare type Handler<E> = (ev: E) => void;
+type Handler<E> = (ev: E) => void;
 /**
  * A type-safe event emitter.
  * @template E The interface that maps event names and event objects.

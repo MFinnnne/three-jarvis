@@ -9,8 +9,8 @@ import { StringInputParams } from '../../../input-binding/string/plugin';
 import { BooleanMonitorParams } from '../../../monitor-binding/boolean/plugin';
 import { NumberMonitorParams } from '../../../monitor-binding/number/plugin';
 import { StringMonitorParams } from '../../../monitor-binding/string/plugin';
-export declare type InputParams = BooleanInputParams | ColorInputParams | NumberInputParams | Point2dInputParams | Point3dInputParams | Point4dInputParams | StringInputParams;
-export declare type MonitorParams = BooleanMonitorParams | NumberMonitorParams | StringMonitorParams;
+export type InputParams = BooleanInputParams | ColorInputParams | NumberInputParams | Point2dInputParams | Point3dInputParams | Point4dInputParams | StringInputParams;
+export type MonitorParams = BooleanMonitorParams | NumberMonitorParams | StringMonitorParams;
 export interface ButtonParams extends BaseParams {
     title: string;
     label?: string;
@@ -19,7 +19,7 @@ export interface FolderParams extends BaseParams {
     title: string;
     expanded?: boolean;
 }
-export declare type SeparatorParams = BaseParams;
+export type SeparatorParams = BaseParams;
 export interface TabParams extends BaseParams {
     pages: {
         title: string;

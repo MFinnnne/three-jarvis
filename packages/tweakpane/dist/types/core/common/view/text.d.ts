@@ -3,7 +3,7 @@ import { Value } from '../model/value';
 import { ValueMap } from '../model/value-map';
 import { ViewProps } from '../model/view-props';
 import { View } from './view';
-export declare type TextProps<T> = ValueMap<{
+export type TextProps<T> = ValueMap<{
     formatter: Formatter<T>;
 }>;
 interface Config<T> {

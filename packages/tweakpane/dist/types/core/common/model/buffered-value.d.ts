@@ -2,11 +2,11 @@ import { Value } from './value';
 /**
  * @hidden
  */
-export declare type Buffer<T> = (T | undefined)[];
+export type Buffer<T> = (T | undefined)[];
 /**
  * @hidden
  */
-export declare type BufferedValue<T> = Value<Buffer<T>>;
+export type BufferedValue<T> = Value<Buffer<T>>;
 /**
  * @hidden
  */

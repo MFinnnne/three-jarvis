@@ -13,7 +13,7 @@ export interface NestedOrderedSetEvents<T> {
         target: NestedOrderedSet<T>;
     };
 }
-declare type Extractor<T> = (item: T) => NestedOrderedSet<T> | null;
+type Extractor<T> = (item: T) => NestedOrderedSet<T> | null;
 export declare class NestedOrderedSet<T> {
     readonly emitter: Emitter<NestedOrderedSetEvents<T>>;
     private readonly items_;

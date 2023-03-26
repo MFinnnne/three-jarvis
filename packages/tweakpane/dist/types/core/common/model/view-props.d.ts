@@ -1,13 +1,13 @@
 import { ReadonlyValue } from './readonly-value';
 import { Value } from './value';
 import { ValueMap, ValueMapEvents } from './value-map';
-export declare type ViewPropsObject = {
+export type ViewPropsObject = {
     disabled: boolean;
     disposed: boolean;
     hidden: boolean;
     parent: ViewProps | null;
 };
-export declare type ViewPropsEvents = ValueMapEvents<ViewPropsObject>;
+export type ViewPropsEvents = ValueMapEvents<ViewPropsObject>;
 interface Disableable {
     disabled: boolean;
 }

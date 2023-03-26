@@ -4,7 +4,7 @@ import { Value } from '../../../common/model/value';
 import { ValueMap } from '../../../common/model/value-map';
 import { ViewProps } from '../../../common/model/view-props';
 import { View } from '../../../common/view/view';
-export declare type GraphLogProps = ValueMap<{
+export type GraphLogProps = ValueMap<{
     maxValue: number;
     minValue: number;
 }>;

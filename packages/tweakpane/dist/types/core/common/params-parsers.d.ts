@@ -1,11 +1,11 @@
-declare type ParamsParsingResult<T> = {
+type ParamsParsingResult<T> = {
     succeeded: true;
     value: T | undefined;
 } | {
     succeeded: false;
     value: undefined;
 };
-export declare type ParamsParser<T> = (value: unknown) => ParamsParsingResult<T>;
+export type ParamsParser<T> = (value: unknown) => ParamsParsingResult<T>;
 export declare const ParamsParsers: {
     optional: {
         custom: <T>(parse: (value: unknown) => T | undefined) => ParamsParser<T>;

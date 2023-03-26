@@ -2,10 +2,10 @@ import { ValueMap } from '../../../common/model/value-map';
 import { ViewProps } from '../../../common/model/view-props';
 import { View } from '../../../common/view/view';
 import { Foldable } from '../../common/model/foldable';
-export declare type FolderPropsObject = {
+export type FolderPropsObject = {
     title: string | undefined;
 };
-export declare type FolderProps = ValueMap<FolderPropsObject>;
+export type FolderProps = ValueMap<FolderPropsObject>;
 interface Config {
     containerElement: HTMLElement;
     foldable: Foldable;

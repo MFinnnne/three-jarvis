@@ -1,6 +1,6 @@
 import { Emitter } from './emitter';
 import { Value, ValueChangeOptions, ValueEvents } from './value';
-export declare type SetRawValue<T> = (rawValue: T, options?: ValueChangeOptions | undefined) => void;
+export type SetRawValue<T> = (rawValue: T, options?: ValueChangeOptions | undefined) => void;
 export declare class ReadonlyValue<T> {
     private value_;
     constructor(value: Value<T>);

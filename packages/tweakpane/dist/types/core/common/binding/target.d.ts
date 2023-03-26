@@ -1,4 +1,4 @@
-export declare type Bindable = Record<string, any>;
+export type Bindable = Record<string, any>;
 /**
  * A binding target.
  */

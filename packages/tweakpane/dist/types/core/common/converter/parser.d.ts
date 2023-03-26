@@ -1,1 +1,1 @@
-export declare type Parser<T> = (text: string) => T | null;
+export type Parser<T> = (text: string) => T | null;

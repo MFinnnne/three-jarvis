@@ -2,7 +2,7 @@ import { BindingTarget } from './binding/target';
 /**
  * The union of primitive types.
  */
-export declare type Primitive = boolean | number | string;
+export type Primitive = boolean | number | string;
 /**
  * Writes the primitive value.
  * @param target The target to be written.

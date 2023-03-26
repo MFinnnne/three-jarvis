@@ -3,7 +3,7 @@ import { ValueMap } from '../../../common/model/value-map';
 import { ViewProps } from '../../../common/model/view-props';
 import { View } from '../../../common/view/view';
 import { Formatter } from '../../converter/formatter';
-export declare type NumberTextProps = ValueMap<{
+export type NumberTextProps = ValueMap<{
     draggingScale: number;
     formatter: Formatter<number>;
 }>;

@@ -1,10 +1,10 @@
 import { ValueMap } from '../../../common/model/value-map';
 import { ViewProps } from '../../../common/model/view-props';
 import { View } from '../../../common/view/view';
-export declare type LabelPropsObject = {
+export type LabelPropsObject = {
     label: string | undefined;
 };
-export declare type LabelProps = ValueMap<LabelPropsObject>;
+export type LabelProps = ValueMap<LabelPropsObject>;
 interface Config {
     props: LabelProps;
     viewProps: ViewProps;

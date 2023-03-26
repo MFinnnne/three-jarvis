@@ -1,6 +1,6 @@
 import { Value } from '../../../common/model/value';
 import { ValueMap } from '../../../common/model/value-map';
-declare type FoldableObject = {
+type FoldableObject = {
     completed: boolean;
     expanded: boolean;
     expandedHeight: number | null;

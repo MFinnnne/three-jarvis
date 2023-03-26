@@ -3,7 +3,7 @@ import { Value } from '../model/value';
 import { ValueMap } from '../model/value-map';
 import { ViewProps } from '../model/view-props';
 import { View } from './view';
-export declare type ListProps<T> = ValueMap<{
+export type ListProps<T> = ValueMap<{
     options: ListItem<T>[];
 }>;
 interface Config<T> {

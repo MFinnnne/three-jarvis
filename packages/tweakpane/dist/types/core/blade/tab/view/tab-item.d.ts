@@ -1,11 +1,11 @@
 import { ValueMap } from '../../../common/model/value-map';
 import { ViewProps } from '../../../common/model/view-props';
 import { View } from '../../../common/view/view';
-export declare type TabItemPropsObject = {
+export type TabItemPropsObject = {
     selected: boolean;
     title: string | undefined;
 };
-export declare type TabItemProps = ValueMap<TabItemPropsObject>;
+export type TabItemProps = ValueMap<TabItemPropsObject>;
 interface Config {
     props: TabItemProps;
     viewProps: ViewProps;

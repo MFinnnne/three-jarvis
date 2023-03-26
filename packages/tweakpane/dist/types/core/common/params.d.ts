@@ -3,20 +3,20 @@ export interface BaseParams {
     hidden?: boolean;
     index?: number;
 }
-export declare type ArrayStyleListOptions<T> = {
+export type ArrayStyleListOptions<T> = {
     text: string;
     value: T;
 }[];
-export declare type ObjectStyleListOptions<T> = {
+export type ObjectStyleListOptions<T> = {
     [text: string]: T;
 };
-export declare type ListParamsOptions<T> = ArrayStyleListOptions<T> | ObjectStyleListOptions<T>;
+export type ListParamsOptions<T> = ArrayStyleListOptions<T> | ObjectStyleListOptions<T>;
 export interface PointDimensionParams {
     max?: number;
     min?: number;
     step?: number;
 }
-export declare type PickerLayout = 'inline' | 'popup';
+export type PickerLayout = 'inline' | 'popup';
 export interface BaseInputParams extends BaseParams, Record<string, unknown> {
     label?: string;
     presetKey?: string;

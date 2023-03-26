@@ -1,4 +1,4 @@
-export declare type PluginType = 'blade' | 'input' | 'monitor';
+export type PluginType = 'blade' | 'input' | 'monitor';
 /**
  * A base interface of the plugin.
  */

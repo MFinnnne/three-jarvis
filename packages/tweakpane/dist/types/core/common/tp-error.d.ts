@@ -15,7 +15,7 @@ interface ErrorContext {
     };
     shouldneverhappen: undefined;
 }
-declare type ErrorType = keyof ErrorContext;
+type ErrorType = keyof ErrorContext;
 interface Config<T extends ErrorType> {
     context?: ErrorContext[T];
     type: T;
