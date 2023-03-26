@@ -1,0 +1,19 @@
+@use '../defs';
+
+.codeBlock {
+	position: relative;
+
+	pre {
+		overflow: auto;
+		padding: 32px;
+
+		@include defs.nonwide() {
+			padding: 24px;
+		}
+
+		code {
+			font-size: 0.9rem;
+			font-weight: 500;
+		}
+	}
+}

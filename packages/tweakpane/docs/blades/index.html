@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" class="blade">
+	<head>
+		<meta charset="UTF-8" />
+
+		<title>Blades | Tweakpane</title>
+
+		<meta
+			name="viewport"
+			content="initial-scale=1,minimum-scale=1,maximum-scale=1"
+		/>
+		<meta
+			name="og:description"
+			content="A compact pane for fine-tuning parameters and monitoring value changes"
+		/>
+		<meta
+			property="og:image"
+			content="https://cocopon.github.io/tweakpane/assets/og.png"
+		/>
+		<meta name="og:title" content="Tweakpane" />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta
+			name="twitter:description"
+			content="A compact pane for fine-tuning parameters and monitoring value changes"
+		/>
+		<meta
+			name="twitter:image"
+			content="https://cocopon.github.io/tweakpane/assets/og.png"
+		/>
+		<meta name="twitter:title" content="Tweakpane" />
+		<link rel="stylesheet" href="../assets/bundle.css" />
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="main main-blade">
+			<div class="main_globalHeader">
+				<div class="globalHeader">
+					<div class="globalHeader_inner">
+						<div class="globalHeader_logo">
+							<a class="logo" href="../">
+								<div class="logo_symbol"></div>
+								Tweakpane
+							</a>
+						</div>
+						<div class="globalHeader_spMenuButton">
+							<button id="spMenuButton" class="spMenuButton">
+								<span class="material-icons">menu</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="main_wrap">
+				<div class="main_menu">
+					<div class="menu">
+						<div class="menu_logo">
+							<a class="logo" href="../">
+								<div class="logo_symbol"></div>
+								Tweakpane
+								<div class="logo_version">3.1.4</div>
+							</a>
+						</div>
+						<ul class="menu_list">
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../getting-started/"
+									>Getting started</a
+								>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../quick-tour/">Quick tour</a>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../input-bindings/"
+									>Input bindings</a
+								>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#number"
+											>Number</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#string"
+											>String</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#boolean"
+											>Boolean</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#color"
+											>Color</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#point"
+											>Point</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../monitor-bindings/"
+									>Monitor bindings</a
+								>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../monitor-bindings/#multiline"
+											>Multiline</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../monitor-bindings/#buffersize"
+											>Buffer size</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../monitor-bindings/#interval"
+											>Interval</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../monitor-bindings/#graph"
+											>Graph</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../ui-components/"
+									>UI components</a
+								>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../ui-components/#folder"
+											>Folder</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../ui-components/#button"
+											>Button</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../ui-components/#tab"
+											>Tab</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../ui-components/#separator"
+											>Separator</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../blades/">Blades</a>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../blades/#text"
+											>Text</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../blades/#list"
+											>List</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../blades/#slider"
+											>Slider</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../theming/">Theming</a>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../theming/#builder"
+											>Theme builder</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../plugins/">Plugins</a>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../misc/">Misc</a>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../misc/#events"
+											>Events</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../misc/#imex"
+											>Import/Export</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../misc/#tips">Tips</a>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../migration/">Migration</a>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../migration/#datgui"
+											>dat.GUI</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a
+									class="menuItem_anchor"
+									href="../api/classes/tweakpane.Pane.html"
+									target="_blank"
+								>
+									API reference
+									<span class="material-icons">open_in_new</span>
+								</a>
+							</li>
+							<li class="menuItem">
+								<a
+									class="menuItem_anchor"
+									href="https://github.com/cocopon/tweakpane"
+									target="_blank"
+								>
+									GitHub
+									<span class="material-icons">open_in_new</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="main_main">
+					<div class="main_pageHeader">
+						<div class="pageHeader">
+							<div class="pageHeader_inner">
+								<div class="pageHeader_text">
+									<h1 class="pageHeader_title">Blades</h1>
+									<p>
+										<code>addBlade()</code> can create a
+										<a href="../quick-tour/#blades">blade</a> without binding.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="main_inner">
+						<h2 id="text">Text</h2>
+						<p>
+							<a href="../api/interfaces/tweakpane.TextBladeParams.html"
+								>Parameters</a
+							>
+							| <a href="../api/classes/tweakpane.TextApi.html">API</a>
+						</p>
+						<div class="main_media">
+							<div class="demo">
+								<div class="demo_code">
+									<div class="codeBlock">
+										<pre><code class="js">const pane = new Pane();
+pane.addBlade({
+  view: 'text',
+  label: 'name',
+  parse: (v) => String(v),
+  value: 'sketch-01',
+});</code></pre>
+									</div>
+								</div>
+								<div class="demo_result">
+									<div class="paneContainer" data-pane-text></div>
+								</div>
+							</div>
+						</div>
+
+						<h2 id="list">List</h2>
+						<p>
+							<a href="../api/interfaces/tweakpane.ListBladeParams.html"
+								>Parameters</a
+							>
+							| <a href="../api/classes/tweakpane.ListApi.html">API</a>
+						</p>
+						<div class="main_media">
+							<div class="demo">
+								<div class="demo_code">
+									<div class="codeBlock">
+										<pre><code class="js">const pane = new Pane();
+pane.addBlade({
+  view: 'list',
+  label: 'scene',
+  options: [
+    {text: 'loading', value: 'LDG'},
+    {text: 'menu', value: 'MNU'},
+    {text: 'field', value: 'FLD'},
+  ],
+  value: 'LDG',
+});</code></pre>
+									</div>
+								</div>
+								<div class="demo_result">
+									<div class="paneContainer" data-pane-list></div>
+									<div
+										class="paneContainer paneContainer-console"
+										data-pane-listconsole
+									></div>
+								</div>
+							</div>
+						</div>
+
+						<h2 id="slider">Slider</h2>
+						<p>
+							<a href="../api/interfaces/tweakpane.SliderBladeParams.html"
+								>Parameters</a
+							>
+							| <a href="../api/classes/tweakpane.SliderApi.html">API</a>
+						</p>
+						<div class="main_media">
+							<div class="demo">
+								<div class="demo_code">
+									<div class="codeBlock">
+										<pre><code class="js">const pane = new Pane();
+pane.addBlade({
+  view: 'slider',
+  label: 'brightness',
+  min: 0,
+  max: 1,
+  value: 0.5,
+});</code></pre>
+									</div>
+								</div>
+								<div class="demo_result">
+									<div class="paneContainer" data-pane-slider></div>
+									<div
+										class="paneContainer paneContainer-console"
+										data-pane-sliderconsole
+									></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="main_globalFooter">
+						<div class="globalFooter">
+							<div class="globalFooter_inner">
+								<div class="globalFooter_copy">
+									&copy; 2018 <a href="https://github.com/cocopon">cocopon</a>.
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+		<script src="../assets/tweakpane.js" defer></script>
+
+		<script src="../assets/bundle.js" defer></script>
+	</body>
+</html>

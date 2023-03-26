@@ -1,0 +1,80 @@
+@use './defs';
+
+:root.index {
+	.pageHeader {
+		background-image: none;
+	}
+	.pageHeader_inner {
+		position: static;
+
+		@include defs.wide() {
+			padding-bottom: 128px;
+			padding-top: 128px;
+		}
+	}
+	.pageHeader_text {
+		mix-blend-mode: difference;
+	}
+	.pageHeader_title {
+		color: white;
+	}
+	.pageHeader_text p {
+		color: white;
+
+		@include defs.nonwide() {
+			hyphens: auto;
+		}
+	}
+	.pageHeader_pane {
+		position: relative;
+	}
+}
+
+:root.theming {
+	.pageHeader {
+		background-color: #21292a;
+		background-image: url(https://source.unsplash.com/u27Rrbs9Dwc/1600x900);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		&::before {
+			background-image: radial-gradient(
+				rgba(255, 255, 255, 0.1) 1px,
+				transparent 0
+			);
+			background-position: center;
+			background-size: 16px 16px;
+			bottom: 0;
+			content: '';
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+
+		.paneContainer {
+			-webkit-backdrop-filter: blur(4px);
+			backdrop-filter: blur(4px);
+		}
+	}
+	.pageHeader_title {
+		h1,
+		p {
+			color: rgba(white, 0.8);
+		}
+	}
+}
+
+:root.catalog.readme {
+	.main_menu {
+		display: none;
+	}
+	.main_wrap {
+		max-width: 1088px;
+	}
+	.paneCatalog {
+		border-radius: 0;
+		padding: 64px;
+	}
+}

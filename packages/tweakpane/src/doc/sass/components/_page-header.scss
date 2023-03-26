@@ -1,0 +1,89 @@
+@use '../defs';
+
+.pageHeader {
+	@include defs.dotGrid();
+
+	background-color: var(--bg-color-secondary);
+	position: relative;
+
+	&,
+	&_sketchContainer,
+	&_sketchContainer canvas {
+		@include defs.wide() {
+			border-radius: 6px;
+		}
+	}
+	&_sketchContainer {
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
+		right: 0;
+		top: 0;
+
+		svg {
+			display: block;
+			height: 100%;
+			left: 0;
+			overflow: hidden;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+	}
+	&_inner {
+		box-sizing: border-box;
+		margin-left: auto;
+		margin-right: auto;
+		position: relative;
+
+		@include defs.wide() {
+			align-items: center;
+			display: flex;
+			justify-content: space-between;
+			padding: 64px;
+			max-width: 800px;
+		}
+		@include defs.middle() {
+			max-width: 480px;
+		}
+		@include defs.nonwide() {
+			display: block;
+			padding: 64px 32px;
+		}
+	}
+	&_text {
+		@include defs.wide() {
+			padding-bottom: 32px;
+			padding-top: 32px;
+		}
+		@include defs.nonwide() {
+			text-align: center;
+		}
+	}
+	&_title {
+		font-size: 3rem;
+		line-height: 1;
+
+		@include defs.nonwide() {
+			font-size: 2rem;
+		}
+	}
+	&#{&}-theming &_text {
+		color: #{hsl(defs.$base-hue, 5%, 60%)};
+	}
+	&#{&}-theming &_title {
+		color: #{hsl(defs.$base-hue, 5%, 70%)};
+	}
+	&_pane {
+		@include defs.wide() {
+			flex-grow: 0;
+			flex-shrink: 0;
+			margin-left: 32px;
+		}
+		@include defs.nonwide() {
+			margin-top: 32px;
+			text-align: center;
+		}
+	}
+}

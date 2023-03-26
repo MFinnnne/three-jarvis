@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" class="gettingStarted">
+	<head>
+		<meta charset="UTF-8" />
+
+		<title>Getting started | Tweakpane</title>
+
+		<meta
+			name="viewport"
+			content="initial-scale=1,minimum-scale=1,maximum-scale=1"
+		/>
+		<meta
+			name="og:description"
+			content="A compact pane for fine-tuning parameters and monitoring value changes"
+		/>
+		<meta
+			property="og:image"
+			content="https://cocopon.github.io/tweakpane/assets/og.png"
+		/>
+		<meta name="og:title" content="Tweakpane" />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta
+			name="twitter:description"
+			content="A compact pane for fine-tuning parameters and monitoring value changes"
+		/>
+		<meta
+			name="twitter:image"
+			content="https://cocopon.github.io/tweakpane/assets/og.png"
+		/>
+		<meta name="twitter:title" content="Tweakpane" />
+		<link rel="stylesheet" href="../assets/bundle.css" />
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="main main-gettingStarted">
+			<div class="main_globalHeader">
+				<div class="globalHeader">
+					<div class="globalHeader_inner">
+						<div class="globalHeader_logo">
+							<a class="logo" href="../">
+								<div class="logo_symbol"></div>
+								Tweakpane
+							</a>
+						</div>
+						<div class="globalHeader_spMenuButton">
+							<button id="spMenuButton" class="spMenuButton">
+								<span class="material-icons">menu</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="main_wrap">
+				<div class="main_menu">
+					<div class="menu">
+						<div class="menu_logo">
+							<a class="logo" href="../">
+								<div class="logo_symbol"></div>
+								Tweakpane
+								<div class="logo_version">3.1.4</div>
+							</a>
+						</div>
+						<ul class="menu_list">
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../getting-started/"
+									>Getting started</a
+								>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../quick-tour/">Quick tour</a>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../input-bindings/"
+									>Input bindings</a
+								>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#number"
+											>Number</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#string"
+											>String</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#boolean"
+											>Boolean</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#color"
+											>Color</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../input-bindings/#point"
+											>Point</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../monitor-bindings/"
+									>Monitor bindings</a
+								>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../monitor-bindings/#multiline"
+											>Multiline</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../monitor-bindings/#buffersize"
+											>Buffer size</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../monitor-bindings/#interval"
+											>Interval</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../monitor-bindings/#graph"
+											>Graph</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../ui-components/"
+									>UI components</a
+								>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../ui-components/#folder"
+											>Folder</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../ui-components/#button"
+											>Button</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../ui-components/#tab"
+											>Tab</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a
+											class="submenuItem_anchor"
+											href="../ui-components/#separator"
+											>Separator</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../blades/">Blades</a>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../blades/#text"
+											>Text</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../blades/#list"
+											>List</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../blades/#slider"
+											>Slider</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../theming/">Theming</a>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../theming/#builder"
+											>Theme builder</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../plugins/">Plugins</a>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../misc/">Misc</a>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../misc/#events"
+											>Events</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../misc/#imex"
+											>Import/Export</a
+										>
+									</li>
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../misc/#tips">Tips</a>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a class="menuItem_anchor" href="../migration/">Migration</a>
+							</li>
+							<li class="menuItem">
+								<ul class="submenu">
+									<li class="submenuItem">
+										<a class="submenuItem_anchor" href="../migration/#datgui"
+											>dat.GUI</a
+										>
+									</li>
+								</ul>
+							</li>
+							<li class="menuItem">
+								<a
+									class="menuItem_anchor"
+									href="../api/classes/tweakpane.Pane.html"
+									target="_blank"
+								>
+									API reference
+									<span class="material-icons">open_in_new</span>
+								</a>
+							</li>
+							<li class="menuItem">
+								<a
+									class="menuItem_anchor"
+									href="https://github.com/cocopon/tweakpane"
+									target="_blank"
+								>
+									GitHub
+									<span class="material-icons">open_in_new</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="main_main">
+					<div class="main_pageHeader">
+						<div class="pageHeader">
+							<div class="pageHeader_sketchContainer"></div>
+							<div class="pageHeader_inner">
+								<div class="pageHeader_text">
+									<h1 class="pageHeader_title">Getting started</h1>
+									<p>Setting up Tweakpane in only 2 steps.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="main_inner">
+						<h2>1. Add Tweakpane to a project</h2>
+						<p>
+							Using
+							<a
+								href="https://www.jsdelivr.com/package/npm/tweakpane"
+								target="_blank"
+								>CDN</a
+							>
+							is the easiest way to add Tweakpane:
+						</p>
+
+						<div class="main_media">
+							<div class="demo">
+								<div class="demo_code">
+									<div class="codeBlock">
+										<pre><code class="html">&lt;script src=&quot;<strong>https://cdn.jsdelivr.net/npm/tweakpane@3.1.4/dist/tweakpane.min.js</strong>&quot;&gt;&lt;/script&gt;</code></pre>
+									</div>
+								</div>
+								<div class="demo_chip">.html</div>
+							</div>
+						</div>
+
+						<p>
+							Or,
+							<a href="https://github.com/cocopon/tweakpane/releases"
+								>download the latest Tweakpane</a
+							>
+							and import it to your web page:
+						</p>
+
+						<div class="main_media">
+							<div class="demo">
+								<div class="demo_code">
+									<div class="codeBlock">
+										<pre><code class="html">&lt;script src=&quot;path/to/tweakpane-3.1.4.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+									</div>
+								</div>
+								<div class="demo_chip">.html</div>
+							</div>
+						</div>
+
+						<p>
+							You can also install, import it as
+							<a href="https://www.npmjs.com/package/tweakpane" target="_blank"
+								>npm package</a
+							>:
+						</p>
+
+						<div class="main_media">
+							<div class="demo">
+								<div class="demo_code">
+									<div class="codeBlock">
+										<pre><code class="sh">$ npm install --save tweakpane
+
+# Additional type definitions for development in TypeScript
+$ npm install --save-dev @tweakpane/core</code></pre>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="main_media">
+							<div class="demo">
+								<div class="demo_code">
+									<div class="codeBlock">
+										<pre><code class="js">import {Pane} from 'tweakpane';</code></pre>
+									</div>
+								</div>
+								<div class="demo_chip">.js</div>
+							</div>
+						</div>
+
+						<h2>2. Create a pane</h2>
+						<p>Create an instance of a pane by <code>new</code>.</p>
+
+						<div class="main_media">
+							<div class="demo">
+								<div class="demo_code">
+									<div class="codeBlock">
+										<pre><code class="js">// CDN
+const pane = new Tweakpane.Pane();
+
+// npm
+const pane = new Pane();</code></pre>
+									</div>
+								</div>
+								<div class="demo_result">
+									<div class="paneContainer" data-pane-hello></div>
+								</div>
+							</div>
+						</div>
+
+						<p>
+							All set! Take a <a href="../quick-tour/">quick tour</a> to see
+							what you can do with the pane.
+						</p>
+
+						<h2>What's next</h2>
+						<div class="rel">
+							<div class="relItem">
+								<a class="relItem_anchor" href="../quick-tour/">
+									<div class="relItem_text">
+										<div class="relItem_title">Quick tour</div>
+										<div class="relItem_detail">
+											learn the basics of Tweakpane
+										</div>
+									</div>
+									<div class="relItem_icon relItem_icon-circle">
+										<span class="material-icons">arrow_forward</span>
+									</div>
+								</a>
+							</div>
+							<div class="relItem relItem-oneline">
+								<a
+									class="relItem_anchor"
+									href="../api/classes/tweakpane.Pane.html"
+									target="_blank"
+								>
+									<div class="relItem_text">
+										<div class="relItem_title">API reference</div>
+									</div>
+									<div class="relItem_icon">
+										<span class="material-icons">open_in_new</span>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="main_globalFooter">
+						<div class="globalFooter">
+							<div class="globalFooter_inner">
+								<div class="globalFooter_copy">
+									&copy; 2018 <a href="https://github.com/cocopon">cocopon</a>.
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+		<script src="../assets/tweakpane.js" defer></script>
+
+		<script src="../assets/bundle.js" defer></script>
+	</body>
+</html>

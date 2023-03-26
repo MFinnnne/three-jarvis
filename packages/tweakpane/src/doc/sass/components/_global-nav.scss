@@ -1,0 +1,118 @@
+@use '../defs';
+
+.menu {
+	background-color: var(--bg-color);
+	bottom: 0;
+	overflow-y: auto;
+	padding-bottom: 32px;
+	padding-top: 32px;
+	position: fixed;
+	top: 0;
+	width: defs.$global-nav-width;
+	z-index: defs.$z-index-global-nav;
+
+	@include defs.nonwide() {
+		left: -(defs.$global-nav-width);
+		padding-bottom: 24px;
+		padding-top: 24px;
+		top: defs.$global-header-height;
+		transform: none;
+
+		&#{&}-expanded {
+			transform: translateX(defs.$global-nav-width);
+		}
+	}
+
+	&#{&}-loaded {
+		transition: transform 0.2s ease-in-out;
+	}
+
+	&_logo {
+		border-bottom: var(--bg-color-secondary) solid 2px;
+		height: defs.$global-header-height;
+		line-height: defs.$global-header-height;
+		padding-left: 32px;
+		padding-right: 32px;
+
+		@include defs.nonwide() {
+			display: none;
+		}
+	}
+	&_list {
+		@include defs.wide() {
+			margin-top: 24px;
+		}
+	}
+}
+.menuItem {
+	& + & {
+		margin-top: 2px;
+	}
+
+	&_anchor {
+		color: var(--fg-color);
+		display: block;
+		font-weight: 500;
+		margin-top: 24px;
+		padding: 8px 16px;
+		text-decoration: none;
+
+		@include defs.wide() {
+			border-radius: 6px;
+			margin-left: 16px;
+			margin-right: 16px;
+		}
+		@include defs.nonwide() {
+			padding-left: 32px;
+			padding-right: 32px;
+		}
+
+		&#{&}-active {
+			background-color: var(--bg-color-secondary);
+			color: var(--fg-color);
+		}
+		&:hover {
+			background-color: var(--bg-color-secondary);
+		}
+
+		.material-icons {
+			font-size: 1.2em;
+			position: relative;
+			top: -1px;
+			vertical-align: middle;
+		}
+	}
+	&:first-child &_anchor {
+		margin-top: 0;
+	}
+}
+
+.submenuItem {
+	& + & {
+		margin-top: 2px;
+	}
+
+	&_anchor {
+		color: var(--fg-color-secondary);
+		display: block;
+		padding: 8px 16px;
+		text-decoration: none;
+
+		@include defs.wide() {
+			border-radius: 6px;
+			margin-left: 16px;
+			margin-right: 16px;
+		}
+		@include defs.nonwide() {
+			padding-left: 32px;
+		}
+
+		&#{&}-active {
+			background-color: var(--bg-color-secondary);
+		}
+		&:hover {
+			background-color: var(--bg-color-secondary);
+			color: var(--fg-color);
+		}
+	}
+}

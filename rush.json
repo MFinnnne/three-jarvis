@@ -33,8 +33,8 @@
 			"projectFolder": "packages/vue-example"
 		},
 		{
-			"packageName": "@tweakpane/core",
-			"projectFolder": "packages/tweakpane-core"
+			"packageName": "my-tweakpane",
+			"projectFolder": "packages/tweakpane"
 		}
 	]
 }

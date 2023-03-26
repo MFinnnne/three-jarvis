@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,700');
+
+// Fonts
+$font-family: Rubik, sans-serif;
+$font-family-mono: 'Source Code Pro', sans-serif;
+
+// Layouts
+$tablet-width: 960px;
+$sp-width: 480px;
+$global-header-height: 64px;
+$global-nav-width: 240px;
+
+// Colors
+$base-hue: 230;
+$pane-bg-color: hsl($base-hue, 7%, 17%);
+
+// Z-index
+$z-index-global-header: 1002;
+$z-index-global-nav: 1003;
+
+// Mixins
+
+@mixin wide() {
+	@media screen and (min-width: ($tablet-width + 1)) {
+		@content;
+	}
+}
+@mixin nonwide() {
+	@media screen and (max-width: $tablet-width) {
+		@content;
+	}
+}
+@mixin middle() {
+	@media screen and (min-width: ($sp-width + 1)) and (max-width: $tablet-width) {
+		@content;
+	}
+}
+@mixin narrow() {
+	@media screen and (max-width: $sp-width) {
+		@content;
+	}
+}
+
+@mixin responsiveContainer() {
+	box-sizing: border-box;
+
+	@include wide() {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 1280px;
+		padding-left: 64px;
+		padding-right: 64px;
+	}
+	@include middle() {
+		padding-left: 32px;
+		padding-right: 32px;
+	}
+	@include narrow() {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
+}
+
+@mixin document() {
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 2em;
+
+		@include nonwide() {
+			font-size: 1.25rem;
+		}
+	}
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: 1.25rem;
+		margin-top: 2em;
+
+		@include nonwide() {
+			font-size: 1rem;
+		}
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		&:first-child {
+			margin-top: 0;
+		}
+
+		& + p {
+			margin-top: 0.5em;
+		}
+	}
+	ul {
+		list-style-type: disc;
+		margin-bottom: 1em;
+		margin-top: 1em;
+		padding-left: 1.3rem;
+	}
+	li + li {
+		margin-top: 0.5em;
+	}
+	p {
+		line-height: 1.6;
+
+		code {
+			background-color: var(--bg-color-secondary);
+			border-radius: 2px;
+			color: var(--code-color);
+			font-weight: 500;
+			padding-left: 0.25em;
+			padding-right: 0.25em;
+		}
+	}
+	a {
+		color: var(--a-color);
+	}
+}
+
+@mixin dotGrid() {
+	background-image: radial-gradient(
+			#{unquote('hsla(var(--guide-color-comps), 0.08)')} 1px,
+			transparent 0
+		),
+		radial-gradient(
+			#{unquote('hsla(var(--guide-color-comps), 0.04)')} 1px,
+			transparent 0
+		);
+	background-size: 32px 32px, 8px 8px;
+	background-position: center;
+}

@@ -1,0 +1,136 @@
+{% set pageId = 'gettingStarted' %} {% set root = '../' %} {% set title =
+'Getting started' %} {% extends "_template.html" %} {% block pageHeader %}
+<div class="pageHeader">
+	<div class="pageHeader_sketchContainer"></div>
+	<div class="pageHeader_inner">
+		<div class="pageHeader_text">
+			<h1 class="pageHeader_title">{{ title }}</h1>
+			<p>Setting up Tweakpane in only 2 steps.</p>
+		</div>
+	</div>
+</div>
+{% endblock %} {% block content %}
+<h2>1. Add Tweakpane to a project</h2>
+<p>
+	Using
+	<a href="https://www.jsdelivr.com/package/npm/tweakpane" target="_blank"
+		>CDN</a
+	>
+	is the easiest way to add Tweakpane:
+</p>
+
+<div class="main_media">
+	<div class="demo">
+		<div class="demo_code">
+			<div class="codeBlock">
+				<pre><code class="html">&lt;script src=&quot;<strong>https://cdn.jsdelivr.net/npm/tweakpane@{{ version }}/dist/tweakpane.min.js</strong>&quot;&gt;&lt;/script&gt;</code></pre>
+			</div>
+		</div>
+		<div class="demo_chip">.html</div>
+	</div>
+</div>
+
+<p>
+	Or,
+	<a href="https://github.com/cocopon/tweakpane/releases"
+		>download the latest Tweakpane</a
+	>
+	and import it to your web page:
+</p>
+
+<div class="main_media">
+	<div class="demo">
+		<div class="demo_code">
+			<div class="codeBlock">
+				<pre><code class="html">&lt;script src=&quot;path/to/tweakpane-{{ version }}.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+			</div>
+		</div>
+		<div class="demo_chip">.html</div>
+	</div>
+</div>
+
+<p>
+	You can also install, import it as
+	<a href="https://www.npmjs.com/package/tweakpane" target="_blank"
+		>npm package</a
+	>:
+</p>
+
+<div class="main_media">
+	<div class="demo">
+		<div class="demo_code">
+			<div class="codeBlock">
+				<pre><code class="sh">$ npm install --save tweakpane
+
+# Additional type definitions for development in TypeScript
+$ npm install --save-dev @tweakpane/core</code></pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="main_media">
+	<div class="demo">
+		<div class="demo_code">
+			<div class="codeBlock">
+				<pre><code class="js">import {Pane} from 'tweakpane';</code></pre>
+			</div>
+		</div>
+		<div class="demo_chip">.js</div>
+	</div>
+</div>
+
+<h2>2. Create a pane</h2>
+<p>Create an instance of a pane by <code>new</code>.</p>
+
+<div class="main_media">
+	<div class="demo">
+		<div class="demo_code">
+			<div class="codeBlock">
+				<pre><code class="js">// CDN
+const pane = new Tweakpane.Pane();
+
+// npm
+const pane = new Pane();</code></pre>
+			</div>
+		</div>
+		<div class="demo_result">
+			<div class="paneContainer" data-pane-hello></div>
+		</div>
+	</div>
+</div>
+
+<p>
+	All set! Take a <a href="{{ root }}quick-tour/">quick tour</a> to see what you
+	can do with the pane.
+</p>
+
+<h2>What's next</h2>
+<div class="rel">
+	<div class="relItem">
+		<a class="relItem_anchor" href="{{ root }}quick-tour/">
+			<div class="relItem_text">
+				<div class="relItem_title">Quick tour</div>
+				<div class="relItem_detail">learn the basics of Tweakpane</div>
+			</div>
+			<div class="relItem_icon relItem_icon-circle">
+				<span class="material-icons">arrow_forward</span>
+			</div>
+		</a>
+	</div>
+	<div class="relItem relItem-oneline">
+		<a
+			class="relItem_anchor"
+			href="{{ root }}api/classes/tweakpane.Pane.html"
+			target="_blank"
+		>
+			<div class="relItem_text">
+				<div class="relItem_title">API reference</div>
+			</div>
+			<div class="relItem_icon">
+				<span class="material-icons">open_in_new</span>
+			</div>
+		</a>
+	</div>
+</div>
+{% endblock %}

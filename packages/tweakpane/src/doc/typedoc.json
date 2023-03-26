@@ -1,0 +1,9 @@
+{
+	"entryPoints": ["../../", "../../../core/"],
+	"entryPointStrategy": "packages",
+	"exclude": ["**/*.d.ts", "**/*-test.ts"],
+	"excludePrivate": true,
+	"out": "../../docs/api",
+	"plugin": ["typedoc-plugin-missing-exports"],
+	"readme": "none"
+}

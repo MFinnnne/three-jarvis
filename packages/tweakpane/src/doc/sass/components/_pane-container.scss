@@ -1,0 +1,88 @@
+.paneContainer {
+	flex-grow: 0;
+	flex-shrink: 0;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	width: 256px;
+
+	& + & {
+		margin-top: 16px;
+	}
+	&#{&}-dat + & {
+		margin-top: 20px + 16px;
+	}
+
+	&#{&}-dat {
+		width: 245px;
+
+		.tp-lblv_v {
+			width: calc(60% + 3px);
+		}
+	}
+	&#{&}-console {
+		--tp-base-background-color: var(--bg-color-secondary);
+		--tp-base-shadow-color: transparent;
+		--tp-button-background-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-button-background-color-active: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-button-background-color-focus: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-button-background-color-hover: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-button-foreground-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.4)'
+			)};
+		--tp-container-background-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-container-background-color-active: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-container-background-color-focus: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-container-background-color-hover: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-container-foreground-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.4)'
+			)};
+		--tp-input-background-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-input-background-color-active: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-input-background-color-focus: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-input-background-color-hover: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-input-foreground-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.4)'
+			)};
+		--tp-monitor-background-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.04)'
+			)};
+		--tp-monitor-foreground-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.4)'
+			)};
+		--tp-label-foreground-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.4)'
+			)};
+		--tp-groove-foreground-color: #{unquote(
+				'hsla(var(--guide-color-comps), 0.1)'
+			)};
+
+		.tp-rotv {
+			border: #{unquote('hsla(var(--guide-color-comps), 0.05) solid 1px')};
+		}
+	}
+}
