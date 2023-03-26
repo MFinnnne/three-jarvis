@@ -1,0 +1,34 @@
+import { Bindable } from '../../../common/binding/target';
+import { BaseBladeParams } from '../../../common/params';
+import { View } from '../../../common/view/view';
+import { ButtonApi } from '../../button/api/button';
+import { BladeApi } from '../../common/api/blade';
+import { BladeRackApi } from '../../common/api/blade-rack';
+import { ButtonParams, FolderParams, InputParams, MonitorParams, SeparatorParams, TabParams } from '../../common/api/params';
+import { BladeController } from '../../common/controller/blade';
+import { FolderApi } from '../../folder/api/folder';
+import { InputBindingApi } from '../../input-binding/api/input-binding';
+import { MonitorBindingApi } from '../../monitor-binding/api/monitor-binding';
+import { RackApi } from '../../rack/api/rack';
+import { SeparatorApi } from '../../separator/api/separator';
+import { TabPageController } from '../controller/tab-page';
+import { TabApi } from './tab';
+export declare class TabPageApi implements BladeRackApi {
+    readonly controller_: TabPageController;
+    private readonly rackApi_;
+    constructor(controller: TabPageController, contentRackApi: RackApi);
+    get title(): string;
+    set title(title: string);
+    get selected(): boolean;
+    set selected(selected: boolean);
+    get children(): BladeApi<BladeController<View>>[];
+    addButton(params: ButtonParams): ButtonApi;
+    addFolder(params: FolderParams): FolderApi;
+    addSeparator(opt_params?: SeparatorParams): SeparatorApi;
+    addTab(params: TabParams): TabApi;
+    add(api: BladeApi<BladeController<View>>, opt_index?: number): void;
+    remove(api: BladeApi<BladeController<View>>): void;
+    addInput<O extends Bindable, Key extends keyof O>(object: O, key: Key, opt_params?: InputParams): InputBindingApi<unknown, O[Key]>;
+    addMonitor<O extends Bindable, Key extends keyof O>(object: O, key: Key, opt_params?: MonitorParams): MonitorBindingApi<O[Key]>;
+    addBlade(params: BaseBladeParams): BladeApi<BladeController<View>>;
+}

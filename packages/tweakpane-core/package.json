@@ -34,7 +34,8 @@
 		"test:ts:dynamic:inspect": "TS_NODE_PROJECT=\"src/tsconfig-cjs.json\" mocha --require ts-node/register \"src/**/*-test.ts\" --inspect-brk",
 		"test:ts:static": "eslint --ext .ts \"src/**/*.ts\"",
 		"watch": "run-p watch:*",
-		"watch:ts": "onchange --initial --kill \"src/**/*.ts\" -- npm run build:ts"
+		"watch:ts": "onchange --initial --kill \"src/**/*.ts\" -- pnpm run build:ts",
+		"setup:core": "pnpm install && pnpm run build"
 	},
 	"devDependencies": {
 		"@types/assert": "^1.5.4",
@@ -61,6 +62,6 @@
 		"sass": "^1.49.9",
 		"ts-node": "^7.0.1",
 		"tslib": "^2.1.0",
-		"typescript": "^4.1.5"
+		"typescript": "^4.2.3"
 	}
 }

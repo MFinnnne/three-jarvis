@@ -1,0 +1,10 @@
+import { BindingWriter } from '../../../common/binding/binding';
+import { BindingTarget } from '../../../common/binding/target';
+import { StringColorFormat } from '../converter/color-string';
+import { Color } from '../model/color';
+import { ColorType } from '../model/color-model';
+export declare function createColorStringWriter(format: StringColorFormat): BindingWriter<Color> | null;
+export declare function createColorNumberWriter(supportsAlpha: boolean): BindingWriter<Color>;
+export declare function writeRgbaColorObject(target: BindingTarget, value: Color, opt_type?: ColorType): void;
+export declare function writeRgbColorObject(target: BindingTarget, value: Color, opt_type?: ColorType): void;
+export declare function createColorObjectWriter(supportsAlpha: boolean, opt_type?: ColorType): BindingWriter<Color>;

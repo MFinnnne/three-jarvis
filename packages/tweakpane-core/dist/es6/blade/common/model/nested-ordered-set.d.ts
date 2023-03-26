@@ -1,0 +1,32 @@
+import { Emitter } from '../../../common/model/emitter';
+export interface NestedOrderedSetEvents<T> {
+    add: {
+        index: number;
+        item: T;
+        root: NestedOrderedSet<T>;
+        target: NestedOrderedSet<T>;
+    };
+    remove: {
+        index: number;
+        item: T;
+        root: NestedOrderedSet<T>;
+        target: NestedOrderedSet<T>;
+    };
+}
+declare type Extractor<T> = (item: T) => NestedOrderedSet<T> | null;
+export declare class NestedOrderedSet<T> {
+    readonly emitter: Emitter<NestedOrderedSetEvents<T>>;
+    private readonly items_;
+    private readonly cache_;
+    private readonly extract_;
+    constructor(extract: Extractor<T>);
+    get items(): T[];
+    allItems(): T[];
+    find(callback: (item: T) => boolean): T | null;
+    includes(item: T): boolean;
+    add(item: T, opt_index?: number): void;
+    remove(item: T): void;
+    private onSubListAdd_;
+    private onSubListRemove_;
+}
+export {};
