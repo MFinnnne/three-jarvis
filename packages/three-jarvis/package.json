@@ -74,7 +74,7 @@
 	"dependencies": {
 		"@0b5vr/tweakpane-plugin-rotation": "^0.1.1",
 		"@right-menu/core": "0.0.7",
-		"@tweakpane/core": "^1.0.9",
+		"my-tweakpane": "workspace:^1.0.0",
 		"@tweakpane/plugin-essentials": "^0.1.5",
 		"@types/toastify-js": "^1.11.1",
 		"dayjs": "^1.11.7",

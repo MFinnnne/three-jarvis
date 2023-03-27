@@ -1,12 +1,11 @@
 {
 	"name": "my-tweakpane",
-	"version": "3.1.4",
-	"description": "A compact pane for fine-tuning parameters and monitoring value changes",
-	"author": "cocopon",
+	"version": "1.0.0",
+	"description": "fork by https://cocopon.github.io/tweakpane/",
+	"author": "mfine",
 	"license": "MIT",
-	"homepage": "https://cocopon.github.io/tweakpane/",
-	"main": "dist/tweakpane.js",
-	"types": "dist/types/index.d.ts",
+	"main": "docs/assets/tweakpane.js",
+	"types": "dist/types/mainn/ts/index.d.ts",
 	"prettier": "./prettier.config.js",
 	"repository": {
 		"type": "git",

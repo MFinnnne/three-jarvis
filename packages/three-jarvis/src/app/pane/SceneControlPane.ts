@@ -1,24 +1,24 @@
 import ObjectControlPane from './ObjectControlPane';
-import { Pane } from 'tweakpane';
-import { Object3D, Scene } from 'three';
+import {Pane} from 'my-tweakpane';
+import {Object3D, Scene} from 'three';
 import General from '../../core/General';
 
 export default class SceneControlPane extends ObjectControlPane {
-    object!: Scene;
+	object!: Scene;
 
-    constructor(general: General) {
-        super(general);
-    }
+	constructor(general: General) {
+		super(general);
+	}
 
-    genPane(argument: Object3D): Pane {
-        const pane = super.genPane(argument);
-        this.object = argument as Scene;
-        pane.title = 'scene';
+	genPane(argument: Object3D): Pane {
+		const pane = super.genPane(argument);
+		this.object = argument as Scene;
+		pane.title = 'scene';
 
-        return pane;
-    }
+		return pane;
+	}
 
-    update() {
-        super.update();
-    }
+	update() {
+		super.update();
+	}
 }

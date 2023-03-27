@@ -17,7 +17,6 @@ importers:
       '@rollup/plugin-commonjs': ^21.1.0
       '@rollup/plugin-node-resolve': ~15.0.1
       '@rollup/plugin-replace': ~5.0.2
-      '@tweakpane/core': ^1.0.9
       '@tweakpane/plugin-essentials': ^0.1.5
       '@types/node': ~18.14.2
       '@types/three': ^0.138.0
@@ -31,6 +30,7 @@ importers:
       eslint: ^8.16.0
       eslint-config-prettier: ^8.5.0
       million: ^1.8.8
+      my-tweakpane: workspace:^1.0.0
       nanoevents: ^6.0.2
       nanoid: ^3.3.4
       npm-run-all: ~4.1.5
@@ -60,12 +60,12 @@ importers:
     dependencies:
       '@0b5vr/tweakpane-plugin-rotation': 0.1.1_tweakpane@3.1.4
       '@right-menu/core': 0.0.7
-      '@tweakpane/core': 1.1.4
       '@tweakpane/plugin-essentials': 0.1.8_tweakpane@3.1.4
       '@types/toastify-js': 1.11.1
       dayjs: 1.11.7
       dexie: 3.2.3
       million: 1.12.5
+      my-tweakpane: link:../tweakpane
       nanoevents: 6.0.2
       npm-run-all: 4.1.5
       onchange: 7.1.0
@@ -1834,10 +1834,6 @@ packages:
 
   /@tsconfig/node16/1.0.3:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
-    dev: false
-
-  /@tweakpane/core/1.1.4:
-    resolution: {integrity: sha512-Z0l5U7IYnLjSzK6PWohEaxqZDV99saa3dymXd5ymw9zrVuVvVzcvK/2TzgyN+suWOIH0DaMzOeLU935qBmUV+w==}
     dev: false
 
   /@tweakpane/plugin-essentials/0.1.8_tweakpane@3.1.4:
