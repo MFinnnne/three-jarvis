@@ -1,0 +1,81 @@
+@use './defs';
+
+:root {
+	--bg-color: white;
+	--bg-color-translucent: #{rgba(white, 0.9)};
+	--bg-color-secondary: #{hsl(defs.$base-hue, 7%, 95%)};
+	--bg-color-secondary-action: #{hsl(defs.$base-hue, 7%, 93%)};
+	--fg-color: #{hsl(defs.$base-hue, 5%, 35%)};
+	--fg-color-action: #{hsla(defs.$base-hue, 5%, 35%, 0.8)};
+	--fg-color-secondary: #{hsla(defs.$base-hue, 5%, 35%, 0.7)};
+
+	--a-color: #{hsl(defs.$base-hue - 10, 50%, 50%)};
+	--code-color: #{hsl(defs.$base-hue, 20%, 50%)};
+	--guide-color-comps: #{defs.$base-hue, 20%, 15%};
+	--heading-color: #{hsl(defs.$base-hue, 5%, 20%)};
+
+	--hl-comment: #{hsl(defs.$base-hue, 7%, 60%)};
+	--hl-keyword: #{hsl(225, 40%, 47%)};
+	--hl-constant: #{hsl(340, 35%, 55%)};
+	--hl-string: #{hsl(defs.$base-hue, 15%, 50%)};
+
+	@media (prefers-color-scheme: dark) {
+		--bg-color: #{hsl(defs.$base-hue, 5%, 10%)};
+		--bg-color-translucent: #{rgba(black, 0.9)};
+		--bg-color-secondary: #{hsl(defs.$base-hue, 5%, 12%)};
+		--bg-color-secondary-action: #{hsl(defs.$base-hue, 5%, 14%)};
+		--fg-color: #{hsl(defs.$base-hue, 5%, 60%)};
+		--fg-color-action: #{hsl(defs.$base-hue, 5%, 65%)};
+		--fg-color-secondary: #{hsla(defs.$base-hue, 5%, 60%, 0.8)};
+
+		--a-color: #{hsl(defs.$base-hue - 10, 25%, 55%)};
+		--code-color: #{hsl(170, 25%, 55%)};
+		--guide-color-comps: #{defs.$base-hue, 5%, 80%};
+		--heading-color: #{hsl(defs.$base-hue, 5%, 70%)};
+
+		--hl-comment: #{hsl(defs.$base-hue, 7%, 40%)};
+		--hl-keyword: #{hsl(220, 25%, 55%)};
+		--hl-constant: #{hsl(340, 15%, 55%)};
+		--hl-string: #{hsl(170, 12%, 50%)};
+	}
+}
+
+html {
+	color: var(--fg-color);
+	font-family: defs.$font-family;
+	font-size: 16px;
+}
+body {
+	background-color: var(--bg-color);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--heading-color);
+	font-weight: 500;
+	letter-spacing: 0.01em;
+
+	a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+code {
+	font-family: defs.$font-family-mono;
+}
+pre {
+	font-family: defs.$font-family-mono;
+}
+strong {
+	color: var(---heading-color);
+}
+
+:root .tp-dfwv {
+	top: (defs.$global-header-height + 8px);
+}

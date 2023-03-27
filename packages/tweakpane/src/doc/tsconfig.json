@@ -1,0 +1,11 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"esModuleInterop": true,
+		"moduleResolution": "Node",
+		"paths": {
+			"tweakpane": ["../main/ts/index"]
+		}
+	}
+}

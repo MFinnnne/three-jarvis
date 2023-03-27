@@ -1,0 +1,130 @@
+{% set pageId = 'plugin' %} {% set root = '../' %} {% set title = 'Plugins' %}
+{% extends "_template.html" %} {% block pageHeader %}
+<div class="pageHeader">
+	<div class="pageHeader_sketchContainer"></div>
+	<div class="pageHeader_inner">
+		<div class="pageHeader_text">
+			<h1 class="pageHeader_title">{{ title }}</h1>
+			<p>Expand Tweakpane world.</p>
+		</div>
+	</div>
+</div>
+{% endblock %} {% block content %}
+<h2 id="essentials">
+	<a href="https://github.com/tweakpane/plugin-essentials">Essentials</a>
+</h2>
+<p>Essential components.</p>
+<div class="main_media">
+	<div class="demo">
+		<div class="demo_code">
+			<div class="codeBlock">
+				<pre><code class="js">const PARAMS = {
+  interval: {min: 16, max: 48},
+};
+
+// Interval
+pane.addInput(PARAMS, 'interval', {
+  min: 0,
+  max: 100,
+  step: 1,
+});
+
+// ...
+
+// FPS graph
+const fpsGraph = pane.addBlade({
+  view: 'fpsgraph',
+  label: 'fpsgraph',
+});
+
+function render() {
+  fpsGraph.begin();
+
+  // Rendering
+
+  fpsGraph.end();
+}
+
+// ...</code></pre>
+			</div>
+		</div>
+		<div class="demo_result">
+			<div class="paneContainer" data-pane-essentials></div>
+		</div>
+	</div>
+</div>
+
+<h2 id="camerakit">
+	<a href="https://github.com/tweakpane/plugin-camerakit">Camerakit</a>
+</h2>
+<p>Enjoyable camera flavored controls.</p>
+<div class="main_media">
+	<div class="demo">
+		<div class="demo_code">
+			<div class="codeBlock">
+				<pre><code class="js">const PARAMS = {
+  flen: 55,
+  fnum: 1.8,
+  iso: 100,
+};
+
+// ...
+
+pane.addInput(PARAMS, 'fnum', {
+  // Use a ring view of Camerakit
+  view: 'cameraring',
+  // Appearance of the ring
+  series: 1,
+  // Configuration of the scale unit
+  unit: {ticks: 10, pixels: 40, value: 0.2},
+  // Hide a text input and widen the ring
+  wide: true,
+  // Number constraints
+  min: 1.4,
+  step: 0.02,
+});
+
+// ...</code></pre>
+			</div>
+		</div>
+		<div class="demo_result">
+			<div class="paneContainer" data-pane-camerakit></div>
+		</div>
+	</div>
+</div>
+
+<h2 id="3rdparty">Find 3rd party plugins</h2>
+<p>
+	<a href="https://github.com/topics/tweakpane">#tweakpane</a> topic on GitHub
+	may be useful to search 3rd party plugins.
+</p>
+
+<h2 id="create">Create your own plugin</h2>
+<p>
+	From version 2.0.0, you can provide custom components with the plugin system.
+</p>
+
+<div class="main_media">
+	<div class="demo">
+		<div class="demo_code">
+			<div class="codeBlock">
+				<pre><code class="js">pane.registerPlugin({
+  plugin: {
+    ...
+  },
+});</code></pre>
+			</div>
+		</div>
+		<div class="demo_chip">.js</div>
+	</div>
+</div>
+
+<p>
+	See the
+	<a href="https://github.com/tweakpane/plugin-template">template repository</a>
+	for details.
+</p>
+{% endblock %} {% block pluginScripts %}
+<script src="https://cdn.jsdelivr.net/npm/@tweakpane/plugin-essentials@0.1.0/dist/tweakpane-plugin-essentials.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tweakpane/plugin-camerakit@0.2.0/dist/tweakpane-plugin-camerakit.min.js"></script>
+{% endblock %}

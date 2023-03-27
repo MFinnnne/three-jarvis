@@ -1,0 +1,7 @@
+.#{$prefix}-pndtxtv {
+	@extend %texts;
+
+	&_a {
+		@extend %texts_item;
+	}
+}

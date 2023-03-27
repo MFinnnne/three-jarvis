@@ -1,0 +1,15 @@
+$prefix: 'hljs';
+
+.#{$prefix}-comment {
+	color: var(--hl-comment);
+}
+.#{$prefix}-keyword {
+	color: var(--hl-keyword);
+}
+.#{$prefix}-literal,
+.#{$prefix}-number {
+	color: var(--hl-constant);
+}
+.#{$prefix}-string {
+	color: var(--hl-string);
+}

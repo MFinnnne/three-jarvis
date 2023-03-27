@@ -1,0 +1,81 @@
+@use '../defs';
+
+.main {
+	overflow: hidden;
+
+	&_globalHeader {
+		@include defs.wide() {
+			display: none;
+		}
+		@include defs.nonwide() {
+			height: defs.$global-header-height;
+		}
+	}
+	&_wrap {
+		@include defs.responsiveContainer();
+
+		@include defs.wide() {
+			display: flex;
+			margin-top: 32px;
+		}
+	}
+	&_menu {
+		@include defs.wide() {
+			margin-right: 32px;
+			width: defs.$global-nav-width;
+		}
+		@include defs.nonwide() {
+			margin-right: 0;
+			width: 0;
+		}
+	}
+	&_main {
+		flex: 1;
+
+		@include defs.wide() {
+			left: defs.$global-nav-width;
+			overflow: hidden;
+			top: 0;
+		}
+		@include defs.nonwide() {
+			left: 0;
+			top: defs.$global-header-height;
+		}
+	}
+	&_pageHeader,
+	&_inner {
+		@include defs.document();
+
+		flex: 1;
+
+		h1 + p {
+			margin-top: 1em;
+			padding-left: 0.1em;
+			padding-right: 0.1em;
+		}
+	}
+	&_pageHeader {
+		@include defs.middle() {
+			margin-left: -32px;
+			margin-right: -32px;
+		}
+		@include defs.narrow() {
+			margin-left: -16px;
+			margin-right: -16px;
+		}
+	}
+	&_inner {
+		@include defs.wide() {
+			padding-bottom: 64px;
+			padding-top: 64px;
+		}
+		@include defs.nonwide() {
+			padding-bottom: 32px;
+			padding-top: 32px;
+		}
+	}
+	&_media {
+		margin-bottom: 1em;
+		margin-top: 1em;
+	}
+}
