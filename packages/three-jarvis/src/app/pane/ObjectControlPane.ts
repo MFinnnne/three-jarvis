@@ -1,16 +1,14 @@
-import {BladeApi, ButtonApi, Pane, TabPageApi} from 'my-tweakpane';
+import {ButtonApi, InputBindingApi, Pane, Point3d, TabPageApi} from 'my-tweakpane';
 import {Euler, Object3D, Quaternion, Vector3} from 'three';
-import DefaultControlPane from './DefaultControlPane';
 import SetPositionCommand from '../../core/commands/SetPositionCommand';
+import SetQuaternionCommand from '../../core/commands/SetQuaternionCommand';
 import SetRotationCommand from '../../core/commands/SetRotationCommand';
 import SetScaleCommand from '../../core/commands/SetScaleCommand';
-import SetQuaternionCommand from '../../core/commands/SetQuaternionCommand';
-import {Point3d} from 'my-tweakpane';
-import Utils from '../../util/Utils';
-import Prompt from '../Prompt';
-import {TpButtonGridEvent} from '@tweakpane/plugin-essentials/dist/types/button-grid/api/tp-button-grid-event';
 import General from '../../core/General';
 import ObjectChanged from '../../core/ObjectChanged';
+import Utils from '../../util/Utils';
+import Prompt from '../Prompt';
+import DefaultControlPane from './DefaultControlPane';
 
 export default class ObjectControlPane extends DefaultControlPane {
 	protected objectPane?: TabPageApi;
@@ -87,7 +85,7 @@ export default class ObjectControlPane extends DefaultControlPane {
 			label: 'control',
 		}) as ButtonApi;
 		controlsGridPane.on('click', (ev) => {
-			const tpEvent = ev as TpButtonGridEvent;
+			const tpEvent = ev as any;
 			if (tpEvent.index[0] === 0) {
 				// rotate
 				this.general.transformControl.setMode('rotate');
@@ -106,10 +104,6 @@ export default class ObjectControlPane extends DefaultControlPane {
 		this.materialPane = tab.pages[2];
 		let isFirstPotion = false;
 		const positionBind = this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
-			if (this.general.transformControl.dragging) {
-				return;
-			}
-
 			const {x, y, z} = ev.value;
 			if (!isFirstPotion) {
 				isFirstPotion = true;
@@ -128,9 +122,6 @@ export default class ObjectControlPane extends DefaultControlPane {
 		this.bindMap.set('position', positionBind);
 		let isFirstScale: boolean = false;
 		const scaleBind = this.objectPane.addInput(PARAMS, 'scale').on('change', (ev) => {
-			if (this.general.transformControl.dragging) {
-				return;
-			}
 			const {x, y, z} = ev.value;
 			if (!isFirstScale) {
 				this.general.recorder.execute(new SetScaleCommand(object, this.object!.scale));
@@ -213,7 +204,7 @@ export default class ObjectControlPane extends DefaultControlPane {
 	}
 
 	update() {
-		this.bindMap.forEach((v: BladeApi<any>, k: string) => {
+		this.bindMap.forEach((v: InputBindingApi<any, any>, k: string) => {
 			if (this.object === undefined) {
 				Prompt.eject('the pane is not associated with any object');
 				return;
@@ -221,22 +212,22 @@ export default class ObjectControlPane extends DefaultControlPane {
 			switch (k) {
 				case 'position': {
 					const position: Vector3 = this.object.position;
-					v.controller_.binding.value.rawValue = new Point3d(position.x, position.y, position.z);
+					v.setValue(new Point3d(position.x, position.y, position.z), false);
 					break;
 				}
 				case 'rotation': {
 					const euler: Euler = this.object.rotation;
-					v.controller_.binding.value.rawValue = new Point3d(euler.x, euler.y, euler.z);
+					v.setValue(new Point3d(euler.x, euler.y, euler.z), false);
 					break;
 				}
 				case 'scale': {
 					const scale: Vector3 = this.object.scale;
-					v.controller_.binding.value.rawValue = new Point3d(scale.x, scale.y, scale.z);
+					v.setValue(new Point3d(scale.x, scale.y, scale.z), false);
 					break;
 				}
 				case 'quat': {
 					const quat: Quaternion = this.object.quaternion;
-					v.controller_.binding.value.rawValue = new Quaternion(quat.x, quat.y, quat.z, quat.w);
+					v.setValue(new Quaternion(quat.x, quat.y, quat.z, quat.w), false);
 					break;
 				}
 				default:

@@ -5,7 +5,7 @@
 	"author": "mfine",
 	"license": "MIT",
 	"main": "docs/assets/tweakpane.js",
-	"types": "dist/types/mainn/ts/index.d.ts",
+	"types": "dist/types/main/ts/index.d.ts",
 	"prettier": "./prettier.config.js",
 	"repository": {
 		"type": "git",
