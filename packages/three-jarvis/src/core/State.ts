@@ -1,42 +1,72 @@
-import { Camera, Object3D, PerspectiveCamera } from 'three';
+import {Camera, Object3D, PerspectiveCamera} from 'three';
+import CameraControlPane from '../app/pane/CameraControlPane';
+import DefaultControlPane, {ControlPane} from '../app/pane/DefaultControlPane';
+import DirectionalLightControlPane from '../app/pane/DirectionalLightControlPane';
+import HemisphereLightControlPane from '../app/pane/HemisphereLightControlPane';
+import ObjectControlPane from '../app/pane/ObjectControlPane';
+import PointLightControlPane from '../app/pane/PointLightControlPane';
+import General from './General';
 
 export default class State {
-    private _selectedObject: Object3D = new Object3D();
-    private _selectedObjectDom: HTMLElement = document.createElement('div');
-    private _activeCamera: Camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+	private _selectedObject: Object3D = new Object3D();
+	private _selectedObjectDom: HTMLElement = document.createElement('div');
+	private _activeCamera: Camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+	private paneMap = new Map<string, () => ControlPane>();
 
-    constructor() {}
+	constructor(general: General) {
+		this.paneMap.set('Sprite', () => new ObjectControlPane(general));
+		this.paneMap.set('Points', () => new ObjectControlPane(general));
+		this.paneMap.set('Group', () => new ObjectControlPane(general));
+		this.paneMap.set('Object3D', () => new ObjectControlPane(general));
+		this.paneMap.set('Mesh', () => new ObjectControlPane(general));
 
-    get activeCamera(): Camera {
-        return this._activeCamera;
-    }
+		this.paneMap.set('PointLightHelper', () => new ObjectControlPane(general));
+		this.paneMap.set('HemisphereLight', () => new HemisphereLightControlPane(general));
+		this.paneMap.set('PointLight', () => new PointLightControlPane(general));
+		this.paneMap.set('DirectionalLight', () => new DirectionalLightControlPane(general));
+		this.paneMap.set('PerspectiveCamera', () => new CameraControlPane(general));
+	}
 
-    set activeCamera(value: Camera) {
-        this._activeCamera = value;
-        if (this._activeCamera instanceof PerspectiveCamera) {
-            this._activeCamera.updateProjectionMatrix();
-        }
-    }
+	get activeCamera(): Camera {
+		return this._activeCamera;
+	}
 
-    get selectedObjectDom(): HTMLElement | null {
-        return this._selectedObjectDom;
-    }
+	set activeCamera(value: Camera) {
+		this._activeCamera = value;
+		if (this._activeCamera instanceof PerspectiveCamera) {
+			this._activeCamera.updateProjectionMatrix();
+		}
+	}
 
-    set selectedObjectDom(value: HTMLElement | null) {
-        if (value == null) {
-            this._selectedObjectDom = document.createElement('div');
-            return;
-        }
-        this._selectedObjectDom.classList.toggle('selected');
-        this._selectedObjectDom = value;
-        this._selectedObjectDom.classList.toggle('selected');
-    }
+	get selectedObjectDom(): HTMLElement | null {
+		return this._selectedObjectDom;
+	}
 
-    get selectedObject(): Object3D {
-        return this._selectedObject;
-    }
+	set selectedObjectDom(value: HTMLElement | null) {
+		if (value == null) {
+			this._selectedObjectDom = document.createElement('div');
+			return;
+		}
+		this._selectedObjectDom.classList.toggle('selected');
+		this._selectedObjectDom = value;
+		this._selectedObjectDom.classList.toggle('selected');
+	}
 
-    set selectedObject(value: Object3D) {
-        this._selectedObject = value;
-    }
+	get selectedObject(): Object3D {
+		return this._selectedObject;
+	}
+
+	set selectedObject(obj: Object3D) {
+		if (!obj.userData.controlPane) {
+			this._selectedObject.userData.controlPane = this.paneMap.get(this._selectedObject.type)?.apply(null);
+		}
+		console.log('new selected object: ', obj);
+		console.log('old selected object: ', this._selectedObject);
+		this._selectedObject?.userData.pane?.dispose();
+		this._selectedObject = obj;
+		this._selectedObject.userData.pane = obj.userData.controlPane?.genPane(this._selectedObject);
+		if (this._selectedObject.userData.controlPane === undefined) {
+			console.log(`${obj.type} pane is not supported`);
+		}
+	}
 }

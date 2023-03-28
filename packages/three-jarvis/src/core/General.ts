@@ -1,16 +1,14 @@
-import {HemisphereLight, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import dayjs from 'dayjs';
+import {HemisphereLight, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
-import State from './State';
-import Recorder from './Recorder';
 import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
-import PaneManager from './PaneManager';
-import objectChanged from './ObjectChanged';
 import SetPositionCommand from './commands/SetPositionCommand';
-import SetQuaternionCommand from './commands/SetQuaternionCommand';
-import SetScaleCommand from './commands/SetScaleCommand';
 import SetRotationCommand from './commands/SetRotationCommand';
+import SetScaleCommand from './commands/SetScaleCommand';
+import objectChanged from './ObjectChanged';
+import Recorder from './Recorder';
+import State from './State';
 
 export default abstract class General {
 	protected _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
@@ -104,7 +102,7 @@ export default abstract class General {
 		}
 		OBJECT_TREE_BLACK_LIST.push(transformControl.uuid);
 		transformControl.addEventListener('objectChange', (e) => {
-			transformControl.object?.userData.pane?.update();
+			transformControl.object?.userData.controlPane?.update();
 			objectChanged.getInstance().update();
 		});
 		transformControl.addEventListener('mouseDown', (e) => {
