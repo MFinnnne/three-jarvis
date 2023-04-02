@@ -235,4 +235,8 @@ export default class ObjectControlPane extends DefaultControlPane {
 			}
 		});
 	}
+
+	remove(): void {
+		this.pane.dispose();
+	}
 }

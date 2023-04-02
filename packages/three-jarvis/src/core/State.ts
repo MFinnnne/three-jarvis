@@ -57,14 +57,13 @@ export default class State {
 	}
 
 	set selectedObject(obj: Object3D) {
-		if (!obj.userData.controlPane) {
-			this._selectedObject.userData.controlPane = this.paneMap.get(this._selectedObject.type)?.apply(null);
+		if (obj.uuid === this._selectedObject.uuid) {
+			return;
 		}
-		console.log('new selected object: ', obj);
-		console.log('old selected object: ', this._selectedObject);
-		this._selectedObject?.userData.pane?.dispose();
+		this._selectedObject?.userData.controlPane?.remove();
 		this._selectedObject = obj;
-		this._selectedObject.userData.pane = obj.userData.controlPane?.genPane(this._selectedObject);
+		this._selectedObject.userData.controlPane = this.paneMap.get(this._selectedObject.type)?.apply(null);
+		this._selectedObject.userData.controlPane.genPane(this._selectedObject);
 		if (this._selectedObject.userData.controlPane === undefined) {
 			console.log(`${obj.type} pane is not supported`);
 		}

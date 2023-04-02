@@ -59,6 +59,7 @@ export default async () => {
 			banner: `/*! Tweakpane ${Package.version} (c) 2016 cocopon, licensed under the MIT license. */`,
 			file: `docs/assets/tweakpane${postfix}.js`,
 			format: 'umd',
+			sourceMap: true,
 			name: 'Tweakpane',
 		},
 		plugins: getPlugins(css, production),

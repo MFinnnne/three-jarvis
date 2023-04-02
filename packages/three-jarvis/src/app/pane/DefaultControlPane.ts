@@ -23,7 +23,6 @@ export default class DefaultControlPane implements ControlPane {
 	genPane(argument?: Object3D | Camera | WebGLRenderer): Pane {
 		this.pane.registerPlugin(TweakpaneRotationInputPlugin);
 		this.pane.registerPlugin(EssentialsPlugin);
-
 		return this.pane;
 	}
 
@@ -31,5 +30,9 @@ export default class DefaultControlPane implements ControlPane {
 
 	get bindMap(): Map<string, InputBindingApi<any, any>> {
 		return this._bindMap;
+	}
+
+	remove() {
+		this.pane.dispose();
 	}
 }

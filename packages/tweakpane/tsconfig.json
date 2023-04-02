@@ -5,6 +5,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"esModuleInterop": true,
+		"sourceMap": true,
 		"strict": true,
 		"target": "ES6"
 	}
