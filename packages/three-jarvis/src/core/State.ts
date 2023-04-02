@@ -63,9 +63,10 @@ export default class State {
 		this._selectedObject?.userData.controlPane?.remove();
 		this._selectedObject = obj;
 		this._selectedObject.userData.controlPane = this.paneMap.get(this._selectedObject.type)?.apply(null);
-		this._selectedObject.userData.controlPane.genPane(this._selectedObject);
 		if (this._selectedObject.userData.controlPane === undefined) {
 			console.log(`${obj.type} pane is not supported`);
+		} else {
+			this._selectedObject.userData.controlPane.genPane(this._selectedObject);
 		}
 	}
 }
