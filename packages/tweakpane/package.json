@@ -5,7 +5,7 @@
 	"author": "mfine",
 	"license": "MIT",
 	"main": "docs/assets/tweakpane.js",
-	"types": "dist/types/mainn/ts/index.d.ts",
+	"types": "dist/types/main/ts/index.d.ts",
 	"prettier": "./prettier.config.js",
 	"repository": {
 		"type": "git",
@@ -28,7 +28,8 @@
 		"assets:dist": "mkdirp dist && cp docs/assets/tweakpane*.js dist",
 		"assets:version": "node scripts/assets-version.js",
 		"assets:zip": "zip -x \"*types*\" -j -r tweakpane-$(cat package.json | npx json version).zip dist",
-		"build": "run-s main:build doc:build",
+		"build:all": "run-s main:build doc:build",
+		"build": "run-s main:build",
 		"clean": "rimraf .nyc_output dist docs test tweakpane-*.tgz tweakpane-*.zip test-module/node_modules",
 		"coverage": "nyc --reporter=none --extension \".ts\" --exclude \"**/*-test.ts\" npm run main:test:ts:dynamic",
 		"format": "run-p main:format doc:format",

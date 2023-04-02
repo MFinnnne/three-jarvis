@@ -12,14 +12,14 @@ export default {
 			format: 'esm',
 			name,
 			exports: 'auto',
-			sourcemap: false,
+			sourcemap: true,
 		},
 		{
 			file: `dist/${name}.cjs.js`,
 			format: 'cjs',
 			exports: 'auto',
 			name,
-			sourcemap: false,
+			sourcemap: true,
 		},
 	],
 	plugins: [

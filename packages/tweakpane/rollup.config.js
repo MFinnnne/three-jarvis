@@ -31,7 +31,7 @@ function getPlugins(css, shouldMinify) {
 		}),
 		Replace({
 			__css__: css,
-			'3.14.16': Package.version,
+			'1.0.0': Package.version,
 			preventAssignment: true,
 		}),
 	];
@@ -59,6 +59,7 @@ export default async () => {
 			banner: `/*! Tweakpane ${Package.version} (c) 2016 cocopon, licensed under the MIT license. */`,
 			file: `docs/assets/tweakpane${postfix}.js`,
 			format: 'umd',
+			sourceMap: true,
 			name: 'Tweakpane',
 		},
 		plugins: getPlugins(css, production),

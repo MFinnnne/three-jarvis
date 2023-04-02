@@ -18,5 +18,5 @@
 			$checkerboard-color-dark 75%
 		);
 	background-size: $size $size;
-	background-position: 0 0, ($size / 2) ($size / 2);
+	background-position: 0 0, calc($size / 2);
 }

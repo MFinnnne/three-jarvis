@@ -14,7 +14,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"module": "ESNext",
 		"experimentalDecorators": true,
-		"sourceMap": false,
+		"sourceMap": true,
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": false
