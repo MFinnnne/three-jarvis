@@ -105,10 +105,17 @@ export default abstract class General {
 			transformControl.object?.userData.controlPane?.update();
 			objectChanged.getInstance().update();
 		});
+
+		transformControl.addEventListener('change', (e) => {
+			transformControl.object?.userData.helper?.update();
+		});
+
 		transformControl.addEventListener('mouseDown', (e) => {
+			console.log('mouse down');
 			this.control.enabled = false;
 			this.recordByTransformControl(transformControl);
 		});
+
 		transformControl.addEventListener('mouseUp', (e) => {
 			this.control.enabled = true;
 		});
