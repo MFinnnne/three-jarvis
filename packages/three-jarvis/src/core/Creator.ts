@@ -1,16 +1,15 @@
-import {BoxGeometry, FileLoader, GridHelper, Mesh, MeshBasicMaterial, Object3D, ObjectLoader, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
+import {BoxGeometry, Clock, FileLoader, GridHelper, Mesh, MeshBasicMaterial, Object3D, ObjectLoader, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import GUI from '../app/GUI';
 import MonitorControlPane from '../app/pane/MonitorControlPane';
-import RenderControlPane from '../app/pane/RenderControlPane';
 import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
-import {rayCasterEvents} from './events/ObjectEvents';
 import General from './General';
-import sceneDB, {SceneEntity} from './mapper/SceneDB';
 import ObjectChanged from './ObjectChanged';
 import ObjectObserver from './ObjectObserver';
 import Recorder from './Recorder';
 import State from './State';
+import {rayCasterEvents} from './events/ObjectEvents';
+import sceneDB, {SceneEntity} from './mapper/SceneDB';
 
 type JarvisHook = {
 	afterRender?: () => void;
@@ -21,6 +20,8 @@ type JarvisHook = {
 
 export default class Creator extends General {
 	private _uuidSubMap: Map<string, ObjectObserver[]> = new Map();
+	private clock = new Clock();
+	private pane!: MonitorControlPane;
 
 	constructor(container: HTMLCanvasElement) {
 		super();
@@ -109,6 +110,7 @@ export default class Creator extends General {
 		this.initTransformControl();
 		this.scene.add(this.transformControl);
 		const gridHelper = new GridHelper(20, 20);
+		gridHelper.userData.isShow = false;
 		gridHelper.layers.set(3);
 		gridHelper.name = 'jarvis-grid-helper';
 		OBJECT_TREE_BLACK_LIST.push(gridHelper.uuid);
@@ -116,8 +118,9 @@ export default class Creator extends General {
 		this.onWindowResize();
 		GUI.guiContainerInit(this);
 		rayCasterEvents(this);
-		new MonitorControlPane(this).genPane();
-		new RenderControlPane(this).genPane(this.renderer);
+		this.pane = new MonitorControlPane(this);
+		this.pane.genPane();
+		// new RenderControlPane(this).genPane(this.renderer);
 	}
 
 	private onWindowResize() {
@@ -130,6 +133,8 @@ export default class Creator extends General {
 
 	private render() {
 		requestAnimationFrame(this.render.bind(this));
+		const delta = this.clock.getDelta();
+		this.fps = 1 / delta;
 		this.renderer.render(this.scene, this.state.activeCamera);
 	}
 
@@ -157,16 +162,11 @@ export default class Creator extends General {
 		this._camera = await loader.parseAsync(json.camera);
 		this.state.activeCamera = this.camera;
 		const scene = await loader.parseAsync(json.scene);
-		if (json.treeBlackList) {
-			for (const uuid of json.treeBlackList) {
-				const obj: Object3D | undefined = scene.getObjectByProperty('uuid', uuid);
-				if (obj) {
-					obj.removeFromParent();
-				}
+		scene.traverse((child) => {
+			if (child.userData.isShow === false) {
+				child.removeFromParent();
 			}
-			json.treeBlackList.length = 0;
-			OBJECT_TREE_BLACK_LIST.length = 0;
-		}
+		});
 		this.setScene(scene as Scene);
 	}
 
