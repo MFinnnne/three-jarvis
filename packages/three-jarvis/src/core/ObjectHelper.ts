@@ -54,10 +54,8 @@ export default class ObjectHelper {
 				throw new Error(`${obj.type} helper is gen error`);
 			}
 			obj.userData.helper = helper;
-			if (!OBJECT_TREE_BLACK_LIST.includes(helper.uuid)) {
-				OBJECT_TREE_BLACK_LIST.push(helper.uuid);
-			}
 			helper.visible = true;
+			helper.userData.isShow = false;
 			this.general.scene.add(helper);
 		}
 	}
@@ -73,7 +71,7 @@ export default class ObjectHelper {
 		highLightBox.layers.set(1);
 		highLightBox.name = 'BoxHelper_' + object.id;
 		highLightBox.setFromObject(object);
-		highLightBox.update(object);
+		highLightBox.update();
 		return highLightBox;
 	}
 

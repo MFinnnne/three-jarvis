@@ -91,6 +91,7 @@ export default abstract class General {
 
 	protected initTransformControl() {
 		const transformControl = new TransformControls(this.state.activeCamera, this.renderer.domElement);
+		transformControl.userData.isShow = false;
 		this._transformControl = transformControl;
 		this._transformControl.name = 'jarvis-transform-control';
 		transformControl.layers.set(1);
@@ -111,7 +112,6 @@ export default abstract class General {
 		});
 
 		transformControl.addEventListener('mouseDown', (e) => {
-			console.log('mouse down');
 			this.control.enabled = false;
 			this.recordByTransformControl(transformControl);
 		});

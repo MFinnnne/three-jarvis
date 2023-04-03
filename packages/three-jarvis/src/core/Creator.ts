@@ -109,6 +109,7 @@ export default class Creator extends General {
 		this.initTransformControl();
 		this.scene.add(this.transformControl);
 		const gridHelper = new GridHelper(20, 20);
+		gridHelper.userData.isShow = false;
 		gridHelper.layers.set(3);
 		gridHelper.name = 'jarvis-grid-helper';
 		OBJECT_TREE_BLACK_LIST.push(gridHelper.uuid);

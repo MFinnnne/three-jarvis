@@ -102,36 +102,26 @@ export default class ObjectControlPane extends DefaultControlPane {
 
 		this.geometryPane = tab.pages[1];
 		this.materialPane = tab.pages[2];
-		let isFirstPotion = false;
 		const positionBind = this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
 			const {x, y, z} = ev.value;
-			if (!isFirstPotion) {
-				isFirstPotion = true;
+			if (ev.before) {
 				this.general.recorder.execute(new SetPositionCommand(object, this.object!.position));
 			}
 			this.object?.position.set(x, y, z);
 			ObjectChanged.getInstance().update(this.object);
-			if (ev.last) {
-				isFirstPotion = false;
-			}
 		});
 		positionBind.controller_.view.labelElement.addEventListener('click', () => {
 			const value = positionBind.controller_.binding.value.rawValue as Point3d;
 			Utils.execCoy(`${value.x.toFixed(2)},${value.y.toFixed(2)},${value.z.toFixed(2)}`);
 		});
 		this.bindMap.set('position', positionBind);
-		let isFirstScale: boolean = false;
 		const scaleBind = this.objectPane.addInput(PARAMS, 'scale').on('change', (ev) => {
 			const {x, y, z} = ev.value;
-			if (!isFirstScale) {
+			if (ev.before) {
 				this.general.recorder.execute(new SetScaleCommand(object, this.object!.scale));
-				isFirstScale = true;
 			}
 			this.object?.scale.set(x, y, z);
 			ObjectChanged.getInstance().update(this.object);
-			if (ev.last) {
-				isFirstScale = false;
-			}
 		});
 
 		scaleBind.controller_.view.labelElement.addEventListener('click', () => {
@@ -141,7 +131,6 @@ export default class ObjectControlPane extends DefaultControlPane {
 		this.bindMap.set('scale', scaleBind);
 
 		// euler
-		let isFirstRotation = false;
 		const rotationBind = this.objectPane
 			.addInput(PARAMS, 'rotation', {
 				view: 'rotation',
@@ -155,16 +144,12 @@ export default class ObjectControlPane extends DefaultControlPane {
 				if (this.general.transformControl.dragging) {
 					return;
 				}
-				if (!isFirstRotation) {
+				if (e.before) {
 					this.general.recorder.execute(new SetRotationCommand(object, this.object!.rotation));
-					isFirstRotation = true;
 				}
 				const {x, y, z} = e.value;
 				this.object?.rotation.set(x, y, z);
 				ObjectChanged.getInstance().update(this.object);
-				if (e.last) {
-					isFirstRotation = false;
-				}
 			});
 		rotationBind.controller_.view.labelElement.addEventListener('click', () => {
 			const value = rotationBind.controller_.binding.value.rawValue as Euler;
@@ -173,7 +158,6 @@ export default class ObjectControlPane extends DefaultControlPane {
 		this.bindMap.set('rotation', rotationBind);
 
 		// quaternion
-		let isFirstQuat = false;
 		const quatBind = this.objectPane
 			.addInput(PARAMS, 'quat', {
 				view: 'rotation',
@@ -186,14 +170,11 @@ export default class ObjectControlPane extends DefaultControlPane {
 					return;
 				}
 				const {x, y, z, w} = e.value;
-				if (!isFirstQuat) {
+				if (e.before) {
 					this.general.recorder.execute(new SetQuaternionCommand(object, this.object!.quaternion));
 				}
 				this.object?.quaternion.set(x, y, z, w);
 				ObjectChanged.getInstance().update(this.object);
-				if (e.last) {
-					isFirstQuat = false;
-				}
 			});
 		quatBind.controller_.view.labelElement.addEventListener('click', () => {
 			const value = quatBind.controller_.binding.value.rawValue as Quaternion;
