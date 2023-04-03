@@ -28,6 +28,14 @@ export default abstract class General {
 	protected _paneContainer!: HTMLElement;
 
 	private _leftSideBarContainer!: HTMLElement;
+	private _fps = 0;
+
+	public get fps() {
+		return this._fps;
+	}
+	public set fps(value) {
+		this._fps = value;
+	}
 
 	get leftSideBarContainer(): HTMLElement {
 		return this._leftSideBarContainer;

@@ -3,6 +3,7 @@ import {Object3D} from 'three';
 import DefaultControlPane from './DefaultControlPane';
 
 import General from '../../core/General';
+import Creator from '../../core/Creator';
 
 export default class MonitorControlPane extends DefaultControlPane {
 	protected object?: Object3D;
@@ -25,7 +26,7 @@ export default class MonitorControlPane extends DefaultControlPane {
 		monitorFolder.addSeparator();
 		monitorFolder.addMonitor(info, 'render', {multiline: true, lineCount: 5}).on('update', () => {
 			const render = this.general.renderer.info.render;
-			info.render = `frame: ${render.frame}\ntriangles: ${render.triangles}\ncalls: ${render.calls}\npoints: ${render.points}\nlines: ${render.lines}`;
+			info.render = `frame: ${render.frame}\ntriangles: ${render.triangles}\ncalls: ${render.calls}\npoints: ${render.points}\nlines: ${render.lines}\nfps: ${this.general.fps.toFixed(0)}`;
 		});
 		monitorFolder.addSeparator();
 		monitorFolder.addMonitor(info, 'page', {multiline: true, lineCount: 3}).on('update', () => {
@@ -33,6 +34,19 @@ export default class MonitorControlPane extends DefaultControlPane {
 			info.page = `total: ${(memory.totalJSHeapSize / base).toFixed(2)}\nused: ${(memory.usedJSHeapSize / base).toFixed(2)}\nlimit: ${(memory.jsHeapSizeLimit / base).toFixed(2)}`;
 		});
 		monitorFolder.addSeparator();
+
+		const fps = {
+			wave: this.general.fps,
+		};
+		setInterval(() => {
+			fps.wave = this.general.fps > 60 ? 60 : this.general.fps;
+		}, 1000);
+		monitorFolder.addMonitor(fps, 'wave', {
+			label: 'fps',
+			view: 'graph',
+			min: 0,
+			max: 120,
+		});
 		return pane;
 	}
 }
