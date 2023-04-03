@@ -162,16 +162,11 @@ export default class Creator extends General {
 		this._camera = await loader.parseAsync(json.camera);
 		this.state.activeCamera = this.camera;
 		const scene = await loader.parseAsync(json.scene);
-		if (json.treeBlackList) {
-			for (const uuid of json.treeBlackList) {
-				const obj: Object3D | undefined = scene.getObjectByProperty('uuid', uuid);
-				if (obj) {
-					obj.removeFromParent();
-				}
+		scene.traverse((child) => {
+			if (child.userData.isShow === false) {
+				child.removeFromParent();
 			}
-			json.treeBlackList.length = 0;
-			OBJECT_TREE_BLACK_LIST.length = 0;
-		}
+		});
 		this.setScene(scene as Scene);
 	}
 
