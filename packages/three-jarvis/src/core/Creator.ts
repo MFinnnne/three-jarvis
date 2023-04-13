@@ -115,12 +115,11 @@ export default class Creator extends General {
 		gridHelper.name = 'jarvis-grid-helper';
 		OBJECT_TREE_BLACK_LIST.push(gridHelper.uuid);
 		this.scene.add(gridHelper);
-		this.onWindowResize();
 		GUI.guiContainerInit(this);
 		rayCasterEvents(this);
 		this.pane = new MonitorControlPane(this);
 		this.pane.genPane();
-		// new RenderControlPane(this).genPane(this.renderer);
+		this.onWindowResize();
 	}
 
 	private onWindowResize() {
