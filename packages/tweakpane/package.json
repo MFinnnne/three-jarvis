@@ -30,6 +30,7 @@
 		"assets:zip": "zip -x \"*types*\" -j -r tweakpane-$(cat package.json | npx json version).zip dist",
 		"build:all": "run-s main:build doc:build",
 		"build": "run-s main:build",
+		"build:watch": "run-s main:build",
 		"clean": "rimraf .nyc_output dist docs test tweakpane-*.tgz tweakpane-*.zip test-module/node_modules",
 		"coverage": "nyc --reporter=none --extension \".ts\" --exclude \"**/*-test.ts\" npm run main:test:ts:dynamic",
 		"format": "run-p main:format doc:format",

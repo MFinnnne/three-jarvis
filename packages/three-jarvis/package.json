@@ -20,6 +20,7 @@
 		"lint:fix": "eslint . --ext .ts --fix",
 		"format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
 		"build": "run-s clean build:type dev",
+		"build:watch": "run-s clean build:type dev",
 		"build:ts": "run-p build:ts:*",
 		"build:ts:cjs": "tsc --project ./tsconfig.cjs.json",
 		"build:ts:es6": "tsc --project ./tsconfig.es6.json",

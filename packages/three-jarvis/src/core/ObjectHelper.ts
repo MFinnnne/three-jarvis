@@ -1,24 +1,9 @@
-import {
-	BoxHelper,
-	Camera,
-	CameraHelper,
-	Color,
-	ColorRepresentation,
-	DirectionalLight,
-	DirectionalLightHelper,
-	HemisphereLight,
-	HemisphereLightHelper,
-	Object3D,
-	PointLight,
-	PointLightHelper,
-} from 'three';
+import {BoxHelper, Camera, CameraHelper, ColorRepresentation, DirectionalLight, DirectionalLightHelper, HemisphereLight, HemisphereLightHelper, Object3D, PointLight, PointLightHelper} from 'three';
 import Toast from '../app/Toast';
-import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 import General from './General';
 
 type helperFns = (object: Object3D, color?: ColorRepresentation) => Object3D | null;
 
-let highLightBox: BoxHelper | null = null;
 let lightHelper: PointLightHelper | HemisphereLightHelper | DirectionalLightHelper | null = null;
 let dLightHelper: DirectionalLightHelper | null = null;
 let hLightHelper: HemisphereLightHelper | null = null;
@@ -43,6 +28,10 @@ export default class ObjectHelper {
 	}
 
 	genHelper(obj: Object3D, color?: ColorRepresentation) {
+		if (obj.userData?.helper !== undefined) {
+			obj.userData.helper.visible = true;
+			return obj.userData.helper;
+		}
 		const helperFn = this.helperMap.get(obj.type);
 		if (helperFn === null || helperFn === undefined) {
 			Toast.show(`${obj.type} helper is not supported`);
@@ -61,13 +50,7 @@ export default class ObjectHelper {
 	}
 
 	private boxHelperFn(object, color = 0xffff00): Object3D | null {
-		if (highLightBox) {
-			highLightBox.visible = true;
-			highLightBox.setFromObject(object);
-			highLightBox.update();
-			return null;
-		}
-		highLightBox = new BoxHelper(object, color);
+		const highLightBox = new BoxHelper(object, color);
 		highLightBox.layers.set(1);
 		highLightBox.name = 'BoxHelper_' + object.id;
 		highLightBox.setFromObject(object);

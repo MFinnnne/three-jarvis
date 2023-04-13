@@ -72,3 +72,5 @@ common/autoinstallers/*/.npmrc
 # Heft temporary files
 .heft
 .vscode
+.rush
+dist
