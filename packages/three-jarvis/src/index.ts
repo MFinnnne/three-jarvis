@@ -1,3 +1,3 @@
-import ThreeJarvis from './Threejarvis';
+import ThreeJarvis from './core/Threejarvis';
 
-export { ThreeJarvis };
+export {ThreeJarvis};

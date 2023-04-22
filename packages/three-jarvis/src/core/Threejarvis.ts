@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-import Creator from './core/Creator';
-import Monitor from './core/Monitor';
-import './sass/full.scss';
+import Creator from './Creator';
+import Monitor from './Monitor';
+import '../sass/full.scss';
 
 export default class ThreeJarvis {
 	private static CONTAINER_ID_SET: Set<string> = new Set<string>();

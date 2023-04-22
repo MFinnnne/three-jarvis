@@ -35,6 +35,10 @@
 		{
 			"packageName": "my-tweakpane",
 			"projectFolder": "packages/tweakpane"
+		},
+		{
+			"packageName": "three-jarvis-doc",
+			"projectFolder": "doc"
 		}
 	]
 }

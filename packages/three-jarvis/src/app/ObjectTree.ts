@@ -1,10 +1,9 @@
 import {className, Flags, m, render, VElement, VNode} from 'million';
 import {Object3D} from 'three';
-import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
-import {rightMenu} from './RightMenu';
-import Ticker from '../core/Ticker';
 import {domClickEvent, domDoubleClickEvent} from '../core/events/DomEvents';
 import General from '../core/General';
+import Ticker from '../core/Ticker';
+import genMyRightMenu from './MyRightMenu';
 
 export default class ObjectTree {
 	private prevNode: VNode | undefined;
@@ -50,7 +49,7 @@ export default class ObjectTree {
 								(e.target as HTMLElement).classList.toggle('caretDown');
 							}
 							const target = e.target as HTMLElement;
-							rightMenu(target, this.general);
+							genMyRightMenu(target, this.general);
 							const uuid = target.id;
 
 							this.general.state.selectedObjectDom = target;
