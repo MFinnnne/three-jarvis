@@ -99,7 +99,11 @@ class SceneDB extends Dexie {
 				ts: dayjs().unix(),
 				updateTime: dayjs().format(),
 			};
-			await this.scene.add(res);
+			if (creator.onSave) {
+				creator.onSave(JSON.stringify(res));
+			} else {
+				await this.scene.add(res);
+			}
 		})
 			.then(() => {
 				console.info(`scene ${creator.container.id} store success`);
@@ -135,6 +139,10 @@ class SceneDB extends Dexie {
 			ts: dayjs().unix(),
 			updateTime: dayjs().format(),
 		};
+		if (creator.onUpdate) {
+			creator.onUpdate(JSON.stringify(res));
+			return;
+		}
 		this.scene
 			.where('id')
 			.equals(creator.container.id)

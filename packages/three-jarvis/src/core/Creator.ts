@@ -18,6 +18,13 @@ type JarvisHook = {
 	dataStore?: (content: string) => void;
 };
 
+type CustomPersistence = {
+	onSave: (json: String) => void;
+	onDelete: (obj: Object3D) => void;
+	onUpdate: (json: String) => void;
+	onLoad: () => String;
+};
+
 export default class Creator extends General {
 	private _uuidSubMap: Map<string, ObjectObserver[]> = new Map();
 	private clock = new Clock();
@@ -156,6 +163,14 @@ export default class Creator extends General {
 		};
 	}
 
+	public customPersistence(config: CustomPersistence): Creator {
+		this.onSave = config.onSave;
+		this.onDelte = config.onDelete;
+		this.onLoad = config.onLoad;
+		this.onUpdate = config.onUpdate;
+		return this;
+	}
+
 	async fromJson(json: SceneEntity) {
 		const loader = new ObjectLoader();
 		this._camera = await loader.parseAsync(json.camera);
@@ -185,6 +200,9 @@ export default class Creator extends General {
 			this.scene.add(child);
 			this.afterAdd(child);
 		}
+
+		// 防止比例错误
+		this.onWindowResize();
 	}
 
 	private afterAdd(child: Object3D) {

@@ -62,6 +62,17 @@ export default class ObjectControlPane extends DefaultControlPane {
 		this.objectPane.addInput({visible: object.visible}, 'visible').on('change', (ev) => {
 			object.visible = ev.value;
 		});
+
+		this.objectPane.addInput({castShadow: object.castShadow}, 'castShadow').on('change', (ev) => {
+			object.castShadow = ev.value;
+		});
+		this.objectPane.addInput({receiveShadow: object.receiveShadow}, 'receiveShadow').on('change', (ev) => {
+			object.receiveShadow = ev.value;
+		});
+
+		this.objectPane.addInput({up: object.up}, 'up').on('change', (ev) => {
+			object.up = ev.value;
+		});
 		this.objectPane.addBlade({
 			view: 'text',
 			label: 'layer',

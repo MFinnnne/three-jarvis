@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import {HemisphereLight, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
+import {HemisphereLight, Object3D, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
 import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
@@ -29,6 +29,39 @@ export default abstract class General {
 
 	private _leftSideBarContainer!: HTMLElement;
 	private _fps = 0;
+
+	private _onSave?: ((json: String) => void) | undefined;
+	private _onUpdate?: ((json: String) => void) | undefined;
+	private _onLoad?: (() => String) | undefined;
+	private _onDelte?: ((obj: Object3D) => void) | undefined;
+
+	public get onDelte(): ((obj: Object3D) => void) | undefined {
+		return this._onDelte;
+	}
+	public set onDelte(value: ((obj: Object3D) => void) | undefined) {
+		this._onDelte = value;
+	}
+	public get onLoad(): (() => String) | undefined {
+		return this._onLoad;
+	}
+	public set onLoad(value: (() => String) | undefined) {
+		this._onLoad = value;
+	}
+
+	public get onUpdate(): ((json: String) => void) | undefined {
+		return this._onUpdate;
+	}
+	public set onUpdate(value: ((json: String) => void) | undefined) {
+		this._onUpdate = value;
+	}
+
+	public get onSave(): ((json: String) => void) | undefined {
+		return this._onSave;
+	}
+
+	public set onSave(value: ((json: String) => void) | undefined) {
+		this._onSave = value;
+	}
 
 	public get fps() {
 		return this._fps;

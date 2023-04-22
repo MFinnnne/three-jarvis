@@ -6,9 +6,10 @@
 	"author": "MFine <1737374338@qq.com>",
 	"license": "GPL-3.0 License",
 	"private": false,
-	"main": "dist/three-jarvis.esm.js",
-	"module": "dist/three-jarvis.esm.js",
-	"types": "dist/index.d.ts",
+	"main": "./dist/index.js",
+	"module": "./dist/index.esm.js",
+	"umd": "./dist/index.umd.js",
+	"types": "./dist/index.d.ts",
 	"prettier": "../../prettier.config.js",
 	"files": [
 		"dist/**/*",
