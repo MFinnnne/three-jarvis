@@ -1,7 +1,6 @@
-import RightMenu, {ConfigType, OptionsType} from '@right-menu/core';
+import RightMenu from '@right-menu/core';
 import RemoveObjectCommand from '../core/commands/RemoveObjectCommand';
 import General from '../core/General';
-import {createDiffieHellmanGroup} from 'crypto';
 
 const clickSet = new Set();
 export default function genMyRightMenu(el: HTMLElement, general: General) {
@@ -25,8 +24,8 @@ class MyRightMenu extends RightMenu {
 						this.general.recorder.execute(new RemoveObjectCommand(object3D));
 						this.general.transformControl.detach();
 						this.general.state.selectedObjectDom = null;
-						if (this.general.onDelte) {
-							this.general.onDelte(object3D);
+						if (this.general.onDelete) {
+							this.general.onDelete(object3D);
 						}
 					}
 				},

@@ -35,7 +35,7 @@ export default class GUI {
 		MenuBar.render(menuDom, general);
 		const objectTree = new ObjectTree(leftSideBarDom, general);
 
-		general.recorder.afterExecute.push((cmd) => {
+		general.recorder?.afterExecute?.push((cmd) => {
 			if (cmd.name === 'add object' || cmd.name === 'remove object') {
 				objectTree.render(leftSideBarDom);
 			}

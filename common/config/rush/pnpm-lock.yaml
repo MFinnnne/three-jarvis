@@ -7,9 +7,15 @@ importers:
 
   ../../doc:
     specifiers:
+      three: ~0.151.3
+      three-jarvis: workspace:*
       vitepress: ~1.0.0-alpha.73
+      vue: ~3.2.47
     dependencies:
+      three: 0.151.3
+      three-jarvis: link:../packages/three-jarvis
       vitepress: 1.0.0-alpha.73
+      vue: 3.2.47
 
   ../../packages/three-jarvis:
     specifiers:
@@ -121,6 +127,7 @@ importers:
       '@rollup/plugin-alias': ^3.1.2
       '@rollup/plugin-node-resolve': ^13.0.0
       '@rollup/plugin-replace': ^2.3.4
+      '@rollup/plugin-terser': ~0.4.1
       '@rollup/plugin-typescript': ^8.2.0
       '@types/assert': ^1.5.4
       '@types/dat.gui': ^0.7.7
@@ -154,7 +161,6 @@ importers:
       rimraf: ^3.0.2
       rollup: ^2.38.5
       rollup-plugin-cleanup: ^3.2.1
-      rollup-plugin-terser: ^7.0.2
       sass: ^1.49.9
       ts-node: ^7.0.1
       tslib: ^2.1.0
@@ -165,6 +171,7 @@ importers:
       '@rollup/plugin-alias': 3.1.9_rollup@2.77.3
       '@rollup/plugin-node-resolve': 13.3.0_rollup@2.77.3
       '@rollup/plugin-replace': 2.4.2_rollup@2.77.3
+      '@rollup/plugin-terser': 0.4.1_rollup@2.77.3
       '@rollup/plugin-typescript': 8.5.0_d059cd93195a95245002183c0ec6c995
       '@types/assert': 1.5.6
       '@types/dat.gui': 0.7.9
@@ -198,7 +205,6 @@ importers:
       rimraf: 3.0.2
       rollup: 2.77.3
       rollup-plugin-cleanup: 3.2.1_rollup@2.77.3
-      rollup-plugin-terser: 7.0.2_rollup@2.77.3
       sass: 1.58.3
       ts-node: 7.0.1
       tslib: 2.5.0
@@ -2062,6 +2068,21 @@ packages:
       '@rollup/pluginutils': 5.0.2_rollup@3.17.3
       magic-string: 0.27.0
       rollup: 3.17.3
+    dev: true
+
+  /@rollup/plugin-terser/0.4.1_rollup@2.77.3:
+    resolution: {integrity: sha512-aKS32sw5a7hy+fEXVy+5T95aDIwjpGHCTv833HXVtyKMDoVS7pBr5K3L9hEQoNqbJFjfANPrNpIXlTQ7is00eA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.x || ^3.x
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      rollup: 2.77.3
+      serialize-javascript: 6.0.0
+      smob: 0.0.6
+      terser: 5.16.8
     dev: true
 
   /@rollup/plugin-typescript/8.5.0_d059cd93195a95245002183c0ec6c995:
@@ -5206,15 +5227,6 @@ packages:
       istanbul-lib-report: 3.0.0
     dev: true
 
-  /jest-worker/26.6.2:
-    resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
-    engines: {node: '>= 10.13.0'}
-    dependencies:
-      '@types/node': 18.14.2
-      merge-stream: 2.0.0
-      supports-color: 7.2.0
-    dev: true
-
   /js-cleanup/1.2.0:
     resolution: {integrity: sha512-JeDD0yiiSt80fXzAVa/crrS0JDPQljyBG/RpOtaSbyDq03VHa9szJWMaWOYU/bcTn412uMN2MxApXq8v79cUiQ==}
     engines: {node: ^10.14.2 || >=12.0.0}
@@ -5519,10 +5531,6 @@ packages:
   /memorystream/0.3.1:
     resolution: {integrity: sha512-S3UwM3yj5mtUSEfP41UZmt/0SCoVYUcU1rkXv+BQ5Ig8ndL4sPoJNBUJERafdPb5jjHJGuMgytgKvKIf58XNBw==}
     engines: {node: '>= 0.10.0'}
-
-  /merge-stream/2.0.0:
-    resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
-    dev: true
 
   /merge2/1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
@@ -6971,19 +6979,6 @@ packages:
       source-map-resolve: 0.6.0
     dev: true
 
-  /rollup-plugin-terser/7.0.2_rollup@2.77.3:
-    resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
-    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
-    peerDependencies:
-      rollup: ^2.0.0
-    dependencies:
-      '@babel/code-frame': 7.18.6
-      jest-worker: 26.6.2
-      rollup: 2.77.3
-      serialize-javascript: 4.0.0
-      terser: 5.16.8
-    dev: true
-
   /rollup-plugin-typescript2/0.34.1_rollup@3.17.3+typescript@4.2.3:
     resolution: {integrity: sha512-P4cHLtGikESmqi1CA+tdMDUv8WbQV48mzPYt77TSTOPJpERyZ9TXdDgjSDix8Fkqce6soYz3+fa4lrC93IEkcw==}
     peerDependencies:
@@ -7108,12 +7103,6 @@ packages:
       lru-cache: 6.0.0
     dev: true
 
-  /serialize-javascript/4.0.0:
-    resolution: {integrity: sha512-GaNA54380uFefWghODBWEGisLZFj00nS5ACs6yHa9nLqlLpVLO8ChDGeKRjZnV4Nh4n0Qi7nhYZD/9fCPzEqkw==}
-    dependencies:
-      randombytes: 2.1.0
-    dev: true
-
   /serialize-javascript/6.0.0:
     resolution: {integrity: sha512-Qr3TosvguFt8ePWqsvRfrKyQXIiW+nGbYpy8XK24NQHE83caxWt+mIymTT19DGFbNWNLfEwsrkSmN64lVWB9ag==}
     dependencies:
@@ -7213,6 +7202,10 @@ packages:
       ansi-styles: 4.3.0
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
+    dev: true
+
+  /smob/0.0.6:
+    resolution: {integrity: sha512-V21+XeNni+tTyiST1MHsa84AQhT1aFZipzPpOFAVB8DkHzwJyjjAmt9bgwnuZiZWnIbMo2duE29wybxv/7HWUw==}
     dev: true
 
   /sonic-boom/3.2.1:
@@ -7509,6 +7502,10 @@ packages:
   /three/0.148.0:
     resolution: {integrity: sha512-8uzVV+qhTPi0bOFs/3te3RW6hb3urL8jYEl6irjCWo/l6sr8MPNMcClFev/MMYeIxr0gmDcoXTy/8LXh/LXkfw==}
     dev: true
+
+  /three/0.151.3:
+    resolution: {integrity: sha512-+vbuqxFy8kzLeO5MgpBHUvP/EAiecaDwDuOPPDe6SbrZr96kccF0ktLngXc7xA7bzyd3N0t2f6mw3Z9y6JCojQ==}
+    dev: false
 
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}

@@ -101,3 +101,4 @@ lib
 
 # 在 Markdown 中，Prettier 将会对代码块进行格式化，这会影响输出
 *.md
+doc/
