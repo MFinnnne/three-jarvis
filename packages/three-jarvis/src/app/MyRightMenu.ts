@@ -1,7 +1,6 @@
-import RightMenu, {ConfigType, OptionsType} from '@right-menu/core';
+import RightMenu from '@right-menu/core';
 import RemoveObjectCommand from '../core/commands/RemoveObjectCommand';
 import General from '../core/General';
-import {createDiffieHellmanGroup} from 'crypto';
 
 const clickSet = new Set();
 export default function genMyRightMenu(el: HTMLElement, general: General) {
