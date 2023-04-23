@@ -3,13 +3,13 @@
 layout: home
 
 hero:
-  name: "three-jarvis doc"
-  text: "three-jarvis doc"
-  tagline: My great project tagline
+  name: "three-jarvis"
+  text: "帮助你开发threejs的小工具"
+  tagline: 
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 快速体验 
+      link: /get-started
     - theme: alt
       text: API Examples
       link: /api-examples

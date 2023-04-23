@@ -8,7 +8,7 @@ export default defineConfig({
 		// https://vitepress.dev/reference/default-theme-config
 		nav: [
 			{text: 'Home', link: '/'},
-			{text: 'Examples', link: '/markdown-examples'},
+			{text: 'get-started', link: '/get-started.md'},
 		],
 
 		sidebar: [

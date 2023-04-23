@@ -84,7 +84,7 @@ function render() {
 <template>
 	<div>
 		<div id="three">
-			<canvas id="container" height="909" width="1912"></canvas>
+			<canvas id="container"></canvas>
 		</div>
 	</div>
 </template>

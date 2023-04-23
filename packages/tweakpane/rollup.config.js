@@ -4,7 +4,7 @@ import Typescript from '@rollup/plugin-typescript';
 import Autoprefixer from 'autoprefixer';
 import Postcss from 'postcss';
 import Cleanup from 'rollup-plugin-cleanup';
-import {terser as Terser} from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import Sass from 'sass';
 
 import Package from './package.json';
@@ -36,7 +36,7 @@ function getPlugins(css, shouldMinify) {
 		}),
 	];
 	if (shouldMinify) {
-		plugins.push(Terser());
+		plugins.push(terser());
 	}
 	return [
 		...plugins,

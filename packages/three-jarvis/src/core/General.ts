@@ -33,13 +33,17 @@ export default abstract class General {
 	private _onSave?: ((json: String) => void) | undefined;
 	private _onUpdate?: ((json: String) => void) | undefined;
 	private _onLoad?: (() => String) | undefined;
-	private _onDelte?: ((obj: Object3D) => void) | undefined;
+	private _onDelete?: ((obj: Object3D) => void) | undefined;
 
-	public get onDelte(): ((obj: Object3D) => void) | undefined {
-		return this._onDelte;
+	constructor() {
+		this._state = new State(this);
 	}
-	public set onDelte(value: ((obj: Object3D) => void) | undefined) {
-		this._onDelte = value;
+
+	public get onDelete(): ((obj: Object3D) => void) | undefined {
+		return this._onDelete;
+	}
+	public set onDelete(value: ((obj: Object3D) => void) | undefined) {
+		this._onDelete = value;
 	}
 	public get onLoad(): (() => String) | undefined {
 		return this._onLoad;

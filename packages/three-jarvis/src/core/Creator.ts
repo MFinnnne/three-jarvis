@@ -69,7 +69,6 @@ export default class Creator extends General {
 	async create(se?: SceneEntity) {
 		this._renderer = new WebGLRenderer({canvas: this.container});
 		this._renderer.setPixelRatio(window.devicePixelRatio);
-		this._state = new State(this);
 		this._recorder = new Recorder();
 		this._recorder.afterExecute.push(() => this.toJson());
 		const sceneInfo = se ?? (await sceneDB.get(this.container.id));
@@ -165,7 +164,7 @@ export default class Creator extends General {
 
 	public customPersistence(config: CustomPersistence): Creator {
 		this.onSave = config.onSave;
-		this.onDelte = config.onDelete;
+		this.onDelete = config.onDelete;
 		this.onLoad = config.onLoad;
 		this.onUpdate = config.onUpdate;
 		return this;
