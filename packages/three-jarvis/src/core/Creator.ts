@@ -4,10 +4,8 @@ import GUI from '../app/GUI';
 import MonitorControlPane from '../app/pane/MonitorControlPane';
 import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 import General from './General';
-import ObjectChanged from './ObjectChanged';
 import ObjectObserver from './ObjectObserver';
 import Recorder from './Recorder';
-import State from './State';
 import {rayCasterEvents} from './events/ObjectEvents';
 import sceneDB, {SceneEntity} from './mapper/SceneDB';
 
@@ -69,7 +67,7 @@ export default class Creator extends General {
 	async create(se?: SceneEntity) {
 		this._renderer = new WebGLRenderer({canvas: this.container});
 		this._renderer.setPixelRatio(window.devicePixelRatio);
-		this._recorder = new Recorder();
+
 		this._recorder.afterExecute.push(() => this.toJson());
 		const sceneInfo = se ?? (await sceneDB.get(this.container.id));
 		if (sceneInfo) {
@@ -96,7 +94,7 @@ export default class Creator extends General {
 		}
 		this.init();
 		this.render();
-		ObjectChanged.getInstance(this).objectHelper(this.scene);
+
 		window.addEventListener('resize', () => {
 			this.onWindowResize();
 		});
@@ -122,7 +120,6 @@ export default class Creator extends General {
 		OBJECT_TREE_BLACK_LIST.push(gridHelper.uuid);
 		this.scene.add(gridHelper);
 		GUI.guiContainerInit(this);
-		rayCasterEvents(this);
 		this.pane = new MonitorControlPane(this);
 		this.pane.genPane();
 		this.onWindowResize();
