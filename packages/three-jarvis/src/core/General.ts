@@ -141,27 +141,28 @@ export default abstract class General {
 		this._transformControl.name = 'jarvis-transform-control';
 		transformControl.layers.set(1);
 		transformControl.getRaycaster().layers.set(1);
+
 		for (const child of transformControl.children) {
 			child.traverse((object) => {
 				object.layers.set(1);
 			});
 		}
 		OBJECT_TREE_BLACK_LIST.push(transformControl.uuid);
-		transformControl.addEventListener('objectChange', (e) => {
+		transformControl.addEventListener('objectChange', () => {
 			transformControl.object?.userData.controlPane?.update();
 			objectChanged.getInstance().update();
 		});
 
-		transformControl.addEventListener('change', (e) => {
+		transformControl.addEventListener('change', () => {
 			transformControl.object?.userData.helper?.update();
 		});
 
-		transformControl.addEventListener('mouseDown', (e) => {
+		transformControl.addEventListener('mouseDown', () => {
 			this.control.enabled = false;
 			this.recordByTransformControl(transformControl);
 		});
 
-		transformControl.addEventListener('mouseUp', (e) => {
+		transformControl.addEventListener('mouseUp', () => {
 			this.control.enabled = true;
 		});
 	}

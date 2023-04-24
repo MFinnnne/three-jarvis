@@ -7,6 +7,7 @@ export default class GUI {
 	public static guiContainerInit(general: General): void {
 		const container = document.querySelector('#three-helper-container');
 		container && container.remove();
+
 		const element = document.createElement('div');
 		element.id = 'three-helper-container';
 		element.className = 'three-helper-container';
@@ -31,7 +32,14 @@ export default class GUI {
 		paneDom.className = 'three-helper-pane';
 		element.appendChild(paneDom);
 		general.paneContainer = paneDom;
-		document.body.appendChild(element);
+		const domRect = general.container.getBoundingClientRect();
+
+		element.style.width = `${domRect.width}px`;
+		element.style.height = `${domRect.height}px`;
+		element.style.top = `${domRect.top}px`;
+
+		general.container.parentNode?.appendChild(element);
+
 		MenuBar.render(menuDom, general);
 		const objectTree = new ObjectTree(leftSideBarDom, general);
 
@@ -41,7 +49,7 @@ export default class GUI {
 			}
 		});
 		let prevGeometries = 0;
-		general.scene.onAfterRender = (renderer, scene) => {
+		general.scene.onAfterRender = (renderer) => {
 			const geometries = renderer.info.memory.geometries;
 			if (geometries !== prevGeometries) {
 				objectTree.render(leftSideBarDom);
