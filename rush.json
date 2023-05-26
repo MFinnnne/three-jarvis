@@ -33,6 +33,10 @@
 			"projectFolder": "packages/vue-example"
 		},
 		{
+			"packageName": "qiqi",
+			"projectFolder": "packages/qiqi"
+		},
+		{
 			"packageName": "my-tweakpane",
 			"projectFolder": "packages/tweakpane"
 		},

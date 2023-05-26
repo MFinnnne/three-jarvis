@@ -17,6 +17,13 @@
       "safeForSimultaneousRushProcesses": true,
       "shellCommand": "rush build:watch --to-except vue-example"
     },
+		{
+			"name": "qiqi",
+			"commandKind": "global",
+			"summary": "Build projects and watch for changes",
+			"safeForSimultaneousRushProcesses": true,
+			"shellCommand": "rush build:watch --to-except qiqi"
+		},
     {
       "name": "build:watch",
       "commandKind": "bulk",
@@ -30,6 +37,6 @@
 
 
   "parameters": [
-    
+
   ]
 }

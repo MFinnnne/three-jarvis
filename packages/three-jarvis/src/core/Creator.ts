@@ -5,8 +5,6 @@ import MonitorControlPane from '../app/pane/MonitorControlPane';
 import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 import General from './General';
 import ObjectObserver from './ObjectObserver';
-import Recorder from './Recorder';
-import {rayCasterEvents} from './events/ObjectEvents';
 import sceneDB, {SceneEntity} from './mapper/SceneDB';
 
 type JarvisHook = {
