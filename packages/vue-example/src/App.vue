@@ -1,10 +1,9 @@
 <script setup>
-import Creator from "./components/Creator.vue";</script>
+import HelloWorld from './components/HelloWorld.vue';
+</script>
 
 <template>
-    <Creator></Creator>
+	<HelloWorld></HelloWorld>
 </template>
 
-<style>
-
-</style>
+<style></style>

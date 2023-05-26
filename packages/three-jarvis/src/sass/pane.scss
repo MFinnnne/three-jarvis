@@ -1,12 +1,11 @@
 @import 'Constant';
 
 #three-helper-pane {
-	position: relative;
-	width: 30%;
-	height: auto;
-	max-height: 100%-$menu-height;
-	top: $menu-height;
+	position: absolute;
 	right: 0;
+	top: 0;
+	height: auto;
+	max-height: 50%;
 	z-index: 1;
 	background: #2f3137;
 	overflow: scroll;

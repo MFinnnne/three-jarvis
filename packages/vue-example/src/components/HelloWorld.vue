@@ -31,6 +31,7 @@ function init() {
 
 	renderer = new THREE.WebGLRenderer({canvas: container, antialias: true});
 	renderer.setPixelRatio(window.devicePixelRatio);
+	renderer.setSize(window.innerWidth, window.innerHeight);
 	control = new OrbitControls(camera, renderer.domElement); // use if there is no animation loop
 	control.minDistance = 2;
 	control.maxDistance = 1000;
@@ -84,7 +85,7 @@ function render() {
 <template>
 	<div>
 		<div id="three">
-			<canvas id="container"></canvas>
+			<canvas id="container" height="909" width="1912"></canvas>
 		</div>
 	</div>
 </template>

@@ -9,6 +9,8 @@ import SetScaleCommand from './commands/SetScaleCommand';
 import objectChanged from './ObjectChanged';
 import Recorder from './Recorder';
 import State from './State';
+import ObjectChanged from './ObjectChanged';
+import {rayCasterEvents} from './events/ObjectEvents';
 
 export default abstract class General {
 	protected _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
@@ -141,7 +143,9 @@ export default abstract class General {
 		this._transformControl.name = 'jarvis-transform-control';
 		transformControl.layers.set(1);
 		transformControl.getRaycaster().layers.set(1);
-
+		this._recorder = new Recorder();
+		ObjectChanged.getInstance(this).objectHelper(this.scene);
+		rayCasterEvents(this);
 		for (const child of transformControl.children) {
 			child.traverse((object) => {
 				object.layers.set(1);

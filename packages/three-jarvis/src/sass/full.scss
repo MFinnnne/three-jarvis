@@ -2,12 +2,18 @@
 @import 'toast';
 
 #three-helper-container {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	position: absolute;
-	display: block;
 	z-index: 0;
 	pointer-events: none;
+	display: flex;
+	flex-direction: column;
 
 	@import 'menu-bar';
+	@import 'pane-and-tree';
 	@import 'left-side-bar';
 	@import 'pane';
 }
