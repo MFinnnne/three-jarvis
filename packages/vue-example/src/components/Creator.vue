@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import {Object3D} from 'three';
 import {ThreeJarvis} from 'three-jarvis';
-import {onMounted, onUpdated} from 'vue';
+import {onMounted} from 'vue';
 
 onMounted(async () => {
 	const container = document.querySelector<HTMLCanvasElement>('#container');
