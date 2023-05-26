@@ -1,14 +1,10 @@
 <script setup>
-import HelloWorld from '@/components/HelloWorld.vue';
+import BathView from './view/BathView.vue';
+import HomeView from './view/HomeView.vue';
 </script>
 
 <template>
-	<HelloWorld />
+	<router-view />
 </template>
 
-<style>
-#app {
-	margin: 0 0;
-	padding: 0;
-}
-</style>
+<style></style>

@@ -113,7 +113,7 @@ export default class ObjectControlPane extends DefaultControlPane {
 
 		this.geometryPane = tab.pages[1];
 		this.materialPane = tab.pages[2];
-		const positionBind = this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
+		const positionBind = this.objectPane.addInput(PARAMS, 'position', {x: {step: 0.1}, y: {step: 0.1}, z: {step: 0.1}}).on('change', (ev) => {
 			const {x, y, z} = ev.value;
 			if (ev.before) {
 				this.general.recorder.execute(new SetPositionCommand(object, this.object!.position));
@@ -142,26 +142,14 @@ export default class ObjectControlPane extends DefaultControlPane {
 		this.bindMap.set('scale', scaleBind);
 
 		// euler
-		const rotationBind = this.objectPane
-			.addInput(PARAMS, 'rotation', {
-				view: 'rotation',
-				rotationMode: 'euler',
-				order: 'XYZ', // Extrinsic rotation order. optional, 'XYZ' by default
-				unit: 'rad', // or 'rad' or 'turn'. optional, 'rad' by default
-				picker: 'inline',
-				expanded: false,
-			})
-			.on('change', (e) => {
-				if (this.general.transformControl.dragging) {
-					return;
-				}
-				if (e.before) {
-					this.general.recorder.execute(new SetRotationCommand(object, this.object!.rotation));
-				}
-				const {x, y, z} = e.value;
-				this.object?.rotation.set(x, y, z);
-				ObjectChanged.getInstance().update(this.object);
-			});
+		const rotationBind = this.objectPane.addInput(PARAMS, 'rotation', {x: {step: 0.1}, y: {step: 0.1}, z: {step: 0.1}}).on('change', (e) => {
+			if (e.before) {
+				this.general.recorder.execute(new SetRotationCommand(object, this.object!.rotation));
+			}
+			const {x, y, z} = e.value;
+			this.object?.rotation.set(x, y, z);
+			ObjectChanged.getInstance().update(this.object);
+		});
 		rotationBind.controller_.view.labelElement.addEventListener('click', () => {
 			const value = rotationBind.controller_.binding.value.rawValue as Euler;
 			Utils.execCoy(`${value.x.toFixed(2)},${value.y.toFixed(2)},${value.z.toFixed(2)}`);
@@ -177,9 +165,6 @@ export default class ObjectControlPane extends DefaultControlPane {
 				expanded: false, // optional, false by default
 			})
 			.on('change', (e) => {
-				if (this.general.transformControl.dragging) {
-					return;
-				}
 				const {x, y, z, w} = e.value;
 				if (e.before) {
 					this.general.recorder.execute(new SetQuaternionCommand(object, this.object!.quaternion));
