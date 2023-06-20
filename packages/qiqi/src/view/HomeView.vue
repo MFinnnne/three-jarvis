@@ -7,7 +7,8 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {FontLoader} from 'three/addons/loaders/FontLoader.js';
 import {SVGLoader} from 'three/addons/loaders/SVGLoader.js';
 import {useRouter} from 'vue-router';
-import {ElNotification} from 'element-plus';
+import {ElNotification, ElMessage, ElMessageBox} from 'element-plus';
+
 const currentDate = ref(new Date().toLocaleDateString());
 const router = useRouter();
 onMounted(() => {
@@ -17,6 +18,12 @@ onMounted(() => {
 });
 
 let camera, scene, renderer;
+
+function sittingRoomClick() {
+	ElMessageBox.alert('琦琦在挑瓷砖呢 ₍ᐢ.ˬ.⑅ᐢ₎  (=^-ω-^=)', '目前在干啥', {
+		confirmButtonText: 'OK',
+	});
+}
 
 function init() {
 	camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
@@ -138,7 +145,7 @@ function jump(url) {
 const open = () => {
 	ElNotification.success({
 		title: '欢迎',
-		message: '欢迎欢迎~，这个地方叫什么好呢？琦琦妙妙屋？',
+		message: '琦琦还会来看看她的妙妙屋吗~？',
 		offset: 100,
 	});
 };
@@ -176,15 +183,15 @@ function UnderConstruction(url) {}
 			</div>
 			<div class="item">
 				<el-card :body-style="{padding: '0px'}">
-					<img src="/wait.png" width="211.33" height="197.67" />
+					<img src="/cat1.png" width="211.33" height="197.67" />
 					<div style="padding: 14px">
 						<span>客厅</span>
 						<div class="bottom">
 							<time class="time">{{ currentDate }}</time>
-							<el-button type="info" disabled class="button">待施工</el-button>
+							<el-button type="primary" class="button" @click="sittingRoomClick()">待施工</el-button>
 						</div>
 						<div class="demo-progress">
-							<el-progress :text-inside="true" :stroke-width="20" :percentage="0" striped striped-flow status="exception" />
+							<el-progress :text-inside="true" :stroke-width="20" :percentage="2.33" striped striped-flow status="exception" />
 						</div>
 					</div>
 				</el-card>
@@ -236,7 +243,7 @@ function UnderConstruction(url) {}
 			</div>
 			<div class="item">
 				<el-card :body-style="{padding: '0px'}">
-					<img src="/wait.png" width="211.33" height="197.67" />
+					<img src="/cat2.png" width="211.33" height="197.67" />
 					<div style="padding: 14px">
 						<span>阳台</span>
 						<div class="bottom">
@@ -265,6 +272,7 @@ body {
 	position: absolute;
 	display: block;
 }
+
 #app {
 	height: 100%;
 	width: 100%;
@@ -282,6 +290,7 @@ body {
 	align-items: center;
 	flex-direction: row;
 }
+
 .home {
 	height: 100%;
 	width: 100%;
@@ -291,6 +300,7 @@ body {
 	justify-content: center;
 	flex-direction: column;
 }
+
 .preview {
 	display: flex;
 	justify-content: center;
@@ -305,6 +315,7 @@ body {
 	margin-right: 10px;
 	margin-bottom: 10px;
 }
+
 .time {
 	font-size: 12px;
 	color: #999;
@@ -334,6 +345,7 @@ body {
 	margin-left: 10px;
 	margin-right: 10px;
 }
+
 .demo-progress {
 	margin-top: 10px;
 }
