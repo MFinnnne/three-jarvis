@@ -1,6 +1,6 @@
 {
 	"name": "three-jarvis",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A threejs development aid",
 	"repository": "git@github.com:MFinnnne/three-jarvis.git",
 	"author": "MFine <1737374338@qq.com>",
@@ -76,16 +76,15 @@
 	"dependencies": {
 		"@0b5vr/tweakpane-plugin-rotation": "^0.1.1",
 		"@right-menu/core": "0.0.7",
-		"my-tweakpane": "workspace:^1.0.0",
+		"my-tweakpane": "1.0.0",
 		"@tweakpane/plugin-essentials": "^0.1.5",
 		"@types/toastify-js": "^1.11.1",
 		"dayjs": "^1.11.7",
 		"dexie": "^3.2.2",
-		"million": "^1.8.8",
+		"million": "^2.0.0",
 		"nanoevents": "^6.0.2",
 		"pino": "^8.8.0",
 		"toastify-js": "^1.12.0",
-		"tweakpane": "^3.0.8",
 		"npm-run-all": "~4.1.5",
 		"onchange": "~7.1.0",
 		"ts-node": "~10.9.1",
@@ -93,5 +92,9 @@
 	},
 	"peerDependencies": {
 		"three": "*"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
 	}
 }

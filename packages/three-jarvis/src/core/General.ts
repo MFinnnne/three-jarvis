@@ -39,6 +39,7 @@ export default abstract class General {
 
 	constructor() {
 		this._state = new State(this);
+		this._recorder = new Recorder();
 	}
 
 	public get onDelete(): ((obj: Object3D) => void) | undefined {
@@ -143,7 +144,6 @@ export default abstract class General {
 		this._transformControl.name = 'jarvis-transform-control';
 		transformControl.layers.set(1);
 		transformControl.getRaycaster().layers.set(1);
-		this._recorder = new Recorder();
 		ObjectChanged.getInstance(this).objectHelper(this.scene);
 		rayCasterEvents(this);
 		for (const child of transformControl.children) {

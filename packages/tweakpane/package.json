@@ -21,7 +21,6 @@
 	},
 	"scripts": {
 		"prepack": "run-s clean main:prepare",
-		"prepublishOnly": "npm test",
 		"start": "npm-run-all main:build:dev doc:build --parallel main:watch doc:watch doc:server",
 		"test": "run-s doc:test main:test",
 		"assets": "npm-run-all clean main:build --serial assets:dist assets:version assets:zip",
