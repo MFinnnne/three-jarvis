@@ -1,42 +1,31 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/command-line.schema.json",
-
-  "commands": [
-    {
-      "name": "prettier",
-      "commandKind": "global",
-      "summary": "Used by the pre-commit Git hook. This command invokes Prettier to reformat staged changes.",
-      "safeForSimultaneousRushProcesses": true,
-      "autoinstallerName": "rush-prettier",
-      "shellCommand": "pretty-quick --staged"
-    },
-    {
-      "name": "tv",
-      "commandKind": "global",
-      "summary": "Build projects and watch for changes",
-      "safeForSimultaneousRushProcesses": true,
-      "shellCommand": "rush build:watch --to-except vue-example"
-    },
+	"$schema": "https://developer.microsoft.com/json-schemas/rush/v5/command-line.schema.json",
+	"commands": [
 		{
-			"name": "qiqi",
+			"name": "prettier",
+			"commandKind": "global",
+			"summary": "Used by the pre-commit Git hook. This command invokes Prettier to reformat staged changes.",
+			"safeForSimultaneousRushProcesses": true,
+			"autoinstallerName": "rush-prettier",
+			"shellCommand": "pretty-quick --staged"
+		},
+		{
+			"name": "tv",
 			"commandKind": "global",
 			"summary": "Build projects and watch for changes",
 			"safeForSimultaneousRushProcesses": true,
-			"shellCommand": "rush build:watch --to-except qiqi"
+			"shellCommand": "rush build:watch --to-except vue-example"
 		},
-    {
-      "name": "build:watch",
-      "commandKind": "bulk",
-      "summary": "Build projects and watch for changes",
-      "description": "For details, see the article \"Using watch mode\" on the Rush website: https://rushjs.io/",
-      "incremental": true,
-      "enableParallelism": true,
-      "watchForChanges": true
-    }
-  ],
-
-
-  "parameters": [
-
-  ]
+		{
+			"name": "build:watch",
+			"commandKind": "bulk",
+			"summary": "Build projects and watch for changes",
+			"description": "For details, see the article \"Using watch mode\" on the Rush website: https://rushjs.io/",
+			"incremental": true,
+			"enableParallelism": true,
+			"watchForChanges": true
+		}
+	],
+	"parameters": [
+	]
 }

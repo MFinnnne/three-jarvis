@@ -14,28 +14,32 @@ export default class Monitor extends General {
 		scene: Scene,
 		renderer: WebGLRenderer,
 		camera: PerspectiveCamera,
-		option: {
-			control: OrbitControls;
+		option?: {
+			control?: OrbitControls;
 		},
 	) {
 		this._scene = scene;
+
 		this._camera = camera;
+		this.camera.lookAt(0, 0, 0);
+		this.camera.name = 'jarvis-camera';
+		this.camera.layers.enableAll();
+
 		this._renderer = renderer;
 		this._container = renderer.domElement;
-		this._control = option.control
-		ObjectChanged.getInstance(this);
-		GUI.guiContainerInit(this);
-		this.camera.layers.enableAll();
-		this.state.activeCamera = this._camera;
-		this.control.minDistance = 0.1;
+		this._control = option?.control ?? new OrbitControls(this.camera, this.renderer.domElement);
+		this.control.minDistance = 2;
 		this.control.maxDistance = 1000;
 		this.control.update();
-		this.control.addEventListener('end', () =>{
+		this.control.addEventListener('end', () => {
 			this._orbitControlIsWorking = false;
 		});
 		this.control.addEventListener('start', () => {
 			this._orbitControlIsWorking = true;
 		});
+		ObjectChanged.getInstance(this);
+		GUI.guiContainerInit(this);
+		this.state.activeCamera = this._camera;
 		this.initTransformControl();
 		this.scene.add(this.transformControl);
 		new MonitorControlPane(this).genPane();

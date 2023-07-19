@@ -6,7 +6,7 @@ import {onMounted} from 'vue';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {ThreeJarvis} from 'three-jarvis';
 
-let camera, rawScene, renderer, control;
+let camera, rawScene, renderer;
 
 onMounted(() => {
 	init();
@@ -31,14 +31,10 @@ function init() {
 	renderer = new THREE.WebGLRenderer({canvas: container, antialias: true});
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
-	control = new OrbitControls(camera, renderer.domElement); // use if there is no animation loop
-	control.minDistance = 2;
-	control.maxDistance = 1000;
-	control.target.set(0, 0, 0);
-	control.update();
+
 	rawScene = new THREE.Scene();
 
-	ThreeJarvis.monitor(rawScene, camera, renderer, {control});
+	ThreeJarvis.monitor(rawScene, camera, renderer);
 	rawScene.add(camera);
 	rawScene.add(camera1);
 	rawScene.add(pointLight);
@@ -73,7 +69,6 @@ function onWindowResize() {
 function render() {
 	requestAnimationFrame(render);
 	renderer.render(rawScene, camera);
-	control.update();
 }
 </script>
 

@@ -31,7 +31,6 @@ export default class ObjectChanged {
 		if (object.type === 'Scene') {
 			return;
 		}
-		debugger
 		this.jarvis.transformControl.attach(object);
 		return;
 	}

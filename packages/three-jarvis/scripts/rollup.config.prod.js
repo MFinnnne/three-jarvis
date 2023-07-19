@@ -1,7 +1,7 @@
 import baseConfig from './rollup.config.base.js';
 import {name} from '../package.json';
 import typescript from '@rollup/plugin-typescript';
-import copy from 'rollup-plugin-copy';
+import strip from "@rollup/plugin-strip";
 
 export default {
 	...baseConfig,
@@ -22,5 +22,5 @@ export default {
 			sourcemap: false,
 		},
 	],
-	plugins: [...baseConfig.plugins, typescript({sourceMap: false, inlineSources: false})],
+	plugins: [...baseConfig.plugins, strip(), typescript({sourceMap: false, inlineSources: false})],
 };

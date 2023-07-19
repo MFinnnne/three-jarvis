@@ -52,6 +52,7 @@ importers:
       '@rollup/plugin-commonjs': ^21.1.0
       '@rollup/plugin-node-resolve': ~15.0.1
       '@rollup/plugin-replace': ~5.0.2
+      '@rollup/plugin-strip': ^3.0.2
       '@tweakpane/plugin-essentials': ^0.1.5
       '@types/node': ~18.14.2
       '@types/three': ^0.138.0
@@ -85,7 +86,7 @@ importers:
       rollup-plugin-sourcemaps: ^0.6.3
       rollup-plugin-typescript2: ~0.34.1
       sass: ^1.52.1
-      three: ^0.148.0
+      three: ^0.138.3
       toastify-js: ^1.12.0
       ts-node: ~10.9.1
       tslib: ^2.4.0
@@ -116,6 +117,7 @@ importers:
       '@rollup/plugin-commonjs': 21.1.0_rollup@3.17.3
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.17.3
       '@rollup/plugin-replace': 5.0.2_rollup@3.17.3
+      '@rollup/plugin-strip': 3.0.2_rollup@3.17.3
       '@types/node': 18.14.2
       '@types/three': 0.138.0
       '@typescript-eslint/eslint-plugin': 5.54.0_ca23eaea7f3fb56b7eeb9cbf06c2b386
@@ -138,7 +140,7 @@ importers:
       rollup-plugin-sourcemaps: 0.6.3_dcb4e3d25cd6b906085ec3c3504ab7d8
       rollup-plugin-typescript2: 0.34.1_rollup@3.17.3+typescript@4.2.3
       sass: 1.58.3
-      three: 0.148.0
+      three: 0.138.3
       tslib: 2.5.0
       typescript: 4.2.3
       utility-types: 3.10.0
@@ -182,7 +184,7 @@ importers:
       rimraf: ^3.0.2
       rollup: ^2.38.5
       rollup-plugin-cleanup: ^3.2.1
-      sass: ^1.49.9
+      sass: ^1.63.6
       ts-node: ^7.0.1
       tslib: ^2.1.0
       typedoc: ^0.23.24
@@ -226,7 +228,7 @@ importers:
       rimraf: 3.0.2
       rollup: 2.77.3
       rollup-plugin-cleanup: 3.2.1_rollup@2.77.3
-      sass: 1.58.3
+      sass: 1.63.6
       ts-node: 7.0.1
       tslib: 2.5.0
       typedoc: 0.23.28_typescript@4.9.5
@@ -239,11 +241,11 @@ importers:
       '@right-menu/vue': 0.0.4
       '@rollup/plugin-commonjs': ^21.1.0
       '@tweenjs/tween.js': ^18
-      '@types/three': ^0.138.0
+      '@types/three': ^0.154.0
       '@vitejs/plugin-vue': ^2.3.3
       simplex-noise: ^3.0.1
       three: ^0.138.3
-      three-jarvis: workspace:^1.0.0
+      three-jarvis: workspace:^1.1.4
       vite: ^2.9.9
       vite-plugin-checker: ^0.4.6
       vue: ^3.2.36
@@ -251,7 +253,7 @@ importers:
       '@right-menu/core': 0.0.7
       '@right-menu/vue': 0.0.4
       '@tweenjs/tween.js': 18.6.4
-      '@types/three': 0.138.0
+      '@types/three': 0.154.0
       simplex-noise: 3.0.1
       three: 0.138.3
       three-jarvis: link:../three-jarvis
@@ -2096,6 +2098,21 @@ packages:
       rollup: 3.17.3
     dev: true
 
+  /@rollup/plugin-strip/3.0.2_rollup@3.17.3:
+    resolution: {integrity: sha512-L8Whin/DB5XsLE586+xcud6yX/pMVUlfalA999uAsC+dtwmBHSiUwtAxMl3eVvykX3N5BhdeAjStqDlzMmfUXw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.0.2_rollup@3.17.3
+      estree-walker: 2.0.2
+      magic-string: 0.27.0
+      rollup: 3.17.3
+    dev: true
+
   /@rollup/plugin-terser/0.4.1_rollup@2.77.3:
     resolution: {integrity: sha512-aKS32sw5a7hy+fEXVy+5T95aDIwjpGHCTv833HXVtyKMDoVS7pBr5K3L9hEQoNqbJFjfANPrNpIXlTQ7is00eA==}
     engines: {node: '>=14.0.0'}
@@ -2317,10 +2334,10 @@ packages:
 
   /@types/stats.js/0.17.0:
     resolution: {integrity: sha512-9w+a7bR8PeB0dCT/HBULU2fMqf6BAzvKbxFboYhmDtDkKPiyXYbjoe2auwsXlEFI7CFNMF1dCv3dFH5Poy9R1w==}
-    dev: true
 
   /@types/three/0.138.0:
     resolution: {integrity: sha512-D8AoV7h2kbCfrv/DcebHOFh1WDwyus3HdooBkAwcBikXArdqnsQ38PQ85JCunnvun160oA9jz53GszF3zch3tg==}
+    dev: true
 
   /@types/three/0.152.1:
     resolution: {integrity: sha512-PMOCQnx9JRmq+2OUGTPoY9h1hTWD2L7/nmuW/SyNq1Vbq3Lwt3MNdl3wYSa4DvLTGv62NmIXD9jYdAOwohwJyw==}
@@ -2331,6 +2348,17 @@ packages:
       fflate: 0.6.10
       lil-gui: 0.17.0
     dev: true
+
+  /@types/three/0.154.0:
+    resolution: {integrity: sha512-IioqpGhch6FdLDh4zazRn3rXHj6Vn2nVOziJdXVbJFi9CaI65LtP9qqUtpzbsHK2Ezlox8NtsLNHSw3AQzucjA==}
+    dependencies:
+      '@tweenjs/tween.js': 18.6.4
+      '@types/stats.js': 0.17.0
+      '@types/webxr': 0.5.2
+      fflate: 0.6.10
+      lil-gui: 0.17.0
+      meshoptimizer: 0.18.1
+    dev: false
 
   /@types/toastify-js/1.11.1:
     resolution: {integrity: sha512-Ef03kGFWseAQYIQwN83WbhRxD+DOd+X6p22j9olA/TnvE0crDMc3fyoctKSpXgEDVWq5l3p98otIdpNX1pOYMA==}
@@ -2346,7 +2374,6 @@ packages:
 
   /@types/webxr/0.5.2:
     resolution: {integrity: sha512-szL74BnIcok9m7QwYtVmQ+EdIKwbjPANudfuvDrAF8Cljg9MKUlIoc1w5tjj9PMpeSH3U1Xnx//czQybJ0EfSw==}
-    dev: true
 
   /@typescript-eslint/eslint-plugin/5.54.0_a3caffc378eb09152a190b358ac0284c:
     resolution: {integrity: sha512-+hSN9BdSr629RF02d7mMtXhAJvDTyCbprNYJKrXETlul/Aml6YZwd90XioVbjejQeHbb3R8Dg0CkRgoJDxo8aw==}
@@ -4587,7 +4614,6 @@ packages:
 
   /fflate/0.6.10:
     resolution: {integrity: sha512-IQrh3lEPM93wVCEczc9SaAOvkmcoQn/G8Bo1e8ZPlY3X3bnAxWaBdvTdvM1hP62iZp0BXWDy4vTAy4fF0+Dlpg==}
-    dev: true
 
   /figures/3.2.0:
     resolution: {integrity: sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==}
@@ -5593,7 +5619,6 @@ packages:
 
   /lil-gui/0.17.0:
     resolution: {integrity: sha512-MVBHmgY+uEbmJNApAaPbtvNh1RCAeMnKym82SBjtp5rODTYKWtM+MXHCifLe2H2Ti1HuBGBtK/5SyG4ShQ3pUQ==}
-    dev: true
 
   /lilconfig/2.0.6:
     resolution: {integrity: sha512-9JROoBW7pobfsx+Sq2JsASvCo6Pfo6WWoUW79HuB1BCoBXD4PLWJPqDF6fNj67pqBYTbAHkE57M1kS/+L1neOg==}
@@ -5784,6 +5809,10 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
     dev: true
+
+  /meshoptimizer/0.18.1:
+    resolution: {integrity: sha512-ZhoIoL7TNV4s5B6+rx5mC//fw8/POGyNxS/DZyCJeiZ12ScLfVwRE/GfsxwiTkMYYD5DmK2/JXnEVXqL4rF+Sw==}
+    dev: false
 
   /micromatch/4.0.5:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
@@ -7353,6 +7382,16 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /sass/1.63.6:
+    resolution: {integrity: sha512-MJuxGMHzaOW7ipp+1KdELtqKbfAWbH7OLIdoSMnVe3EXPMTmxTmlaZDCTsgIpPCs3w99lLo9/zDKkOrJuT5byw==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.2.4
+      source-map-js: 1.0.2
+    dev: true
+
   /saxes/5.0.1:
     resolution: {integrity: sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==}
     engines: {node: '>=10'}
@@ -7775,11 +7814,6 @@ packages:
 
   /three/0.138.3:
     resolution: {integrity: sha512-4t1cKC8gimNyJChJbaklg8W/qj3PpsLJUIFm5LIuAy/hVxxNm1ru2FGTSfbTSsuHmC/7ipsyuGKqrSAKLNtkzg==}
-    dev: false
-
-  /three/0.148.0:
-    resolution: {integrity: sha512-8uzVV+qhTPi0bOFs/3te3RW6hb3urL8jYEl6irjCWo/l6sr8MPNMcClFev/MMYeIxr0gmDcoXTy/8LXh/LXkfw==}
-    dev: true
 
   /three/0.151.3:
     resolution: {integrity: sha512-+vbuqxFy8kzLeO5MgpBHUvP/EAiecaDwDuOPPDe6SbrZr96kccF0ktLngXc7xA7bzyd3N0t2f6mw3Z9y6JCojQ==}

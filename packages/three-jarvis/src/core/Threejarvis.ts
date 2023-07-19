@@ -16,9 +16,7 @@ export default class ThreeJarvis {
 		},
 	) {
 		const monitor = new Monitor();
-		monitor.start(scene, renderer, camera, {
-			control: options?.control ?? new OrbitControls(camera, renderer.domElement),
-		});
+		monitor.start(scene, renderer, camera, options);
 	}
 
 	public static creator(container: HTMLCanvasElement): Creator {
