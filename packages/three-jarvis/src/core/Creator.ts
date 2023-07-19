@@ -1,8 +1,7 @@
-import {BoxGeometry, Clock, FileLoader, GridHelper, Mesh, MeshBasicMaterial, Object3D, ObjectLoader, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
+import {Clock, FileLoader, GridHelper, Object3D, ObjectLoader, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import GUI from '../app/GUI';
 import MonitorControlPane from '../app/pane/MonitorControlPane';
-import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 import General from './General';
 import ObjectObserver from './ObjectObserver';
 import sceneDB, {SceneEntity} from './mapper/SceneDB';
@@ -31,11 +30,11 @@ export default class Creator extends General {
 		this._container = container;
 	}
 
-	public createFrom(from: string | (() => string | ArrayBuffer), options?: JarvisHook) {
+	public async createFrom(from: string | (() => string | ArrayBuffer)) {
 		let creator: Creator;
 		const loader = new FileLoader();
 		if (typeof from === 'string') {
-			loader.loadAsync(from).then((res) => {
+			loader.loadAsync(from).then(async (res) => {
 				let rawString: string;
 				if (typeof res !== 'string') {
 					rawString = new TextDecoder().decode(res);
@@ -44,13 +43,12 @@ export default class Creator extends General {
 				}
 				const se = JSON.parse(rawString) as SceneEntity;
 				creator = new Creator(this.container);
-				creator.create(se).then((r) => {});
+				await creator.create(se);
 			});
 		} else {
 			const data = from();
 			if (typeof data === 'string') {
-				const exist = data;
-				if (exist) {
+				if (data) {
 					console.warn("this json has already exist in indexed db,we will select indexedDB's json");
 				} else {
 					const parse = JSON.parse(data) as SceneEntity;
@@ -58,7 +56,7 @@ export default class Creator extends General {
 				}
 			}
 			creator = new Creator(this.container);
-			creator.create().then((r) => {});
+			await creator.create()
 		}
 	}
 
@@ -80,15 +78,6 @@ export default class Creator extends General {
 			this.scene.add(this.camera);
 			this.state.activeCamera = this.camera;
 			this.scene.add(this.light);
-			const boxGeometry = new BoxGeometry(1, 1, 1);
-			const material = new MeshBasicMaterial({color: 0x00ff00});
-			const mesh = new Mesh(boxGeometry, material);
-			mesh.uuid = '315f511e-0080-46dc-8df0-6585c3619cb8';
-			mesh.position.set(1, 1, 1);
-			this.beforeAdd(mesh);
-			this.setRenderHook(mesh);
-			this.scene?.add(mesh);
-			this.afterAdd(mesh);
 		}
 		this.init();
 		this.render();
@@ -115,7 +104,6 @@ export default class Creator extends General {
 		gridHelper.userData.isShow = false;
 		gridHelper.layers.set(3);
 		gridHelper.name = 'jarvis-grid-helper';
-		OBJECT_TREE_BLACK_LIST.push(gridHelper.uuid);
 		this.scene.add(gridHelper);
 		GUI.guiContainerInit(this);
 		this.pane = new MonitorControlPane(this);
@@ -142,7 +130,7 @@ export default class Creator extends General {
 		sceneDB.lazyUpsertScene(this);
 	}
 
-	public subscribeByUUID(uuid: string): {on: (resolve: (observer: ObjectObserver) => void) => Creator} {
+	public subscribeByUUID(uuid: string): { on: (resolve: (observer: ObjectObserver) => void) => Creator } {
 		const observer = new ObjectObserver('uuid', uuid);
 		if (this._uuidSubMap.has(uuid)) {
 			this._uuidSubMap.get(uuid)?.push(observer);
@@ -225,12 +213,12 @@ export default class Creator extends General {
 		if (this._uuidSubMap.has(child.uuid)) {
 			const observers = this._uuidSubMap.get(child.uuid);
 			if (observers) {
-				child.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {
+				child.onBeforeRender = (renderer, scene, camera, ) => {
 					for (const observer of observers) {
 						observer.beforeRender(child, renderer, scene, camera);
 					}
 				};
-				child.onAfterRender = (renderer, scene, camera, geometry, material, group) => {
+				child.onAfterRender = (renderer, scene, camera) => {
 					for (const observer of observers) {
 						observer.afterRender(child, renderer, scene, camera);
 					}

@@ -1,5 +1,4 @@
 import {Object3D} from 'three';
-import HelperManager from './ObjectHelper';
 import General from './General';
 
 export default class ObjectChanged {
@@ -32,6 +31,7 @@ export default class ObjectChanged {
 		if (object.type === 'Scene') {
 			return;
 		}
+		debugger
 		this.jarvis.transformControl.attach(object);
 		return;
 	}

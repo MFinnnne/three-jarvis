@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as THREE from 'three';
-import {BoxGeometry, DirectionalLight, Group, MeshBasicMaterial, PointLight, PointLightHelper} from 'three';
+import {BoxGeometry, DirectionalLight, Group, MeshBasicMaterial, PointLight} from 'three';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {onMounted} from 'vue';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
@@ -26,7 +26,6 @@ function init() {
 	light2.position.set(0.5, 0, 0.866); // ~60º
 	light2.name = 'main_light';
 	const pointLight = new PointLight(0xffffff, 1);
-	let pointLightHelper = new PointLightHelper(pointLight, 5, 0xffff00);
 	pointLight.name = 'point_light';
 
 	renderer = new THREE.WebGLRenderer({canvas: container, antialias: true});
@@ -39,7 +38,7 @@ function init() {
 	control.update();
 	rawScene = new THREE.Scene();
 
-	ThreeJarvis.monitor(rawScene, camera1, renderer, {control});
+	ThreeJarvis.monitor(rawScene, camera, renderer, {control});
 	rawScene.add(camera);
 	rawScene.add(camera1);
 	rawScene.add(pointLight);
@@ -50,18 +49,14 @@ function init() {
 	const boxGeometry = new BoxGeometry(10, 10, 10);
 	const material = new MeshBasicMaterial({color: 0x00ff00});
 	const mesh = new THREE.Mesh(boxGeometry, material);
-	mesh.layers.set(0);
 	rawScene.add(group);
-	setTimeout(() => {
-		mesh.name = '12312312';
-	}, 5000);
 	group.add(mesh);
 	mesh.position.set(0, 0, 0);
 	// material.wireframe = true;
 	const loader = new GLTFLoader().setPath('../../static/');
 	window.addEventListener('resize', onWindowResize);
 	// renderer.antialias = t
-	loader.load('test.glb', function (gltf) {
+	loader.load('luzi.glb', function (gltf) {
 		rawScene.add(gltf.scene);
 		gltf.scene.scale.set(0.01, 0.01, 0.01);
 	});

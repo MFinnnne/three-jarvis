@@ -2,14 +2,13 @@ import dayjs from 'dayjs';
 import {HemisphereLight, Object3D, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
-import {OBJECT_TREE_BLACK_LIST} from '../config/Config';
 import SetPositionCommand from './commands/SetPositionCommand';
 import SetRotationCommand from './commands/SetRotationCommand';
 import SetScaleCommand from './commands/SetScaleCommand';
 import objectChanged from './ObjectChanged';
+import ObjectChanged from './ObjectChanged';
 import Recorder from './Recorder';
 import State from './State';
-import ObjectChanged from './ObjectChanged';
 import {rayCasterEvents} from './events/ObjectEvents';
 
 export default abstract class General {
@@ -151,7 +150,6 @@ export default abstract class General {
 				object.layers.set(1);
 			});
 		}
-		OBJECT_TREE_BLACK_LIST.push(transformControl.uuid);
 		transformControl.addEventListener('objectChange', () => {
 			transformControl.object?.userData.controlPane?.update();
 			objectChanged.getInstance().update();

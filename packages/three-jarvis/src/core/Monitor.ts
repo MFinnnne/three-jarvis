@@ -14,7 +14,7 @@ export default class Monitor extends General {
 		scene: Scene,
 		renderer: WebGLRenderer,
 		camera: PerspectiveCamera,
-		option?: {
+		option: {
 			control: OrbitControls;
 		},
 	) {
@@ -22,11 +22,22 @@ export default class Monitor extends General {
 		this._camera = camera;
 		this._renderer = renderer;
 		this._container = renderer.domElement;
-		this._control = option?.control ?? new OrbitControls(camera, renderer.domElement);
+		this._control = option.control
 		ObjectChanged.getInstance(this);
 		GUI.guiContainerInit(this);
+		this.camera.layers.enableAll();
 		this.state.activeCamera = this._camera;
+		this.control.minDistance = 0.1;
+		this.control.maxDistance = 1000;
+		this.control.update();
+		this.control.addEventListener('end', () =>{
+			this._orbitControlIsWorking = false;
+		});
+		this.control.addEventListener('start', () => {
+			this._orbitControlIsWorking = true;
+		});
 		this.initTransformControl();
+		this.scene.add(this.transformControl);
 		new MonitorControlPane(this).genPane();
 	}
 }
