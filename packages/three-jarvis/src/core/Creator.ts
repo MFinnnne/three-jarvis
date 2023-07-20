@@ -88,10 +88,7 @@ export default class Creator extends General {
 	}
 
 	private init() {
-		this._control = new OrbitControls(this.camera, this.renderer.domElement);
-		this.control.minDistance = 2;
-		this.control.maxDistance = 1000;
-		this.control.update();
+		this.initOrbitControl(new OrbitControls(this.camera, this.renderer.domElement));
 		this.control.addEventListener('end', () => {
 			this._orbitControlIsWorking = false;
 		});
@@ -213,7 +210,7 @@ export default class Creator extends General {
 		if (this._uuidSubMap.has(child.uuid)) {
 			const observers = this._uuidSubMap.get(child.uuid);
 			if (observers) {
-				child.onBeforeRender = (renderer, scene, camera, ) => {
+				child.onBeforeRender = (renderer, scene, camera,) => {
 					for (const observer of observers) {
 						observer.beforeRender(child, renderer, scene, camera);
 					}

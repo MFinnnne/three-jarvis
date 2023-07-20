@@ -27,10 +27,7 @@ export default class Monitor extends General {
 
 		this._renderer = renderer;
 		this._container = renderer.domElement;
-		this._control = option?.control ?? new OrbitControls(this.camera, this.renderer.domElement);
-		this.control.minDistance = 2;
-		this.control.maxDistance = 1000;
-		this.control.update();
+		this.initOrbitControl(option?.control ?? new OrbitControls(this.camera, this.renderer.domElement));
 		this.control.addEventListener('end', () => {
 			this._orbitControlIsWorking = false;
 		});
