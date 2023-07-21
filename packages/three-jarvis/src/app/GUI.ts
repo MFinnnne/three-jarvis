@@ -63,4 +63,19 @@ export default class GUI {
 		};
 		clickObjectEvent(objectTree);
 	}
+
+	//hidden gui
+	public static hiddenGUI(): void {
+		const container = document.querySelector('#three-helper-container');
+		if (container != null) {
+			(<HTMLElement>container).style.visibility = 'hidden';
+		}
+	}
+
+	static showGUI() {
+		const container = document.querySelector('#three-helper-container');
+		if (container != null) {
+			(<HTMLElement>container).style.visibility = 'visible';
+		}
+	}
 }

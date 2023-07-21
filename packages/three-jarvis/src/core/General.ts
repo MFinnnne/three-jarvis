@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import {Camera, HemisphereLight, Object3D, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
+import {HemisphereLight, Object3D, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
 import SetPositionCommand from './commands/SetPositionCommand';
@@ -10,7 +10,7 @@ import ObjectChanged from './ObjectChanged';
 import Recorder from './Recorder';
 import State from './State';
 import {rayCasterEvents} from './events/ObjectEvents';
-import CameraControlPane from "../app/pane/CameraControlPane";
+import PerspectiveCameraControlPane from "../app/pane/PerspectiveCameraControlPane";
 
 export default abstract class General {
 	protected _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
@@ -41,6 +41,8 @@ export default abstract class General {
 		this._state = new State(this);
 		this._recorder = new Recorder();
 	}
+
+
 
 	public get onDelete(): ((obj: Object3D) => void) | undefined {
 		return this._onDelete;
@@ -145,7 +147,7 @@ export default abstract class General {
 
 	protected initOrbitControl(control: OrbitControls) {
 		this._control = control;
-		this.control.object.userData.controlPane = new CameraControlPane(this);
+		this.control.object.userData.controlPane = new PerspectiveCameraControlPane(this);
 		this.control.minDistance = 2;
 		this.control.maxDistance = 1000;
 		this.control.update();
@@ -161,7 +163,7 @@ export default abstract class General {
 		this._transformControl.name = 'jarvis-transform-control';
 		transformControl.layers.set(1);
 		transformControl.getRaycaster().layers.set(1);
-		ObjectChanged.getInstance(this).objectHelper(this.scene);
+		ObjectChanged.getInstance(this).transformControlAttach(this.scene);
 		rayCasterEvents(this);
 		for (const child of transformControl.children) {
 			child.traverse((object) => {

@@ -34,12 +34,10 @@ export default class ObjectHelper {
 		}
 		const helperFn = this.helperMap.get(obj.type);
 		if (helperFn === null || helperFn === undefined) {
-			Toast.show(`${obj.type} helper is not supported`);
 			console.warn(`${obj.type} helper is not supported`);
 		} else {
 			const helper = helperFn(obj);
 			if (helper === null) {
-				Toast.show(`${obj.type} helper is gen error`);
 				throw new Error(`${obj.type} helper is gen error`);
 			}
 			obj.userData.helper = helper;

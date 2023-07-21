@@ -6,7 +6,7 @@
 		"target": "es6",
 		"outDir": "./dist",
 		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": false,
+		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,

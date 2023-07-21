@@ -1,5 +1,5 @@
 import {Camera, Object3D, PerspectiveCamera} from 'three';
-import CameraControlPane from '../app/pane/CameraControlPane';
+import PerspectiveCameraControlPane from '../app/pane/PerspectiveCameraControlPane';
 import {ControlPane} from '../app/pane/DefaultControlPane';
 import DirectionalLightControlPane from '../app/pane/DirectionalLightControlPane';
 import HemisphereLightControlPane from '../app/pane/HemisphereLightControlPane';
@@ -7,6 +7,7 @@ import ObjectControlPane from '../app/pane/ObjectControlPane';
 import PointLightControlPane from '../app/pane/PointLightControlPane';
 import General from './General';
 import ObjectHelper from './ObjectHelper';
+import SceneControlPane from "../app/pane/SceneControlPane";
 
 export default class State {
 	private _selectedObject: Object3D = new Object3D();
@@ -20,13 +21,14 @@ export default class State {
 		this.paneMap.set('Points', () => new ObjectControlPane(general));
 		this.paneMap.set('Group', () => new ObjectControlPane(general));
 		this.paneMap.set('Object3D', () => new ObjectControlPane(general));
-		this.paneMap.set('Mesh', () => new ObjectControlPane(general));
+		this.paneMap.set('Scene', () => new SceneControlPane(general));
 
+		this.paneMap.set('Mesh', () => new ObjectControlPane(general));
 		this.paneMap.set('PointLightHelper', () => new ObjectControlPane(general));
 		this.paneMap.set('HemisphereLight', () => new HemisphereLightControlPane(general));
 		this.paneMap.set('PointLight', () => new PointLightControlPane(general));
 		this.paneMap.set('DirectionalLight', () => new DirectionalLightControlPane(general));
-		this.paneMap.set('PerspectiveCamera', () => new CameraControlPane(general));
+		this.paneMap.set('PerspectiveCamera', () => new PerspectiveCameraControlPane(general));
 		this.helper = new ObjectHelper(general);
 	}
 

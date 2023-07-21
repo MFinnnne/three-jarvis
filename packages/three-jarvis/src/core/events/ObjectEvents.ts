@@ -1,6 +1,6 @@
 import EventRegistry from '../EventRegistry';
-import { Group, Object3D, Raycaster, Vector2 } from 'three';
-import { Intersection } from 'three/src/core/Raycaster';
+import {Group, Object3D, Raycaster, Vector2} from 'three';
+import {Intersection} from 'three/src/core/Raycaster';
 import ObjectChanged from '../ObjectChanged';
 import Ticker from '../Ticker';
 import ObjectTree from '../../app/ObjectTree';
@@ -52,7 +52,7 @@ export function clickObjectEvent(objectTree: ObjectTree): void {
             throw new Error(`object ===${object.uuid}===${object.name} dom is null`);
         }
         objectTree.expandTreeByChildNode(dom);
-        ObjectChanged.getInstance().objectHelper(object);
+        ObjectChanged.getInstance().transformControlAttach(object);
         Ticker.emmit('objectDomClick', object.uuid);
     });
 }

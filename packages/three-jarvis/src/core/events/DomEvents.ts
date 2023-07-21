@@ -10,7 +10,7 @@ export function domClickEvent(scene: Scene): void {
 		if (!obj) {
 			throw new Error(`object3d(uuid:${id}) is not in scene`);
 		}
-		ObjectChanged.getInstance().objectHelper(obj);
+		ObjectChanged.getInstance().transformControlAttach(obj);
 	});
 }
 
@@ -29,7 +29,7 @@ export function domDoubleClickEvent(node: HTMLElement, scene: Scene): void {
 		if (!obj) {
 			throw new Error(`object3d(uuid:${id}) is not in scene`);
 		}
-		ObjectChanged.getInstance().objectHelper(obj);
+		ObjectChanged.getInstance().transformControlAttach(obj);
 		Ticker.emmit('objectDoubleClick', obj);
 	});
 }
