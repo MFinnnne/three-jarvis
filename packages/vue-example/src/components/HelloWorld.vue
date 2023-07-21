@@ -37,6 +37,7 @@ function init() {
 
   monitor = ThreeJarvis.monitor(rawScene, camera, renderer);
   let config = ThreeJarvis.config;
+  config.hidden = true;
 
   rawScene.add(camera);
   rawScene.add(camera1);
