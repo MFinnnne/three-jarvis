@@ -1,5 +1,4 @@
-import {Object3D} from 'three';
-import HelperManager from './ObjectHelper';
+import {Object3D, PerspectiveCamera} from 'three';
 import General from './General';
 
 export default class ObjectChanged {
@@ -9,7 +8,8 @@ export default class ObjectChanged {
 	/**
 	 *   boxed  mesh
 	 */
-	private constructor() {}
+	private constructor() {
+	}
 
 	public static getInstance(general?: General): ObjectChanged {
 		if (general) {
@@ -27,7 +27,7 @@ export default class ObjectChanged {
 		}
 	}
 
-	public objectHelper(object: Object3D): void {
+	public transformControlAttach(object: Object3D): void {
 		this.jarvis.state.selectedObject = object;
 		if (object.type === 'Scene') {
 			return;
@@ -42,8 +42,12 @@ export default class ObjectChanged {
 			return;
 		}
 		object?.userData.helper?.update();
+		//如果更改了相机的属性，需要更新相机的投影矩阵
+		if (object.type === 'PerspectiveCamera') {
+			(<PerspectiveCamera>object).updateProjectionMatrix();
+		}
 		if (this.jarvis.state.selectedObject.uuid === object.uuid) {
-			this.objectHelper(object);
+			this.transformControlAttach(object);
 		}
 	}
 }

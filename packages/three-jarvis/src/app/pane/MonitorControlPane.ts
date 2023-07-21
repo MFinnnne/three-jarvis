@@ -3,7 +3,6 @@ import {Object3D} from 'three';
 import DefaultControlPane from './DefaultControlPane';
 
 import General from '../../core/General';
-import Creator from '../../core/Creator';
 
 export default class MonitorControlPane extends DefaultControlPane {
 	protected object?: Object3D;
@@ -18,6 +17,7 @@ export default class MonitorControlPane extends DefaultControlPane {
 		const base = Math.pow(1024, 2);
 		const pane = super.genPane(object);
 		const monitorFolder = this.pane.addFolder({title: 'monitor'});
+		monitorFolder.expanded = false;
 		const info = {memory: '', render: '', page: ''};
 		monitorFolder.addMonitor(info, 'memory', {multiline: true, lineCount: 2}).on('update', () => {
 			const memory = this.general.renderer.info.memory;

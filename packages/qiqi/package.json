@@ -1,0 +1,24 @@
+{
+	"name": "qiqi",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"build:watch": "vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"three": "^0.152.2",
+		"vue": "^3.3.2",
+		"three-jarvis": "workspace:^1.0.0",
+		"element-plus": "~2.3.5",
+		"@tweenjs/tween.js": "~20.0.3",
+		"vue-router": "~4.2.1"
+	},
+	"devDependencies": {
+		"@types/three": "^0.152.0",
+		"@vitejs/plugin-vue": "^4.2.3",
+		"vite": "^4.3.8"
+	}
+}

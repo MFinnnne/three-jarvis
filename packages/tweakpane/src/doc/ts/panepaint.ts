@@ -2,7 +2,7 @@ import {
 	Color,
 	colorFromString,
 	colorToFunctionalRgbaString,
-} from '../../core/index';
+} from '../../core';
 import {Pane} from 'tweakpane';
 
 import {createTheme, ThemeId} from './themes';

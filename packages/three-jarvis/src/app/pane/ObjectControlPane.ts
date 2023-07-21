@@ -1,4 +1,4 @@
-import {ButtonApi, InputBindingApi, Pane, Point3d, TabPageApi} from 'my-tweakpane';
+import {ButtonApi, InputBindingApi, Pane, Point3d, Point4d, TabPageApi} from 'my-tweakpane';
 import {Euler, Object3D, Quaternion, Vector3} from 'three';
 import SetPositionCommand from '../../core/commands/SetPositionCommand';
 import SetQuaternionCommand from '../../core/commands/SetQuaternionCommand';
@@ -22,8 +22,12 @@ export default class ObjectControlPane extends DefaultControlPane {
 
 	public genPane(object: Object3D): Pane {
 		const pane = super.genPane(object);
-		pane.title = 'object';
 		this.object = object;
+		if (this.object.name === null || this.object.name === '') {
+			this.pane.title = this.object.type;
+		} else {
+			this.pane.title = this.object.name;
+		}
 		const PARAMS = {
 			position: {
 				x: object.position.x,
@@ -113,7 +117,11 @@ export default class ObjectControlPane extends DefaultControlPane {
 
 		this.geometryPane = tab.pages[1];
 		this.materialPane = tab.pages[2];
-		const positionBind = this.objectPane.addInput(PARAMS, 'position').on('change', (ev) => {
+		const positionBind = this.objectPane.addInput(PARAMS, 'position', {
+			x: {step: 0.1},
+			y: {step: 0.1},
+			z: {step: 0.1}
+		}).on('change', (ev) => {
 			const {x, y, z} = ev.value;
 			if (ev.before) {
 				this.general.recorder.execute(new SetPositionCommand(object, this.object!.position));
@@ -142,26 +150,18 @@ export default class ObjectControlPane extends DefaultControlPane {
 		this.bindMap.set('scale', scaleBind);
 
 		// euler
-		const rotationBind = this.objectPane
-			.addInput(PARAMS, 'rotation', {
-				view: 'rotation',
-				rotationMode: 'euler',
-				order: 'XYZ', // Extrinsic rotation order. optional, 'XYZ' by default
-				unit: 'rad', // or 'rad' or 'turn'. optional, 'rad' by default
-				picker: 'inline',
-				expanded: false,
-			})
-			.on('change', (e) => {
-				if (this.general.transformControl.dragging) {
-					return;
-				}
-				if (e.before) {
-					this.general.recorder.execute(new SetRotationCommand(object, this.object!.rotation));
-				}
-				const {x, y, z} = e.value;
-				this.object?.rotation.set(x, y, z);
-				ObjectChanged.getInstance().update(this.object);
-			});
+		const rotationBind = this.objectPane.addInput(PARAMS, 'rotation', {
+			x: {step: 0.1},
+			y: {step: 0.1},
+			z: {step: 0.1}
+		}).on('change', (e) => {
+			if (e.before) {
+				this.general.recorder.execute(new SetRotationCommand(object, this.object!.rotation));
+			}
+			const {x, y, z} = e.value;
+			this.object?.rotation.set(x, y, z);
+			ObjectChanged.getInstance().update(this.object);
+		});
 		rotationBind.controller_.view.labelElement.addEventListener('click', () => {
 			const value = rotationBind.controller_.binding.value.rawValue as Euler;
 			Utils.execCoy(`${value.x.toFixed(2)},${value.y.toFixed(2)},${value.z.toFixed(2)}`);
@@ -171,15 +171,10 @@ export default class ObjectControlPane extends DefaultControlPane {
 		// quaternion
 		const quatBind = this.objectPane
 			.addInput(PARAMS, 'quat', {
-				view: 'rotation',
-				rotationMode: 'quaternion', // optional, 'quaternion' by default
-				picker: 'inline', // or 'popup'. optional, 'popup' by default
-				expanded: false, // optional, false by default
-			})
-			.on('change', (e) => {
-				if (this.general.transformControl.dragging) {
-					return;
-				}
+				expanded: false,
+				x: {step: 0.1}, y: {step: 0.1}, z: {step: 0.1}, w: {step: 0.1},
+				// optional, false by default
+			}).on('change', (e) => {
 				const {x, y, z, w} = e.value;
 				if (e.before) {
 					this.general.recorder.execute(new SetQuaternionCommand(object, this.object!.quaternion));
@@ -219,7 +214,7 @@ export default class ObjectControlPane extends DefaultControlPane {
 				}
 				case 'quat': {
 					const quat: Quaternion = this.object.quaternion;
-					v.setValue(new Quaternion(quat.x, quat.y, quat.z, quat.w), false);
+					v.setValue(new Point4d(quat.x, quat.y, quat.z, quat.w), false);
 					break;
 				}
 				default:

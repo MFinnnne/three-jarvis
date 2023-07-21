@@ -7,6 +7,7 @@ export default class GUI {
 	public static guiContainerInit(general: General): void {
 		const container = document.querySelector('#three-helper-container');
 		container && container.remove();
+
 		const element = document.createElement('div');
 		element.id = 'three-helper-container';
 		element.className = 'three-helper-container';
@@ -20,18 +21,30 @@ export default class GUI {
 		menuDom.className = 'three-helper-menu';
 		element.appendChild(menuDom);
 
+		const paneAndTreeDom = document.createElement('div');
+		paneAndTreeDom.id = 'three-helper-pane-and-tree';
+		paneAndTreeDom.className = 'three-helper-pane-and-tree';
+		element.appendChild(paneAndTreeDom);
+
 		const leftSideBarDom = document.createElement('div');
 		leftSideBarDom.id = 'three-helper-left-side-bar';
 		leftSideBarDom.className = 'three-helper-left-side-bar';
-		element.appendChild(leftSideBarDom);
+		paneAndTreeDom.appendChild(leftSideBarDom);
 		general.leftSideBarContainer = leftSideBarDom;
 
 		const paneDom = document.createElement('div');
 		paneDom.id = 'three-helper-pane';
 		paneDom.className = 'three-helper-pane';
-		element.appendChild(paneDom);
+		paneAndTreeDom.appendChild(paneDom);
 		general.paneContainer = paneDom;
-		document.body.appendChild(element);
+
+		const domRect = general.container.getBoundingClientRect();
+
+		// element.style.width = `${domRect.width}px`;
+		// element.style.height = `${domRect.height}px`;
+		element.style.top = `${domRect.top}px`;
+		general.container.parentNode?.appendChild(element);
+
 		MenuBar.render(menuDom, general);
 		const objectTree = new ObjectTree(leftSideBarDom, general);
 
@@ -41,7 +54,7 @@ export default class GUI {
 			}
 		});
 		let prevGeometries = 0;
-		general.scene.onAfterRender = (renderer, scene) => {
+		general.scene.onAfterRender = (renderer) => {
 			const geometries = renderer.info.memory.geometries;
 			if (geometries !== prevGeometries) {
 				objectTree.render(leftSideBarDom);
@@ -49,5 +62,20 @@ export default class GUI {
 			prevGeometries = geometries;
 		};
 		clickObjectEvent(objectTree);
+	}
+
+	//hidden gui
+	public static hiddenGUI(): void {
+		const container = document.querySelector('#three-helper-container');
+		if (container != null) {
+			(<HTMLElement>container).style.visibility = 'hidden';
+		}
+	}
+
+	static showGUI() {
+		const container = document.querySelector('#three-helper-container');
+		if (container != null) {
+			(<HTMLElement>container).style.visibility = 'visible';
+		}
 	}
 }

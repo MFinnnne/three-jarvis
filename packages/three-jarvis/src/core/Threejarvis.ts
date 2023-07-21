@@ -1,11 +1,16 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import Creator from './Creator';
-import Monitor from './Monitor';
+import Monitor from './monitor/Monitor';
 import '../sass/full.scss';
+import {Config} from "../config/Config";
+import {MonitorWrapper} from "./monitor/MonitorWrapper";
 
 export default class ThreeJarvis {
 	private static CONTAINER_ID_SET: Set<string> = new Set<string>();
+	private static _config: Config = new Config();
+
+	public static clock = new THREE.Clock();
 
 	public static monitor(
 		scene: THREE.Scene,
@@ -14,11 +19,10 @@ export default class ThreeJarvis {
 		options?: {
 			control?: OrbitControls;
 		},
-	) {
+	): MonitorWrapper {
 		const monitor = new Monitor();
-		monitor.start(scene, renderer, camera, {
-			control: options?.control ?? new OrbitControls(camera, renderer.domElement),
-		});
+		monitor.start(scene, renderer, camera, options);
+		return new MonitorWrapper(monitor);
 	}
 
 	public static creator(container: HTMLCanvasElement): Creator {
@@ -29,5 +33,11 @@ export default class ThreeJarvis {
 			throw new Error(`this container(id:${container.id}) has been already used`);
 		}
 		return new Creator(container);
+	}
+
+
+	//get config
+	public static get config(): Config {
+		return ThreeJarvis._config;
 	}
 }
