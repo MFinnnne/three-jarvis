@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import {HemisphereLight, Object3D, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
+import {Clock, HemisphereLight, Object3D, OrthographicCamera, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
 import SetPositionCommand from './commands/SetPositionCommand';
@@ -11,10 +11,13 @@ import Recorder from './Recorder';
 import State from './State';
 import {rayCasterEvents} from './events/ObjectEvents';
 import PerspectiveCameraControlPane from "../app/pane/PerspectiveCameraControlPane";
+import {Loader} from "./component/Loader";
 
 export default abstract class General {
 	protected _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
 	protected _renderer!: WebGLRenderer;
+
+	private clock = new Clock();
 
 	protected _time: string = dayjs().format();
 	protected _light = new HemisphereLight(0xffffbb, 0x080820, 1);
@@ -27,11 +30,13 @@ export default abstract class General {
 	protected _recorder!: Recorder;
 	protected _orbitControlIsWorking = false;
 
+
 	protected _paneContainer!: HTMLElement;
 
 	private _leftSideBarContainer!: HTMLElement;
 	private _fps = 0;
 
+	private _loader: Loader;
 	private _onSave?: ((json: String) => void) | undefined;
 	private _onUpdate?: ((json: String) => void) | undefined;
 	private _onLoad?: (() => String) | undefined;
@@ -40,9 +45,13 @@ export default abstract class General {
 	constructor() {
 		this._state = new State(this);
 		this._recorder = new Recorder();
+		this._loader = new Loader(this);
 	}
 
 
+	get loader(): Loader {
+		return this._loader;
+	}
 
 	public get onDelete(): ((obj: Object3D) => void) | undefined {
 		return this._onDelete;
@@ -76,12 +85,13 @@ export default abstract class General {
 		this._onSave = value;
 	}
 
-	public get fps() {
+
+	get fps(): number {
 		return this._fps;
 	}
 
-	public set fps(value) {
-		this._fps = value;
+	public setFps() {
+		this._fps = 1 / this.clock.getDelta();
 	}
 
 	get leftSideBarContainer(): HTMLElement {

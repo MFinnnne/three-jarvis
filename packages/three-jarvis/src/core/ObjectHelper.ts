@@ -1,14 +1,20 @@
-import {BoxHelper, Camera, CameraHelper, ColorRepresentation, DirectionalLight, DirectionalLightHelper, HemisphereLight, HemisphereLightHelper, Object3D, PointLight, PointLightHelper} from 'three';
-import Toast from '../app/Toast';
+import {
+	BoxHelper,
+	Camera,
+	CameraHelper,
+	ColorRepresentation,
+	DirectionalLight,
+	DirectionalLightHelper,
+	HemisphereLight,
+	HemisphereLightHelper,
+	Object3D,
+	PointLight,
+	PointLightHelper
+} from 'three';
 import General from './General';
 
 type helperFns = (object: Object3D, color?: ColorRepresentation) => Object3D | null;
 
-let lightHelper: PointLightHelper | HemisphereLightHelper | DirectionalLightHelper | null = null;
-let dLightHelper: DirectionalLightHelper | null = null;
-let hLightHelper: HemisphereLightHelper | null = null;
-let pLightHelper: PointLightHelper | null = null;
-// init camera helper
 let cameraHelper: CameraHelper | null = null;
 
 export default class ObjectHelper {
@@ -28,10 +34,6 @@ export default class ObjectHelper {
 	}
 
 	genHelper(obj: Object3D, color?: ColorRepresentation) {
-		if (obj.userData?.helper !== undefined) {
-			obj.userData.helper.visible = true;
-			return obj.userData.helper;
-		}
 		const helperFn = this.helperMap.get(obj.type);
 		if (helperFn === null || helperFn === undefined) {
 			console.warn(`${obj.type} helper is not supported`);
@@ -57,52 +59,34 @@ export default class ObjectHelper {
 	}
 
 	private cameraHelperFn(camera: Camera): CameraHelper | null {
-		if (cameraHelper != null) {
-			cameraHelper.dispose();
-			cameraHelper.removeFromParent();
-		}
 		cameraHelper = new CameraHelper(camera);
 		cameraHelper.layers.set(3);
 		return cameraHelper;
 	}
 
 	private lightHelperFn(object, color = 0xffff00): Object3D | null {
-		let lightObject: PointLight | HemisphereLight | DirectionalLight | null = null;
 		let name = '';
+		let helper: PointLightHelper | HemisphereLightHelper | DirectionalLightHelper | null = null;
 		switch (object.type) {
 			case 'DirectionalLight':
-				lightObject = object as DirectionalLight;
-				if (dLightHelper == null) {
-					dLightHelper = new DirectionalLightHelper(lightObject, 5, color);
-				}
-				lightHelper = dLightHelper;
-				name = 'DirectionalLight';
+				helper = new DirectionalLightHelper(object as DirectionalLight, 5, color);
 				break;
 			case 'PointLight':
-				lightObject = object as PointLight;
-				if (pLightHelper == null) {
-					pLightHelper = new PointLightHelper(lightObject, 5, color);
-				}
-				lightHelper = pLightHelper;
-				name = 'PointLight';
+				helper = new PointLightHelper(object as PointLight, 5, color);
 				break;
 			case 'HemisphereLight':
-				lightObject = object as HemisphereLight;
-				if (hLightHelper == null) {
-					hLightHelper = new HemisphereLightHelper(lightObject, 5, color);
-				}
-				lightHelper = hLightHelper;
-				name = 'HemisphereLight';
+				helper = new HemisphereLightHelper(object as HemisphereLight, 5, color);
 				break;
 			default:
 				break;
 		}
-		if (lightHelper && lightObject) {
-			lightHelper.visible = true;
-			lightHelper.light = lightObject;
-			lightHelper.update();
-			lightHelper.name = name + '_' + lightObject.uuid;
-			return lightHelper;
+		if (helper) {
+			helper.visible = true;
+			helper.light = object;
+			helper.layers.set(3);
+			helper.update();
+			helper.name = name + '_' + object.uuid;
+			return helper;
 		}
 		return null;
 	}

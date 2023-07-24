@@ -44,6 +44,7 @@ importers:
     specifiers:
       '@0b5vr/tweakpane-plugin-rotation': ^0.1.1
       '@babel/core': ^7.20.5
+      '@babel/plugin-proposal-nullish-coalescing-operator': ^7.18.6
       '@babel/plugin-transform-modules-commonjs': ^7.18.2
       '@babel/preset-env': ^7.18.2
       '@right-menu/core': 0.0.7
@@ -109,6 +110,7 @@ importers:
       toastify-js: 1.12.0
     devDependencies:
       '@babel/core': 7.21.0
+      '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6_@babel+core@7.21.0
       '@babel/plugin-transform-modules-commonjs': 7.21.2_@babel+core@7.21.0
       '@babel/preset-env': 7.20.2_@babel+core@7.21.0
       '@rollup/plugin-alias': 4.0.3_rollup@3.17.3
@@ -246,7 +248,7 @@ importers:
       '@types/three': ^0.154.0
       '@vitejs/plugin-vue': ^2.3.3
       simplex-noise: ^3.0.1
-      three: ^0.138.3
+      three: ^0.154.0
       three-jarvis: workspace:^1.1.4
       vite: ^2.9.9
       vite-plugin-checker: ^0.4.6
@@ -257,7 +259,7 @@ importers:
       '@tweenjs/tween.js': 18.6.4
       '@types/three': 0.154.0
       simplex-noise: 3.0.1
-      three: 0.138.3
+      three: 0.154.0
       three-jarvis: link:../three-jarvis
       vue: 3.2.47
     devDependencies:
@@ -7946,6 +7948,7 @@ packages:
 
   /three/0.138.3:
     resolution: {integrity: sha512-4t1cKC8gimNyJChJbaklg8W/qj3PpsLJUIFm5LIuAy/hVxxNm1ru2FGTSfbTSsuHmC/7ipsyuGKqrSAKLNtkzg==}
+    dev: true
 
   /three/0.151.3:
     resolution: {integrity: sha512-+vbuqxFy8kzLeO5MgpBHUvP/EAiecaDwDuOPPDe6SbrZr96kccF0ktLngXc7xA7bzyd3N0t2f6mw3Z9y6JCojQ==}
@@ -7953,6 +7956,10 @@ packages:
 
   /three/0.152.2:
     resolution: {integrity: sha512-Ff9zIpSfkkqcBcpdiFo2f35vA9ZucO+N8TNacJOqaEE6DrB0eufItVMib8bK8Pcju/ZNT6a7blE1GhTpkdsILw==}
+    dev: false
+
+  /three/0.154.0:
+    resolution: {integrity: sha512-Uzz8C/5GesJzv8i+Y2prEMYUwodwZySPcNhuJUdsVMH2Yn4Nm8qlbQe6qRN5fOhg55XB0WiLfTPBxVHxpE60ug==}
     dev: false
 
   /through/2.3.8:

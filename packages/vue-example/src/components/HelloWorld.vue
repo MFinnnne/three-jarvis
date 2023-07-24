@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import * as THREE from 'three';
-import {BoxGeometry, DirectionalLight, Group, MeshBasicMaterial, PointLight} from 'three';
+import * as THREE from 'three-jarvis';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {onMounted} from 'vue';
 import {ThreeJarvis} from 'three-jarvis';
@@ -22,11 +21,11 @@ function init() {
   camera1.position.set(0, 0, 0);
 
   const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-  const light2 = new DirectionalLight(0xffffff, 1);
+  const light2 = new THREE.DirectionalLight(0xffffff, 1);
   light2.position.set(0.5, 0, 0.866); // ~60º
 
   light2.name = 'main_light';
-  const pointLight = new PointLight(0xffffff, 1);
+  const pointLight = new THREE.PointLight(0xffffff, 1);
   pointLight.name = 'point_light';
 
   renderer = new THREE.WebGLRenderer({canvas: container, antialias: true});
@@ -37,17 +36,17 @@ function init() {
 
   monitor = ThreeJarvis.monitor(rawScene, camera, renderer);
   let config = ThreeJarvis.config;
-  config.hidden = true;
+  config.hidden = false;
 
   rawScene.add(camera);
   rawScene.add(camera1);
   rawScene.add(pointLight);
   rawScene.add(light);
   rawScene.add(light2);
-  let group = new Group();
+  let group = new THREE.Group();
   group.name = 'cube';
-  const boxGeometry = new BoxGeometry(10, 10, 10);
-  const material = new MeshBasicMaterial({color: 0x00ff00});
+  const boxGeometry = new THREE.BoxGeometry(10, 10, 10);
+  const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
   const mesh = new THREE.Mesh(boxGeometry, material);
   rawScene.add(group);
   group.add(mesh);
@@ -72,7 +71,6 @@ function onWindowResize() {
 
 function render() {
   requestAnimationFrame(render);
-  monitor.fps()
   renderer.render(rawScene, camera);
 }
 </script>

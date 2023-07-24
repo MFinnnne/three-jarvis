@@ -1,10 +1,9 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import Creator from './Creator';
-import Monitor from './monitor/Monitor';
+import Monitor from './Monitor';
 import '../sass/full.scss';
 import {Config} from "../config/Config";
-import {MonitorWrapper} from "./monitor/MonitorWrapper";
 
 export default class ThreeJarvis {
 	private static CONTAINER_ID_SET: Set<string> = new Set<string>();
@@ -19,10 +18,9 @@ export default class ThreeJarvis {
 		options?: {
 			control?: OrbitControls;
 		},
-	): MonitorWrapper {
+	) {
 		const monitor = new Monitor();
 		monitor.start(scene, renderer, camera, options);
-		return new MonitorWrapper(monitor);
 	}
 
 	public static creator(container: HTMLCanvasElement): Creator {

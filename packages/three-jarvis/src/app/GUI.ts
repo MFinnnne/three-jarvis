@@ -55,6 +55,7 @@ export default class GUI {
 		});
 		let prevGeometries = 0;
 		general.scene.onAfterRender = (renderer) => {
+			general.setFps();
 			const geometries = renderer.info.memory.geometries;
 			if (geometries !== prevGeometries) {
 				objectTree.render(leftSideBarDom);

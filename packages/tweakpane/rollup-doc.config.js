@@ -19,6 +19,7 @@ export default async () => {
 		plugins: [
 			Typescript({
 				tsconfig: 'src/doc/tsconfig.json',
+				sourceMap: false,
 			}),
 			nodeResolve({
 				preferBuiltins: false,

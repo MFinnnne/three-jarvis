@@ -1,5 +1,5 @@
 import {Camera, Object3D, WebGLRenderer} from 'three';
-import {BladeApi, InputBindingApi, Pane} from 'my-tweakpane';
+import {InputBindingApi, Pane} from 'my-tweakpane';
 import * as TweakpaneRotationInputPlugin from '@0b5vr/tweakpane-plugin-rotation';
 import * as EssentialsPlugin from '@tweakpane/plugin-essentials';
 
@@ -28,7 +28,7 @@ export default class DefaultControlPane implements ControlPane {
 
 	update(): void {}
 
-	get bindMap(): Map<string, InputBindingApi<any, any>> {
+	get bindMap(): Map<string, InputBindingApi<unknown, unknown>> {
 		return this._bindMap;
 	}
 

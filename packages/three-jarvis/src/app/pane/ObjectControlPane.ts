@@ -134,6 +134,8 @@ export default class ObjectControlPane extends DefaultControlPane {
 			Utils.execCoy(`${value.x.toFixed(2)},${value.y.toFixed(2)},${value.z.toFixed(2)}`);
 		});
 		this.bindMap.set('position', positionBind);
+
+		//scale
 		const scaleBind = this.objectPane.addInput(PARAMS, 'scale').on('change', (ev) => {
 			const {x, y, z} = ev.value;
 			if (ev.before) {

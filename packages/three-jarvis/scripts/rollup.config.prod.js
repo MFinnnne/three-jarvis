@@ -3,6 +3,7 @@ import pkg from '../package.json';
 import strip from "@rollup/plugin-strip";
 import {getBabelOutputPlugin} from "@rollup/plugin-babel";
 import path from "path";
+import sourceMaps from "rollup-plugin-sourcemaps";
 
 export default {
 	...baseConfig,
@@ -25,5 +26,5 @@ export default {
 	],
 	plugins: [...baseConfig.plugins, strip(), getBabelOutputPlugin({
 		configFile: path.resolve(__dirname, '../babel.config.js')
-	})],
+	}), sourceMaps()],
 };
