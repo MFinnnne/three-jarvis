@@ -1,9 +1,9 @@
 import {PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-import ObjectChanged from '../ObjectChanged';
-import GUI from '../../app/GUI';
-import MonitorControlPane from '../../app/pane/MonitorControlPane';
-import General from '../General';
+import ObjectChanged from './ObjectChanged';
+import GUI from '../app/GUI';
+import MonitorControlPane from '../app/pane/MonitorControlPane';
+import General from './General';
 
 /**
  * threejs scene monitor，just monitor scene,Any operation not persistent
@@ -20,8 +20,6 @@ export default class Monitor extends General {
 	) {
 		this._scene = scene;
 		this._camera = camera;
-		this.camera.lookAt(0, 0, 0);
-		this.camera.name = 'jarvis-camera';
 		this.camera.layers.enableAll();
 
 		this._renderer = renderer;

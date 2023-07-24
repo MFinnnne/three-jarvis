@@ -1,4 +1,4 @@
-import {Clock, FileLoader, GridHelper, Object3D, ObjectLoader, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
+import {FileLoader, GridHelper, Object3D, ObjectLoader, PerspectiveCamera, Scene, WebGLRenderer} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import GUI from '../app/GUI';
 import MonitorControlPane from '../app/pane/MonitorControlPane';
@@ -6,12 +6,6 @@ import General from './General';
 import ObjectObserver from './ObjectObserver';
 import sceneDB, {SceneEntity} from './mapper/SceneDB';
 
-type JarvisHook = {
-	afterRender?: () => void;
-	beforeRender?: () => void;
-	dataGet?: () => string;
-	dataStore?: (content: string) => void;
-};
 
 type CustomPersistence = {
 	onSave: (json: String) => void;
@@ -22,7 +16,6 @@ type CustomPersistence = {
 
 export default class Creator extends General {
 	private _uuidSubMap: Map<string, ObjectObserver[]> = new Map();
-	private clock = new Clock();
 	private pane!: MonitorControlPane;
 
 	constructor(container: HTMLCanvasElement) {
@@ -118,8 +111,6 @@ export default class Creator extends General {
 
 	private render() {
 		requestAnimationFrame(this.render.bind(this));
-		const delta = this.clock.getDelta();
-		this.fps = 1 / delta;
 		this.renderer.render(this.scene, this.state.activeCamera);
 	}
 

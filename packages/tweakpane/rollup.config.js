@@ -25,6 +25,7 @@ function getPlugins(css, shouldMinify) {
 	const plugins = [
 		Typescript({
 			tsconfig: 'src/main/tsconfig.json',
+			sourceMap: false,
 		}),
 		nodeResolve({
 			preferBuiltins: false,

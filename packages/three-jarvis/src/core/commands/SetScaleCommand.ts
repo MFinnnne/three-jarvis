@@ -19,6 +19,7 @@ export default class SetScaleCommand implements Command {
     }
 
     undo(): void {
-        this.name = 'change rotation';
+        this.name = 'change scale';
+			this.object.scale.copy(this.oldScale);
     }
 }

@@ -41,11 +41,12 @@ export default class ObjectChanged {
 		if (object == null) {
 			return;
 		}
-		object?.userData.helper?.update();
 		//如果更改了相机的属性，需要更新相机的投影矩阵
 		if (object.type === 'PerspectiveCamera') {
 			(<PerspectiveCamera>object).updateProjectionMatrix();
 		}
+		object?.userData.helper?.update();
+		object?.userData.controlPane?.update();
 		if (this.jarvis.state.selectedObject.uuid === object.uuid) {
 			this.transformControlAttach(object);
 		}

@@ -13,7 +13,7 @@
 		"@tweenjs/tween.js": "^18",
 		"@types/three": "^0.154.0",
 		"simplex-noise": "^3.0.1",
-		"three": "^0.138.3",
+		"three": "^0.154.0",
 		"vue": "^3.2.36",
 		"three-jarvis": "workspace:^1.1.4"
 	},

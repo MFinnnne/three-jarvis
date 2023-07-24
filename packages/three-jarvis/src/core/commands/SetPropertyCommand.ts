@@ -5,7 +5,7 @@ export default class SetPropertyCommand implements Command {
     name = 'set property';
     object: Object3D;
     private readonly _propertyName: string;
-    private _value: any;
+    private readonly _value: any;
 
     private _oldValue: any;
 
