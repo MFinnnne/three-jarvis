@@ -4,6 +4,9 @@ import ObjectChanged from './ObjectChanged';
 import GUI from '../app/GUI';
 import MonitorControlPane from '../app/pane/MonitorControlPane';
 import General from './General';
+import {html, render} from 'lit';
+import {customElement} from "lit/decorators.js";
+import {ThreeJarvisPrompt} from "../app/component/ThreeJarvisPrompt";
 
 /**
  * threejs scene monitor，just monitor scene,Any operation not persistent
@@ -25,6 +28,7 @@ export default class Monitor extends General {
 		this._renderer = renderer;
 		this._container = renderer.domElement;
 
+		new ThreeJarvisPrompt("hello");
 
 		this.initOrbitControl(option?.control ?? new OrbitControls(this.camera, this.renderer.domElement));
 		this.control.addEventListener('end', () => {

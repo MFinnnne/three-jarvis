@@ -5,7 +5,11 @@
 		"noImplicitAny": false,
 		"target": "es6",
 		"outDir": "./dist",
-		"lib": ["dom", "dom.iterable", "esnext"],
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext"
+		],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
@@ -14,11 +18,17 @@
 		"forceConsistentCasingInFileNames": true,
 		"module": "ESNext",
 		"experimentalDecorators": true,
+		"useDefineForClassFields": false,
 		"sourceMap": true,
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": false
 	},
-	"exclude": ["node_modules/**/*", "**/*/*-test.ts"],
-	"include": ["src/**/*.ts"]
+	"exclude": [
+		"node_modules/**/*",
+		"**/*/*-test.ts"
+	],
+	"include": [
+		"src/**/*.ts"
+	]
 }

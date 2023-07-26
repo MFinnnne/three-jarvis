@@ -7,8 +7,8 @@ import SetScaleCommand from '../../core/commands/SetScaleCommand';
 import General from '../../core/General';
 import ObjectChanged from '../../core/ObjectChanged';
 import Utils from '../../util/Utils';
-import Prompt from '../Prompt';
 import DefaultControlPane from './DefaultControlPane';
+import Toast from "../Toast";
 
 export default class ObjectControlPane extends DefaultControlPane {
 	protected objectPane?: TabPageApi;
@@ -195,7 +195,7 @@ export default class ObjectControlPane extends DefaultControlPane {
 	update() {
 		this.bindMap.forEach((v: InputBindingApi<any, any>, k: string) => {
 			if (this.object === undefined) {
-				Prompt.eject('the pane is not associated with any object');
+				Toast.show('the pane is not associated with any object');
 				return;
 			}
 			switch (k) {

@@ -1,7 +1,8 @@
 import ObjectTree from './ObjectTree';
-import MenuBar from './menu/MenuBar';
 import {clickObjectEvent} from '../core/events/ObjectEvents';
 import General from '../core/General';
+import MenuBarElement from "./component/MenuBarElement";
+import {render} from "lit-element";
 
 export default class GUI {
 	public static guiContainerInit(general: General): void {
@@ -45,7 +46,8 @@ export default class GUI {
 		element.style.top = `${domRect.top}px`;
 		general.container.parentNode?.appendChild(element);
 
-		MenuBar.render(menuDom, general);
+		new MenuBarElement(menuDom, general);
+
 		const objectTree = new ObjectTree(leftSideBarDom, general);
 
 		general.recorder?.afterExecute?.push((cmd) => {

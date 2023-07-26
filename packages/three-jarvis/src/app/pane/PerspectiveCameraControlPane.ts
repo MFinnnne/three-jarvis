@@ -3,7 +3,7 @@ import {Object3D, PerspectiveCamera} from 'three';
 import {InputBindingApi, Pane} from 'my-tweakpane';
 import SetPropertyCommand from "../../core/commands/SetPropertyCommand";
 import ObjectChanged from "../../core/ObjectChanged";
-import Prompt from "../Prompt";
+import Toast from "../Toast";
 
 export default class PerspectiveCameraControlPane extends ObjectControlPane {
 	genPane(object: Object3D): Pane {
@@ -48,7 +48,7 @@ export default class PerspectiveCameraControlPane extends ObjectControlPane {
 		super.update();
 		this.bindMap.forEach((v: InputBindingApi<unknown, unknown>, k: string) => {
 			if (this.object === undefined) {
-				Prompt.eject('the pane is not associated with any object');
+				Toast.show('the pane is not associated with any object');
 				return;
 			}
 			const camera = <PerspectiveCamera>this.object;
