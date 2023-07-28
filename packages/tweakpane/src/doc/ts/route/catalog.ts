@@ -254,11 +254,11 @@ export function initCatalog() {
 				title: 'Tab',
 			});
 			const t = pane.addTab({
-				pages: [{title: 'Page'}, {title: 'Page'}],
+				pages: [{title: 'ThreejarvisPage'}, {title: 'ThreejarvisPage'}],
 			});
 			t.pages[0].addInput({param: 0}, 'param', {disabled: disabled});
 			const st = t.pages[0].addTab({
-				pages: [{title: 'Page'}, {title: 'Page'}],
+				pages: [{title: 'ThreejarvisPage'}, {title: 'ThreejarvisPage'}],
 			});
 			st.pages[0].addInput({param: 0}, 'param', {disabled: disabled});
 			return pane;
@@ -407,7 +407,7 @@ export function initCatalog() {
 			})(rf.addFolder({title: 'Folder'}));
 			((t) => {
 				t.pages[0].addInput({param: 0}, 'param');
-			})(rf.addTab({pages: [{title: 'Page'}, {title: 'Page'}]}));
+			})(rf.addTab({pages: [{title: 'ThreejarvisPage'}, {title: 'ThreejarvisPage'}]}));
 			((f) => {
 				f.addInput({param: 0}, 'param');
 			})(rf.addFolder({title: 'Folder'}));

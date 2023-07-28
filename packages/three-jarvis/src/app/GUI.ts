@@ -1,21 +1,23 @@
 import ObjectTree from './ObjectTree';
 import {clickObjectEvent} from '../core/events/ObjectEvents';
 import General from '../core/General';
-import MenuBarElement from "./component/MenuBarElement";
-import {render} from "lit-element";
+import MenuBarElement from "./component/menu/MenuBarElement";
+import {html, render} from "lit";
+import './ThreejarvisHomePage'
 
 export default class GUI {
 	public static guiContainerInit(general: General): void {
 		const container = document.querySelector('#three-helper-container');
 		container && container.remove();
-
 		const element = document.createElement('div');
 		element.id = 'three-helper-container';
 		element.className = 'three-helper-container';
+		render(html`
+			<div class="" id="menu">
+				<three-jarvis-home context="${general.container.id}"></three-jarvis-home>
+			</div>
+		`, element);
 
-		const promptContainer = document.createElement('div');
-		promptContainer.className = 'prompt-container';
-		element.appendChild(promptContainer);
 
 		const menuDom = document.createElement('div');
 		menuDom.id = 'three-helper-menu';
@@ -45,8 +47,12 @@ export default class GUI {
 		// element.style.height = `${domRect.height}px`;
 		element.style.top = `${domRect.top}px`;
 		general.container.parentNode?.appendChild(element);
-
-		new MenuBarElement(menuDom, general);
+		customElements.define("menu-bar", MenuBarElement);
+		render(html`
+			<div class="menu sl-theme-dark" id="menu">
+				<menu-bar context="${general.container.id}"></menu-bar>
+			</div>
+		`, menuDom);
 
 		const objectTree = new ObjectTree(leftSideBarDom, general);
 

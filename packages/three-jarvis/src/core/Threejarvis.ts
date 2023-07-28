@@ -4,9 +4,9 @@ import Creator from './Creator';
 import Monitor from './Monitor';
 import '../sass/full.scss';
 import {Config} from "../config/Config";
+import ThreeJarvisContext from "./context/ThreeJarvisContext";
 
 export default class ThreeJarvis {
-	private static CONTAINER_ID_SET: Set<string> = new Set<string>();
 	private static _config: Config = new Config();
 
 	public static clock = new THREE.Clock();
@@ -20,17 +20,21 @@ export default class ThreeJarvis {
 		},
 	) {
 		const monitor = new Monitor();
+		ThreeJarvisContext.setContext(renderer.domElement.id, monitor)
 		monitor.start(scene, renderer, camera, options);
+
 	}
 
 	public static creator(container: HTMLCanvasElement): Creator {
 		if (container.id === undefined) {
 			throw new Error('container id  must be set and only');
 		}
-		if (ThreeJarvis.CONTAINER_ID_SET.has(container.id)) {
+		if (ThreeJarvisContext.hasContext(container.id)) {
 			throw new Error(`this container(id:${container.id}) has been already used`);
 		}
-		return new Creator(container);
+		const creator = new Creator(container);
+		ThreeJarvisContext.setContext(container.id, creator)
+		return creator;
 	}
 
 

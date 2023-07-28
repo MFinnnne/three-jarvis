@@ -14,7 +14,7 @@ import PerspectiveCameraControlPane from "../app/pane/PerspectiveCameraControlPa
 import {Loader} from "./component/Loader";
 import '@shoelace-style/shoelace/dist/themes/light.css';
 import '@shoelace-style/shoelace/dist/themes/dark.css';
-import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+import {setBasePath} from '@shoelace-style/shoelace/dist/utilities/base-path.js';
 
 export default abstract class General {
 	protected _camera: PerspectiveCamera | OrthographicCamera = new PerspectiveCamera();
@@ -50,13 +50,9 @@ export default abstract class General {
 		//init hoelace
 		setBasePath('node_modules/three-jarvis/dist/shoelace');
 		document.getElementsByTagName('head')[0].innerHTML += `<link rel="stylesheet" href="node_modules/three-jarvis/dist/bundle.css">`
-
 		this._state = new State(this);
 		this._recorder = new Recorder();
 		this._loader = new Loader(this);
-
-		// const head = document.getElementsByTagName('head');
-		// // head[0].innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.2/cdn/themes/light.css" />`
 	}
 
 
@@ -228,3 +224,4 @@ export default abstract class General {
 		}
 	}
 }
+

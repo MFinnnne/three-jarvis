@@ -20,10 +20,10 @@ const { theme, page, frontmatter } = useData()
 ### Theme Data
 <pre>{{ theme }}</pre>
 
-### Page Data
+### ThreejarvisPage Data
 <pre>{{ page }}</pre>
 
-### Page Frontmatter
+### ThreejarvisPage Frontmatter
 <pre>{{ frontmatter }}</pre>
 ```
 
@@ -38,10 +38,10 @@ const { site, theme, page, frontmatter } = useData()
 ### Theme Data
 <pre>{{ theme }}</pre>
 
-### Page Data
+### ThreejarvisPage Data
 <pre>{{ page }}</pre>
 
-### Page Frontmatter
+### ThreejarvisPage Frontmatter
 <pre>{{ frontmatter }}</pre>
 
 ## More
