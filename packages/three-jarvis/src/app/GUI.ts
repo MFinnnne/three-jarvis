@@ -1,7 +1,4 @@
-import ObjectTree from './ObjectTree';
-import {clickObjectEvent} from '../core/events/ObjectEvents';
 import General from '../core/General';
-import MenuBarElement from "./component/menu/MenuBarElement";
 import {html, render} from "lit";
 import './ThreejarvisHomePage'
 
@@ -9,68 +6,64 @@ export default class GUI {
 	public static guiContainerInit(general: General): void {
 		const container = document.querySelector('#three-helper-container');
 		container && container.remove();
-		const element = document.createElement('div');
-		element.id = 'three-helper-container';
-		element.className = 'three-helper-container';
-		render(html`
-			<div class="" id="menu">
-				<three-jarvis-home context="${general.container.id}"></three-jarvis-home>
-			</div>
-		`, element);
+		const threeParentNode = general.container?.parentNode as HTMLElement;
+		if (threeParentNode) {
+			render(html`
+        <three-jarvis-home context="${general.container.id}">
+            <slot>
+            </slot>
+        </three-jarvis-home>
+		`, threeParentNode);
+		}
 
+		// const menuDom = document.createElement('div');
+		// menuDom.id = 'three-helper-menu';
+		// menuDom.className = 'three-helper-menu';
+		// element.appendChild(menuDom);
+		//
+		// const paneAndTreeDom = document.createElement('div');
+		// paneAndTreeDom.id = 'three-helper-pane-and-tree';
+		// paneAndTreeDom.className = 'three-helper-pane-and-tree';
+		// element.appendChild(paneAndTreeDom);
+		//
+		// const leftSideBarDom = document.createElement('div');
+		// leftSideBarDom.id = 'three-helper-left-side-bar';
+		// leftSideBarDom.className = 'three-helper-left-side-bar';
+		// paneAndTreeDom.appendChild(leftSideBarDom);
+		// general.leftSideBarContainer = leftSideBarDom;
+		//
+		// const paneDom = document.createElement('div');
+		// paneDom.id = 'three-helper-pane';
+		// paneDom.className = 'three-helper-pane';
+		// paneAndTreeDom.appendChild(paneDom);
+		// general.paneContainer = paneDom;
+		//
+		//
 
-		const menuDom = document.createElement('div');
-		menuDom.id = 'three-helper-menu';
-		menuDom.className = 'three-helper-menu';
-		element.appendChild(menuDom);
+		// customElements.define("menu-bar", MenuBarElement);
+		// render(html`
+		// 	<div class="menu sl-theme-dark" id="menu">
+		// 		<menu-bar context="${general.container.id}"></menu-bar>
+		// 	</div>
+		// `, menuDom);
 
-		const paneAndTreeDom = document.createElement('div');
-		paneAndTreeDom.id = 'three-helper-pane-and-tree';
-		paneAndTreeDom.className = 'three-helper-pane-and-tree';
-		element.appendChild(paneAndTreeDom);
-
-		const leftSideBarDom = document.createElement('div');
-		leftSideBarDom.id = 'three-helper-left-side-bar';
-		leftSideBarDom.className = 'three-helper-left-side-bar';
-		paneAndTreeDom.appendChild(leftSideBarDom);
-		general.leftSideBarContainer = leftSideBarDom;
-
-		const paneDom = document.createElement('div');
-		paneDom.id = 'three-helper-pane';
-		paneDom.className = 'three-helper-pane';
-		paneAndTreeDom.appendChild(paneDom);
-		general.paneContainer = paneDom;
-
-		const domRect = general.container.getBoundingClientRect();
-
-		// element.style.width = `${domRect.width}px`;
-		// element.style.height = `${domRect.height}px`;
-		element.style.top = `${domRect.top}px`;
-		general.container.parentNode?.appendChild(element);
-		customElements.define("menu-bar", MenuBarElement);
-		render(html`
-			<div class="menu sl-theme-dark" id="menu">
-				<menu-bar context="${general.container.id}"></menu-bar>
-			</div>
-		`, menuDom);
-
-		const objectTree = new ObjectTree(leftSideBarDom, general);
-
-		general.recorder?.afterExecute?.push((cmd) => {
-			if (cmd.name === 'add object' || cmd.name === 'remove object') {
-				objectTree.render(leftSideBarDom);
-			}
-		});
-		let prevGeometries = 0;
-		general.scene.onAfterRender = (renderer) => {
-			general.setFps();
-			const geometries = renderer.info.memory.geometries;
-			if (geometries !== prevGeometries) {
-				objectTree.render(leftSideBarDom);
-			}
-			prevGeometries = geometries;
-		};
-		clickObjectEvent(objectTree);
+		// const objectTree = new ObjectTree(leftSideBarDom, general);
+		//
+		// general.recorder?.afterExecute?.push((cmd) => {
+		// 	if (cmd.name === 'add object' || cmd.name === 'remove object') {
+		// 		objectTree.render(leftSideBarDom);
+		// 	}
+		// });
+		// let prevGeometries = 0;
+		// general.scene.onAfterRender = (renderer) => {
+		// 	general.setFps();
+		// 	const geometries = renderer.info.memory.geometries;
+		// 	if (geometries !== prevGeometries) {
+		// 		objectTree.render(leftSideBarDom);
+		// 	}
+		// 	prevGeometries = geometries;
+		// };
+		// clickObjectEvent(objectTree);
 	}
 
 	//hidden gui

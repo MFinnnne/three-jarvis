@@ -1,6 +1,6 @@
 import {html, LitElement} from "lit";
 import {customElement} from "lit/decorators.js";
-@customElement('bottom')
+@customElement('tj-bottom')
 export class Bottom extends LitElement{
 
 	protected render(): unknown {
