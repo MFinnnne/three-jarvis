@@ -1,6 +1,6 @@
 import {html, LitElement} from "lit";
 import {customElement} from "lit/decorators.js";
-import './component/MenuBarElement';
+import './component/menu/MenuBarElement';
 @customElement('header')
 export class Header extends LitElement{
 

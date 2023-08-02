@@ -1,8 +1,12 @@
 import {html, LitElement} from "lit";
 import {customElement} from "lit/decorators.js";
-import './component/MenuBarElement';
 @customElement('content')
 export class Content  extends LitElement{
+
+
+	connectedCallback() {
+		super.connectedCallback();
+	}
 
 	protected render(): unknown {
 		return html`
